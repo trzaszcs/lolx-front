@@ -2,12 +2,44 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>front</title>
+    <title>Nazwa domeny</title>
   </head>
-  <body>
+  <body class="pushable">
+
+    <!-- Following Menu -->
+    <div class="ui large top fixed menu transition hidden">
+      <div class="ui container">
+        <a class="active item">Nazwa domeny</a>
+        <div class="right menu">
+          <div class="item">
+            <a class="ui button">Log in</a>
+          </div>
+          <div class="item">
+            <a class="ui primary button">Moje Konto</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Page Contents -->
+    <div class="pusher">
+      <div class="ui inverted vertical masthead center aligned segment">
+
+        <div class="ui container">
+          <div class="ui large secondary inverted pointing menu">
+            <a class="active item">Nazwa domeny</a>
+            <div class="right item">
+              <a class="ui inverted button">Moje Konto</a>
+              <a class="ui inverted button">Dodaj ogłoszenie</a>
+            </div>
+          </div>
+        </div>
+     </div>
+      
     <div id="app">
       <router-view></router-view>
     </div>
+
     <!-- built files will be auto injected -->
   </body>
 </html>

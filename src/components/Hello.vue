@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <button v-on:click="click()">Click Me</button>
+    <button v-on:click="click()" class="ui primary button">
+      Click me
+    </button>
   </div>
 </template>
 

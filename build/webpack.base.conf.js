@@ -19,7 +19,10 @@ module.exports = {
             $ : "jquery",
             jQuery : "jquery",
             "window.jQuery" : "jquery",
-            "root.jQuery" : "jquery"
+            "root.jQuery" : "jquery",
+            'semantic': 'semantic-ui-css',
+            'Semantic': 'semantic-ui-css',
+            'semantic-ui': 'semantic-ui-css'
     })
   ],
   resolve: {
@@ -29,7 +32,8 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'jquery' : "jquery/dist/jquery"
+      'jquery' : "jquery/dist/jquery",
+      'semantic': "semantic-ui-css/semantic"
     }
   },
   resolveLoader: {
@@ -84,6 +88,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.less$/,
+        loader: "style!css!less"
       }
     ]
   },

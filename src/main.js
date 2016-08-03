@@ -2,15 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import Listing from './components/Listing'
+/* eslint-disable no-unused-vars */
+import semantic from 'semantic'
+import mycss from '../static/main.css'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter()
-
-const Bar = Vue.extend({
-  template: '<p>This is bar!</p>'
-})
-
 const Empty = Vue.extend({})
 
 router.map({
@@ -19,9 +17,6 @@ router.map({
   },
   '/search': {
     component: Listing
-  },
-  '/bar': {
-    component: Bar
   }
 })
 
