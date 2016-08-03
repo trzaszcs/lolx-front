@@ -5,7 +5,6 @@ import Listing from './components/Listing'
 /* eslint-disable no-unused-vars */
 import semantic from 'semantic'
 import mycss from '../static/main.css'
-import myless from '../static/style.less'
 
 Vue.use(VueRouter)
 
