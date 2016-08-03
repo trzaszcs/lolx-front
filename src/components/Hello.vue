@@ -1,10 +1,13 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <button v-on:click="click()">Click Me</button>
   </div>
 </template>
 
 <script>
+import api from '../api.js'
+
 export default {
   data () {
     return {
@@ -13,6 +16,14 @@ export default {
       // preserves its current state and we are modifying
       // its initial state.
       msg: 'Hello World!'
+    }
+  },
+  methods: {
+    click: function () {
+      console.log('clicked !')
+      api.doCall((resp) => {
+        console.log(`ajax response: ${resp}`)
+      })
     }
   }
 }

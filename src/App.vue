@@ -19,6 +19,9 @@
       <a href="https://github.com/vuejs/vue-router/" target="_blank">vue-router</a> for routing and
       <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
     </p>
+    <p>
+        Router <a v-link="{ path: '/search' }">Go to Search</a>
+    </p>
   </div>
 </template>
 
