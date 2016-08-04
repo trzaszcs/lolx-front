@@ -23,7 +23,7 @@ export default {
   methods: {
     click: function () {
       console.log('clicked !')
-      api.doCall((resp) => {
+      api.doCallRelative((resp) => {
         console.log(`ajax response: ${resp}`)
       })
     }

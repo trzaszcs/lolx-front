@@ -6,6 +6,11 @@ const API = (function () {
       $.ajax({
         url: 'https://jsonplaceholder.typicode.com/users'
       }).done(succCallback)
+    },
+    doCallRelative: function (succCallback) {
+      $.ajax({
+        url: '/api/users'
+      }).done(succCallback)
     }
   }
 })()
