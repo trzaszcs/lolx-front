@@ -1,23 +1,20 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Listing from './components/Listing'
-/* eslint-disable no-unused-vars */
-import semantic from 'semantic'
-import mycss from '../static/main.css'
+import Main from './Main'
+import Listing from './Listing'
 
 Vue.use(VueRouter)
 
 const router = new VueRouter()
-const Empty = Vue.extend({})
 
 router.map({
   '/': {
-    component: App
+    component: Main
   },
   '/search': {
     component: Listing
   }
 })
 
-router.start(Empty, '#app')
+router.start(App, '#app')
