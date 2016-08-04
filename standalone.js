@@ -7,7 +7,12 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/dist'));
 
-app.use('/api', proxy({target: 'http://www.example.org', changeOrigin: true}));
+app.use('/api', 
+        proxy({
+          target: "https://jsonplaceholder.typicode.com", 
+          pathRewrite: {'^/api' : ''},
+          changeOrigin: true})
+       );
 
 
 app.listen(app.get('port'), function() {
