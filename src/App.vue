@@ -1,5 +1,6 @@
 <template>
-  <!-- Following Menu -->
+  <div class="template">
+    <!-- Following Menu -->
     <div class="ui large top fixed menu transition hidden">
       <div class="ui container">
         <a class="active item"  v-link="{ path: '/account' }">Appka</a>
@@ -22,25 +23,19 @@
             <a class="active item"  v-link="{ path: '/' }">Appka</a>
             <div class="right item">
               <a class="ui inverted account" v-link="{ path: '/account' }">Moje Konto</a>
-              <a class="ui inverted button" v-link="{ path: '/addAnounce' }">Dodaj og≥oszenie</a>
+              <a class="ui inverted button" v-link="{ path: '/addAnounce' }">Dodaj og≈Çoszenie</a>
             </div>
           </div>
         </div>
       </div>
-
+      
       <router-view></router-view>
       
     </div>
+  </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
-
-export default {
-  components: {
-    Hello
-  }
-}
 </script>
 
 <style lang="less">

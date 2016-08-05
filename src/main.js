@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
-import Template from './Template'
+import Welcome from './Welcome'
 import Listing from './Listing'
+import AddAnounce from './AddAnounce'
 
 Vue.use(VueRouter)
 
@@ -10,10 +11,13 @@ const router = new VueRouter()
 
 router.map({
   '/': {
-    component: Template
+    component: Welcome
   },
   '/search': {
     component: Listing
+  },
+  '/addAnounce': {
+    component: AddAnounce
   }
 })
 

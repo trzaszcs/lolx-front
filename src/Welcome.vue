@@ -1,10 +1,14 @@
 <template>
-  <div class="main">
+  <div class="ui container main">
+    <h1>
+        Main Page
+    </h1>
     <p>
-        <h1>Component</h1>
+        <h3>Component Example</h3>
         <hello></hello>
     </p>
     <p>
+        <h3>Example Link</h3>
         Router <a v-link="{ path: '/search' }">Go to Search</a>
     </p>
   </div>
@@ -19,7 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-@import '../static/style.less';
-</style>
