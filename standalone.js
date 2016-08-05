@@ -1,5 +1,5 @@
 var express = require('express');
-var proxy = require('http-proxy-middleware');
+var httpProxy = require('http-proxy-middleware');
 
 var app = express();
 
@@ -7,12 +7,14 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/dist'));
 
-app.use('/api', 
-        proxy({
-          target: "https://jsonplaceholder.typicode.com", 
-          pathRewrite: {'^/api' : ''},
-          changeOrigin: true})
-       );
+// PROXY config
+
+var proxyConfig = {
+  target: 'https://jsonplaceholder.typicode.com',  
+  pathRewrite: {'^/api' : ''},
+  changeOrigin: true
+};
+app.use(httpProxy('/api', proxyConfig));
 
 
 app.listen(app.get('port'), function() {
