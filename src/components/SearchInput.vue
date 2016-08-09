@@ -18,10 +18,14 @@ export default {
   methods: {
     search: function () {
       this.$router.go({'path': '/search', 'query': {phrase: this.phrase}})
+      this.$dispatch('search', {phrase: this.phrase})
     }
   },
   ready: function () {
-    this.phrase = this.$route.query.phrase
+    const queryFromUrl = this.$route.query.phrase
+    if (queryFromUrl) {
+      this.phrase = queryFromUrl
+    }
   }
 }
 </script>
