@@ -1,12 +1,8 @@
 <template>
   <div class="ui container main">
-    <h1>
-        Main Page
-    </h1>
-    <p>
-        <h3>Component Example</h3>
-        <hello></hello>
-    </p>
+    
+    <search-input></search-input>
+    
     <p>
         <h3>Example Link</h3>
         Router <a v-link="{ path: '/search' }">Go to Search</a>
@@ -15,11 +11,11 @@
 </template>
 
 <script>
-import Hello from './components/Hello'
+import SearchInput from './components/SearchInput'
 
 export default {
   components: {
-    Hello
+    SearchInput
   }
 }
 </script>
