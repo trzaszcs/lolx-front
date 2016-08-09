@@ -1,9 +1,9 @@
 <template>
   <div class="searchInput ui section">
    <div class="ui action left icon input">
-     <input type="text" placeholder="Szukaj..."/>
+     <input v-model="phrase" type="text" placeholder="Szukaj..."/>
      <i class="search icon"></i>
-     <button class="ui button">Search</button> 
+     <button v-on:click="search" class="ui button">Search</button> 
    </div>
   </div>
 </template>
@@ -12,11 +12,16 @@
 export default {
   data () {
     return {
+      phrase: ''
     }
   },
   methods: {
-    click: function () {
+    search: function () {
+      this.$router.go({'path': '/search', 'query': {phrase: this.phrase}})
     }
+  },
+  ready: function () {
+    this.phrase = this.$route.query.phrase
   }
 }
 </script>
