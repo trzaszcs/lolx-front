@@ -22,8 +22,12 @@
           <div class="ui large secondary inverted pointing menu">
             <a class="active item"  v-link="{ path: '/' }">Appka</a>
             <div class="right item">
-              <a class="ui inverted button" v-link="{ path: '/myAccount' }">Moje Konto</a>
-              <a class="ui inverted button" v-link="{ path: '/addAnounce' }">Dodaj ogłoszenie</a>
+              <button class="ui icon button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
+                  <i class="user icon"></i> 
+              </button>
+              <button class="ui icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
+                  <i class="add sign icon"></i> 
+              </button>
             </div>
           </div>
         </div>
