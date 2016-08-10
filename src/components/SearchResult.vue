@@ -1,5 +1,5 @@
 <template>
-  <div class="search-result ui container">
+  <div class="searchResult ui container">
     <div class="segment">
       <div v-if="searchStarted">
       

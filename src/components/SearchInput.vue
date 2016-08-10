@@ -18,6 +18,9 @@ export default {
   methods: {
     search: function () {
       this.$router.go({'path': '/search', 'query': {phrase: this.phrase}})
+      this.emitSearchEvent()
+    },
+    emitSearchEvent: function () {
       this.$dispatch('search', {'phrase': this.phrase})
     }
   },
@@ -25,6 +28,7 @@ export default {
     const queryFromUrl = this.$route.query.phrase
     if (queryFromUrl) {
       this.phrase = queryFromUrl
+      this.emitSearchEvent()
     }
   }
 }

@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/dist'));
 // PROXY config
 
 var proxyConfig = {
-  target: 'https://jsonplaceholder.typicode.com',  
+  target: 'http://lolx-backend.herokuapp.com/',  
   pathRewrite: {'^/api' : ''},
   changeOrigin: true
 };
