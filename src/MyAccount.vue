@@ -4,7 +4,7 @@
      
     <div class="ui card">
       <div class="content">
-        <div class="right floated meta">14h</div>
+        <div class="right floated meta">{{lastActive}}</div>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg"> Jan Kowalski
       </div>
       <div class="image">
@@ -13,22 +13,22 @@
 
       <div class="extra content">
         Rating:
-        <div class="ui star rating" data-rating="3" id="test"></div>
+        <div class="ui star rating" data-rating="{{rating}}" id="test"></div>
       </div>
     
       <div class="content">
         <span class="right floated">
           <i class="heart outline like icon"></i>
-          17 likes
+          {{likesCount}} lajków
         </span>
         <i class="comment icon"></i>
-        3 comments
+        {{commentsCount}} komentarzy
       </div>
         
       <div class="extra content">
         <div class="ui large transparent left icon input">
           <i class="heart outline icon"></i>
-          <input type="text" placeholder="Add Comment...">
+          <input type="text" placeholder="Dodaj komentarz...">
         </div>
       </div>
     </div>
@@ -57,12 +57,19 @@
   export default {
     data () {
       return {
+        username: 'Jan Kowalski',
+        rating: 3,
+        commentsCount: 3,
+        likesCount: 6,
+        lastActive: '12h',
         items: [
           {
-            title: 'Przepcham rurę'
+            title: 'Przepcham rurę',
+            catImg: 'plumber.png'
           },
           {
-            title: 'Wymienię zlew'
+            title: 'Wymienię zlew',
+            catImg: 'plumber.png'
           }
         ]
       }
