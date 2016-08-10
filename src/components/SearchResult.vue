@@ -2,33 +2,32 @@
   <div class="search-result ui container">
     <div class="segment">
       <div v-if="searchStarted">
+      
         <div v-if="searchLoading">
           Searching...
         </div>
-        <div v-else>
-          Result for '{{queryString()}}'
+        
+        <div v-else class="result">
+           <h1>Wyniki wyszukiwania</h1>
+           <div class="ui middle aligned selection list" v-for="item in anounces">
+               <anounce-item :anounce=item></anounce-item>
+           </div>
         </div>
+
       </div>
     </div>
 
-    <div class="ui middle aligned selection list">
-      <div v-for="item in items" class="item">
-        <img class="ui avatar image" src="../assets/plumber.png">
-        <div class="content">
-          <div class="header">{{item.title}}</div>
-          <div class="description">{{item.desc}}</div>
-        </div>
-      </div>
-    </div>
   
   </div>
 </template>
 
 <script>
 import api from '../api'
+import AnounceItem from './AnounceItem.vue'
 
 export default {
   components: {
+    AnounceItem
   },
   data () {
     return {

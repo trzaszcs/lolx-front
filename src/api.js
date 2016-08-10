@@ -14,7 +14,7 @@ const API = (function () {
     },
     search: function (query, page = 0, callback) {
       $.ajax({
-        url: '/api/announces/find',
+        url: '/api/anounces',
         data: {'query': query, 'page': page}
       }).done(callback)
     }
