@@ -10,11 +10,11 @@
       <div class="image">
         <img>
       </div>
-      
-    <div class="extra content">
-      Rating:
-      <div class="ui star rating" data-rating="2"></div>
-    </div>
+
+      <div class="extra content">
+        Rating:
+        <div class="ui star rating" data-rating="2" id="test"></div>
+      </div>
     
       <div class="content">
         <span class="right floated">
@@ -37,7 +37,7 @@
             <h4 class="ui dividing header">Moje ogłoszenia</h4>
     </div>
     
-    <div class="ui middle aligned selection list">
+  <div class="ui middle aligned selection list">
   <div class="item">
     <img class="ui avatar image" src="assets/plumber.png">
     <div class="content">
@@ -51,24 +51,22 @@
     </div>
   </div>
 </div>
-    
-    
-  
+
     </div> 
   </div>
 
 </template>
 
-
 <script>
-import Hello from './components/Hello'
-
+require('semantic')
+var $ = require('jquery')
 export default {
-  components: {
-    Hello
+  ready: function () {
+    var stars = $('.ui.star.rating')
+    console.log((stars.length === 0))
+    stars.rating()
   }
 }
-
 </script>
 
 <style scoped>

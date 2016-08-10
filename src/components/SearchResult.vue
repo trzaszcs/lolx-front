@@ -1,5 +1,8 @@
 <template>
   <div class="search-result ui container">
+    <div class="segment">
+      Result for '{{queryString()}}'
+    </div>
     
     <div class="ui middle aligned selection list">
       <div class="item">
