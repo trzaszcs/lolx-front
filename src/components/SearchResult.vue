@@ -10,6 +10,17 @@
         </div>
       </div>
     </div>
+
+    <div class="ui middle aligned selection list">
+      <div v-for="item in items" class="item">
+        <img class="ui avatar image" src="../assets/plumber.png">
+        <div class="content">
+          <div class="header">{{item.title}}</div>
+          <div class="description">{{item.desc}}</div>
+        </div>
+      </div>
+    </div>
+  
   </div>
 </template>
 
