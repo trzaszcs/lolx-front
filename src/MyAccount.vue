@@ -7,9 +7,6 @@
         <div class="right floated meta">{{lastActive}}</div>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg"> Jan Kowalski
       </div>
-      <div class="image">
-        <img>
-      </div>
 
       <div class="extra content">
         Rating:
@@ -36,7 +33,6 @@
     <div class="extra content">
             <h4 class="ui dividing header">Moje ogłoszenia</h4>
     </div>
-    
     <div class="ui middle aligned selection list">
       <div v-for="item in items" class="item">
         <img class="ui avatar image" src="assets/plumber.png">
@@ -65,11 +61,11 @@
         items: [
           {
             title: 'Przepcham rurę',
-            catImg: 'plumber.png'
+            img: './assets/plumber.png'
           },
           {
             title: 'Wymienię zlew',
-            catImg: 'plumber.png'
+            img: './assets/plumber.png'
           }
         ]
       }
