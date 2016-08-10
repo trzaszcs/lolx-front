@@ -13,7 +13,7 @@
 
       <div class="extra content">
         Rating:
-        <div class="ui star rating" data-rating="2" id="test"></div>
+        <div class="ui star rating" data-rating="3" id="test"></div>
       </div>
     
       <div class="content">
@@ -58,17 +58,15 @@
 </template>
 
 <script>
-require('semantic')
-var $ = require('jquery')
-export default {
-  ready: function () {
-    var stars = $('.ui.star.rating')
-    console.log((stars.length === 0))
-    stars.rating()
+  require('semantic')
+  var $ = require('jquery')
+  export default {
+    ready: function () {
+      $('.ui.star.rating').rating()
+    }
   }
-}
 </script>
 
 <style scoped>
-</style>
 
+</style>
