@@ -11,6 +11,12 @@ const API = (function () {
       $.ajax({
         url: '/api/users'
       }).done(succCallback)
+    },
+    search: function (query, page = 0, callback) {
+      $.ajax({
+        url: '/api/announces/find',
+        data: {'query': query, 'page': page}
+      }).done(callback)
     }
   }
 })()
