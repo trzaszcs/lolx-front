@@ -1,12 +1,6 @@
 <template>
   <div class="ui container main">
-    
-    <search-input></search-input>
-    
-    <p>
-        <h3>Example Link</h3>
-        Router <a v-link="{ path: '/search' }">Go to Search</a>
-    </p>
+    <search-input></search-input>   
   </div>
 </template>
 

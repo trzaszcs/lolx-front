@@ -1,34 +1,21 @@
 <template>
-  <div class="listing ui component">
-    <search-input phrase="xx"></search-input>
-    <h1>Rezultat</h1>
+  <div class="listing ui container">
+    <search-box></search-box>
   </div>
 </template>
 
 <script>
-import SearchInput from 'components/SearchInput.vue'
+import SearchBox from 'components/SearchBox.vue'
 
 export default {
   components: {
-    SearchInput
+    SearchBox
   },
   data () {
     return {
     }
   },
   methods: {
-    getQuery: function () {
-      return this.$route.query.phrase
-    }
-  },
-  computed: {
-    queryPhrase: function () {
-      return this.$route.query.phrase
-    }
   }
 }
 </script>
-
-<style scoped>
-</style>
-

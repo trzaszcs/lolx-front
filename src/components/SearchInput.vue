@@ -18,7 +18,7 @@ export default {
   methods: {
     search: function () {
       this.$router.go({'path': '/search', 'query': {phrase: this.phrase}})
-      this.$dispatch('search', {phrase: this.phrase})
+      this.$dispatch('search', {'phrase': this.phrase})
     }
   },
   ready: function () {
