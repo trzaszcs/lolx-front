@@ -1,7 +1,7 @@
 <template>
   <div class="listing ui container">
     <search-input></search-input>
-    <search-result :search-query=searchQuery></search-result>
+    <search-result></search-result>
   </div>
 </template>
 
@@ -16,15 +16,11 @@ export default {
   },
   data () {
     return {
-      'searchQuery': {}
     }
-  },
-  methods: {
   },
   events: {
     'search': function (searchQuery) {
-      console.log('--->', searchQuery)
-      this.searchQuery = searchQuery
+      this.$broadcast('search', searchQuery)
     }
   }
 }
