@@ -37,20 +37,14 @@
             <h4 class="ui dividing header">Moje ogłoszenia</h4>
     </div>
     
-  <div class="ui middle aligned selection list">
-  <div class="item">
-    <img class="ui avatar image" src="assets/plumber.png">
-    <div class="content">
-      <div class="header">Przepcham rurę</div>
+    <div class="ui middle aligned selection list">
+      <div v-for="item in items" class="item">
+        <img class="ui avatar image" src="assets/plumber.png">
+        <div class="content">
+          <div class="header">{{item.title}}</div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="item">
-    <img class="ui avatar image" src="assets/plumber.png">
-    <div class="content">
-      <div class="header">Wymienię zlew</div>
-    </div>
-  </div>
-</div>
 
     </div> 
   </div>
@@ -61,6 +55,18 @@
   require('semantic')
   var $ = require('jquery')
   export default {
+    data () {
+      return {
+        items: [
+          {
+            title: 'Przepcham rurę'
+          },
+          {
+            title: 'Wymienię zlew'
+          }
+        ]
+      }
+    },
     ready: function () {
       $('.ui.star.rating').rating()
     }
