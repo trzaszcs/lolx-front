@@ -9,10 +9,16 @@
         
         <div v-else class="result">
            <h1>Wyniki wyszukiwania</h1>
-           <div class="ui middle aligned selection list" v-for="item in anounces">
+           <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
                <anounce-item :anounce=item></anounce-item>
            </div>
         </div>
+        
+        <div class="ui modal">
+          <div class="header">Ogłoszenie</div>
+          <anounce-card></anounce-card>
+        </div>
+        
         <div class="pagingBox">
           <div class="ui pagination menu">
             <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
@@ -28,12 +34,15 @@
 <script>
 import api from '../api'
 import AnounceItem from './AnounceItem.vue'
-
+import AnounceCard from './AnounceCard.vue'
+require('semantic')
+var $ = require('jquery')
 const itemsPerPage = 20
 
 export default {
   components: {
-    AnounceItem
+    AnounceItem,
+    AnounceCard
   },
   data () {
     return {
@@ -66,6 +75,11 @@ export default {
     },
     goToPage: function (page) {
       this.$dispatch('listing-page-changed', {page})
+    },
+    showAnounce: function (selectedItem) {
+      console.log(selectedItem)
+      this.$broadcast('showAnounce', {'anounce': selectedItem})
+      $('.ui.modal').modal('show')
     }
   },
   events: {

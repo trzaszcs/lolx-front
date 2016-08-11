@@ -1,6 +1,7 @@
 <template>
   <div class="item">
    <div class="content">
+    {{anounce.title}}
     {{anounce.desc}}
    </div>
  </div>
