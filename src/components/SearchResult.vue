@@ -13,7 +13,11 @@
                <anounce-item :anounce=item></anounce-item>
            </div>
         </div>
-
+        <div class="pagingBox">
+          <div class="ui pagination menu">
+            <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -25,6 +29,8 @@
 import api from '../api'
 import AnounceItem from './AnounceItem.vue'
 
+const itemsPerPage = 20
+
 export default {
   components: {
     AnounceItem
@@ -34,33 +40,39 @@ export default {
       anounces: [],
       searchQuery: {},
       searchStarted: false,
-      searchLoading: false
+      searchLoading: false,
+      noOfPages: 0
     }
   },
   methods: {
     queryString: function () {
       return this.searchQuery.phrase
     },
-    doSearch: function (page) {
-      api.search(this.searchQuery.phrase, page, (anounces) => {
-        this.searchFinished(anounces)
+    doSearch: function () {
+      api.search(this.searchQuery.phrase, this.searchQuery.page, itemsPerPage, (searchResult) => {
+        this.searchFinished(searchResult)
       })
     },
-    searchFinished: function (anounces) {
+    searchFinished: function (searchResult) {
       this.searchLoading = false
-      this.anounces = anounces
+      this.anounces = searchResult.anounces
+      this.noOfPages = searchResult.totalCount / itemsPerPage
     },
-    startSearch: function (page) {
+    startSearch: function () {
       this.searchStarted = true
       this.searchLoading = true
-      this.doSearch(page)
+      this.noOfPages = 0
+      this.doSearch()
+    },
+    goToPage: function (page) {
+      this.$dispatch('listing-page-changed', {page})
     }
   },
   events: {
     'search': function (queryMsg) {
       console.log('do query', queryMsg)
       this.searchQuery = queryMsg
-      this.startSearch(0)
+      this.startSearch()
     }
   }
 }
