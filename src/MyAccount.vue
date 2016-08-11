@@ -33,13 +33,22 @@
     <div class="extra content">
             <h4 class="ui dividing header">Moje ogłoszenia</h4>
     </div>
+    
+    <div class="ui modal">
+      <div class="header">Ogłoszenie</div>
+      <anounce-card></anounce-card>
+    </div>
+    
     <div class="ui middle aligned selection list">
-      <div v-for="item in items" class="item">
+      <div v-for="item in items" class="item" v-on:click="showAnounce(item)">
         <img class="ui avatar image" src="assets/plumber.png">
         <div class="content">
           <div class="header">{{item.title}}</div>
         </div>
+           
       </div>
+    </div>
+    <div class="extra content">
     </div>
 
     </div> 
@@ -48,6 +57,7 @@
 </template>
 
 <script>
+  import AnounceCard from './components/AnounceCard.vue'
   require('semantic')
   var $ = require('jquery')
   export default {
@@ -61,13 +71,25 @@
         items: [
           {
             title: 'Przepcham rurę',
-            img: './assets/plumber.png'
+            img: './assets/plumber.png',
+            desc: 'opis opis 1'
           },
           {
             title: 'Wymienię zlew',
-            img: './assets/plumber.png'
+            img: './assets/plumber.png',
+            desc: 'opis opis 2'
           }
         ]
+      }
+    },
+    components: {
+      AnounceCard
+    },
+    methods: {
+      showAnounce: function (selectedItem) {
+        console.log(selectedItem)
+        this.$broadcast('showAnounce', {'anounce': selectedItem})
+        $('.ui.modal').modal('show')
       }
     },
     ready: function () {
