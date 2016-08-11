@@ -1,15 +1,15 @@
 <template>
   <div class="ui container main">
-    <search-input></search-input>   
+    <search-box></search-box>   
   </div>
 </template>
 
 <script>
-import SearchInput from './components/SearchInput'
+import SearchBox from './components/SearchBox'
 
 export default {
   components: {
-    SearchInput
+    SearchBox
   }
 }
 </script>

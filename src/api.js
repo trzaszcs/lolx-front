@@ -12,10 +12,10 @@ const API = (function () {
         url: '/api/users'
       }).done(succCallback)
     },
-    search: function (query, page = 0, callback) {
+    search: function (query, page, itemsPerPage, callback) {
       $.ajax({
         url: '/api/anounces',
-        data: {'query': query, 'page': page}
+        data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       }).done(callback)
     }
   }
