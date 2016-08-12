@@ -1,6 +1,7 @@
 import * as $ from 'jquery'
 
 const API = (function () {
+  const userId = 'anonymous'
   return {
     doCall: function (succCallback) {
       $.ajax({
@@ -16,6 +17,19 @@ const API = (function () {
       $.ajax({
         url: '/api/anounces',
         data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
+      }).done(callback)
+    },
+    add: function (title, description, state, city, callback) {
+      $.ajax({
+        url: '/api/anounces',
+        method: 'POST',
+        data: {title, description, state, city, 'ownerId': userId}
+      }).done(callback)
+    },
+    getForUser: function (page, itemsPerPage, callback) {
+      $.ajax({
+        url: '/api/anounces/user',
+        data: {'ownerId': userId}
       }).done(callback)
     }
   }
