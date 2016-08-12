@@ -1,10 +1,28 @@
 <template>
-  <div class="item">
-   <div class="content">
-    {{anounce.title}}
-    {{anounce.desc}}
-   </div>
- </div>
+   <div class="ui container">
+     <div class="segment">
+       <div class="card">
+        <div class="content">
+          <img class="right floated mini ui image" src="../assets/plumber.png">
+          <div class="header">
+            {{anounce.title}}
+          </div>
+          <div class="meta">
+            Jan Kowalski 
+          </div>
+          <div class="description">
+            {{anounce.desc}}
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="ui two buttons">
+            <div class="ui basic green button">Zamów</div>
+            <div class="ui basic red button">Anuluj</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

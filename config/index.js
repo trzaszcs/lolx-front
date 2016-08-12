@@ -22,7 +22,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {"/api": {
-      target: "http://localhost:8081/", 
+      target: "http://lolx-backend.herokuapp.com", 
       pathRewrite: {'^/api' : ''},
       changeOrigin: true}},
     // CSS Sourcemaps off by default because relative paths are "buggy"
