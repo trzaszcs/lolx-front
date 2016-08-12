@@ -35,7 +35,6 @@
     </div>
     
     <div class="ui modal">
-      <div class="header">Ogłoszenie</div>
       <anounce-card></anounce-card>
     </div>
     

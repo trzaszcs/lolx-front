@@ -5,7 +5,7 @@ import Welcome from './Welcome'
 import Listing from './Listing'
 import AddAnounce from './AddAnounce'
 import MyAccount from './MyAccount'
-import AnounceCard from './components/AnounceCard'
+import Anounce from './Anounce'
 
 Vue.use(VueRouter)
 
@@ -24,8 +24,8 @@ router.map({
   '/addAnounce': {
     component: AddAnounce
   },
-  '/showAnounce': {
-    component: AnounceCard
+  '/anounce': {
+    component: Anounce
   }
 })
 
