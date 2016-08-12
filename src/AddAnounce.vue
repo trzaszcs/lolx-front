@@ -5,7 +5,7 @@
     <div v-if="saving" class="loadingScreen"></div>
 
     <div v-if="saved" class="ui info message">
-      <i class="close icon"></i>
+      <i class="icon"></i>
       <div class="header">
         Twój wpis został zapisany
       </div>

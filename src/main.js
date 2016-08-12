@@ -6,6 +6,8 @@ import Listing from './Listing'
 import AddAnounce from './AddAnounce'
 import MyAccount from './MyAccount'
 import Anounce from './Anounce'
+// eslint-disable-next-line no-unused-vars
+import semantic from 'semantic'
 
 Vue.use(VueRouter)
 

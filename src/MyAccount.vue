@@ -57,8 +57,9 @@
 
 <script>
   import AnounceCard from './components/AnounceCard.vue'
-  require('semantic')
-  var $ = require('jquery')
+  import api from './api'
+  import $ from 'jquery'
+
   export default {
     data () {
       return {
@@ -67,22 +68,7 @@
         commentsCount: 3,
         likesCount: 6,
         lastActive: '12h',
-        items: [
-          {
-            title: 'Przepcham rurę',
-            img: './assets/plumber.png',
-            city: 'poz',
-            state: 'wklp',
-            desc: 'opis opis 1'
-          },
-          {
-            title: 'Wymienię zlew',
-            img: './assets/plumber.png',
-            city: 'warszawa',
-            state: 'maz',
-            desc: 'opis opis 2'
-          }
-        ]
+        items: []
       }
     },
     components: {
@@ -97,6 +83,9 @@
     },
     ready: function () {
       $('.ui.star.rating').rating()
+      api.getForUser('currentUser', 0, 10, (anounces) => {
+        this.items = anounces.anounces
+      })
     }
   }
 </script>

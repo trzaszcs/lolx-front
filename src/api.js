@@ -27,10 +27,10 @@ const API = (function () {
         data: JSON.stringify({title, description, state, city, 'ownerId': userId})
       }).done(callback)
     },
-    getForUser: function (page, itemsPerPage, callback) {
+    getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
-        url: '/api/anounces/user',
-        data: {'ownerId': userId}
+        url: `/api/anounces/user/${userId}`,
+        data: {page, itemsPerPage}
       }).done(callback)
     }
   }
