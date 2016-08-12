@@ -72,11 +72,15 @@
           {
             title: 'Przepcham rurę',
             img: './assets/plumber.png',
+            city: 'poz',
+            state: 'wklp',
             desc: 'opis opis 1'
           },
           {
             title: 'Wymienię zlew',
             img: './assets/plumber.png',
+            city: 'warszawa',
+            state: 'maz',
             desc: 'opis opis 2'
           }
         ]

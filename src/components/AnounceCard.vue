@@ -8,7 +8,7 @@
             {{anounce.title}}
           </div>
           <div class="meta">
-            Jan Kowalski 
+            Jan Kowalski - {{anounce.city}} - {{anounce.state}}
           </div>
           <div class="description">
             {{anounce.desc}}
@@ -31,6 +31,8 @@ export default {
     return {
       anounce: {
         title: '',
+        city: '',
+        state: '',
         img: '',
         desc: ''
       }
