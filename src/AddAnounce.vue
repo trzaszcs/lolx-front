@@ -4,7 +4,7 @@
 
     <div v-if="saving" class="loadingScreen"></div>
 
-    <div v-id="saved" class="ui info message">
+    <div v-if="saved" class="ui info message">
       <i class="close icon"></i>
       <div class="header">
         Twój wpis został zapisany
@@ -62,12 +62,19 @@ export default {
     }
   },
   methods: {
+    afterSave: function () {
+      this.title = ''
+      this.description = ''
+      this.city = ''
+      this.state = ''
+      this.saved = true
+      this.saving = false
+    },
     save: function (event) {
       event.preventDefault()
       this.saving = true
       api.add(this.title, this.description, this.city, this.state, (response) => {
-        this.saved = true
-        this.saving = false
+        this.afterSave()
       })
     }
   }

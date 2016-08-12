@@ -23,7 +23,8 @@ const API = (function () {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
-        data: {title, description, state, city, 'ownerId': userId}
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({title, description, state, city, 'ownerId': userId})
       }).done(callback)
     },
     getForUser: function (page, itemsPerPage, callback) {
