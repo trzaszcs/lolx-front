@@ -2,7 +2,6 @@
    <div class="ui container">
      <div class="segment">
        <div class="card">
-        <div class="header">Ogłoszenie</div>
         <div class="content">
           <img class="right floated mini ui image" src="../assets/plumber.png">
           <div class="header">
