@@ -87,6 +87,13 @@ export default {
       console.log('do query', queryMsg)
       this.searchQuery = queryMsg
       this.startSearch()
+    },
+    'emitOrderEvent': function () {
+      console.log('order')
+    },
+    'emitCloseEvent': function () {
+      console.log('close')
+      $('.ui.modal').modal('hide')
     }
   }
 }

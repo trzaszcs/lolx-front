@@ -86,6 +86,15 @@
       api.getForUser('currentUser', 0, 10, (anounces) => {
         this.items = anounces.anounces
       })
+    },
+    events: {
+      'emitOrderEvent': function () {
+        console.log('order')
+      },
+      'emitCloseEvent': function () {
+        console.log('close')
+        $('.ui.modal').modal('hide')
+      }
     }
   }
 </script>

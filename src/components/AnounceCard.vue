@@ -16,8 +16,8 @@
           </div>
           <div class="extra content">
             <div class="ui two buttons">
-              <div class="ui basic green button">Zamów</div>
-              <div class="ui basic red button">Anuluj</div>
+              <div class="ui basic green button" v-on:click="emitOrderEvent()">Zamów</div>
+              <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
             </div>
           </div>
         </div>
@@ -40,6 +40,12 @@ export default {
     }
   },
   methods: {
+    emitOrderEvent: function () {
+      this.$dispatch('emitOrderEvent', {})
+    },
+    emitCloseEvent: function () {
+      this.$dispatch('emitCloseEvent', {})
+    }
   },
   events: {
     'showAnounce': function (selectedItem) {
