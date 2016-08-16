@@ -1,15 +1,15 @@
 <template>
   <div class="listing ui container">
-    <anounce-card3></anounce-card3>
+    <anounce-card></anounce-card>
   </div>
 </template>
 
 <script>
-import AnounceCard3 from 'components/AnounceCard.vue'
+import AnounceCard from 'components/AnounceCard.vue'
 import $ from 'jquery'
 export default {
   components: {
-    AnounceCard3
+    AnounceCard
   },
   data () {
     return {

@@ -11,9 +11,11 @@
         <div class="ui header">Moje ogłoszenia</div>
       </div>
       
-      <div class="ui modal">
-        <anounce-card></anounce-card>
-      </div>
+        <div class="ui modal">
+            <div class="content">
+              <anounce-card></anounce-card>
+            </div>
+        </div>
       
       <div class="extra content">
         <div class="ui middle aligned selection list">

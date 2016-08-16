@@ -15,7 +15,9 @@
         </div>
         
         <div class="ui modal">
-          <anounce-card2></anounce-card2>
+            <div class="content">
+              <anounce-card></anounce-card>
+            </div>
         </div>
         
         <div class="pagingBox">
@@ -33,7 +35,7 @@
 <script>
 import api from '../api'
 import AnounceItem from './AnounceItem.vue'
-import AnounceCard2 from './AnounceCard.vue'
+import AnounceCard from './AnounceCard.vue'
 require('semantic')
 var $ = require('jquery')
 const itemsPerPage = 20
@@ -41,7 +43,7 @@ const itemsPerPage = 20
 export default {
   components: {
     AnounceItem,
-    AnounceCard2
+    AnounceCard
   },
   data () {
     return {

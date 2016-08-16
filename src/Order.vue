@@ -1,27 +1,28 @@
 <template>
   <div class="ui container">
-    
-    <div class="ui card">
+    <div class="ui segment">
+      <div class="ui card">
+        
+        <div class="content">
+          <div class="ui header">
+            Dane do zamówienia usługi
+          </div>
+          <div class="meta">
+            kto / gdzie / kiedy
+          </div>
+          <div class="description">
+            opis
+          </div>
+        </div>
+        
+        <div class="extra content">
+          <div class="ui header">Email</div>
+        </div>
       
-      <div class="content">
-        <div class="ui header">
-          Dane do zamówienia usługi
-        </div>
-        <div class="meta">
-          kto / gdzie / kiedy
-        </div>
-        <div class="description">
-          opis
-        </div>
-      </div>
-      
-      <div class="extra content">
-        <div class="ui header">Email</div>
-      </div>
-    
-     <div class="extra content">
-        #id: {{anounceId}}
-     </div>
+       <div class="extra content">
+          #id: {{anounceId}}
+       </div>
+    </div>
     
     </div>
     
