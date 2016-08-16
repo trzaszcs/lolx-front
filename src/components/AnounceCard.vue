@@ -1,33 +1,48 @@
 <template>
    <div class="ui container">
-     <div class="ui segment">
-         <div class="card">
-          <div class="content">
-            <img class="right floated mini ui image" src="../assets/plumber.png">
-            <div class="header">
-              {{anounce.title}}
+     
+    <div class="ui stackable two column grid">
+      <div class="column">
+          <div class="ui segment">
+           <div class="card">
+            <div class="content">
+              <img class="right floated mini ui image" src="../assets/plumber.png">
+              <div class="ui header">
+                {{anounce.title}}
+              </div>
+              <div class="meta">
+                Jan Kowalski - {{anounce.city}} - {{anounce.state}}
+              </div>
+              <div class="description">
+                {{anounce.desc}}
+              </div>
             </div>
-            <div class="meta">
-              Jan Kowalski - {{anounce.city}} - {{anounce.state}}
-            </div>
-            <div class="description">
-              {{anounce.desc}}
-            </div>
-          </div>
-          <div class="extra content">
-            <div class="ui two buttons">
-              <div class="ui basic green button" v-on:click="emitOrderEvent()">Zamów</div>
-              <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <div class="ui basic green button" v-on:click="emitOrderEvent()">Zamów</div>
+                <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+      <div class="column">
+        <div class="extra content">
+          <div class="ui header">O użytkowniku</div>
+        </div>
+        <user-public-profile :user=user></user-public-profile>
+      </div>
     </div>
-    
+
   </div>
 </template>
 
 <script>
+import UserPublicProfile from './UserPublicProfile.vue'
 export default {
+  components: {
+    UserPublicProfile
+  },
   data () {
     return {
       anounce: {
@@ -36,6 +51,13 @@ export default {
         state: '',
         img: '',
         desc: ''
+      },
+      user: {
+        username: 'lala',
+        rating: 2,
+        commentsCount: 0,
+        likesCount: 0,
+        lastActive: ''
       }
     }
   },
@@ -45,12 +67,24 @@ export default {
     },
     emitCloseEvent: function () {
       this.$dispatch('emitCloseEvent', {})
+    },
+    getUser: function (selectedItem) {
+      return {
+        username: 'X Y',
+        rating: 4,
+        commentsCount: 2,
+        likesCount: 1,
+        lastActive: '12h'
+      }
     }
+  },
+  ready: function () {
   },
   events: {
     'showAnounce': function (selectedItem) {
       console.log('show -> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
+      this.user = this.getUser(selectedItem)
     }
   }
 }
