@@ -15,8 +15,7 @@
         </div>
         
         <div class="ui modal">
-          <div class="header">Ogłoszenie</div>
-          <anounce-card></anounce-card>
+          <anounce-card2></anounce-card2>
         </div>
         
         <div class="pagingBox">
@@ -34,7 +33,7 @@
 <script>
 import api from '../api'
 import AnounceItem from './AnounceItem.vue'
-import AnounceCard from './AnounceCard.vue'
+import AnounceCard2 from './AnounceCard.vue'
 require('semantic')
 var $ = require('jquery')
 const itemsPerPage = 20
@@ -42,7 +41,7 @@ const itemsPerPage = 20
 export default {
   components: {
     AnounceItem,
-    AnounceCard
+    AnounceCard2
   },
   data () {
     return {
@@ -77,7 +76,7 @@ export default {
       this.$dispatch('listing-page-changed', {page})
     },
     showAnounce: function (selectedItem) {
-      console.log(selectedItem)
+      console.log('SearchResult - showAnounce' + selectedItem)
       this.$broadcast('showAnounce', {'anounce': selectedItem})
       $('.ui.modal').modal('show')
     }
@@ -88,11 +87,12 @@ export default {
       this.searchQuery = queryMsg
       this.startSearch()
     },
-    'emitOrderEvent': function () {
-      console.log('order')
+    'emitOrderEvent': function (anounce) {
+      console.log('order -> ', anounce)
+      $('.ui.modal').modal('hide')
     },
     'emitCloseEvent': function () {
-      console.log('close')
+      console.log('close  SearchResult')
       $('.ui.modal').modal('hide')
     }
   }

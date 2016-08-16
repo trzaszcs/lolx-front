@@ -1,36 +1,32 @@
 <template>
   <div class="ui container myAccount">
+    <div class="ui card">
 
-          <div class="ui card">
-
-        <div class="extra content">
-            <div class="ui header">Mój profil publiczny</div>
-          <user-public-profile :user=user></user-public-profile>
-        </div>
-     
-          <div class="extra content">
-            <div class="ui header">Moje ogłoszenia</div>
-          </div>
-          
-          <div class="ui modal">
-            <div class="ui header">Ogłoszenie</div>
-            <anounce-card></anounce-card>
-          </div>
-          
-                    <div class="extra content">
-
-          <div class="ui middle aligned selection list">
-            <div v-for="item in items" class="item" v-on:click="showAnounce(item)">
-              <img class="ui avatar image" src="assets/plumber.png">
-              <div class="content">
-                <div class="header">{{item.title}}</div>
-              </div>
+      <div class="extra content">
+          <div class="ui header">Mój profil publiczny</div>
+        <user-public-profile :user=user></user-public-profile>
+      </div>
+   
+      <div class="extra content">
+        <div class="ui header">Moje ogłoszenia</div>
+      </div>
+      
+      <div class="ui modal">
+        <anounce-card></anounce-card>
+      </div>
+      
+      <div class="extra content">
+        <div class="ui middle aligned selection list">
+          <div v-for="item in items" class="item" v-on:click="showAnounce(item)">
+            <img class="ui avatar image" src="assets/plumber.png">
+            <div class="content">
+              <div class="header">{{item.title}}</div>
             </div>
           </div>
-          
-          </div>
-</div>
-
+        </div>
+      </div>
+        
+    </div>
   </div>
 
 </template>
@@ -61,7 +57,7 @@
     },
     methods: {
       showAnounce: function (selectedItem) {
-        console.log(selectedItem)
+        console.log('MyAccount - showAnounce' + selectedItem)
         this.$broadcast('showAnounce', {'anounce': selectedItem})
         $('.ui.modal').modal('show')
       },
@@ -82,11 +78,12 @@
       this.user = this.getUser()
     },
     events: {
-      'emitOrderEvent': function () {
-        console.log('order')
+      'emitOrderEvent': function (anounce) {
+        console.log('order -> ', anounce)
+        $('.ui.modal').modal('hide')
       },
       'emitCloseEvent': function () {
-        console.log('close')
+        console.log('close - MyAccount')
         $('.ui.modal').modal('hide')
       }
     }

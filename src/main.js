@@ -6,6 +6,8 @@ import Listing from './Listing'
 import AddAnounce from './AddAnounce'
 import MyAccount from './MyAccount'
 import Anounce from './Anounce'
+import Order from './Order'
+
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
 
@@ -28,6 +30,9 @@ router.map({
   },
   '/anounce': {
     component: Anounce
+  },
+  '/order': {
+    component: Order
   }
 })
 

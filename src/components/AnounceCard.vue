@@ -1,37 +1,35 @@
 <template>
-   <div class="ui container">
-    
-           <div class="ui card">
+
+  <div class="ui card">
             
-            <div class="content">
-              <img class="right floated mini ui image" src="../assets/plumber.png">
-              <div class="ui header">
-                {{anounce.title}}
-              </div>
-              <div class="meta">
-                Jan Kowalski - {{anounce.city}} - {{anounce.state}}
-              </div>
-              <div class="description">
-                {{anounce.desc}}
-              </div>
-            </div>
-            
-            <div class="extra content">
-              <div class="ui two buttons">
-                <div class="ui basic green button" v-on:click="emitOrderEvent()">Zamów</div>
-                <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
-              </div>
-            </div>
-            
-            <div class="extra content">
-              <div class="ui header">O użytkowniku</div>
-              <user-public-profile :user=user></user-public-profile>
-          </div>
-            
+      <div class="content">
+        <img class="right floated mini ui image" src="../assets/plumber.png">
+        <div class="ui header">
+          {{anounce.title}}
+        </div>
+        <div class="meta">
+          Jan Kowalski - {{anounce.city}} - {{anounce.state}}
+        </div>
+        <div class="description">
+          {{anounce.desc}}
+        </div>
       </div>
-
-   
-
+      
+      <div class="extra content">
+        <div class="ui two buttons">
+          <div class="ui basic green button" v-on:click="emitOrderEvent(anounce)">Zamów</div>
+          <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+        </div>
+      </div>
+      
+      <div class="extra content">
+        <div class="ui header">O użytkowniku</div>
+        <user-public-profile :user=user></user-public-profile>
+      </div>
+      
+      <div class="extra content">
+        #id: {{anounce.id}}
+      </div>
 
   </div>
 </template>
@@ -45,6 +43,7 @@ export default {
   data () {
     return {
       anounce: {
+        id: '',
         title: '',
         city: '',
         state: '',
@@ -61,8 +60,9 @@ export default {
     }
   },
   methods: {
-    emitOrderEvent: function () {
-      this.$dispatch('emitOrderEvent', {})
+    emitOrderEvent: function (anonuce) {
+      this.$router.go({'path': '/order', 'query': {'anounceId': anonuce.id}})
+      this.$dispatch('emitOrderEvent', anonuce)
     },
     emitCloseEvent: function () {
       this.$dispatch('emitCloseEvent', {})
@@ -81,7 +81,7 @@ export default {
   },
   events: {
     'showAnounce': function (selectedItem) {
-      console.log('show -> ', selectedItem.anounce)
+      console.log('event show anounce card-> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
     }

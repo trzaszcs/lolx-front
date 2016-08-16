@@ -1,6 +1,4 @@
 <template>
-   <div class="ui container">
-    
     <div class="ui card">
       <div class="content">
         <div class="right floated meta">{{user.lastActive}}</div>
@@ -29,7 +27,6 @@
       </div>
     </div>
     
-  </div>
 </template>
 
 <script>
