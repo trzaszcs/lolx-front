@@ -6,7 +6,7 @@
 
 <script>
 import AnounceCard from 'components/AnounceCard.vue'
-
+import $ from 'jquery'
 export default {
   components: {
     AnounceCard
@@ -16,6 +16,15 @@ export default {
     }
   },
   methods: {
+  },
+  events: {
+    'emitOrderEvent': function () {
+      console.log('order')
+    },
+    'emitCloseEvent': function () {
+      console.log('close')
+      $('.ui.modal').modal('hide')
+    }
   }
 }
 </script>
