@@ -1,10 +1,8 @@
 <template>
    <div class="ui container">
-     
-    <div class="ui stackable two column grid">
-      <div class="column">
-          <div class="ui segment">
-           <div class="card">
+    
+           <div class="ui card">
+            
             <div class="content">
               <img class="right floated mini ui image" src="../assets/plumber.png">
               <div class="ui header">
@@ -17,22 +15,23 @@
                 {{anounce.desc}}
               </div>
             </div>
+            
             <div class="extra content">
               <div class="ui two buttons">
                 <div class="ui basic green button" v-on:click="emitOrderEvent()">Zamów</div>
                 <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
               </div>
             </div>
+            
+            <div class="extra content">
+              <div class="ui header">O użytkowniku</div>
+              <user-public-profile :user=user></user-public-profile>
           </div>
-        </div>
+            
       </div>
-      <div class="column">
-        <div class="extra content">
-          <div class="ui header">O użytkowniku</div>
-        </div>
-        <user-public-profile :user=user></user-public-profile>
-      </div>
-    </div>
+
+   
+
 
   </div>
 </template>

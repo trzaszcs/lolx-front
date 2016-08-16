@@ -1,24 +1,24 @@
 <template>
   <div class="ui container myAccount">
 
-      <div class="ui stackable two column grid">
-        <div class="column">
-          <div class="extra content">
+          <div class="ui card">
+
+        <div class="extra content">
             <div class="ui header">Mój profil publiczny</div>
-          </div>
           <user-public-profile :user=user></user-public-profile>
         </div>
-        <div class="column">
-          
+     
           <div class="extra content">
             <div class="ui header">Moje ogłoszenia</div>
           </div>
           
           <div class="ui modal">
-            <div class="header">Ogłoszenie</div>
+            <div class="ui header">Ogłoszenie</div>
             <anounce-card></anounce-card>
           </div>
           
+                    <div class="extra content">
+
           <div class="ui middle aligned selection list">
             <div v-for="item in items" class="item" v-on:click="showAnounce(item)">
               <img class="ui avatar image" src="assets/plumber.png">
@@ -28,8 +28,8 @@
             </div>
           </div>
           
-        </div>
-      </div>  
+          </div>
+</div>
 
   </div>
 
