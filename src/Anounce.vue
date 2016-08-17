@@ -9,11 +9,10 @@ import AnounceCard from 'components/AnounceCard.vue'
 import $ from 'jquery'
 export default {
   components: {
-    AnounceCard
+    AnounceCard3
   },
   data () {
     return {
-      anounceId: ''
     }
   },
   methods: {
@@ -26,12 +25,6 @@ export default {
       console.log('close')
       $('.ui.modal').modal('hide')
     }
-  },
-  ready: function () {
-    const anounceId = this.$route.query.anounceId
-    console.log(anounceId)
-    this.anounceId = anounceId
-    this.$broadcast('showAnounce', {'anounce': {id: anounceId}})
   }
 }
 </script>
