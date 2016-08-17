@@ -9,12 +9,19 @@ app.use(express.static(__dirname + '/dist'));
 
 // PROXY config
 
-var proxyConfig = {
+var proxyConfigForApi = {
   target: 'http://lolx-backend.herokuapp.com/',  
   pathRewrite: {'^/api' : ''},
   changeOrigin: true
 };
-app.use(httpProxy('/api', proxyConfig));
+
+var proxyConfigForAuthApi = {
+    target: 'http://lolx-auth.herokuapp.com/',  
+    pathRewrite: {'^/auth-api' : ''},
+    changeOrigin: true
+};
+app.use(httpProxy('/api', proxyConfigForApi));
+app.use(httpProxy('/auth-api', proxyConfigForAuthApi));
 
 
 app.listen(app.get('port'), function() {

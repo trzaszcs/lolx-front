@@ -32,6 +32,18 @@ const API = (function () {
         url: `/api/anounces/user/${userId}`,
         data: {page, itemsPerPage}
       }).done(callback)
+    },
+    login: function (email, password, callback) {
+      $.ajax({
+        url: '/auth-api/auth',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({email, password})
+      }).done((result) => {
+        callback({success: true, jwt: result.jwt})
+      }).fail((result) => {
+        callback({success: false})
+      })
     }
   }
 })()
