@@ -20,9 +20,7 @@
         <div v-on:click="login" class="ui fluid large teal submit button">Login</div>
         </div>
         <div class="ui error message">
-          <ul class="list">
-            <li>{{message}}</li>
-          </ul>
+          {{message}}
         </div>
       </form>
       
