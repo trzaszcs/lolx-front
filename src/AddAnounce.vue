@@ -49,6 +49,7 @@
 
 <script>
 import api from './api'
+import session from './session'
 
 export default {
   data () {
@@ -73,9 +74,15 @@ export default {
     save: function (event) {
       event.preventDefault()
       this.saving = true
-      api.add(this.title, this.description, this.city, this.state, (response) => {
+      api.add(this.title, this.description, this.city, this.state, session.getJwt(), (response) => {
         this.afterSave()
       })
+    }
+  },
+  init: function () {
+    if (!session.logged()) {
+      session.setBackUrl(this.$route)
+      this.$router.go({path: '/login'})
     }
   }
 }

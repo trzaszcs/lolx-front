@@ -19,10 +19,13 @@ const API = (function () {
         data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       }).done(callback)
     },
-    add: function (title, description, state, city, callback) {
+    add: function (title, description, state, city, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`
+        },
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({title, description, state, city, 'ownerId': userId})
       }).done(callback)
