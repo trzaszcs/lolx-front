@@ -20,7 +20,9 @@
         </div>
       
         <div class="extra content">
-          <a v-link="{ path: '/anounce', query: { anounceId: anounceId }}">link bezpośrednio do oferty</a>
+          <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounceId }}">
+            link bezpośrednio do oferty
+          </a>
         </div>
       
        <div class="extra content">

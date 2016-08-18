@@ -20,7 +20,7 @@
       </div>
         
       <div class="extra content">
-        <div class="ui large transparent left icon input">
+        <div class="ui large transparent left icon focus input">
           <i class="heart outline icon"></i>
           <input type="text" placeholder="Dodaj komentarz...">
         </div>

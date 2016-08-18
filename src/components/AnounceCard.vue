@@ -27,7 +27,9 @@
         <user-public-profile :user=user></user-public-profile>
       </div>
       <div class="extra content">
-        <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">link bezpośrednio do oferty</a>
+        <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
+          link bezpośrednio do oferty
+        </a>
       </div>
       
       <div class="extra content">
