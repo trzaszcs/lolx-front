@@ -33,7 +33,7 @@
       </div>
       
       <div class="extra content">
-        #id: {{anounce.id}}
+        #id oferty: {{anounce.id}}
       </div>
 
   </div>
