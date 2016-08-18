@@ -52,10 +52,12 @@ export default {
       api.login(this.email, this.password, (result) => {
         if (result.success) {
           session.setJwt(result.jwt)
-          this.$router.go({'path': '/myAccount'})
+          const backUrl = session.getBackUrl()
+
+          this.$router.go(backUrl || {'path': '/myAccount'})
         } else {
           session.reset()
-          this.message = 'Podano złe hasło lub email'
+          this.message = 'Podałeś złe hasło lub email'
         }
       })
     },

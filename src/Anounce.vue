@@ -9,7 +9,7 @@ import AnounceCard from 'components/AnounceCard.vue'
 import $ from 'jquery'
 export default {
   components: {
-    AnounceCard3
+    AnounceCard
   },
   data () {
     return {
