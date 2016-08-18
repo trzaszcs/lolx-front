@@ -7,15 +7,25 @@
 <script>
 import AnounceCard from 'components/AnounceCard.vue'
 import $ from 'jquery'
+import api from './api'
+
 export default {
   components: {
-    AnounceCard3
+    AnounceCard
   },
   data () {
     return {
     }
   },
   methods: {
+  },
+  ready: function () {
+    const anounceId = this.$route.query.anounceId
+    console.log(anounceId)
+    api.getById(anounceId, (searchResult) => {
+      const anounce = searchResult.anounces[0]
+      this.$broadcast('showAnounce', {'anounce': anounce})
+    })
   },
   events: {
     'emitOrderEvent': function () {

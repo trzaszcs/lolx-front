@@ -33,17 +33,10 @@ const API = (function () {
         data: {page, itemsPerPage}
       }).done(callback)
     },
-    login: function (email, password, callback) {
+    getById: function (anounceId, callback) {
       $.ajax({
-        url: '/auth-api/auth',
-        method: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({email, password})
-      }).done((result) => {
-        callback({success: true, jwt: result.jwt})
-      }).fail((result) => {
-        callback({success: false})
-      })
+        url: `/api/anounces/${anounceId}`
+      }).done(callback)
     }
   }
 })()
