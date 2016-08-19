@@ -66,8 +66,8 @@ export default {
     }
   },
   ready: function () {
-    this.facebookInit(document, 'script', 'facebook-jssdk')
     this.appkaUrl = document.location.href
+    this.facebookInit(document, 'script', 'facebook-jssdk')
     console.log(this.appkaUrl)
   }
 }

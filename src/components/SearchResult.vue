@@ -12,12 +12,6 @@
            </div>
         </div>
         
-        <div class="ui modal">
-            <div class="content">
-              <anounce-card></anounce-card>
-            </div>
-        </div>
-        
         <div class="pagingBox">
           <div class="ui pagination menu">
             <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
@@ -36,7 +30,6 @@ import AnounceItem from './AnounceItem.vue'
 import AnounceCard from './AnounceCard.vue'
 import LoadingBox from './LoadingBox.vue'
 require('semantic')
-var $ = require('jquery')
 const itemsPerPage = 20
 
 export default {
@@ -79,8 +72,7 @@ export default {
     },
     showAnounce: function (selectedItem) {
       console.log('SearchResult - showAnounce' + selectedItem)
-      this.$broadcast('showAnounce', {'anounce': selectedItem})
-      $('.ui.modal').modal('show')
+      this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
     }
   },
   events: {
@@ -88,14 +80,6 @@ export default {
       console.log('do query', queryMsg)
       this.searchQuery = queryMsg
       this.startSearch()
-    },
-    'emitOrderEvent': function (anounce) {
-      console.log('order -> ', anounce)
-      $('.ui.modal').modal('hide')
-    },
-    'emitCloseEvent': function () {
-      console.log('close  SearchResult')
-      $('.ui.modal').modal('hide')
     }
   }
 }
