@@ -23,6 +23,11 @@
       </div>
       
       <div class="extra content">
+        <div id="fb-root"></div>
+        <div class="fb-like" v-bind:data-href="anounceUrl" data-layout="standard" data-width="250" data-action="recommend" data-show-faces="true" data-share="true"></div>
+      </div>
+      
+      <div class="extra content">
         <div class="ui header">O użytkowniku</div>
         <user-public-profile :user=user></user-public-profile>
       </div>
@@ -35,7 +40,7 @@
       <div class="extra content">
         #id oferty: {{anounce.id}}
       </div>
-
+      
   </div>
 </template>
 
@@ -61,7 +66,8 @@ export default {
         commentsCount: 0,
         likesCount: 0,
         lastActive: ''
-      }
+      },
+      anounceUrl: ''
     }
   },
   methods: {
@@ -80,9 +86,23 @@ export default {
         likesCount: 1,
         lastActive: '12h'
       }
+    },
+    facebookInit: function (d, s, id) {
+      var js = d.getElementsByTagName(s)[0]
+      var fjs = js
+      if (d.getElementById(id)) {
+        return
+      }
+      js = d.createElement(s)
+      js.id = id
+      js.src = '//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.7'
+      fjs.parentNode.insertBefore(js, fjs)
     }
   },
   ready: function () {
+    this.facebookInit(document, 'script', 'facebook-jssdk')
+    this.anounceUrl = document.location.href
+    console.log(this.anounceUrl)
   },
   events: {
     'showAnounce': function (selectedItem) {
