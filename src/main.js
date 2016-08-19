@@ -8,6 +8,7 @@ import MyAccount from './MyAccount'
 import Anounce from './Anounce'
 import Order from './Order'
 import Login from './Login'
+import Register from './Register'
 
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
@@ -37,6 +38,9 @@ router.map({
   },
   '/login': {
     component: Login
+  },
+  '/register': {
+    component: Register
   }
 })
 

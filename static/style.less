@@ -15,6 +15,10 @@
   margin-top: 10px;
 }
 
+.register {
+  margin-top: 10px;
+}
+
 
 .searchInput {
     margin-top: 10px;
@@ -45,14 +49,24 @@
 }
 
 
-.loadingScreen {
+.loadingBox {
   opacity: .85;
   background-color: white;
   filter: alpha(opacity=85);
   position: absolute;
   width:95%;
-  height: 95%;
+  height: 99%;
   z-index: 2;
+  div.logo {
+    background-image: url('../src/assets/ajax-loader.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    z-index: 2;
+  }
 }
 
 .login {

@@ -2,10 +2,8 @@
   <div class="searchResult ui container">
     <div class="segment">
       <div v-if="searchStarted">
-      
-        <div v-if="searchLoading">
-          Searching...
-        </div>
+
+        <loading-box :show="searchLoading"></loading-box>
         
         <div v-else class="result">
            <h1>Wyniki wyszukiwania</h1>
@@ -36,6 +34,7 @@
 import api from '../api'
 import AnounceItem from './AnounceItem.vue'
 import AnounceCard from './AnounceCard.vue'
+import LoadingBox from './LoadingBox.vue'
 require('semantic')
 var $ = require('jquery')
 const itemsPerPage = 20
@@ -43,7 +42,8 @@ const itemsPerPage = 20
 export default {
   components: {
     AnounceItem,
-    AnounceCard
+    AnounceCard,
+    LoadingBox
   },
   data () {
     return {

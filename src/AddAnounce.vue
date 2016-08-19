@@ -2,8 +2,8 @@
   <div class="ui container addAnounce">
     <div class="ui segment">
 
-    <div v-if="saving" class="loadingScreen"></div>
-
+    <loading-box :show="saving"></loading-box>
+   
     <div v-if="saved" class="ui info message">
       <i class="icon"></i>
       <div class="header">
@@ -14,15 +14,21 @@
       </ul>
     </div>
 
-    <form class="ui form">
+    <form class="ui form" v-bind:class="{ 'error': validationErrors }">
       <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
-      
-      <div class="field">
+
+      <div class="ui error message">
+        <ul class="list" v-for="error in validationErrors">
+          <li>{{error.txt}}</li>
+        </ul>
+      </div>
+
+      <div class="field" v-bind:class="{'error': hasFieldError('title')}">
         <label>Tytuł</label>
         <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia">
       </div>
 
-      <div class="field">
+      <div class="field" v-bind:class="{'error': hasFieldError('description')}">
         <label>Opis</label>
         <textarea v-model="description" name="descripion"></textarea>
       </div>
@@ -30,10 +36,10 @@
       <div class="field">
         <label>Adres</label>
          <div class="fields">
-          <div class="four wide field">
+          <div class="four wide field" v-bind:class="{'error': hasFieldError('state')}">
            <input v-model="state" type="text" name="state" placeholder="Województwo">
           </div>
-          <div class="twelve wide field">
+          <div class="twelve wide field" v-bind:class="{'error': hasFieldError('city')}">
            <input v-model="city" type="text" name="city" placeholder="Miasto">
           </div>
       </div>
@@ -50,8 +56,12 @@
 <script>
 import api from './api'
 import session from './session'
+import LoadingBox from './components/LoadingBox.vue'
 
 export default {
+  components: {
+    LoadingBox
+  },
   data () {
     return {
       title: '',
@@ -59,7 +69,8 @@ export default {
       city: '',
       state: '',
       saving: false,
-      saved: false
+      saved: false,
+      validationErrors: null
     }
   },
   methods: {
@@ -73,21 +84,50 @@ export default {
     },
     save: function (event) {
       event.preventDefault()
+
+      if (!this.validate()) {
+        return
+      }
+
       this.saving = true
       api.add(this.title, this.description, this.city, this.state, session.getJwt(), (response) => {
         this.afterSave()
       })
+    },
+    validate: function (event) {
+      let errors = []
+      const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
+      if (!this.title) {
+        append('title', 'Tytuł jest wymagany')
+      }
+      if (!this.description) {
+        append('description', 'Opis jest wymagany')
+      }
+      if (!this.city) {
+        append('city', 'Miasto jest wymagane')
+      }
+
+      if (errors.length > 0) {
+        this.validationErrors = errors
+        return false
+      }
+      return true
+    },
+    hasFieldError: function (fieldName) {
+      if (this.validationErrors) {
+        return this.validationErrors.some((errorMessage) => {
+          return errorMessage.name === fieldName
+        })
+      }
+      return false
     }
   },
-  init: function () {
+  ready: function () {
     if (!session.logged()) {
       session.setBackUrl(this.$route)
       this.$router.go({path: '/login'})
+      return
     }
   }
 }
 </script>
-
-<style scoped>
-</style>
-

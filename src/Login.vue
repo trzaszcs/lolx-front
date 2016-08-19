@@ -1,4 +1,5 @@
 <template>
+  <loading-box :show="loading"></loading-box>
   <div class="ui middle aligned center aligned grid login">
     <div class="column">
 
@@ -36,20 +37,25 @@
 <script>
 import api from './api'
 import session from './session'
+import LoadingBox from './components/LoadingBox.vue'
 
 export default {
   data () {
     return {
       email: 'john@wp.pl',
       password: 'pass',
-      message: ''
+      message: '',
+      loading: false
     }
   },
   components: {
+    LoadingBox
   },
   methods: {
     login: function () {
+      this.loading = true
       api.login(this.email, this.password, (result) => {
+        this.loading = false
         if (result.success) {
           session.setJwt(result.jwt)
           const backUrl = session.getBackUrl()

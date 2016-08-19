@@ -36,7 +36,7 @@
 <script>
   import AnounceCard from './components/AnounceCard.vue'
   import UserPublicProfile from './components/UserPublicProfile.vue'
-  
+  import session from './session'
   import api from './api'
   import $ from 'jquery'
 
@@ -74,6 +74,11 @@
       }
     },
     ready: function () {
+      if (!session.logged()) {
+        session.setBackUrl(this.$route)
+        this.$router.go({path: '/login'})
+        return
+      }
       api.getForUser('currentUser', 0, 10, (anounces) => {
         this.items = anounces.anounces
       })
@@ -91,7 +96,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

@@ -40,6 +40,26 @@ const API = (function () {
       $.ajax({
         url: `/api/anounces/${anounceId}`
       }).done(callback)
+    },
+    login: function (email, password, callback) {
+      $.ajax({
+        url: '/auth-api/auth',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({email, password})
+      }).done((result) => {
+        callback({success: true, jwt: result.jwt})
+      }).fail((result) => {
+        callback({success: false})
+      })
+    },
+    register: function (firstName, lastName, email, password, state, city, callback) {
+      $.ajax({
+        url: '/auth-api/register',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({firstName, lastName, email, password, state, city, 'ownerId': userId})
+      }).done(callback)
     }
   }
 })()
