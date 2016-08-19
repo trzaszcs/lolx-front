@@ -24,7 +24,7 @@
       
       <div class="extra content">
         <div id="fb-root"></div>
-        <div class="fb-like" v-bind:data-href="anounceUrl" data-layout="standard" data-width="250" data-action="recommend" data-show-faces="true" data-share="true"></div>
+        <div class="fb-like" v-bind:data-href="anounceUrl" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div>
       </div>
       
       <div class="extra content">
@@ -35,7 +35,7 @@
         <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
           link bezpośrednio do oferty
         </a>
-      </div>
+      </div>        
       
       <div class="extra content">
         #id oferty: {{anounce.id}}
