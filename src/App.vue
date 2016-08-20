@@ -33,7 +33,10 @@
         </div>
       </div>
 
-      <social-plugins></social-plugins>
+      <div class="ui bottom attached segment">
+        <div class="fb-like" v-bind:data-href="siteUrl" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+      </div>  
+  
       <router-view></router-view>
 
     </div>
@@ -42,17 +45,21 @@
 </template>
 
 <script>
-import SocialPlugins from 'components/SocialPlugins.vue'
+import sp from './socialplugin'
 
 export default {
   components: {
-    SocialPlugins
   },
   data () {
     return {
+      siteUrl: ''
     }
   },
   methods: {
+  },
+  ready: function () {
+    this.siteUrl = window.location.href
+    sp.facebookInit(document, 'script', 'facebook-jssdk')
   }
 }
 </script>
