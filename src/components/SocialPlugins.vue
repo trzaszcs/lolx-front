@@ -1,7 +1,7 @@
 <template>
   <div class="socialPlugins ui bottom attached segment">
     <div id="fb-root"></div>
-    <div class="fb-like" v-bind:data-href="appkaUrl" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+    <div class="fb-like" v-bind:data-href="siteUrl" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 export default {
   data () {
     return {
-      appkaUrl: ''
+      siteUrl: ''
     }
   },
   methods: {
