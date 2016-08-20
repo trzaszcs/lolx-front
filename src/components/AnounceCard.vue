@@ -21,7 +21,7 @@
           <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
         </div>
       </div>
-      
+
       <div class="extra content">
         <div class="ui header">O użytkowniku</div>
         <user-public-profile :user=user></user-public-profile>
@@ -41,6 +41,7 @@
 
 <script>
 import UserPublicProfile from './UserPublicProfile.vue'
+
 export default {
   components: {
     UserPublicProfile

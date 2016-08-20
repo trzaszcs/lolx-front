@@ -1,12 +1,11 @@
 <template>
-  <div class="listing ui container">
+  <div class="anounce ui container">
     <anounce-card></anounce-card>
   </div>
 </template>
 
 <script>
 import AnounceCard from 'components/AnounceCard.vue'
-import $ from 'jquery'
 import api from './api'
 
 export default {
@@ -33,7 +32,6 @@ export default {
     },
     'emitCloseEvent': function () {
       console.log('close')
-      $('.ui.modal').modal('hide')
     }
   }
 }

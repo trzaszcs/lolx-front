@@ -32,12 +32,8 @@
           </div>
         </div>
       </div>
-    
-      <div class="ui bottom attached segment">
-        <div id="fb-root"></div>
-        <div class="fb-like" v-bind:data-href="appkaUrl" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-      </div> 
-    
+
+      <social-plugins></social-plugins>
       <router-view></router-view>
 
     </div>
@@ -46,29 +42,17 @@
 </template>
 
 <script>
+import SocialPlugins from 'components/SocialPlugins.vue'
+
 export default {
+  components: {
+    SocialPlugins
+  },
   data () {
     return {
-      appkaUrl: ''
     }
   },
   methods: {
-    facebookInit: function (d, s, id) {
-      var js = d.getElementsByTagName(s)[0]
-      var fjs = js
-      if (d.getElementById(id)) {
-        return
-      }
-      js = d.createElement(s)
-      js.id = id
-      js.src = '//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.7'
-      fjs.parentNode.insertBefore(js, fjs)
-    }
-  },
-  ready: function () {
-    this.appkaUrl = document.location.href
-    this.facebookInit(document, 'script', 'facebook-jssdk')
-    console.log(this.appkaUrl)
   }
 }
 </script>
