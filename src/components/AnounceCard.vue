@@ -18,7 +18,7 @@
             Jan Kowalski - {{anounce.city}} - {{anounce.state}}
           </div>
           <div class="description">
-            {{anounce.desc}}
+            {{anounce.description}}
           </div>
         </div>
         
@@ -42,11 +42,15 @@
     </div>
   </div>
   
-  <div class="ui segment">
+  <div class="ui segments">
+    <div class="ui segment">
       <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
         link bezpośrednio do oferty
       </a>
+    </div>
+    <div class="ui segment">
       #id oferty: {{anounce.id}}
+    </div>
   </div>
 
 </template>
@@ -66,7 +70,7 @@ export default {
         city: '',
         state: '',
         img: '',
-        desc: ''
+        description: ''
       },
       user: {
         username: 'lala',
