@@ -32,6 +32,7 @@ export default {
     },
     'emitCloseEvent': function () {
       console.log('close')
+      this.$router.go(window.history.back())
     }
   }
 }

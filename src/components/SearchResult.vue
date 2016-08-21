@@ -1,12 +1,10 @@
 <template>
-  <div class="searchResult ui container">
-    <div class="segment">
       <div v-if="searchStarted">
 
         <loading-box :show="searchLoading"></loading-box>
         
         <div v-else class="result">
-           <h1>Wyniki wyszukiwania</h1>
+           <h4>Wyniki wyszukiwania</h4>
            <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
                <anounce-item :anounce=item></anounce-item>
            </div>
@@ -17,10 +15,7 @@
             <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
           </div>
         </div>
-      </div>
-    </div>
 
-  
   </div>
 </template>
 
