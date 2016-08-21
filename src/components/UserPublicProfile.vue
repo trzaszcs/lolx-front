@@ -1,5 +1,5 @@
 <template>
-    <div class="ui card">
+    <div class="ui fluid card">
       <div class="content">
         <div class="right floated meta">{{user.lastActive}}</div>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">{{user.username}}

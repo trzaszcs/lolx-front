@@ -1,6 +1,6 @@
 <template>
   <div class="ui container myAccount">
-    <div class="ui card">
+    <div class="ui fluid card">
 
       <div class="extra content">
           <div class="ui header">Mój profil publiczny</div>

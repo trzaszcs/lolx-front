@@ -1,42 +1,54 @@
 <template>
 
-  <div class="ui card">
-            
-      <div class="content">
-        <img class="right floated mini ui image" src="../assets/plumber.png">
-        <div class="ui header">
-          {{anounce.title}}
-        </div>
-        <div class="meta">
-          Jan Kowalski - {{anounce.city}} - {{anounce.state}}
-        </div>
-        <div class="description">
-          {{anounce.desc}}
-        </div>
-      </div>
-      
-      <div class="extra content">
-        <div class="ui two buttons">
-          <div class="ui basic green button" v-on:click="emitOrderEvent(anounce)">Zamów</div>
-          <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
-        </div>
+  <div class="ui stackable two column grid">
+    <div class="ui column">
+
+      <div class="ui extra content">
+        <div class="ui header">Ogłoszenie</div>
       </div>
 
-      <div class="extra content">
+      <div class="ui fluid card">
+                
+        <div class="content">
+          <img class="right floated mini ui image" src="../assets/plumber.png">
+          <div class="ui header">
+            {{anounce.title}}
+          </div>
+          <div class="meta">
+            Jan Kowalski - {{anounce.city}} - {{anounce.state}}
+          </div>
+          <div class="description">
+            {{anounce.desc}}
+          </div>
+        </div>
+        
+        <div class="extra content">
+          <div class="ui two buttons">
+            <div class="ui basic green button" v-on:click="emitOrderEvent(anounce)">Zamów</div>
+            <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+          </div>
+        </div>
+       
+      </div>
+    
+    </div>
+    <div class="ui column">
+    
+      <div class="ui extra content">
         <div class="ui header">O użytkowniku</div>
         <user-public-profile :user=user></user-public-profile>
       </div>
-      <div class="extra content">
-        <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
-          link bezpośrednio do oferty
-        </a>
-      </div>        
-      
-      <div class="extra content">
-        #id oferty: {{anounce.id}}
-      </div>
-      
+    
+    </div>
   </div>
+  
+  <div class="ui segment">
+      <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
+        link bezpośrednio do oferty
+      </a>
+      #id oferty: {{anounce.id}}
+  </div>
+
 </template>
 
 <script>

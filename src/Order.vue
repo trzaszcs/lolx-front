@@ -1,6 +1,6 @@
 <template>
   <div class="order ui container">
-    <div class="ui card">
+    <div class="ui fluid card">
       
       <div class="content">
         <div class="ui header">
