@@ -2,7 +2,9 @@
   <div class="item">
    <img class="ui avatar image" src="../assets/plumber.png">
    <div class="content">
-    <div class="header">{{anounce.title}}</div>
+      <a class="ui header" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
+        {{anounce.title}}
+      </a>
    </div>
  </div>
 </template>

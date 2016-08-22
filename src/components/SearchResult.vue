@@ -1,21 +1,13 @@
 <template>
-  <div class="searchResult ui container">
-    <div class="segment">
       <div v-if="searchStarted">
 
         <loading-box :show="searchLoading"></loading-box>
         
         <div v-else class="result">
-           <h1>Wyniki wyszukiwania</h1>
+           <h4>Wyniki wyszukiwania</h4>
            <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
                <anounce-item :anounce=item></anounce-item>
            </div>
-        </div>
-        
-        <div class="ui modal">
-            <div class="content">
-              <anounce-card></anounce-card>
-            </div>
         </div>
         
         <div class="pagingBox">
@@ -23,10 +15,7 @@
             <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
           </div>
         </div>
-      </div>
-    </div>
 
-  
   </div>
 </template>
 
@@ -36,7 +25,6 @@ import AnounceItem from './AnounceItem.vue'
 import AnounceCard from './AnounceCard.vue'
 import LoadingBox from './LoadingBox.vue'
 require('semantic')
-var $ = require('jquery')
 const itemsPerPage = 20
 
 export default {
@@ -79,8 +67,7 @@ export default {
     },
     showAnounce: function (selectedItem) {
       console.log('SearchResult - showAnounce' + selectedItem)
-      this.$broadcast('showAnounce', {'anounce': selectedItem})
-      $('.ui.modal').modal('show')
+      this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
     }
   },
   events: {
@@ -88,14 +75,6 @@ export default {
       console.log('do query', queryMsg)
       this.searchQuery = queryMsg
       this.startSearch()
-    },
-    'emitOrderEvent': function (anounce) {
-      console.log('order -> ', anounce)
-      $('.ui.modal').modal('hide')
-    },
-    'emitCloseEvent': function () {
-      console.log('close  SearchResult')
-      $('.ui.modal').modal('hide')
     }
   }
 }

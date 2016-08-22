@@ -1,39 +1,36 @@
 <template>
-  <div class="ui container">
-    <div class="ui segment">
-      <div class="ui card">
-        
-        <div class="content">
-          <div class="ui header">
-            Dane do zamówienia usługi
-          </div>
-          <div class="meta">
-            kto / gdzie / kiedy
-          </div>
-          <div class="description">
-            opis
-          </div>
-        </div>
-        
-        <div class="extra content">
-          <div class="ui header">Email</div>
-        </div>
+  <div class="order ui container">
+    <div class="ui fluid card">
       
-        <div class="extra content">
-          <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounceId }}">
-            link bezpośrednio do oferty
-          </a>
+      <div class="content">
+        <div class="ui header">
+          Dane do zamówienia usługi
         </div>
+        <div class="meta">
+          kto / gdzie / kiedy
+        </div>
+        <div class="description">
+          opis
+        </div>
+      </div>
       
-       <div class="extra content">
-          #id: {{anounceId}}
-       </div>
-    </div>
+      <div class="extra content">
+        <div class="ui header">Email</div>
+      </div>
     
-    </div>
+      <div class="extra content">
+        <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounceId }}">
+          link bezpośrednio do oferty
+        </a>
+      </div>
     
-    
+     <div class="extra content">
+        #id: {{anounceId}}
+     </div>
   </div>
+  
+  </div>
+
 </template>
 
 <script>
