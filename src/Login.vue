@@ -9,13 +9,13 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input v-model="email" type="text" name="email" placeholder="E-mail">
+              <input v-model="email" type="text" name="email" placeholder="E-mail"/>
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input v-model="password" type="password" name="password" placeholder="Hasło">
+              <input v-model="password" type="password" name="password" placeholder="Hasło"/>
             </div>
           </div>
         <div v-on:click="login" class="ui fluid large teal submit button">Login</div>
@@ -57,9 +57,8 @@ export default {
       api.login(this.email, this.password, (result) => {
         this.loading = false
         if (result.success) {
-          session.setJwt(result.jwt)
+          session.create(result.userId, result.jwt)
           const backUrl = session.getBackUrl()
-
           this.$router.go(backUrl || {'path': '/myAccount'})
         } else {
           session.reset()

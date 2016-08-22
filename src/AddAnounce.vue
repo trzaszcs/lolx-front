@@ -5,7 +5,6 @@
     <loading-box :show="saving"></loading-box>
    
     <div v-if="saved" class="ui info message">
-      <i class="icon"></i>
       <div class="header">
         Twój wpis został zapisany
       </div>
@@ -25,7 +24,7 @@
 
       <div class="field" v-bind:class="{'error': hasFieldError('title')}">
         <label>Tytuł</label>
-        <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia">
+        <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
       </div>
 
       <div class="field" v-bind:class="{'error': hasFieldError('description')}">
@@ -37,10 +36,15 @@
         <label>Adres</label>
          <div class="fields">
           <div class="four wide field" v-bind:class="{'error': hasFieldError('state')}">
-           <input v-model="state" type="text" name="state" placeholder="Województwo">
+           <select v-model="state">
+             <option value="">Województwo</option>
+             <option v-for="state in states" v-bind:value="state">
+               {{ state }}
+             </option>
+           </select>
           </div>
           <div class="twelve wide field" v-bind:class="{'error': hasFieldError('city')}">
-           <input v-model="city" type="text" name="city" placeholder="Miasto">
+           <input v-model="city" type="text" name="city" placeholder="Miasto"/>
           </div>
       </div>
       
@@ -56,6 +60,7 @@
 <script>
 import api from './api'
 import session from './session'
+import {states} from './const'
 import LoadingBox from './components/LoadingBox.vue'
 
 export default {
@@ -70,7 +75,8 @@ export default {
       state: '',
       saving: false,
       saved: false,
-      validationErrors: null
+      validationErrors: null,
+      states: states
     }
   },
   methods: {
@@ -79,6 +85,7 @@ export default {
       this.description = ''
       this.city = ''
       this.state = ''
+      this.validationErrors = null
       this.saved = true
       this.saving = false
     },
@@ -90,9 +97,17 @@ export default {
       }
 
       this.saving = true
-      api.add(this.title, this.description, this.city, this.state, session.getJwt(), (response) => {
-        this.afterSave()
-      })
+      api.add(
+        this.title,
+        this.description,
+        this.city,
+        this.state,
+        session.getUserId(),
+        session.getJwt(),
+        (response) => {
+          this.afterSave()
+        }
+      )
     },
     validate: function (event) {
       let errors = []
@@ -105,6 +120,9 @@ export default {
       }
       if (!this.city) {
         append('city', 'Miasto jest wymagane')
+      }
+      if (!this.state) {
+        append('state', 'Województwo jest wymagane')
       }
 
       if (errors.length > 0) {

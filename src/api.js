@@ -1,7 +1,6 @@
 import * as $ from 'jquery'
 
 const API = (function () {
-  const userId = 'anonymous'
   return {
     doCall: function (succCallback) {
       $.ajax({
@@ -19,7 +18,7 @@ const API = (function () {
         data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       }).done(callback)
     },
-    add: function (title, description, state, city, jwtToken, callback) {
+    add: function (title, description, state, city, userId, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
@@ -48,7 +47,7 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({email, password})
       }).done((result) => {
-        callback({success: true, jwt: result.jwt})
+        callback({success: true, jwt: result.jwt, userId: result.userId})
       }).fail((result) => {
         callback({success: false})
       })
@@ -58,7 +57,7 @@ const API = (function () {
         url: '/auth-api/register',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({firstName, lastName, email, password, state, city, 'ownerId': userId})
+        data: JSON.stringify({firstName, lastName, email, password, state, city})
       }).done(callback)
     }
   }

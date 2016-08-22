@@ -25,37 +25,43 @@
 
       <div class="field" v-bind:class="{'error': hasFieldError('firstName')}">
         <label>Imie</label>
-        <input v-model="firstName" placeholder="Imie">
+        <input v-model="firstName" placeholder="Imie"/>
       </div>
 
       <div class="field" v-bind:class="{'error': hasFieldError('lastName')}">
         <label>Nazwisko</label>
-        <input v-model="lastName" placeholder="Nazwisko">
+        <input v-model="lastName" placeholder="Nazwisko"/>
       </div>
-
-      <div class="field" v-bind:class="{'error': hasFieldError('state')}">
-        <label>Województwo</label>
-        <input v-model="state" placeholder="Województwo">
-      </div>
-
-      <div class="field" v-bind:class="{'error': hasFieldError('city')}">
-        <label>Miasto</label>
-        <input v-model="city" placeholder="Miasto">
+      
+      <div class="field">
+        <label>Adres</label>
+         <div class="fields">
+          <div class="four wide field" v-bind:class="{'error': hasFieldError('state')}">
+           <select v-model="state">
+             <option value="">Województwo</option>
+             <option v-for="state in states">
+               {{ state }}
+             </option>
+           </select>
+          </div>
+          <div class="twelve wide field" v-bind:class="{'error': hasFieldError('city')}">
+           <input v-model="city" type="text" name="city" placeholder="Miasto">
+          </div>
       </div>
 
       <div class="field" v-bind:class="{'error': hasFieldError('email')}">
         <label>E-mail</label>
-        <input v-model="email" placeholder="Email">
+        <input v-model="email" placeholder="Email"/>
       </div>
 
       <div class="field" v-bind:class="{'error': hasFieldError('password1')}">
         <label>Hasło</label>
-        <input v-model="password1" type="password">
+        <input v-model="password1" type="password"/>
       </div>
 
       <div class="field" v-bind:class="{'error': hasFieldError('password2')}">
         <label>Powtórzone hasło</label>
-        <input v-model="password2" type="password">
+        <input v-model="password2" type="password"/>
       </div>
 
       <input v-on:click="save" type="submit" class="ui primary button" value="Zarejestruj"></input>
@@ -69,6 +75,7 @@
 
 <script>
 import api from './api'
+import {states} from './const'
 import LoadingBox from './components/LoadingBox.vue'
 
 export default {
@@ -86,7 +93,8 @@ export default {
       state: '',
       saving: false,
       saved: false,
-      validationErrors: null
+      validationErrors: null,
+      states: states
     }
   },
   methods: {

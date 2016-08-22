@@ -1,10 +1,10 @@
 
 const SESSION = (function () {
-  let jwt, backUrl
+  let jwt, backUrl, userId
 
-  function processJwt (jwtToken) {
+  function create (responseUserId, jwtToken) {
     jwt = jwtToken
-    console.log(jwt)
+    userId = responseUserId
   }
 
   function logged () {
@@ -23,12 +23,22 @@ const SESSION = (function () {
     return backUrl
   }
 
+  function getJwt () {
+    return jwt
+  }
+
+  function getUserId () {
+    return userId
+  }
+
   return {
-    setJwt: processJwt,
+    create: create,
     logged: logged,
     reset: reset,
     setBackUrl: setBackUrl,
-    getBackUrl: getBackUrl
+    getBackUrl: getBackUrl,
+    getJwt: getJwt,
+    getUserId: getUserId
   }
 })()
 
