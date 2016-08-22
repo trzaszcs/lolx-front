@@ -25,9 +25,7 @@ export default {
   ready: function () {
     this.anounceLoading = true
     const anounceId = this.$route.query.anounceId
-    console.log(anounceId)
-    api.getById(anounceId, (searchResult) => {
-      const anounce = searchResult.anounces[0]
+    api.getById(anounceId, (anounce) => {
       this.$broadcast('showAnounce', {'anounce': anounce})
     })
     this.anounceLoading = false
