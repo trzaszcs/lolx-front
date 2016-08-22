@@ -1,0 +1,17 @@
+const states = {
+  "dol": "Dolno¶l±skie",
+  "kuj": "Kujawsko-Pomorskie",
+  "lbl": "Lubelskie",
+  "lub": "Lubuskie",
+  "lod": "£ódzkie",
+  "mal": "Ma³opolskie",
+  "maz": "Mazowieckie",
+  "opo": "Opolskie",
+  "pdk": "Podkarpackie",
+  "pdl": "Podlaskie",
+  "pom": "Pomorskie",
+  "sla": "¦l±skie",
+  "swi": "¦wiêtokrzyskie",
+  "wma": "Warmiñsko-Mazurskie",
+  "wlk": "Wielkospolskie",
+  "zac": "Zachodniopomorskie"} 
