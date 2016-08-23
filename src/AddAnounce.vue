@@ -22,22 +22,27 @@
         </ul>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('title')}">
+      <div class="five wide field required" v-bind:class="{'error': hasFieldError('title')}">
         <label>Tytuł</label>
         <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('description')}">
+      <div class="field ten wide required" v-bind:class="{'error': hasFieldError('description')}">
         <label>Opis</label>
         <textarea v-model="description" name="descripion"></textarea>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('price')}">
-        <label>Tytuł</label>
-        <input v-model="price" type="text" name="title" placeholder="Cena"/>
+      <div class="two wide field required" v-bind:class="{'error': hasFieldError('price')}">
+        <label>Cena</label>
+        <div class="ui right labeled input">
+          <input v-model="price" type="text" placeholder="Cena.."/>
+          <div class="ui basic label">
+            zł
+          </div>
+        </div>
       </div>
       
-      <div class="field">
+      <div class="field required">
         <label>Adres</label>
          <div class="fields">
           <div class="four wide field" v-bind:class="{'error': hasFieldError('state')}">
@@ -48,7 +53,7 @@
              </option>
            </select>
           </div>
-          <div class="twelve wide field" v-bind:class="{'error': hasFieldError('city')}">
+          <div class="four wide field" v-bind:class="{'error': hasFieldError('city')}">
            <input v-model="city" type="text" name="city" placeholder="Miasto"/>
           </div>
       </div>
@@ -129,7 +134,7 @@ export default {
       if (!this.price) {
         append('price', 'Cena jest wymagana')
       } else {
-        if (this.price < 0) {
+        if (this.price <= 0) {
           append('price', 'Cena jest niepoprawna')
         }
       }

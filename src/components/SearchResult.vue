@@ -4,7 +4,7 @@
         <loading-box :show="searchLoading"></loading-box>
         
         <div v-else class="result">
-           <h4>Wyniki wyszukiwania</h4>
+           <h4>Znaleziono {{total}} ogłoszeń</h4>
            <div class="ui divided items">
              <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
                <anounce-item :anounce=item></anounce-item>
@@ -41,6 +41,7 @@ export default {
       searchQuery: {},
       searchStarted: false,
       searchLoading: false,
+      total: 0,
       noOfPages: 0
     }
   },
@@ -57,11 +58,13 @@ export default {
       this.searchLoading = false
       this.anounces = searchResult.anounces
       this.noOfPages = searchResult.totalCount / itemsPerPage
+      this.total = searchResult.totalCount
     },
     startSearch: function () {
       this.searchStarted = true
       this.searchLoading = true
       this.noOfPages = 0
+      this.total = 0
       this.doSearch()
     },
     goToPage: function (page) {
