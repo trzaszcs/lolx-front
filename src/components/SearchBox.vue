@@ -1,5 +1,5 @@
 <template>
-  <div class="listing ui container">
+  <div class="searchBox ui container">
     <search-input></search-input>
     <search-result></search-result>
   </div>

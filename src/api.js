@@ -18,7 +18,7 @@ const API = (function () {
         data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       }).done(callback)
     },
-    add: function (title, description, state, city, userId, jwtToken, callback) {
+    add: function (title, description, price, state, city, userId, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
@@ -26,7 +26,7 @@ const API = (function () {
           'Authorization': `Bearer ${jwtToken}`
         },
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({title, description, state, city, 'ownerId': userId})
+        data: JSON.stringify({title, description, price, state, city, 'ownerId': userId})
       }).done(callback)
     },
     getForUser: function (userId, page, itemsPerPage, callback) {

@@ -1,10 +1,19 @@
 <template>
   <div class="item">
-   <img class="ui avatar image" src="../assets/plumber.png">
+   <div class="image">
+        <img src="../assets/plumber.png">
+   </div>
    <div class="content">
-      <a class="ui header" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
+      <a class="header" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
         {{anounce.title}}
       </a>
+      <div class="description">
+        {{anounce.price}} zł
+      </div>
+      <div class="extra">
+        {{anounce.city}} ({{anounce.state}}) <br/>
+        {{anounce.creationDate}}
+      </div>
    </div>
  </div>
 </template>

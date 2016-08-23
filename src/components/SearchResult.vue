@@ -1,12 +1,14 @@
 <template>
-      <div v-if="searchStarted">
+      <div class="searchResult" v-if="searchStarted">
 
         <loading-box :show="searchLoading"></loading-box>
         
         <div v-else class="result">
            <h4>Wyniki wyszukiwania</h4>
-           <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
+           <div class="ui divided items">
+             <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
                <anounce-item :anounce=item></anounce-item>
+             </div>
            </div>
         </div>
         

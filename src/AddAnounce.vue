@@ -31,6 +31,11 @@
         <label>Opis</label>
         <textarea v-model="description" name="descripion"></textarea>
       </div>
+
+      <div class="field" v-bind:class="{'error': hasFieldError('price')}">
+        <label>Tytuł</label>
+        <input v-model="price" type="text" name="title" placeholder="Cena"/>
+      </div>
       
       <div class="field">
         <label>Adres</label>
@@ -71,6 +76,7 @@ export default {
     return {
       title: '',
       description: '',
+      price: null,
       city: '',
       state: '',
       saving: false,
@@ -83,6 +89,7 @@ export default {
     afterSave: function () {
       this.title = ''
       this.description = ''
+      this.price = null
       this.city = ''
       this.state = ''
       this.validationErrors = null
@@ -100,6 +107,7 @@ export default {
       api.add(
         this.title,
         this.description,
+        this.price,
         this.city,
         this.state,
         session.getUserId(),
@@ -117,6 +125,13 @@ export default {
       }
       if (!this.description) {
         append('description', 'Opis jest wymagany')
+      }
+      if (!this.price) {
+        append('price', 'Cena jest wymagana')
+      } else {
+        if (this.price < 0) {
+          append('price', 'Cena jest niepoprawna')
+        }
       }
       if (!this.city) {
         append('city', 'Miasto jest wymagane')
