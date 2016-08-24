@@ -27,7 +27,7 @@
             <div class="ten wide field">
               <label>Termin wykonania usługi</label>
                 <div class="ui input">
-                  <input type"text" id="daterange"/>
+                  <input type="text" id="daterange"/>
                  </div>
             </div>     
                
