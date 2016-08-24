@@ -23,10 +23,19 @@
         </div>
         
         <div class="extra content">
-          <div class="ui two buttons">
-            <div class="ui basic green button" v-on:click="emitOrderEvent(anounce)">Zamów</div>
-            <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
-          </div>
+          <div class="ui form">
+            <div class="ten wide field">
+              <label>Termin wykonania usługi</label>
+                <div class="ui input">
+                  <input type"text" id="daterange"/>
+                 </div>
+            </div>     
+               
+            <div class="ui two buttons">
+              <input class="ui basic green button" type="submit" v-on:click="emitOrderEvent(anounce)" value="Zamów"/>
+              <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+            </div>
+          </div>  
         </div>
        
       </div>
@@ -57,6 +66,9 @@
 
 <script>
 import UserPublicProfile from './UserPublicProfile.vue'
+const $ = require('jquery')
+require('moment')
+require('semantic-ui-daterangepicker')
 
 export default {
   components: {
@@ -105,6 +117,9 @@ export default {
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
     }
+  },
+  ready: function () {
+    $('#daterange').daterangepicker()
   }
 }
 </script>
