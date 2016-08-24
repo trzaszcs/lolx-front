@@ -29,6 +29,10 @@ const API = (function () {
         data: JSON.stringify({title, description, price, state, city, 'ownerId': userId})
       }).done(callback)
     },
+    order: function (order, jwtToken, callback) {
+      console.log('api order -> ', order)
+      callback({success: true})
+    },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
         url: `/api/anounces/user/${userId}`,

@@ -31,8 +31,8 @@ export default {
     this.anounceLoading = false
   },
   events: {
-    'emitOrderEvent': function () {
-      console.log('order')
+    'emitOrderEvent': function (order) {
+      console.log('anounce order -> ', order)
     },
     'emitCloseEvent': function () {
       console.log('close')

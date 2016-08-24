@@ -23,45 +23,46 @@
         </div>
         
         <div class="extra content">
-          <div class="ui form">
-            
-            <div class="field">
-              <label>Preferowana godzina wykonania usługi</label>
-              <select class="ui search dropdown">
-                <option value="">godzina</option>
-                <option value="06:00">06:00</option>
-                <option value="07:00">07:00</option>
-                <option value="08:00">08:00</option>
-                <option value="09:00">09:00</option>
-                <option value="10:00">10:00</option>
-                <option value="11:00">11:00</option>
-                <option value="12:00">12:00</option>
-                <option value="13:00">13:00</option>
-                <option value="14:00">14:00</option>
-                <option value="15:00">15:00</option>
-                <option value="16:00">16:00</option>
-                <option value="17:00">17:00</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
-                <option value="22:00">22:00</option>
-                <option value="23:00">23:00</option>
-              </select>
-            </div>
-            
-            <div class="field">
-              <label>oraz data</label>
-                <div class="ui input">
-                  <input type="text" id="daterange"/>
-                 </div>
-            </div>     
-               
-            <div class="ui two buttons">
-              <input class="ui basic green button" type="submit" v-on:click="emitOrderEvent(anounce)" value="Zamów"/>
-              <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
-            </div>
-          </div>  
+            <div class="ui form">
+              
+              <div class="field">
+                <label>Możesz wybrać preferowaną godzinę wykonania usługi</label>
+                <select v-model="order.preferedTime" class="ui search dropdown">
+                  <option value="">-</option>
+                  <option value="06:00">06:00</option>
+                  <option value="07:00">07:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                  <option value="21:00">21:00</option>
+                  <option value="22:00">22:00</option>
+                  <option value="23:00">23:00</option>
+                </select>
+              </div>
+              
+              <div class="field">
+                <label>oraz datę</label>
+                  <div class="ui icon input">
+                    <i class="calendar icon"></i>
+                    <input v-model="order.preferedDate" type="text" id="daterange"/>
+                  </div>
+              </div>     
+                 
+              <div class="ui two buttons">
+                <input class="ui basic green button" type="submit" v-on:click="onOrder(anounce)" value="Zamów"/>
+                <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+              </div>
+            </div>  
         </div>
        
       </div>
@@ -91,6 +92,8 @@
 </template>
 
 <script>
+import api from '../api'
+import session from '../session'
 import UserPublicProfile from './UserPublicProfile.vue'
 const $ = require('jquery')
 require('moment')
@@ -116,13 +119,25 @@ export default {
         commentsCount: 0,
         likesCount: 0,
         lastActive: ''
+      },
+      order: {
+        anounceId: '',
+        preferedTime: '',
+        preferedDate: '',
+        customerContactInfo: ''
       }
     }
   },
   methods: {
-    emitOrderEvent: function (anonuce) {
+    onOrder: function (anonuce) {
+      this.order.anounceId = anonuce.id
+      api.order(this.order, session.getJwt(), (response) => {
+        this.emitOrderEvent(this.order)
+      })
       this.$router.go({'path': '/order', 'query': {'anounceId': anonuce.id}})
-      this.$dispatch('emitOrderEvent', anonuce)
+    },
+    emitOrderEvent: function (order) {
+      this.$dispatch('emitOrderEvent', order)
     },
     emitCloseEvent: function () {
       this.$dispatch('emitCloseEvent', {})
@@ -147,7 +162,11 @@ export default {
   ready: function () {
     $('#daterange').daterangepicker({
       singleDatePicker: true,
-      showDropdowns: true
+      showDropdowns: true,
+      autoApply: true,
+      locale: {
+        format: 'MM-DD-YYYY'
+      }
     })
   }
 }

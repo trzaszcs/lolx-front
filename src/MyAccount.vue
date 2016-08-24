@@ -85,8 +85,8 @@
       this.user = this.getUser()
     },
     events: {
-      'emitOrderEvent': function (anounce) {
-        console.log('order -> ', anounce)
+      'emitOrderEvent': function (order) {
+        console.log('order -> ', order)
         $('.ui.modal').modal('hide')
       },
       'emitCloseEvent': function () {
