@@ -58,6 +58,14 @@
                   </div>
               </div>     
                  
+              <div class="field">
+                <label>Podaj swój email lub telefon (możesz się także zalogować) </label>
+                  <div class="ui icon input">
+                    <i class="at icon"></i>
+                    <input v-model="order.customerContactInfo" type="text"/>
+                  </div>
+              </div>     
+                 
               <div class="ui two buttons">
                 <input class="ui basic green button" type="submit" v-on:click="onOrder(anounce)" value="Zamów"/>
                 <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
@@ -93,6 +101,7 @@
 
 <script>
 import api from '../api'
+import guid from '../guid'
 import session from '../session'
 import UserPublicProfile from './UserPublicProfile.vue'
 const $ = require('jquery')
@@ -121,6 +130,7 @@ export default {
         lastActive: ''
       },
       order: {
+        requestId: guid.getUuid(),
         anounceId: '',
         preferedTime: '',
         preferedDate: '',
@@ -132,6 +142,7 @@ export default {
     onOrder: function (anonuce) {
       this.order.anounceId = anonuce.id
       api.order(this.order, session.getJwt(), (response) => {
+        console.log('response -> ', response)
         this.emitOrderEvent(this.order)
       })
       this.$router.go({'path': '/order', 'query': {'anounceId': anonuce.id}})

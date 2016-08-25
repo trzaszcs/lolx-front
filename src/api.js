@@ -31,7 +31,15 @@ const API = (function () {
     },
     order: function (order, jwtToken, callback) {
       console.log('api order -> ', order)
-      callback({success: true})
+      $.ajax({
+        url: '/api/orders',
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`
+        },
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(order)
+      }).done(callback)
     },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
