@@ -24,14 +24,13 @@
           {{message}}
         </div>
       </form>
-      
       <div class="ui message">
+        Zaloguj sie przez <a v-bind:href="facebookAddress">Facebook</a><br/>
         Nie posiadasz konta? <a v-on:click="register">Załóż konto</a>
       </div>
 
     </div>
   </div>
-
 </template>
 
 <script>
@@ -45,7 +44,8 @@ export default {
       email: 'john@wp.pl',
       password: 'pass',
       message: '',
-      loading: false
+      loading: false,
+      facebookAddress: this.buildFacebookLoginAddress()
     }
   },
   components: {
@@ -68,6 +68,25 @@ export default {
     },
     register: function () {
       this.$router.go({'path': '/register'})
+    },
+    buildFacebookLoginAddress: function () {
+      const appId = '1069849489717317'
+      const redirectUrl = 'http://lolx-front.herokuapp.com/login'
+      const version = 2.7
+      const scope = 'email,public_profile'
+
+      return `https://www.facebook.com/v${version}/dialog/oauth?client_id=${appId}&response_type=code&sdk=jssdk&redirect_uri=${redirectUrl}&scope=${scope}`
+    }
+  },
+  ready: function () {
+    const facebookCode = this.$route.query('code')
+    if (facebookCode) {
+      // facebook returned with code
+      api.loginWithFacebook(facebookCode, (result) => {
+        session.create(result.userId, result.jwt)
+        const backUrl = session.getBackUrl()
+        this.$router.go(backUrl || {'path': '/myAccount'})
+      })
     }
   }
 }

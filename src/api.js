@@ -56,6 +56,18 @@ const API = (function () {
         callback({success: false})
       })
     },
+    loginWithFacebook: function (code, callback) {
+      $.ajax({
+        url: '/auth-api/auth-facebook',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({code})
+      }).done((result) => {
+        callback({success: true, jwt: result.jwt, userId: result.userId})
+      }).fail((result) => {
+        callback({success: false})
+      })
+    },
     register: function (firstName, lastName, email, password, state, city, callback) {
       $.ajax({
         url: '/auth-api/register',
