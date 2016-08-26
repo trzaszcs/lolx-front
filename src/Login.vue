@@ -71,7 +71,7 @@ export default {
     },
     buildFacebookLoginAddress: function () {
       const appId = '1069849489717317'
-      const redirectUrl = 'http://lolx-front.herokuapp.com/login'
+      const redirectUrl = 'http://lolx-front.herokuapp.com/#!/login'
       const version = 2.7
       const scope = 'email,public_profile'
 
@@ -79,7 +79,7 @@ export default {
     }
   },
   ready: function () {
-    const facebookCode = this.$route.query('code')
+    const facebookCode = this.$route.query.code
     if (facebookCode) {
       // facebook returned with code
       api.loginWithFacebook(facebookCode, (result) => {
