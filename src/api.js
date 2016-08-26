@@ -41,6 +41,16 @@ const API = (function () {
         data: JSON.stringify(order)
       }).done(callback)
     },
+    getOrder: function (orderId, jwtToken, callback) {
+      console.log('api get order -> ', orderId)
+      $.ajax({
+        url: `/api/orders/${orderId}`,
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${jwtToken}`
+        }
+      }).done(callback)
+    },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
         url: `/api/anounces/user/${userId}`,

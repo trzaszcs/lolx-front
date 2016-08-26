@@ -142,10 +142,10 @@ export default {
     onOrder: function (anonuce) {
       this.order.anounceId = anonuce.id
       api.order(this.order, session.getJwt(), (response) => {
-        console.log('response -> ', response)
+        console.log('onOrder response -> ', response)
+        this.$router.go({'path': '/order', 'query': {'orderId': this.order.requestId}})
         this.emitOrderEvent(this.order)
       })
-      this.$router.go({'path': '/order', 'query': {'anounceId': anonuce.id}})
     },
     emitOrderEvent: function (order) {
       this.$dispatch('emitOrderEvent', order)
