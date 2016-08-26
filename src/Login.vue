@@ -71,7 +71,7 @@ export default {
     },
     buildFacebookLoginAddress: function () {
       const appId = '1069849489717317'
-      const redirectUrl = encodeURIComponent('http://lolx-front.herokuapp.com/#!/login')
+      const redirectUrl = encodeURIComponent('http://lolx-front.herokuapp.com/#/login')
       const version = 2.7
       const scope = 'email,public_profile'
 
