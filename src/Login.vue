@@ -71,7 +71,7 @@ export default {
     },
     buildFacebookLoginAddress: function () {
       const appId = '1069849489717317'
-      const redirectUrl = encodeURIComponent('http://lolx-front.herokuapp.com/#/login')
+      const redirectUrl = encodeURIComponent('http://lolx-front.herokuapp.com/#/fb')
       const version = 2.7
       const scope = 'email,public_profile'
 
@@ -82,10 +82,17 @@ export default {
     const facebookCode = this.$route.query.code
     if (facebookCode) {
       // facebook returned with code
+      this.loading = true
       api.loginWithFacebook(facebookCode, (result) => {
-        session.create(result.userId, result.jwt)
-        const backUrl = session.getBackUrl()
-        this.$router.go(backUrl || {'path': '/myAccount'})
+        this.loading = false
+        if (result.success) {
+          session.create(result.userId, result.jwt)
+          const backUrl = session.getBackUrl()
+          this.$router.go(backUrl || {'path': '/myAccount'})
+        } else {
+          session.reset()
+          this.message = 'Problem z logowaniem do facebook'
+        }
       })
     }
   }
