@@ -37,6 +37,7 @@
 import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
+import social from './socialplugin'
 
 export default {
   data () {
@@ -45,7 +46,7 @@ export default {
       password: 'pass',
       message: '',
       loading: false,
-      facebookAddress: this.buildFacebookLoginAddress()
+      facebookAddress: social.fbLoginUrl()
     }
   },
   components: {
@@ -68,14 +69,6 @@ export default {
     },
     register: function () {
       this.$router.go({'path': '/register'})
-    },
-    buildFacebookLoginAddress: function () {
-      const appId = '1069849489717317'
-      const redirectUrl = 'http://lolx-front.herokuapp.com/#!/fb'
-      const version = 2.7
-      const scope = 'email,public_profile'
-
-      return `https://www.facebook.com/v${version}/dialog/oauth?client_id=${appId}&response_type=code&sdk=jssdk&redirect_uri=${redirectUrl}&scope=${scope}`
     }
   },
   ready: function () {
