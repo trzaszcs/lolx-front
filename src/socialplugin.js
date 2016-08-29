@@ -1,7 +1,7 @@
 const SocialPlugin = (function () {
   function buildFacebookLoginAddress () {
     const appId = '1069849489717317'
-    const redirectUrl = encodeURIComponent('http://lolx-front.herokuapp.com/#!/fb')
+    const redirectUrl = encodeURIComponent('http://lolx-front.herokuapp.com/#/fb')
     const version = 2.7
     const scope = 'email,public_profile'
     return `https://www.facebook.com/v${version}/dialog/oauth?client_id=${appId}&response_type=code&sdk=jssdk&redirect_uri=${redirectUrl}&scope=${scope}`
