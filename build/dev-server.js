@@ -3,6 +3,8 @@ var express = require('express')
 var webpack = require('webpack')
 var config = require('../config')
 var proxyMiddleware = require('http-proxy-middleware')
+var rewriteModule = require('http-rewrite-middleware');
+
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')
@@ -32,6 +34,9 @@ compiler.plugin('compilation', function (compilation) {
     cb()
   })
 })
+
+// rewrite
+app.use(rewriteModule.getMiddleware(config.dev.rewrites));
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {

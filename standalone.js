@@ -1,9 +1,15 @@
 var express = require('express');
 var httpProxy = require('http-proxy-middleware');
+var rewriteModule = require('http-rewrite-middleware');
 
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
+
+// rewrite
+app.use(rewriteModule.getMiddleware([
+    {from: '^/fb(.*)$', to: '/#!/login$1' , redirect: 'permanent'}
+]));
 
 app.use(express.static(__dirname + '/dist'));
 
@@ -20,9 +26,9 @@ var proxyConfigForAuthApi = {
     pathRewrite: {'^/auth-api' : ''},
     changeOrigin: true
 };
+
 app.use(httpProxy('/api', proxyConfigForApi));
 app.use(httpProxy('/auth-api', proxyConfigForAuthApi));
-
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
