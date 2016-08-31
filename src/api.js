@@ -1,17 +1,14 @@
 import * as $ from 'jquery'
 
 const API = (function () {
+  function headers (jwt) {
+    let headers = {}
+    if (jwt) {
+      headers.Authorization = `Bearer ${jwt}`
+    }
+    return headers
+  }
   return {
-    doCall: function (succCallback) {
-      $.ajax({
-        url: 'https://jsonplaceholder.typicode.com/users'
-      }).done(succCallback)
-    },
-    doCallRelative: function (succCallback) {
-      $.ajax({
-        url: '/api/users'
-      }).done(succCallback)
-    },
     search: function (query, page, itemsPerPage, callback) {
       $.ajax({
         url: '/api/anounces',
@@ -22,9 +19,7 @@ const API = (function () {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${jwtToken}`
-        },
+        headers: headers(jwtToken),
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({title, description, price, state, city, 'ownerId': userId})
       }).done(callback)
@@ -34,9 +29,7 @@ const API = (function () {
       $.ajax({
         url: '/api/orders',
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${jwtToken}`
-        },
+        headers: headers(jwtToken),
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(order)
       }).done(callback)
@@ -46,9 +39,7 @@ const API = (function () {
       $.ajax({
         url: `/api/orders/${orderId}`,
         method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${jwtToken}`
-        }
+        headers: headers(jwtToken)
       }).done(callback)
     },
     getForUser: function (userId, page, itemsPerPage, callback) {
@@ -88,10 +79,18 @@ const API = (function () {
     },
     register: function (firstName, lastName, email, password, state, city, callback) {
       $.ajax({
-        url: '/auth-api/register',
+        url: '/auth-api/users',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify({firstName, lastName, email, password, state, city})
+      }).done(callback)
+    },
+    userDetails: function (userId, jwt, callback) {
+      $.ajax({
+        url: `/auth-api/users/${userId}`,
+        method: 'GET',
+        headers: headers(jwt),
+        contentType: 'application/json; charset=utf-8'
       }).done(callback)
     }
   }
