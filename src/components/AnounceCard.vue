@@ -67,8 +67,8 @@
               </div>     
                  
               <div class="ui two buttons">
-                <input class="ui basic green button" type="submit" v-on:click="onOrder(anounce)" value="Zamów"/>
-                <div class="ui basic red button" v-on:click="emitCloseEvent()">Anuluj</div>
+                <input class="ui orange button" type="submit" v-on:click="onOrder(anounce)" value="Zamów"/>
+                <div class="ui button" v-on:click="emitCloseEvent()">Anuluj</div>
               </div>
             </div>  
         </div>
@@ -88,12 +88,9 @@
   
   <div class="ui segments">
     <div class="ui segment">
-      <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
-        link bezpośrednio do oferty
+      <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
+        link bezpośrednio do oferty: {{anounce.id}}
       </a>
-    </div>
-    <div class="ui segment">
-      #id oferty: {{anounce.id}}
     </div>
   </div>
 
