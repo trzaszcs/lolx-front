@@ -1,6 +1,7 @@
 <template>
   <div class="anounce ui container">
     <loading-box :show="anounceLoading"></loading-box>
+    <order-steps></order-steps>
     <anounce-card></anounce-card>
   </div>
 </template>
@@ -8,12 +9,14 @@
 <script>
 import AnounceCard from 'components/AnounceCard.vue'
 import LoadingBox from 'components/LoadingBox.vue'
+import OrderSteps from 'components/OrderSteps.vue'
 import api from './api'
 
 export default {
   components: {
     AnounceCard,
-    LoadingBox
+    LoadingBox,
+    OrderSteps
   },
   data () {
     return {

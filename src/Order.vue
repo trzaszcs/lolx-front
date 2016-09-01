@@ -1,34 +1,57 @@
 <template>
   <div class="order ui container">
-    <div class="ui fluid card">
-      
+    
+    <div class="ui icon message">
+      <i class="info icon"></i>
       <div class="content">
-        <div class="ui header">
-          Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
-          W razie wątpliwości możesz skontaktować się z nim bezpośrednio:
-        </div>
-        <div class="meta">
-          {{order.requestId}}
-        </div>
-        <div class="description">
-           {{order.status.anounceContactInfo}}
-        </div>
+        <p>Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
+      W razie wątpliwości możesz skontaktować się z nim bezpośrednio.</p>
       </div>
-      
-      <div class="extra content">
-        <div class="ui header">Wybrane dodatkowe preferencje, które przekazaliśmy ogłoszeniodawcy</div>
-         czas wykonania usługi: {{order.preferedTime}}, data: {{order.preferedDate}}
-      </div>
+    </div>
     
-      <div class="extra content">
-        <a class="ui blue button" v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">
-          link bezpośrednio do oferty
-        </a>
+  <div class="ui fluid card">
+      <div class="content">
+        <div class="header">Karta zamówienia</div>
+        
+          <table class="ui celled striped table">
+            <tbody>
+              <tr>
+                <td>
+                  <div class="ui ribbon label">Identyfikator Twojego zamówienia</div>
+                </td>
+                <td>{{order.requestId}}</td>
+              </tr>
+              <tr>
+                <td>Bezpośredni link do zamówienia</td>
+                <td>
+                  <a v-link="{ path: '/order', query: { orderId: order.requestId }}">link</a>
+                </td>
+              </tr>
+              <tr>
+                <td>Dodatkowe informacje od ogłoszeniodawcy</td>
+                <td>{{order.status.anounceContactInfo}}</td>
+              </tr>
+              <tr>
+                <td>Wybrane przez Ciebie dodatkowe preferencje, które przekazaliśmy ogłoszeniodawcy</td>
+                <td>
+                    <p>czas wykonania usługi: {{order.preferedTime}}</p>
+                    <p>data: {{order.preferedDate}}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>link bezpośrednio do oferty</td>
+                <td>
+                  <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">link</a>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+
       </div>
-    
-     <div class="extra content">
-        #id: {{order.requestId}}
-     </div>
   </div>
   
   </div>
