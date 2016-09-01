@@ -92,6 +92,14 @@ const API = (function () {
         headers: headers(jwt),
         contentType: 'application/json; charset=utf-8'
       }).done(callback)
+    },
+    updateUserDetails: function (firstName, lastName, state, city, userId, jwt, callback) {
+      $.ajax({
+        url: `/auth-api/users/${userId}`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({firstName, lastName, state, city})
+      }).done(callback)
     }
   }
 })()
