@@ -1,5 +1,8 @@
 <template>
   <div class="anounce ui container">
+    <div class="ui segment">
+      <div class="ui button" v-on:click="back()">wstecz</div>
+    </div>
     <loading-box :show="anounceLoading"></loading-box>
     <order-steps></order-steps>
     <anounce-card></anounce-card>
@@ -24,6 +27,9 @@ export default {
     }
   },
   methods: {
+    back: function () {
+      this.$router.go(window.history.back())
+    }
   },
   ready: function () {
     this.anounceLoading = true

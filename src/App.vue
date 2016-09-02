@@ -20,12 +20,15 @@
       <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui container">
           <div class="ui large secondary inverted pointing menu">
-            <a class="active item"  v-link="{ path: '/' }">Appka</a>
+            <a class="active item"  v-link="{ path: '/' }">dorobie.pl</a>
             <div class="right item">
-              <button class="ui icon button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
+              <button class="ui icon orange button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
+                  <i class="search icon"></i> 
+              </button>
+              <button class="ui icon blue button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
                   <i class="user icon"></i> 
               </button>
-              <button class="ui icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
+              <button class="ui icon blue button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
                   <i class="add sign icon"></i> 
               </button>
             </div>
