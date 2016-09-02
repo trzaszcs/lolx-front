@@ -3,14 +3,14 @@
   <div class="ui stackable two column grid">
     <div class="ui column">
 
-      <div class="ui extra content">
-        <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć do wyników wyszukania">
-          <i class="arrow left icon"></i>
-        </a> 
-        Ogłoszenie
-      </div>
-
       <div class="ui fluid card">
+        
+        <div class="ui extra content">
+          <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
+            <i class="close icon"></i>
+          </a> 
+          Ogłoszenie
+        </div>
                 
         <div class="content">
           <img class="right floated mini ui image" src="../assets/plumber.png">
@@ -80,12 +80,7 @@
     
     </div>
     <div class="ui column">
-    
-      <div class="ui extra content">
-        <div class="ui icon"><i class="user icon"></i>O użytkowniku</div>
         <user-public-profile :user=user></user-public-profile>
-      </div>
-    
     </div>
   </div>
   
