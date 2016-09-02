@@ -1,32 +1,33 @@
 <template>
   <div class="ui container myAccount">
+    
     <loading-box :show="loading"></loading-box>
+    
+    <p>Mój profil publiczny</p>
+    
+    <user-public-profile :user=user></user-public-profile>
+  
+    <p>Moje dane</p>
+  
+    <edit-account 
+      :first-name="user.firstName"
+      :last-name="user.lastName"
+      :state="user.state"
+      :city="user.city"></edit-account>
+      
+    <div class="ui modal">
+      <div class="content">
+        <anounce-card></anounce-card>
+      </div>
+    </div>
+      
     <div class="ui fluid card">
-      <div class="extra content">
-        <div class="ui header">Mój profil publiczny</div>
-        <user-public-profile :user=user></user-public-profile>
+    
+      <div class="ui extra content">
+        Moje ogłoszenia
       </div>
-      
-      <div class="extra content">
-        <div class="ui header">Moje dane</div>
-        <edit-account 
-          :first-name="user.firstName"
-          :last-name="user.lastName"
-          :state="user.state"
-          :city="user.city"></edit-account>
-      </div>      
-
-      <div class="extra content">
-        <div class="ui header">Moje ogłoszenia</div>
-      </div>
-      
-        <div class="ui modal">
-            <div class="content">
-              <anounce-card></anounce-card>
-            </div>
-        </div>
-      
-      <div class="extra content">
+            
+      <div class="content">
         <div class="ui middle aligned selection list">
           <div v-for="item in items" class="item" v-on:click="showAnounce(item)">
             <img class="ui avatar image" src="assets/plumber.png">
@@ -36,8 +37,9 @@
           </div>
         </div>
       </div>
-        
+    
     </div>
+
   </div>
 
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div class="ui fluid card">
-      
+
       <div class="ui extra content">
         <div class="ui icon"><i class="user icon"></i>O użytkowniku</div>
       </div>  
