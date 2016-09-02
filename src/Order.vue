@@ -54,6 +54,37 @@
       </div>
   </div>
   
+  
+  
+  <div class="ui segments">
+    <div class="ui segment">
+      Zarządzaj kartą
+    </div>
+    <div class="ui secondary segment">
+      <div class="ui segment">
+        <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+      
+          <div class="ui error message">
+            <ul class="list" v-for="error in validationErrors">
+              <li>{{error.txt}}</li>
+            </ul>
+          </div>
+          
+          <div class="six wide field desktop ten wide mobile required" v-bind:class="{'error': hasFieldError('email')}">
+            <div class="ui icon input">
+              <i class="at icon"></i>
+              <input v-model="email" placeholder="wyślij kartę na adres email..."/>
+            </div>
+          </div>
+            
+          <button v-on:click="save" type="submit" class="ui action right button" >Wyślij</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+    
+      
   </div>
 
 </template>

@@ -3,24 +3,33 @@
     
     <loading-box :show="loading"></loading-box>
     
-    <p>Mój profil publiczny</p>
-    
-    <user-public-profile :user=user></user-public-profile>
-  
-    <p>Moje dane</p>
-  
-    <edit-account 
-      :first-name="user.firstName"
-      :last-name="user.lastName"
-      :state="user.state"
-      :city="user.city"></edit-account>
-      
     <div class="ui modal">
       <div class="content">
         <anounce-card></anounce-card>
       </div>
     </div>
-      
+    
+    <div class="ui message">
+      <div class="content">
+        Mój profil publiczny
+      </div>
+    </div>
+
+    <user-public-profile :user=user></user-public-profile>
+  
+  <div class="ui fluid card">
+   <div class="ui extra content">
+        Moje dane
+      </div>
+ <div class="content">
+    <edit-account 
+      :first-name="user.firstName"
+      :last-name="user.lastName"
+      :state="user.state"
+      :city="user.city"></edit-account>
+                </div>
+        </div>
+
     <div class="ui fluid card">
     
       <div class="ui extra content">
@@ -38,7 +47,8 @@
         </div>
       </div>
     
-    </div>
+      </div>
+    
 
   </div>
 
