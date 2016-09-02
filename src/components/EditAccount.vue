@@ -7,16 +7,15 @@
     <div v-if="saved" class="ui info message">
       <i class="icon"></i>
       <div class="header">
-        Konto zostało utworzone
+        Konto zostało zmodyfikowane
       </div>
       <ul class="list">
-        <li>Twoje konto zostało żałożone</li>
+        <li>Zmodyfikowano dane</li>
       </ul>
     </div>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
-      <h4 class="ui dividing header">Zarejestruj konto</h4>
-
+    
       <div class="ui error message">
         <ul class="list" v-for="error in validationErrors">
           <li>{{error.txt}}</li>
