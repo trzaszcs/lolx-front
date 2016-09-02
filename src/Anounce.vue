@@ -1,18 +1,18 @@
 <template>
+  <loading-box :show="loading"></loading-box>
   <div class="anounce ui container">
     <div class="ui segment">
       <div class="ui button" v-on:click="back()">wstecz</div>
     </div>
-    <loading-box :show="anounceLoading"></loading-box>
     <order-steps></order-steps>
     <anounce-card></anounce-card>
   </div>
 </template>
 
 <script>
-import AnounceCard from 'components/AnounceCard.vue'
-import LoadingBox from 'components/LoadingBox.vue'
-import OrderSteps from 'components/OrderSteps.vue'
+import AnounceCard from './components/AnounceCard.vue'
+import LoadingBox from './components/LoadingBox.vue'
+import OrderSteps from './components/OrderSteps.vue'
 import api from './api'
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
   data () {
     return {
-      anounceLoading: true
+      loading: false
     }
   },
   methods: {
@@ -32,12 +32,12 @@ export default {
     }
   },
   ready: function () {
-    this.anounceLoading = true
+    this.loading = true
     const anounceId = this.$route.query.anounceId
     api.getById(anounceId, (anounce) => {
       this.$broadcast('showAnounce', {'anounce': anounce})
+      this.loading = false
     })
-    this.anounceLoading = false
   },
   events: {
     'emitOrderEvent': function (order) {

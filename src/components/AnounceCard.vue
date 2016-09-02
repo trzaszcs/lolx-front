@@ -1,5 +1,5 @@
 <template>
-
+  <loading-box :show="loading"></loading-box>
   <div class="ui stackable two column grid">
     <div class="ui column">
 
@@ -101,13 +101,15 @@ import api from '../api'
 import guid from '../guid'
 import session from '../session'
 import UserPublicProfile from './UserPublicProfile.vue'
+import LoadingBox from './LoadingBox.vue'
 const $ = require('jquery')
 require('moment')
 require('semantic-ui-daterangepicker')
 
 export default {
   components: {
-    UserPublicProfile
+    UserPublicProfile,
+    LoadingBox
   },
   data () {
     return {
@@ -132,16 +134,19 @@ export default {
         preferedTime: '',
         preferedDate: '',
         customerContactInfo: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
     onOrder: function (anonuce) {
+      this.loading = true
       this.order.anounceId = anonuce.id
       api.order(this.order, session.getJwt(), (response) => {
         console.log('onOrder response -> ', response)
-        this.$router.go({'path': '/order', 'query': {'orderId': this.order.requestId}})
+        this.loading = false
         this.emitOrderEvent(this.order)
+        this.$router.go({'path': '/order', 'query': {'orderId': this.order.requestId}})
       })
     },
     emitOrderEvent: function (order) {
