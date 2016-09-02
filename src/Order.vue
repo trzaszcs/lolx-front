@@ -24,7 +24,7 @@
               <tr>
                 <td>Bezpośredni link do zamówienia</td>
                 <td>
-                  <a v-link="{ path: '/order', query: { orderId: order.requestId }}">link</a>
+                  <a v-link="{ path: '/order', query: { orderId: order.requestId }}">moje zamowienie</a>
                 </td>
               </tr>
               <tr>
@@ -41,7 +41,7 @@
               <tr>
                 <td>link bezpośrednio do oferty</td>
                 <td>
-                  <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">link</a>
+                  <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">oferta: {{order.anounceId}}</a>
                 </td>
               </tr>
               <tr>

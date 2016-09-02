@@ -1,11 +1,9 @@
 <template>
-  <div class="searchInput ui section">
-   <div class="ui action left icon input">
-     <input v-model="phrase" type="text" placeholder="Szukaj..."/>
+   <div class="ui action left icon fluid input">
+     <input v-model="phrase" type="text" placeholder="Poszukuje kogoś kto..."/>
      <i class="search icon"></i>
-     <button v-on:click="search" class="ui button">Search</button> 
+     <button v-on:click="search" class="ui button">Szukaj</button> 
    </div>
-  </div>
 </template>
 
 <script>

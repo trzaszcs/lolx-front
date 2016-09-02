@@ -4,7 +4,10 @@
     <div class="ui column">
 
       <div class="ui extra content">
-        <div class="ui header">Ogłoszenie</div>
+        <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć do wyników wyszukania">
+          <i class="arrow left icon"></i>
+        </a> 
+        Ogłoszenie
       </div>
 
       <div class="ui fluid card">
@@ -79,7 +82,7 @@
     <div class="ui column">
     
       <div class="ui extra content">
-        <div class="ui header">O użytkowniku</div>
+        <div class="ui icon"><i class="user icon"></i>O użytkowniku</div>
         <user-public-profile :user=user></user-public-profile>
       </div>
     

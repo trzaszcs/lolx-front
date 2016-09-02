@@ -1,7 +1,5 @@
 <template>
-  <div class="listing ui container">
     <search-box></search-box>
-  </div>
 </template>
 
 <script>

@@ -1,9 +1,6 @@
 <template>
   <loading-box :show="loading"></loading-box>
   <div class="anounce ui container">
-    <div class="ui segment">
-      <div class="ui button" v-on:click="back()">wstecz</div>
-    </div>
     <order-steps></order-steps>
     <anounce-card></anounce-card>
   </div>
