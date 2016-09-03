@@ -13,5 +13,5 @@ export const states = [
   'Śląskie',
   'Świętokrzyskie',
   'Warmińsko-Mazurskie',
-  'Wielkospolskie',
+  'Wielkopolskie',
   'Zachodnio-Pomorskie']
