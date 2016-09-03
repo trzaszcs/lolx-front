@@ -26,7 +26,13 @@
         </div>
         
         <div class="extra content">
-            <div class="ui form">
+            <div class="ui form" v-bind:class="{ 'error': validationErrors }">
+              
+             <div class="ui error message">
+                <ul class="list" v-for="error in validationErrors">
+                  <li>{{error.txt}}</li>
+                </ul>
+              </div>
               
               <div class="field">
                 <label>Możesz wybrać preferowaną godzinę wykonania usługi</label>
@@ -61,16 +67,16 @@
                   </div>
               </div>     
                  
-              <div class="field">
+              <div class="field" v-bind:class="{'error': hasFieldError('customerContactInfo')}">
                 <label>Podaj swój email lub telefon (możesz się także zalogować) </label>
                   <div class="ui icon input">
                     <i class="at icon"></i>
-                    <input v-model="order.customerContactInfo" type="text"/>
+                    <input v-model="order.customerContactInfo" type="text" name="customerContactInfo"/>
                   </div>
               </div>     
                  
               <div class="ui two buttons">
-                <input class="ui orange button" type="submit" v-on:click="onOrder(anounce)" value="Zamów"/>
+                <input class="ui orange button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
                 <div class="ui button" v-on:click="emitCloseEvent()">Anuluj</div>
               </div>
             </div>  
@@ -131,15 +137,44 @@ export default {
         anounceId: '',
         preferedTime: '',
         preferedDate: '',
-        customerContactInfo: ''
+        customerContactInfo: '',
+        customerId: ''
       },
-      loading: false
+      loading: false,
+      validationErrors: null
     }
   },
   methods: {
-    onOrder: function (anonuce) {
+    validate: function (event) {
+      let errors = []
+      const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
+      if (!this.order.customerContactInfo) {
+        append('customerContactInfo', 'Podaj kontaktowy email lub zaloguj się')
+      }
+      if (errors.length > 0) {
+        this.validationErrors = errors
+        return false
+      }
+      return true
+    },
+    hasFieldError: function (fieldName) {
+      if (this.validationErrors) {
+        return this.validationErrors.some((errorMessage) => {
+          return errorMessage.name === fieldName
+        })
+      }
+      return false
+    },
+    onOrder: function (anonuce, event) {
+      event.preventDefault()
+      if (!this.validate() && !session.logged()) {
+        return
+      }
       this.loading = true
       this.order.anounceId = anonuce.id
+      if (session.logged()) {
+        this.order.customerId = session.getUserId()
+      }
       api.order(this.order, session.getJwt(), (response) => {
         console.log('onOrder response -> ', response)
         this.loading = false

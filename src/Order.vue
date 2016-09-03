@@ -72,7 +72,7 @@
           
           <div class="six wide field desktop ten wide mobile required" v-bind:class="{'error': hasFieldError('email')}">
               <label>Wyślij kartę na adres email</label>
-              <input v-model="orderEmail.email" type="text" name="wyślij kartę na adres" placeholder="email"/>
+              <input v-model="orderEmail.email" type="text" name="email" placeholder="email"/>
           </div>
 
           <button v-on:click="sendOrder($event)" type="submit" class="ui action right button" >Wyślij</button>
@@ -144,11 +144,11 @@ export default {
       return false
     },
     sendOrder: function (event) {
-      this.loading = true
       event.preventDefault()
       if (!this.validate()) {
         return
       }
+      this.loading = true
       this.orderEmail.anounceId = this.order.anounceId
       api.sendOrderEmail(this.orderEmail, session.getJwt(), (result) => {
         if (result.success) {
