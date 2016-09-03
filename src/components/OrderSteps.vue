@@ -7,7 +7,7 @@
           
         <div class="extra content">
 
-              <div class="ui ordered fluid steps">
+              <div class="ui ordered stackable steps">
 
               <div class="step">
                 <div class="content">
