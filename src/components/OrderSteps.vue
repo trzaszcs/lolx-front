@@ -1,5 +1,5 @@
 <template>
-  <div class="ui fluid card"> 
+  <div class="ui section"> 
                   
         <div class="extra content">  
              <i class="close icon"></i>Chcesz zamówić - to proste!
@@ -7,7 +7,7 @@
           
         <div class="extra content">
 
-              <div class="ui ordered stackable steps">
+              <div class="ui ordered fluid steps">
 
               <div class="step">
                 <div class="content">
@@ -34,6 +34,7 @@
      </div>   
   
   </div>
+  
 </template>
 
 <script>
@@ -48,8 +49,8 @@ export default {
   methods: {
   },
   ready: function () {
-    $('.card .close').on('click', function () {
-      $(this).closest('.card').transition('fade')
+    $('.section .close').on('click', function () {
+      $(this).closest('.section').transition('fade')
     })
   },
   events: {

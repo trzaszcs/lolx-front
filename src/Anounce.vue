@@ -2,6 +2,7 @@
   <loading-box :show="loading"></loading-box>
   <div class="anounce ui container">
     <order-steps></order-steps>
+    <p></p>
     <anounce-card></anounce-card>
   </div>
 </template>
