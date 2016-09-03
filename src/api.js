@@ -42,6 +42,20 @@ const API = (function () {
         headers: headers(jwtToken)
       }).done(callback)
     },
+    sendOrderEmail: function (orderEmail, jwtToken, callback) {
+      console.log('api email order -> ', orderEmail)
+      $.ajax({
+        url: '/api/orders/email',
+        method: 'POST',
+        headers: headers(jwtToken),
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(orderEmail)
+      }).done((result) => {
+        callback({success: true})
+      }).fail((result) => {
+        callback({success: false})
+      })
+    },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
         url: `/api/anounces/user/${userId}`,

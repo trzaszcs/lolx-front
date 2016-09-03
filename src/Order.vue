@@ -1,6 +1,6 @@
 <template>
   <div class="order ui container">
-    
+    <loading-box :show="loading"></loading-box>
     <div class="ui icon message">
       <i class="info icon"></i>
       <div class="content">
@@ -72,7 +72,7 @@
           
           <div class="six wide field desktop ten wide mobile required" v-bind:class="{'error': hasFieldError('email')}">
               <label>Wyślij kartę na adres email</label>
-              <input v-model="email" type="text" name="wyślij kartę na adres" placeholder="email"/>
+              <input v-model="orderEmail.email" type="text" name="wyślij kartę na adres" placeholder="email"/>
           </div>
 
           <button v-on:click="sendOrder($event)" type="submit" class="ui action right button" >Wyślij</button>
@@ -94,10 +94,12 @@
 <script>
 import api from './api'
 import session from './session'
+import LoadingBox from './components/LoadingBox.vue'
 import $ from 'jquery'
 
 export default {
   components: {
+    LoadingBox
   },
   data () {
     return {
@@ -113,15 +115,18 @@ export default {
           anounceContactInfo: ''
         }
       },
-      email: '',
-      validationErrors: null
+      validationErrors: null,
+      orderEmail: {
+        email: '',
+        anounceId: ''
+      }
     }
   },
   methods: {
     validate: function (event) {
       let errors = []
       const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
-      if (!this.email) {
+      if (!this.orderEmail.email) {
         append('email', 'Podaj email')
       }
       if (errors.length > 0) {
@@ -139,20 +144,28 @@ export default {
       return false
     },
     sendOrder: function (event) {
-      $('.ui.modal').modal('show')
+      this.loading = true
       event.preventDefault()
-
       if (!this.validate()) {
         return
       }
+      this.orderEmail.anounceId = this.order.anounceId
+      api.sendOrderEmail(this.orderEmail, session.getJwt(), (result) => {
+        if (result.success) {
+          $('.ui.modal').modal('show')
+        }
+        this.loading = false
+      })
     }
   },
   ready: function () {
+    this.loading = true
     const orderId = this.$route.query.orderId
     console.log(orderId)
     api.getOrder(orderId, session.getJwt(), (order) => {
       console.log('response -> ', order)
       this.order = order
+      this.loading = false
     })
   }
 }
