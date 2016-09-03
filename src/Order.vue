@@ -75,13 +75,17 @@
               <input v-model="email" type="text" name="wyślij kartę na adres" placeholder="email"/>
           </div>
 
-          <button v-on:click="save" type="submit" class="ui action right button" >Wyślij</button>
+          <button v-on:click="sendOrder($event)" type="submit" class="ui action right button" >Wyślij</button>
         </form>
       </div>
     </div>
   </div>
   
-    
+    <div class="ui small modal">
+      <div class="content">
+        Przesłalismy kartę na wybrany adres
+      </div>
+    </div>  
       
   </div>
 
@@ -90,6 +94,7 @@
 <script>
 import api from './api'
 import session from './session'
+import $ from 'jquery'
 
 export default {
   components: {
@@ -108,10 +113,39 @@ export default {
           anounceContactInfo: ''
         }
       },
-      email: ''
+      email: '',
+      validationErrors: null
     }
   },
   methods: {
+    validate: function (event) {
+      let errors = []
+      const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
+      if (!this.email) {
+        append('email', 'Podaj email')
+      }
+      if (errors.length > 0) {
+        this.validationErrors = errors
+        return false
+      }
+      return true
+    },
+    hasFieldError: function (fieldName) {
+      if (this.validationErrors) {
+        return this.validationErrors.some((errorMessage) => {
+          return errorMessage.name === fieldName
+        })
+      }
+      return false
+    },
+    sendOrder: function (event) {
+      $('.ui.modal').modal('show')
+      event.preventDefault()
+
+      if (!this.validate()) {
+        return
+      }
+    }
   },
   ready: function () {
     const orderId = this.$route.query.orderId
