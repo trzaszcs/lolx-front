@@ -71,12 +71,10 @@
           </div>
           
           <div class="six wide field desktop ten wide mobile required" v-bind:class="{'error': hasFieldError('email')}">
-            <div class="ui icon input">
-              <i class="at icon"></i>
-              <input v-model="email" placeholder="wyślij kartę na adres email..."/>
-            </div>
+              <label>Wyślij kartę na adres email</label>
+              <input v-model="email" type="text" name="wyślij kartę na adres" placeholder="email"/>
           </div>
-            
+
           <button v-on:click="save" type="submit" class="ui action right button" >Wyślij</button>
         </form>
       </div>
@@ -109,7 +107,8 @@ export default {
           requestDate: '',
           anounceContactInfo: ''
         }
-      }
+      },
+      email: ''
     }
   },
   methods: {
