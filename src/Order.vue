@@ -119,7 +119,8 @@ export default {
       orderEmail: {
         email: '',
         anounceId: ''
-      }
+      },
+      loading: false
     }
   },
   methods: {
