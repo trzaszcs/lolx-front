@@ -5,13 +5,9 @@
     <loading-box :show="saving"></loading-box>
    
     <div v-if="saved" class="ui info message">
-      <i class="icon"></i>
-      <div class="header">
-        Konto zostało zmodyfikowane
-      </div>
-      <ul class="list">
-        <li>Zmodyfikowano dane</li>
-      </ul>
+      <p>
+        Dane zostały zmodyfikowane
+      </p>
     </div>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">

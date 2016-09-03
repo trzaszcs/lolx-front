@@ -98,6 +98,7 @@ const API = (function () {
         url: `/auth-api/users/${userId}`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
         data: JSON.stringify({firstName, lastName, state, city})
       }).done(callback)
     }
