@@ -3,12 +3,6 @@
     
     <loading-box :show="loading"></loading-box>
     
-    <div class="ui modal">
-      <div class="content">
-        <anounce-card></anounce-card>
-      </div>
-    </div>
-    
     <div class="ui message">
       <div class="content">
         Mój profil publiczny
@@ -38,10 +32,12 @@
             
       <div class="content">
         <div class="ui middle aligned selection list">
-          <div v-for="item in items" class="item" v-on:click="showAnounce(item)">
+          <div v-for="item in items" class="item">
             <img class="ui avatar image" src="assets/plumber.png">
             <div class="content">
-              <div class="header">{{item.title}}</div>
+              <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
+                {{item.title}}
+              </a>
             </div>
           </div>
         </div>
