@@ -1,11 +1,19 @@
 <template>
   <div class="order ui container">
     <loading-box :show="loading"></loading-box>
-    <div class="ui icon message">
+    <div class="ui icon success message">
+      <i class="checkmark icon"></i>
+      <p> </p>
+       <div class="header">
+        Twoje zamówienie zostało przyjęte
+      </div>
+    </div>
+    
+     <div class="ui icon message">
       <i class="info icon"></i>
       <div class="content">
-        <p>Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
-      W razie wątpliwości możesz skontaktować się z nim bezpośrednio.</p>
+        Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
+        W razie wątpliwości możesz skontaktować się z nim bezpośrednio.</p>
       </div>
     </div>
     
