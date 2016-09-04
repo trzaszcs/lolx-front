@@ -39,6 +39,13 @@ export default {
       this.page = event.page
       this.startSearch()
     }
+  },
+  ready: function () {
+    const queryFromUrl = this.$route.query.phrase
+    if (queryFromUrl) {
+      this.phrase = queryFromUrl
+      this.startSearch()
+    }
   }
 }
 </script>

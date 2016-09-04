@@ -20,13 +20,6 @@ export default {
     emitSearchEvent: function () {
       this.$dispatch('search', {'phrase': this.phrase})
     }
-  },
-  ready: function () {
-    const queryFromUrl = this.$route.query.phrase
-    if (queryFromUrl) {
-      this.phrase = queryFromUrl
-      this.emitSearchEvent()
-    }
   }
 }
 </script>

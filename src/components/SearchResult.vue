@@ -1,9 +1,7 @@
 <template>
-      <div class="searchResult" v-if="searchStarted">
-
-        <loading-box :show="searchLoading"></loading-box>
-        
-        <div v-else class="result">
+  <loading-box :show="loading"></loading-box>    
+  <div class="searchResult" v-if="finished">
+        <div class="result">
            <h4>Znaleziono {{total}} ogłoszeń</h4>
            <div class="ui divided items">
              <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
@@ -39,8 +37,8 @@ export default {
     return {
       anounces: [],
       searchQuery: {},
-      searchStarted: false,
-      searchLoading: false,
+      loading: false,
+      finished: false,
       total: 0,
       noOfPages: 0
     }
@@ -55,14 +53,16 @@ export default {
       })
     },
     searchFinished: function (searchResult) {
-      this.searchLoading = false
+      this.loading = false
+      this.finished = true
       this.anounces = searchResult.anounces
       this.noOfPages = searchResult.totalCount / itemsPerPage
       this.total = searchResult.totalCount
+      console.log('total:', this.total)
     },
     startSearch: function () {
-      this.searchStarted = true
-      this.searchLoading = true
+      this.finished = false
+      this.loading = true
       this.noOfPages = 0
       this.total = 0
       this.doSearch()
@@ -71,7 +71,6 @@ export default {
       this.$dispatch('listing-page-changed', {page})
     },
     showAnounce: function (selectedItem) {
-      console.log('SearchResult - showAnounce' + selectedItem)
       this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
     }
   },
