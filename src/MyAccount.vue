@@ -4,8 +4,11 @@
     <loading-box :show="loading"></loading-box>
     
     <div class="ui message">
-      <div class="content">
+      <div class="header">
         Mój profil publiczny
+      </div>
+      <div class="content">
+        Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać swoim kontem
       </div>
     </div>
 
@@ -13,7 +16,7 @@
   
   <div class="ui fluid card">
    <div class="ui extra content">
-        Moje dane
+        <b>Moje dane</b>
       </div>
  <div class="content">
     <edit-account 
@@ -27,7 +30,7 @@
     <div class="ui fluid card">
     
       <div class="ui extra content">
-        Moje ogłoszenia
+        <b>Moje ogłoszenia</b>
       </div>
             
       <div class="content">
@@ -45,6 +48,7 @@
     
       </div>
     
+    <p></p>
 
   </div>
 

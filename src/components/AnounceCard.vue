@@ -9,7 +9,7 @@
           <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
             <i class="close icon"></i>
           </a> 
-          Ogłoszenie
+          <b>Ogłoszenie</b>
         </div>
                 
         <div class="content">
@@ -92,7 +92,7 @@
   
   <div class="ui segments">
     <div class="ui segment">
-      <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" v-on:click="emitCloseEvent()">
+      <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
         link bezpośrednio do oferty: {{anounce.id}}
       </a>
     </div>

@@ -66,7 +66,7 @@
   
   <div class="ui segments">
     <div class="ui segment">
-      Zarządzaj kartą
+      <b>Zarządzaj kartą</b>
     </div>
     <div class="ui secondary segment">
       <div class="ui segment">
