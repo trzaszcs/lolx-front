@@ -1,6 +1,5 @@
 <template>
   <div class="ui container addAnounce">
-    <div class="ui segment">
 
     <loading-box :show="saving"></loading-box>
    
@@ -22,17 +21,17 @@
         </ul>
       </div>
 
-      <div class="five wide field required" v-bind:class="{'error': hasFieldError('title')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('title')}">
         <label>Tytuł</label>
         <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
       </div>
 
-      <div class="field ten wide required" v-bind:class="{'error': hasFieldError('description')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('description')}">
         <label>Opis</label>
         <textarea v-model="description" name="descripion"></textarea>
       </div>
 
-      <div class="two wide field required" v-bind:class="{'error': hasFieldError('price')}">
+      <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
         <label>Cena</label>
         <div class="ui right labeled input">
           <input v-model="price" type="text" placeholder="Cena.."/>
@@ -56,12 +55,12 @@
           <div class="four wide field" v-bind:class="{'error': hasFieldError('city')}">
            <input v-model="city" type="text" name="city" placeholder="Miasto"/>
           </div>
+        </div>
       </div>
-      
+        
       <input v-on:click="save($event)" type="submit" class="ui primary button" value="Zapisz"></input>
       </form>
-    </div> 
-  </div>
+
 </div>
 
   </div>

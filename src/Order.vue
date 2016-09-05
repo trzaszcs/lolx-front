@@ -78,7 +78,7 @@
             </ul>
           </div>
           
-          <div class="six wide field desktop ten wide mobile required" v-bind:class="{'error': hasFieldError('email')}">
+          <div class="eight wide desktop ten wide mobile field required" v-bind:class="{'error': hasFieldError('email')}">
               <label>Wyślij kartę na adres email</label>
               <input v-model="orderEmail.email" type="text" name="email" placeholder="email"/>
           </div>

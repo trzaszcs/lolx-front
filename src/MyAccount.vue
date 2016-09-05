@@ -5,7 +5,7 @@
     
     <div class="ui message">
       <div class="header">
-        Mój profil publiczny
+        Moje konto
       </div>
       <div class="content">
         Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać swoim kontem
