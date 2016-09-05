@@ -88,15 +88,6 @@
         console.log('MyAccount - showAnounce' + selectedItem)
         this.$broadcast('showAnounce', {'anounce': selectedItem})
         $('.ui.modal').modal('show')
-      },
-      getUser: function () {
-        return {
-          username: 'X Y',
-          rating: 4,
-          commentsCount: 2,
-          likesCount: 1,
-          lastActive: '12h'
-        }
       }
     },
     ready: function () {
@@ -117,6 +108,7 @@
         this.user.likesCount = 1
         this.user.lastActive = '12h'
         this.loading = false
+        $('.ui.star.rating').rating()
       })
     },
     events: {

@@ -1,6 +1,6 @@
 <template>
   <div class="ui container addAnounce">
-
+    <div class="ui segment">
     <loading-box :show="saving"></loading-box>
    
     <div v-if="saved" class="ui info message">
@@ -60,7 +60,8 @@
         
       <input v-on:click="save($event)" type="submit" class="ui primary button" value="Zapisz"></input>
       </form>
-
+      <p></p>
+</div>
 </div>
 
   </div>
