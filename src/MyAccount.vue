@@ -2,53 +2,87 @@
   <div class="ui container myAccount">
     
     <loading-box :show="loading"></loading-box>
-    
-    <div class="ui message">
-      <div class="header">
-        Moje konto
-      </div>
-      <div class="content">
-        Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać swoim kontem
+
+    <div class="ui secondary pointing menu">
+      <a class="item" v-bind:class="{'active': view == 'publicData'}" @click="select('publicData')">
+        Dane publiczne
+      </a>
+      <a class="item" v-bind:class="{'active': view == 'account'}" @click="select('account')">
+        Konto
+      </a>
+      <a class="item" v-bind:class="{'active': view == 'changePassword'}" @click="select('changePassword')">
+        Zmiana Hasła
+      </a>
+      <div class="right menu" @click="logout">
+        <a class="ui item">
+          Wyloguj
+        </a>
       </div>
     </div>
-
-    <user-public-profile :user=user></user-public-profile>
-  
-  <div class="ui fluid card">
-   <div class="ui extra content">
-        <b>Moje dane</b>
-      </div>
- <div class="content">
-    <edit-account 
-      :first-name="user.firstName"
-      :last-name="user.lastName"
-      :state="user.state"
-      :city="user.city"></edit-account>
-                </div>
-        </div>
-
-    <div class="ui fluid card">
+    <div class="ui segment">
+     
+     <!-- PUBLIC ACCOUNT -->
+     <div v-show="view == 'publicData'">
+       <div class="ui message">
+         <div class="header">
+           Moje konto
+         </div>
+         <div class="content">
+           Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać swoim kontem
+         </div>
+       </div>
+       <user-public-profile :user=user></user-public-profile>
+       <div class="ui fluid card">
     
-      <div class="ui extra content">
-        <b>Moje ogłoszenia</b>
-      </div>
+        <div class="ui extra content">
+          <b>Moje ogłoszenia</b>
+        </div>
             
-      <div class="content">
-        <div class="ui middle aligned selection list">
-          <div v-for="item in items" class="item">
-            <img class="ui avatar image" src="assets/plumber.png">
-            <div class="content">
-              <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
-                {{item.title}}
-              </a>
+        <div class="content">
+          <div class="ui middle aligned selection list">
+            <div v-for="item in items" class="item">
+              <img class="ui avatar image" src="assets/plumber.png">
+              <div class="content">
+                <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
+                  {{item.title}}
+                </a>
+              </div>
             </div>
           </div>
+        </div> 
+       </div>
+     </div>
+
+     <!-- ACCOUNT -->
+     <div v-show="view == 'account'">
+       <div class="ui fluid card">
+         <div class="ui extra content">
+           <b>Moje dane</b>
+         </div>
+         <div class="content">
+           <edit-account 
+             :first-name="user.firstName"
+             :last-name="user.lastName"
+             :state="user.state"
+             :city="user.city"
+             :email="user.email"></edit-account>
         </div>
       </div>
-    
-      </div>
-    
-    <p></p>
+     </div>
+
+     <!-- CHANGE PASSWORD -->
+     <div v-show="view == 'changePassword'">
+       <div class="ui fluid card">
+         <div class="ui extra content">
+           <b>Zmiana hasła</b>
+         </div>
+         <div class="content">
+           <change-password></change-password>
+         </div>
+       </div>
+     </div>
+
+    </div>
 
   </div>
 
@@ -59,6 +93,7 @@
   import AnounceCard from './components/AnounceCard.vue'
   import EditAccount from './components/EditAccount.vue'
   import UserPublicProfile from './components/UserPublicProfile.vue'
+  import ChangePassword from './components/ChangePassword.vue'
   import session from './session'
   import api from './api'
   import $ from 'jquery'
@@ -66,6 +101,7 @@
   export default {
     data () {
       return {
+        view: 'publicData',
         user: {
           username: 'lala',
           rating: 0,
@@ -81,9 +117,17 @@
       AnounceCard,
       UserPublicProfile,
       EditAccount,
-      LoadingBox
+      LoadingBox,
+      ChangePassword
     },
     methods: {
+      select: function (viewName) {
+        this.view = viewName
+      },
+      logout: function () {
+        session.logout()
+        this.$router.go({path: '/'})
+      },
       showAnounce: function (selectedItem) {
         console.log('MyAccount - showAnounce' + selectedItem)
         this.$broadcast('showAnounce', {'anounce': selectedItem})

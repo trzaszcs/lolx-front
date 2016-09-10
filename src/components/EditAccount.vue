@@ -29,6 +29,13 @@
         </div>
       </div>
       
+      <div class="fields">
+        <div class="field" v-bind:class="{'error': hasFieldError('email')}">
+          <label>Email</label>
+          <input v-model="email" placeholder="email@domena.pl"/>
+        </div>
+      </div>
+      
       <div class="field">
         <label>Adres</label>
          <div class="fields">
@@ -61,7 +68,7 @@ import {states} from '../const'
 import LoadingBox from './LoadingBox.vue'
 
 export default {
-  props: ['firstName', 'lastName', 'state', 'city'],
+  props: ['firstName', 'lastName', 'state', 'city', 'email'],
   components: {
     LoadingBox
   },
@@ -86,7 +93,7 @@ export default {
       }
 
       this.saving = true
-      api.updateUserDetails(this.firstName, this.lastName, this.state, this.city, session.getUserId(), session.getJwt(), (response) => {
+      api.updateUserDetails(this.email, this.firstName, this.lastName, this.state, this.city, session.getUserId(), session.getJwt(), (response) => {
         this.afterSave()
       })
     },
@@ -98,6 +105,10 @@ export default {
       }
       if (!this.lastName) {
         append('lastName', 'Nazwisko jest wymagane')
+      }
+
+      if (!this.email) {
+        append('email', 'Email nie jest poprawny')
       }
 
       if (!this.city) {

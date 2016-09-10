@@ -2,6 +2,11 @@
 const SESSION = (function () {
   let jwt, backUrl, userId
 
+  function logout () {
+    jwt = null
+    userId = null
+  }
+
   function create (responseUserId, jwtToken) {
     jwt = jwtToken
     userId = responseUserId
@@ -38,7 +43,8 @@ const SESSION = (function () {
     setBackUrl: setBackUrl,
     getBackUrl: getBackUrl,
     getJwt: getJwt,
-    getUserId: getUserId
+    getUserId: getUserId,
+    logout: logout
   }
 })()
 

@@ -107,14 +107,31 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8'
       }).done(callback)
     },
-    updateUserDetails: function (firstName, lastName, state, city, userId, jwt, callback) {
+    updateUserDetails: function (email, firstName, lastName, state, city, userId, jwt, callback) {
       $.ajax({
         url: `/auth-api/users/${userId}`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({firstName, lastName, state, city})
+        data: JSON.stringify({email, firstName, lastName, state, city})
       }).done(callback)
+    },
+    changePassword: function (oldPassword, newPassword, userId, jwt, callback) {
+      $.ajax({
+        url: `/auth-api/users/${userId}/change-password`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({oldPassword, newPassword})
+      }).done(result => {
+        callback({success: true})
+      }).fail(result => {
+        if (result.status === 409) {
+          callback({success: false, wrongOldPassword: true})
+        } else {
+          callback({success: false})
+        }
+      })
     }
   }
 })()
