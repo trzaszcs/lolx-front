@@ -1,99 +1,108 @@
 <template>
   <div class="order ui container">
     <loading-box :show="loading"></loading-box>
-    <div class="ui icon success message">
-      <i class="checkmark icon"></i>
-      <p> </p>
-       <div class="header">
-        Twoje zamówienie zostało przyjęte
-      </div>
-    </div>
     
-     <div class="ui icon message">
-      <i class="info icon"></i>
-      <div class="content">
-        Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
-        W razie wątpliwości możesz skontaktować się z nim bezpośrednio.</p>
-      </div>
-    </div>
-    
-  <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Karta zamówienia</div>
+    <div class="ui stackable two column grid">
+      <div class="column">
+
+        <div class="ui icon success message">
+          <i class="checkmark icon"></i>
+          <p> </p>
+           <div class="header">
+            Twoje zamówienie zostało przyjęte
+          </div>
+        </div>
         
-          <table class="ui celled striped table">
-            <tbody>
-              <tr>
-                <td>
-                  <div class="ui ribbon label">Identyfikator Twojego zamówienia</div>
-                </td>
-                <td>{{order.requestId}}</td>
-              </tr>
-              <tr>
-                <td>Bezpośredni link do zamówienia</td>
-                <td>
-                  <a v-link="{ path: '/order', query: { orderId: order.requestId }}">moje zamowienie</a>
-                </td>
-              </tr>
-              <tr>
-                <td>Dodatkowe informacje od ogłoszeniodawcy</td>
-                <td>{{order.status.anounceContactInfo}}</td>
-              </tr>
-              <tr>
-                <td>Wybrane przez Ciebie dodatkowe preferencje, które przekazaliśmy ogłoszeniodawcy</td>
-                <td>
-                    <p>czas wykonania usługi: {{order.preferedTime}}</p>
-                    <p>data: {{order.preferedDate}}</p>
-                </td>
-              </tr>
-              <tr>
-                <td>link bezpośrednio do oferty</td>
-                <td>
-                  <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">oferta: {{order.anounceId}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-
+         <div class="ui icon message">
+          <i class="info icon"></i>
+          <div class="content">
+            Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
+            W razie wątpliwości możesz skontaktować się z nim bezpośrednio.</p>
+          </div>
+        </div>
+        
+      <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Karta zamówienia</div>
+            
+              <table class="ui celled striped table">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="ui ribbon label">Identyfikator Twojego zamówienia</div>
+                    </td>
+                    <td>{{order.requestId}}</td>
+                  </tr>
+                  <tr>
+                    <td>Bezpośredni link do zamówienia</td>
+                    <td>
+                      <a v-link="{ path: '/order', query: { orderId: order.requestId }}">moje zamowienie</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Dodatkowe informacje od ogłoszeniodawcy</td>
+                    <td>{{order.status.anounceContactInfo}}</td>
+                  </tr>
+                  <tr>
+                    <td>Wybrane przez Ciebie dodatkowe preferencje, które przekazaliśmy ogłoszeniodawcy</td>
+                    <td>
+                        <p>czas wykonania usługi: {{order.preferedTime}}</p>
+                        <p>data: {{order.preferedDate}}</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>link bezpośrednio do oferty</td>
+                    <td>
+                      <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">oferta: {{order.anounceId}}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+    
+          </div>
       </div>
-  </div>
   
-  
-  
-  <div class="ui segments">
-    <div class="ui segment">
-      <b>Zarządzaj kartą</b>
     </div>
-    <div class="ui secondary segment">
-      <div class="ui segment">
-        <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+    <div class="column">
+
+        <div class="ui segments">
+          <div class="ui segment">
+            <b>Zarządzaj kartą</b>
+          </div>
+          <div class="ui secondary segment">
+            <div class="ui segment">
+              <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+            
+                <div class="ui error message">
+                  <ul class="list" v-for="error in validationErrors">
+                    <li>{{error.txt}}</li>
+                  </ul>
+                </div>
+                
+                <div class="eight wide desktop ten wide mobile field required" v-bind:class="{'error': hasFieldError('email')}">
+                    <label>Wyślij kartę na adres email</label>
+                    <input v-model="orderEmail.email" type="text" name="email" placeholder="email"/>
+                </div>
       
-          <div class="ui error message">
-            <ul class="list" v-for="error in validationErrors">
-              <li>{{error.txt}}</li>
-            </ul>
+                <button v-on:click="sendOrder($event)" type="submit" class="ui action right button" >Wyślij</button>
+              </form>
+            </div>
           </div>
-          
-          <div class="eight wide desktop ten wide mobile field required" v-bind:class="{'error': hasFieldError('email')}">
-              <label>Wyślij kartę na adres email</label>
-              <input v-model="orderEmail.email" type="text" name="email" placeholder="email"/>
+        </div>
+        
+        <div class="ui small modal">
+          <div class="content">
+            Przesłalismy kartę na wybrany adres
           </div>
-
-          <button v-on:click="sendOrder($event)" type="submit" class="ui action right button" >Wyślij</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  
-    <div class="ui small modal">
-      <div class="content">
-        Przesłalismy kartę na wybrany adres
-      </div>
-    </div>  
+        </div>  
+    
+      </div>  
+      
+    </div> 
       
   </div>
 
