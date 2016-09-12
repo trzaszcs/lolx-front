@@ -23,7 +23,7 @@
         
       <div class="ui fluid card">
           <div class="content">
-            <div class="header">Karta zamówienia</div>
+            <div class="header">Karta zamówienia usługi</div>
             
               <table class="ui celled striped table">
                 <tbody>
