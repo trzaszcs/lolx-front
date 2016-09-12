@@ -33,13 +33,15 @@
               </button>
             </div>
           </div>
+          
         </div>
+
       </div>
 
       <div class="ui bottom attached segment">
-        <div class="fb-like" v-bind:data-href="siteUrl" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
-      </div>  
-  
+        <div class="fb-like" v-bind:data-href="siteUrl" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div>
+      </div> 
+
       <router-view></router-view>
 
     </div>
