@@ -36,11 +36,11 @@
       
       
       <div class="ui message">
-        <p>
-          Zalogowanie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
-        </p>
         <p> 
           Nie posiadasz konta? <a v-on:click="register">Załóż konto</a>
+        </p>
+        <p>
+          Zalogowanie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
         </p>
       </div>
 

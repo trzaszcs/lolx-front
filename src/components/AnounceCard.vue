@@ -194,7 +194,7 @@ export default {
     },
     getUser: function (selectedItem) {
       return {
-        username: 'X Y',
+        username: 'Zbigniew ToDo',
         rating: 4,
         commentsCount: 2,
         likesCount: 1,
