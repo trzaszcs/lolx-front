@@ -76,8 +76,12 @@
               </div>     
                  
               <div class="ui two buttons">
-                <input class="ui orange button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
-                <div class="ui button" v-on:click="emitCloseEvent()">Anuluj</div>
+                <input class="ui orange large button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
+                <div class="ui large button" v-on:click="emitCloseEvent()">Anuluj</div>
+              </div>
+              
+              <div class="ui message">
+              Zamówienie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
               </div>
             </div>  
         </div>

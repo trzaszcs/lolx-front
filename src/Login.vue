@@ -19,14 +19,29 @@
             </div>
           </div>
         <div v-on:click="login" class="ui fluid large teal submit button">Login</div>
+        
+        <div class="ui horizontal divider">
+          lub zaloguj sie przez
+        </div>     
+        <a class="ui fluid large blue button" v-bind:href="facebookAddress">Facebook</a>
+        <p>
+          Nie publikujemy bez twojej zgody
+        </p>
+   
         </div>
         <div class="ui error message">
           {{message}}
         </div>
       </form>
+      
+      
       <div class="ui message">
-        Zaloguj sie przez <a v-bind:href="facebookAddress">Facebook</a><br/>
-        Nie posiadasz konta? <a v-on:click="register">Załóż konto</a>
+        <p>
+          Zalogowanie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
+        </p>
+        <p> 
+          Nie posiadasz konta? <a v-on:click="register">Załóż konto</a>
+        </p>
       </div>
 
     </div>
