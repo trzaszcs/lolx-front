@@ -29,8 +29,7 @@
        </div>
      </div>
   
-    <div class="ui segment">
-     
+
      <!-- PUBLIC ACCOUNT -->
      <div v-show="view == 'publicData'">
 
@@ -44,10 +43,9 @@
             </div>
                 
             <div class="content">
-              <div class="ui left algined election list">
+              <div class="ui fluid selection list">
                 <div v-for="item in items" class="item">
-                  
-                
+                    
                   <img class="ui avatar image" src="assets/plumber.png">
                   
                   <div class="content">
@@ -59,21 +57,22 @@
                         {{item.creationDate}} <br/>
                         {{item.price}} zł 
                      </div>
-                     <div class="extra">
-                       <button class="ui red mini  button" v-link="{ path: '/deleteAnounce', query: { anounceId: item.id }}">
+
+                  </div>  
+                  
+                   <div class="right aligned content">
+                        <button class="ui red mini button" v-link="{ path: '/deleteAnounce', query: { anounceId: item.id }}">
                           usuń
                         </button>
-                        
-                     </div>
-                     
-                    </div>
-                  </div>  
+                  </div>
   
                 </div>
               </div>
             </div> 
            </div>
-       
+        </div>
+
+
         <div class="column">
              <user-public-profile :user=user></user-public-profile>
         </div> 
@@ -113,7 +112,6 @@
 
     </div>
 
-  </div>
 
 </template>
 
