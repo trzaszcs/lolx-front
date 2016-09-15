@@ -35,10 +35,12 @@
       </form>
       
       
+      <div class="inline">
+        <a class="l" v-on:click="register">Załóż konto</a>
+        <a class="r" v-on:click="reset">Resetuj hasło</a>
+      </div>
+
       <div class="ui message">
-        <p> 
-          Nie posiadasz konta? <a v-on:click="register">Załóż konto</a>
-        </p>
         <p>
           Zalogowanie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
         </p>
@@ -84,6 +86,9 @@ export default {
     },
     register: function () {
       this.$router.go({'path': '/register'})
+    },
+    reset: function () {
+      this.$router.go({'path': '/resetPasswordRequest'})
     }
   },
   ready: function () {

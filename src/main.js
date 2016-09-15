@@ -9,6 +9,8 @@ import Anounce from './Anounce'
 import Order from './Order'
 import Login from './Login'
 import Register from './Register'
+import ResetPasswordRequest from './ResetPasswordRequest'
+import ResetPassword from './ResetPassword'
 
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
@@ -41,6 +43,12 @@ router.map({
   },
   '/register': {
     component: Register
+  },
+  '/resetPasswordRequest': {
+    component: ResetPasswordRequest
+  },
+  '/resetPassword': {
+    component: ResetPassword
   }
 })
 
