@@ -56,6 +56,13 @@ const API = (function () {
         callback({success: false})
       })
     },
+    deleteAnounce: function (anounceId, jwtToken, callback) {
+      $.ajax({
+        url: `/api/anounces/${anounceId}`,
+        method: 'DELETE',
+        headers: headers(jwtToken)
+      }).done(callback)
+    },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
         url: `/api/anounces/user/${userId}`,
