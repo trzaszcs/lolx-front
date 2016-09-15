@@ -135,7 +135,8 @@ export default {
       validationErrors: null,
       orderEmail: {
         email: '',
-        anounceId: ''
+        anounceId: '',
+        orderId: ''
       },
       loading: false
     }
