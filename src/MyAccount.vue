@@ -34,8 +34,7 @@
      <div v-show="view == 'publicData'">
 
        <div class="ui stackable two column grid">
-
-         <div class="column">   
+       <div class="column">
            <div class="ui fluid card">
         
             <div class="ui extra content">
@@ -43,8 +42,8 @@
             </div>
                 
             <div class="content">
-              <div class="ui fluid selection list">
-                <div v-for="item in items" class="item">
+              <div class="ui fluid selection list" v-for="item in items">
+                <div class="ui item">
                     
                   <img class="ui avatar image" src="assets/plumber.png">
                   
@@ -52,7 +51,7 @@
                     <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
                         {{item.title}} 
                       </a>
-                      <div class="description">
+                      <div class="description" v-on:click="showAnounce(item)">
                         {{item.city}} ({{item.state}}) <br/>
                         {{item.creationDate}} <br/>
                         {{item.price}} zł 
@@ -61,22 +60,25 @@
                   </div>  
                   
                    <div class="right aligned content">
-                        <button class="ui red mini button" v-link="{ path: '/deleteAnounce', query: { anounceId: item.id }}">
+                        <button class="ui red mini button" v-on:click="deleteAnounce(item)">
                           usuń
                         </button>
                   </div>
   
                 </div>
+                
+                
+                
               </div>
             </div> 
            </div>
-        </div>
+          </div>
+          
+       <div class="column">
 
-
-        <div class="column">
              <user-public-profile :user=user></user-public-profile>
-        </div> 
-        
+       </div>
+
        </div>
        
      </div>
@@ -157,8 +159,12 @@
       },
       showAnounce: function (selectedItem) {
         console.log('MyAccount - showAnounce' + selectedItem)
-        this.$broadcast('showAnounce', {'anounce': selectedItem})
-        $('.ui.modal').modal('show')
+        this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
+      },
+      deleteAnounce: function (selectedItem) {
+        api.deleteAnounce(selectedItem.id, (result) => {
+          this.$router.go({path: '/myAccount'})
+        })
       }
     },
     ready: function () {

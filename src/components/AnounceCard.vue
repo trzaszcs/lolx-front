@@ -1,5 +1,6 @@
 <template>
   <loading-box :show="loading"></loading-box>
+  
   <div class="ui stackable two column grid">
     <div class="ui column">
 
@@ -11,21 +12,29 @@
           </a> 
           <b>Ogłoszenie</b>
         </div>
-                
+
         <div class="content">
-          <img class="right floated mini ui image" src="../assets/plumber.png">
+          <div class="ui right floated green label">
+             Cena {{anounce.price}} PLN
+          </div>
           <div class="ui header">
             {{anounce.title}}
           </div>
           <div class="meta">
             Jan Kowalski - {{anounce.city}} - {{anounce.state}}
           </div>
+
           <div class="description">
+            <img class="ui left floated image" src="../assets/plumber.png">
             {{anounce.description}}
           </div>
+
         </div>
-        
+
         <div class="extra content">
+       <div class="ui message">Formularz zamówienia</div>
+
+          
             <div class="ui form" v-bind:class="{ 'error': validationErrors }">
               
              <div class="ui error message">
@@ -127,7 +136,8 @@ export default {
         city: '',
         state: '',
         img: '',
-        description: ''
+        description: '',
+        price: ''
       },
       user: {
         username: 'lala',
