@@ -56,13 +56,6 @@ const API = (function () {
         callback({success: false})
       })
     },
-    deleteAnounce: function (anounceId, jwtToken, callback) {
-      $.ajax({
-        url: `/api/anounces/${anounceId}`,
-        method: 'DELETE',
-        headers: headers(jwtToken)
-      }).done(callback)
-    },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({
         url: `/api/anounces/user/${userId}`,
@@ -138,6 +131,30 @@ const API = (function () {
         } else {
           callback({success: false})
         }
+      })
+    },
+    resetPassword: function (email, callback) {
+      $.ajax({
+        url: '/auth-api/users/reset-password',
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({email})
+      }).done(result => {
+        callback({success: true})
+      }).fail(result => {
+        callback({success: false})
+      })
+    },
+    changePasswordAfterReset: function (resetRefId, newPassword, callback) {
+      $.ajax({
+        url: `/auth-api/users/reset-password/${resetRefId}`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify({newPassword})
+      }).done(result => {
+        callback({success: true})
+      }).fail(result => {
+        callback({success: false})
       })
     }
   }
