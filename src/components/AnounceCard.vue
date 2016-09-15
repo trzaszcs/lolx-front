@@ -14,24 +14,32 @@
         </div>
 
         <div class="content">
+          
+          <div class="ui left floated section">
           <div class="ui header">
             {{anounce.title}}
-          </div>
-          <div class="ui right floated green label">
-            <p>
-             Cena {{anounce.price}} PLN
-             </p>
           </div>
           <div class="meta">
             Jan Kowalski - {{anounce.city}} - {{anounce.state}}
           </div>
+</div>
 
+   <div class="ui right floated section">
+            <div class="ui green label">
+             Cena {{anounce.price}} PLN
+             </div>
+          </div>
+          </div>
+
+<div class="content">
           <div class="description">
             <img class="ui left floated image" src="../assets/plumber.png">
             {{anounce.description}}
           </div>
 
         </div>
+        
+     
 
         <div class="extra content">
        <div class="ui message">Formularz zamówienia</div>
