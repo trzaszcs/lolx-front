@@ -173,7 +173,7 @@
         this.$router.go({path: '/login'})
         return
       }
-      api.getForUser('currentUser', 0, 10, (anounces) => {
+      api.getForUser(session.getUserId(), 0, 10, (anounces) => {
         this.items = anounces.anounces
       })
       this.loading = true
