@@ -162,7 +162,7 @@
         this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
       },
       deleteAnounce: function (selectedItem) {
-        api.deleteAnounce(selectedItem.id, (result) => {
+        api.deleteAnounce(selectedItem.id, session.getJwt(), (result) => {
           this.$router.go({path: '/myAccount'})
         })
       }
