@@ -42,6 +42,14 @@ const API = (function () {
         headers: headers(jwtToken)
       }).done(callback)
     },
+    getCustomerOrders: function (userId, jwtToken, callback) {
+      console.log('api get order -> ', userId)
+      $.ajax({
+        url: `/api/orders/customer/${userId}`,
+        method: 'GET',
+        headers: headers(jwtToken)
+      }).done(callback)
+    },
     sendOrderEmail: function (orderEmail, jwtToken, callback) {
       console.log('api email order -> ', orderEmail)
       $.ajax({
@@ -55,6 +63,13 @@ const API = (function () {
       }).fail((result) => {
         callback({success: false})
       })
+    },
+    deleteAnounce: function (anounceId, jwtToken, callback) {
+      $.ajax({
+        url: `/api/anounces/${anounceId}`,
+        method: 'DELETE',
+        headers: headers(jwtToken)
+      }).done(callback)
     },
     getForUser: function (userId, page, itemsPerPage, callback) {
       $.ajax({

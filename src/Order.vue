@@ -25,6 +25,12 @@
           <div class="content">
             <div class="header">Karta zamówienia usługi</div>
             
+              <span>
+                <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">
+                    {{order.title}}
+                </a>
+              </span>
+            
               <table class="ui celled striped table">
                 <tbody>
                   <tr>
@@ -122,6 +128,7 @@ export default {
     return {
       order: {
         requestId: '',
+        title: '',
         anounceId: '',
         preferedTime: '',
         preferedDate: '',
@@ -135,7 +142,8 @@ export default {
       validationErrors: null,
       orderEmail: {
         email: '',
-        anounceId: ''
+        anounceId: '',
+        orderId: ''
       },
       loading: false
     }
@@ -168,6 +176,7 @@ export default {
       }
       this.loading = true
       this.orderEmail.anounceId = this.order.anounceId
+      this.orderEmail.orderId = this.order.requestId
       api.sendOrderEmail(this.orderEmail, session.getJwt(), (result) => {
         if (result.success) {
           $('.ui.modal').modal('show')

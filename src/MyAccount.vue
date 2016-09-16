@@ -7,6 +7,9 @@
       <a class="item" v-bind:class="{'active': view == 'publicData'}" @click="select('publicData')">
         Dane publiczne
       </a>
+      <a class="item" v-bind:class="{'active': view == 'orders'}" @click="select('orders')">
+        Zamówienia
+      </a>
       <a class="item" v-bind:class="{'active': view == 'account'}" @click="select('account')">
         Konto
       </a>
@@ -66,9 +69,7 @@
                   </div>
   
                 </div>
-                
-                
-                
+
               </div>
             </div> 
            </div>
@@ -81,6 +82,29 @@
 
        </div>
        
+     </div>
+
+     <!-- MY-ORDERS -->
+     <div v-show="view == 'orders'">
+       <div class="ui fluid card">
+         <div class="ui extra content">
+           <b>Moje zamówienia usług</b>
+         </div>
+         <div class="content">
+          
+             <div class="ui fluid selection list" v-for="order in customerOrders">
+                <div class="ui item">
+                  
+                  <div class="content">
+                      <a class="header" v-link="{ path: '/order', query: { orderId: order.requestId }}">
+                          {{order.title}} {{order.requestId}} 
+                      </a>
+                  </div>  
+                </div>
+             </div>
+        </div>
+        
+      </div>
      </div>
 
      <!-- ACCOUNT -->
@@ -139,6 +163,7 @@
           lastActive: ''
         },
         items: [],
+        customerOrders: [],
         loading: false
       }
     },
@@ -173,7 +198,7 @@
         this.$router.go({path: '/login'})
         return
       }
-      api.getForUser('currentUser', 0, 10, (anounces) => {
+      api.getForUser(session.getUserId(), 0, 10, (anounces) => {
         this.items = anounces.anounces
       })
       this.loading = true
@@ -186,6 +211,9 @@
         this.user.lastActive = '12h'
         this.loading = false
         $('.ui.star.rating').rating()
+      })
+      api.getCustomerOrders(session.getUserId(), session.getJwt(), (items) => {
+        this.customerOrders = items
       })
     },
     events: {
