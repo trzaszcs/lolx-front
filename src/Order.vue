@@ -25,8 +25,10 @@
           <div class="content">
             <div class="header">Karta zamówienia usługi</div>
             
-            <span>
-              {{order.title}}
+              <span>
+                <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">
+                    {{order.title}}
+                </a>
               </span>
             
               <table class="ui celled striped table">
