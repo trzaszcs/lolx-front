@@ -18,7 +18,7 @@
               <div class="step">
                 <div class="content">
                   <div class="title">Kliknij zamów</div>
-                  <div class="description">Nie musisz się nawet rejestrować</div>
+                  <div class="description">Nie musisz się nawet rejestrować.</div>
                 </div>
               </div>
               <div class="step">

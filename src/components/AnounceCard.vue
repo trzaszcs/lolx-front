@@ -43,7 +43,6 @@
 
         <div class="extra content">
        <div class="ui message">Formularz zamówienia</div>
-
           
             <div class="ui form" v-bind:class="{ 'error': validationErrors }">
               
@@ -86,22 +85,29 @@
                   </div>
               </div>     
                  
-              <div class="field" v-bind:class="{'error': hasFieldError('customerContactInfo')}">
-                <label>Podaj swój email lub telefon (możesz się także zalogować) </label>
-                  <div class="ui icon input">
-                    <i class="at icon"></i>
-                    <input v-model="order.customerContactInfo" type="text" name="customerContactInfo"/>
-                  </div>
-              </div>     
-                 
+                <div v-if="showLoginMessage" class="field" v-bind:class="{'error': hasFieldError('customerContactInfo')}">
+                  <label>Podaj swój email lub telefon.</label>
+                    <div class="ui icon input">
+                      <i class="at icon"></i>
+                      <input v-model="order.customerContactInfo" type="text" name="customerContactInfo"/>
+                    </div>
+                </div>    
+                
+                <div  v-if="showLoginMessage" class="ui message">
+                    Nie jesteś zalogowany! <a v-link="{ path: '/login'}">Logowanie</a> nie jest wymagane 
+                    by zamówić, ale dzięki logowaniu automatycznie wypełnimy dane i zapamiętamy twoje zamówienia.
+                </div> 
+                    
+
               <div class="ui two buttons">
                 <input class="ui orange large button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
                 <div class="ui large button" v-on:click="emitCloseEvent()">Anuluj</div>
               </div>
-              
+
               <div class="ui message">
               Zamówienie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
               </div>
+              
             </div>  
         </div>
        
@@ -114,7 +120,7 @@
   </div>
   
   <div class="ui segments">
-    <div class="ui segment">
+    <div class="ui center algined segment">
       <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
         link bezpośrednio do oferty: {{anounce.id}}
       </a>
@@ -165,7 +171,8 @@ export default {
         customerId: ''
       },
       loading: false,
-      validationErrors: null
+      validationErrors: null,
+      showLoginMessage: false
     }
   },
   methods: {
@@ -238,6 +245,7 @@ export default {
         format: 'MM-DD-YYYY'
       }
     })
+    this.showLoginMessage = !session.logged()
   }
 }
 </script>
