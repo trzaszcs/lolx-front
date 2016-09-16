@@ -179,7 +179,7 @@ export default {
     validate: function (event) {
       let errors = []
       const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
-      if (!this.order.customerContactInfo) {
+      if (this.showLoginMessage && !this.order.customerContactInfo) {
         append('customerContactInfo', 'Podaj kontaktowy email lub zaloguj się')
       }
       if (errors.length > 0) {
