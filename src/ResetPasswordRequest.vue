@@ -6,7 +6,7 @@
    
     <div v-if="saved && success" class="ui info message">
       <ul class="list">
-        <li>Hasło zostało zresetowane sprawdź hasło</li>
+        <li>Hasło zostało zresetowane, link został wysłany na Twój email</li>
       </ul>
     </div>
 
@@ -20,11 +20,11 @@
       </div>
 
       <div class="field" v-bind:class="{'error': hasFieldError('email')}">
-        <label>Imie</label>
+        <label>Podaj swój email</label>
         <input v-model="email" placeholder="email@domena.pl"/>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui primary button" value="Zarejestruj"></input>
+      <input v-on:click="save" type="submit" class="ui primary button" value="Resetuj"></input>
       </form>
     </div> 
   </div>
@@ -66,7 +66,9 @@ export default {
 
       this.saving = true
       api.resetPassword(this.email, (response) => {
-        this.validationErrors.push({txt: 'Błędny email'})
+        if (!response.success) {
+          this.validationErrors = [{txt: 'Błędny email'}]
+        }
         this.afterSave(response.success)
       })
     },

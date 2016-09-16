@@ -145,12 +145,12 @@ const API = (function () {
         callback({success: false})
       })
     },
-    changePasswordAfterReset: function (resetRefId, newPassword, callback) {
+    changePasswordAfterReset: function (resetRefId, password, callback) {
       $.ajax({
-        url: `/auth-api/users/reset-password/${resetRefId}`,
+        url: `/auth-api/users/reset-password/${resetRefId}/change-password`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({newPassword})
+        data: JSON.stringify({password})
       }).done(result => {
         callback({success: true})
       }).fail(result => {
