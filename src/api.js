@@ -42,6 +42,14 @@ const API = (function () {
         headers: headers(jwtToken)
       }).done(callback)
     },
+    getCustomerOrders: function (userId, jwtToken, callback) {
+      console.log('api get order -> ', userId)
+      $.ajax({
+        url: `/api/orders/customer/${userId}`,
+        method: 'GET',
+        headers: headers(jwtToken)
+      }).done(callback)
+    },
     sendOrderEmail: function (orderEmail, jwtToken, callback) {
       console.log('api email order -> ', orderEmail)
       $.ajax({

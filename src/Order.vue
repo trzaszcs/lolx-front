@@ -25,6 +25,10 @@
           <div class="content">
             <div class="header">Karta zamówienia usługi</div>
             
+            <span>
+              {{order.title}}
+              </span>
+            
               <table class="ui celled striped table">
                 <tbody>
                   <tr>
@@ -122,6 +126,7 @@ export default {
     return {
       order: {
         requestId: '',
+        title: '',
         anounceId: '',
         preferedTime: '',
         preferedDate: '',
