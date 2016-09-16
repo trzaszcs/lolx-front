@@ -129,6 +129,7 @@ export default {
         preferedTime: '',
         preferedDate: '',
         customerContactInfo: '',
+        customerId: '',
         status: {
           status: '',
           requestDate: '',
