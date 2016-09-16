@@ -29,7 +29,7 @@
         <input v-model="password2" type="password"/>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui primary button" value="Zarejestruj"></input>
+      <input v-on:click="save" type="submit" class="ui primary button" value="Zapisz"></input>
       </form>
     </div> 
   </div>
@@ -68,7 +68,7 @@ export default {
         return
       }
       this.saving = true
-      api.changePasswordAfterReset(this.firstName, this.$route.query.id, this.password1, (response) => {
+      api.changePasswordAfterReset(this.$route.query.id, this.password1, (response) => {
         this.afterSave()
       })
     },

@@ -117,7 +117,7 @@ export default {
       }
 
       this.saving = true
-      api.register(this.firstName, this.lastName, this.email, this.password1, this.city, this.state, (response) => {
+      api.register(this.firstName, this.lastName, this.email, this.password1, this.state, this.city, (response) => {
         this.afterSave()
       })
     },

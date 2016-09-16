@@ -36,8 +36,8 @@
       
       
       <div class="inline">
-        <a class="l" v-on:click="register">Załóż konto</a>
-        <a class="r" v-on:click="reset">Resetuj hasło</a>
+        <a class="l" v-link="'register'">Załóż konto</a>
+        <a class="r" v-link="'resetPasswordRequest'">Resetuj hasło</a>
       </div>
 
       <div class="ui message">
@@ -83,12 +83,6 @@ export default {
           this.message = 'Podałeś złe hasło lub email'
         }
       })
-    },
-    register: function () {
-      this.$router.go({'path': '/register'})
-    },
-    reset: function () {
-      this.$router.go({'path': '/resetPasswordRequest'})
     }
   },
   ready: function () {
