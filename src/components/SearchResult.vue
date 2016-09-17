@@ -1,20 +1,20 @@
 <template>
-  <loading-box :show="loading"></loading-box>    
-  <div class="searchResult" v-if="finished">
-        <div class="result">
-           <h4>Znaleziono {{total}} ogłoszeń</h4>
-           <div class="ui divided items">
-             <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
-               <anounce-item :anounce=item></anounce-item>
-             </div>
-           </div>
+  <loading-box :show="loading"></loading-box>
+  <div class="searchResult" v-show="finished">
+    <div class="result">
+      <h4>Znaleziono {{total}} ogłoszeń</h4>
+      <div class="ui divided items">
+        <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
+          <anounce-item :anounce=item></anounce-item>
         </div>
+      </div>
+    </div>
         
-        <div class="pagingBox">
-          <div class="ui pagination menu">
-            <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
-          </div>
-        </div>
+    <div class="pagingBox">
+      <div class="ui pagination menu">
+        <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -24,7 +24,7 @@ import api from '../api'
 import AnounceItem from './AnounceItem.vue'
 import AnounceCard from './AnounceCard.vue'
 import LoadingBox from './LoadingBox.vue'
-require('semantic')
+
 const itemsPerPage = 20
 
 export default {
@@ -58,7 +58,6 @@ export default {
       this.anounces = searchResult.anounces
       this.noOfPages = searchResult.totalCount / itemsPerPage
       this.total = searchResult.totalCount
-      console.log('total:', this.total)
     },
     startSearch: function () {
       this.finished = false

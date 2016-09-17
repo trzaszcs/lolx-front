@@ -15,10 +15,12 @@ export default {
   },
   methods: {
     search: function () {
-      this.emitSearchEvent()
-    },
-    emitSearchEvent: function () {
       this.$dispatch('search', {'phrase': this.phrase})
+    }
+  },
+  events: {
+    'search': function (event) {
+      this.phrase = event.phrase
     }
   }
 }
