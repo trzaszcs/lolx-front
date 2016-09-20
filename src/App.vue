@@ -43,10 +43,22 @@
       </div> 
 
       <router-view></router-view>
+      
+       <p>
+      </p>
+      <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            Dorobie.pl 2016. All Rights Reserved
+        </div>
+    </div>
 
     </div>
         
   </div>
+  
+
+  
+  
 </template>
 
 <script>

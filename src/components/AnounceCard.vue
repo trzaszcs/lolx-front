@@ -6,10 +6,10 @@
 
       <div class="ui fluid card">
         
-        <div class="ui extra content">
-          <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
-            <i class="close icon"></i>
-          </a> 
+        <div class="ui left aligned extra content">
+          <button v-on:click="emitCloseEvent()" class="ui stackable icon button " data-tooltip="wróć na poprzednią stronę">
+            <i class="arrow left icon"></i>
+          </button> 
           <b>Ogłoszenie</b>
         </div>
 
@@ -25,7 +25,7 @@
 </div>
 
    <div class="ui right floated section">
-            <div class="ui green label">
+            <div class="ui large label">
              Cena {{anounce.price}} PLN
              </div>
           </div>
@@ -120,7 +120,7 @@
   </div>
   
   <div class="ui segments">
-    <div class="ui center algined segment">
+    <div class="ui center aligned segment">
       <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
         link bezpośrednio do oferty: {{anounce.id}}
       </a>

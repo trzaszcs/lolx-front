@@ -36,8 +36,6 @@
      <!-- PUBLIC ACCOUNT -->
      <div v-show="view == 'publicData'">
 
-       <div class="ui stackable two column grid">
-       <div class="column">
            <div class="ui fluid card">
         
             <div class="ui extra content">
@@ -58,30 +56,24 @@
                         {{item.city}} ({{item.state}}) <br/>
                         {{item.creationDate}} <br/>
                         {{item.price}} zł 
+               
+                        
                      </div>
 
                   </div>  
-                  
-                   <div class="right aligned content">
-                        <button class="ui red mini button" v-on:click="deleteAnounce(item)">
-                          usuń
-                        </button>
-                  </div>
-  
+                           
+                  <button class="ui right floated button" v-on:click="deleteAnounce(item)">
+                    usuń
+                  </button>
+            
                 </div>
 
               </div>
             </div> 
            </div>
-          </div>
-          
-       <div class="column">
 
-             <user-public-profile :user=user></user-public-profile>
-       </div>
+           <user-public-profile :user=user></user-public-profile>
 
-       </div>
-       
      </div>
 
      <!-- MY-ORDERS -->
