@@ -25,26 +25,33 @@ export default {
     }
   },
   methods: {
-    startSearch: function () {
-      this.$router.go({'path': '/search', 'query': {phrase: this.phrase, page: this.page}})
+    emitEvent: function () {
       this.$broadcast('search', buildSearchEvent(this.phrase, this.page))
+    },
+    changeAddress: function () {
+      this.$router.go({'path': '/search', 'query': {phrase: this.phrase, page: this.page}})
     }
   },
   events: {
     'search': function (event) {
+      console.log('1')
       this.phrase = event.phrase
-      this.startSearch()
+      this.emitEvent()
+      this.changeAddress()
     },
     'listing-page-changed': function (event) {
       this.page = event.page
-      this.startSearch()
+      this.emitEvent()
+      this.changeAddress()
     }
   },
   ready: function () {
-    const queryFromUrl = this.$route.query.phrase
-    if (queryFromUrl) {
-      this.phrase = queryFromUrl
-      this.startSearch()
+    if ('phrase' in this.$route.query) {
+      if ('page' in this.$route.query) {
+        this.page = this.$route.query.page
+      }
+      this.phrase = this.$route.query.phrase
+      this.emitEvent()
     }
   }
 }
