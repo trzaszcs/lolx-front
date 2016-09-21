@@ -44,11 +44,50 @@
 
       <router-view></router-view>
       
-      <div class="ui very padded vertical footer segment">
-        <div class="ui center aligned container">
-            Dorobie.pl 2016. All Rights Reserved
+
+    <div class="ui inverted vertical footer segment" id="footerspace">
+    
+    <div class="ui center aligned container">
+          <div class="ui stackable inverted divided grid">
+            <div class="three wide column">
+              <h4 class="ui inverted header">Wyszukaj</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Strona wyszukiwania</a>
+              </div>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui inverted header">Ogłoszenia</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Moje ogłoszenia</a>
+                <a href="#" class="item">Moje zamówienia</a>
+              </div>
+            </div>
+            <div class="three wide column">
+              <h4 class="ui inverted header">Moje konto</h4>
+              <div class="ui inverted link list">
+                <a href="#" class="item">Załuż konto</a>
+                <a href="#" class="item">Dane publiczne</a>
+                <a href="#" class="item">Reset hasła</a>
+              </div>
+            </div>
+            <div class="seven wide column">
+              <h4 class="ui inverted header">Dorobie.pl</h4>
+              <p>Pozwalamy znalezienie odpowiedniego dla Ciebie ogłoszenia tzw. mikro usługi - czyli rzeczy na którą nie masz czasu 
+              i w której wyręczyć Ciebie mogą Ogłoszeniodawcy. Ty także możesz dodawać swoje ogłoszenia!</p>
+            </div>
+          </div>
+          <div class="ui inverted section divider"></div>
+          <img src="assets/logo.png" class="ui centered mini image">
+          <div class="ui horizontal inverted small divided link list">
+            <a class="item" href="#">Mapa strony</a>
+            <a class="item" href="#">Kontakt</a>
+            <a class="item" href="#">Regulamin</a>
+            <a class="item" href="#">Polityka prywatności</a>
+          </div>
         </div>
-    </div>
+    
+      </div>
+
 
     </div>
         
