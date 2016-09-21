@@ -52,25 +52,25 @@
             <div class="three wide column">
               <h4 class="ui inverted header">Wyszukaj</h4>
               <div class="ui inverted link list">
-                <a href="#" class="item">Strona wyszukiwania</a>
+                <a v-link="{ path: '/search' }" class="item">Strona wyszukiwania</a>
               </div>
             </div>
             <div class="three wide column">
               <h4 class="ui inverted header">Ogłoszenia</h4>
               <div class="ui inverted link list">
-                <a href="#" class="item">Dodaj ogłoszenie</a>
-                <a href="#" class="item">Moje ogłoszenia</a>
-                <a href="#" class="item">Moje zamówienia</a>
-                <a href="#" class="item">Szukaj ogłoszenia</a>
+                <a v-link="{ path: '/addAnounce' }" class="item">Dodaj ogłoszenie</a>
+                <a v-link="{ path: '/myAccount' }" class="item">Moje ogłoszenia</a>
+                <a v-link="{ path: '/myAccount' }" class="item">Moje zamówienia</a>
+                <a v-link="{ path: '/search' }" class="item">Szukaj ogłoszenia</a>
               </div>
             </div>
             <div class="three wide column">
               <h4 class="ui inverted header">Moje konto</h4>
               <div class="ui inverted link list">
-                <a href="#" class="item">Załuż konto</a>
-                <a href="#" class="item">Dane publiczne</a>
-                <a href="#" class="item">Edytuj konto</a>
-                <a href="#" class="item">Reset hasła</a>
+                <a v-link="{ path: '/register' }" class="item">Załuż konto</a>
+                <a v-link="{ path: '/myAccount' }" class="item">Dane publiczne</a>
+                <a v-link="{ path: '/myAccount' }" class="item">Edytuj konto</a>
+                <a v-link="{ path: '/resetPasswordRequest' }" class="item">Reset hasła</a>
               </div>
             </div>
             <div class="seven wide column">
@@ -82,10 +82,10 @@
           <div class="ui inverted section divider"></div>
           <img src="assets/logo.png" class="ui centered mini image">
           <div class="ui horizontal inverted small divided link list">
-            <a class="item" href="#">Mapa strony</a>
-            <a class="item" href="#">Kontakt</a>
-            <a class="item" href="#">Regulamin</a>
-            <a class="item" href="#">Polityka prywatności</a>
+            <a class="item" v-link="{ path: '/sitemap' }">Mapa strony</a>
+            <a class="item" v-link="{ path: '/contact' }">Kontakt</a>
+            <a class="item" v-link="{ path: '/terms' }">Regulamin</a>
+            <a class="item" v-link="{ path: '/privacy' }">Polityka prywatności</a>
           </div>
         </div>
     

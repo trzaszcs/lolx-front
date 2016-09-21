@@ -105,7 +105,7 @@
               </div>
 
               <div class="ui message">
-              Zamówienie oznacza akceptację aktualnego <a href="regulamin.html">regulaminu</a> serwisu.
+              Zamówienie oznacza akceptację aktualnego <a v-link="{ path: '/terms' }">regulaminu</a> serwisu.
               </div>
               
             </div>  
