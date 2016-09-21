@@ -41,8 +41,16 @@
         
      
 
-        <div class="extra content">
-       <div class="ui message">Formularz zamówienia</div>
+ 
+       
+      </div>
+    
+    
+    
+    
+    
+           <div class="ui secondary segment">
+       <div class="ui header">Formularz zamówienia</div>
           
             <div class="ui form" v-bind:class="{ 'error': validationErrors }">
               
@@ -110,8 +118,16 @@
               
             </div>  
         </div>
-       
-      </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     </div>
     <div class="ui column">
