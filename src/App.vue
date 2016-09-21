@@ -58,8 +58,10 @@
             <div class="three wide column">
               <h4 class="ui inverted header">Ogłoszenia</h4>
               <div class="ui inverted link list">
+                <a href="#" class="item">Dodaj ogłoszenie</a>
                 <a href="#" class="item">Moje ogłoszenia</a>
                 <a href="#" class="item">Moje zamówienia</a>
+                <a href="#" class="item">Szukaj ogłoszenia</a>
               </div>
             </div>
             <div class="three wide column">
@@ -67,12 +69,13 @@
               <div class="ui inverted link list">
                 <a href="#" class="item">Załuż konto</a>
                 <a href="#" class="item">Dane publiczne</a>
+                <a href="#" class="item">Edytuj konto</a>
                 <a href="#" class="item">Reset hasła</a>
               </div>
             </div>
             <div class="seven wide column">
               <h4 class="ui inverted header">Dorobie.pl</h4>
-              <p>Pozwalamy znalezienie odpowiedniego dla Ciebie ogłoszenia tzw. mikro usługi - czyli rzeczy na którą nie masz czasu 
+              <p>Pozwalamy na znalezienie odpowiedniego dla Ciebie ogłoszenia mikro usługi - czyli rzeczy na którą nie masz czasu (np. sprzątanie, codzienne zakupy)
               i w której wyręczyć Ciebie mogą Ogłoszeniodawcy. Ty także możesz dodawać swoje ogłoszenia!</p>
             </div>
           </div>
