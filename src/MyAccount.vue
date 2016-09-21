@@ -85,9 +85,9 @@
          <div class="content">
           
              <div class="ui fluid selection list" v-for="order in customerOrders">
-                <div class="ui item">
+                <div class="ui item" v-link="{ path: '/order', query: { orderId: order.requestId }}">
                   <div class="content">
-                      <a class="header" v-link="{ path: '/order', query: { orderId: order.requestId }}">
+                      <a class="header">
                           {{order.title}} {{order.requestId}} 
                       </a>
                   </div> 
