@@ -22,13 +22,13 @@
           <div class="ui secondary inverted pointing menu">
             <a v-link="{ path: '/' }"><img src="./assets/dorobie-1.png"></a>
             <div class="right item">
-              <button class="ui icon small orange button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
+              <button class="ui icon black button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
                   <i class="search icon"></i> 
               </button>
-              <button class="ui icon small blue button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
+              <button class="ui icon black button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
                   <i class="user icon"></i> 
               </button>
-              <button class="ui icon small blue button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
+              <button class="ui icon black button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
                   <i class="add sign icon"></i> 
               </button>
             </div>
