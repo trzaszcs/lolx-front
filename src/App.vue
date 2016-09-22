@@ -3,7 +3,7 @@
     <!-- Following Menu -->
     <div class="ui large top fixed menu transition hidden">
       <div class="ui container">
-        <a class="active item"  v-link="{ path: '/myAccount' }">Appka</a>
+        <a class="active item"  v-link="{ path: '/search' }">Dorobie.pl</a>
         <div class="right menu">
           <div class="item">
             <a v-link="{ path: '/login' }"  class="ui button">Log in</a>
@@ -20,7 +20,7 @@
       <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui container">
           <div class="ui secondary inverted pointing menu">
-            <a v-link="{ path: '/' }"><img src="./assets/dorobie-1.png"></a>
+            <a class="ui small image" v-link="{ path: '/' }"><img src="./assets/dorobie-1.png"></a>
             <div class="right item">
               <button class="ui icon black button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
                   <i class="search icon"></i> 

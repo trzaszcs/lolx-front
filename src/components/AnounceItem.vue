@@ -2,25 +2,25 @@
   <div class="item">
                  
     <div class="ui stackable grid">
-      <div class="nine wide column">
-        <h4 class="ui header">
+      
+      <div class="four wide column">
+          <img class="ui small image" src="http://semantic-ui.com/images/wireframe/image.png">
+      </div>
+      
+      <div class="ten wide column">
+        <h3 class="ui header">
           <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
             {{anounce.title}}
           </a>
-        </h4>
-      <div class="content">
-        <div class="image">
-          <img src="../assets/plumber.png">
-        </div>
-      </div>
-      </div>
-      <div class="five wide column">
+        </h3>
         <h4 class="ui header">{{anounce.city}} ({{anounce.state}})</h4>
         <div class="content">
           {{creationDate()}}
         </div>
+
       </div>
-      <div class="two wide right aligned column">
+
+      <div class="two wide left aligned column">
         <h4 class="ui header">Cena</h4>
         <div class="content">
           {{anounce.price}} zł
