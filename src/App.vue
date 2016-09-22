@@ -20,7 +20,7 @@
       <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui container">
           <div class="ui large secondary inverted pointing menu">
-            <a class="active item"  v-link="{ path: '/' }">dorobie.pl</a>
+            <a v-link="{ path: '/' }"><img src="./assets/dorobie-1.png"></a>
             <div class="right item">
               <button class="ui icon orange button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
                   <i class="search icon"></i> 

@@ -1,20 +1,33 @@
 <template>
   <div class="item">
-   <div class="image">
-        <img src="../assets/plumber.png">
-   </div>
-   <div class="content">
-      <a class="header" v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
-        {{anounce.title}}
-      </a>
-      <div class="description">
-        {{anounce.price}} zł
+                 
+    <div class="ui stackable grid">
+      <div class="nine wide column">
+        <h4 class="ui header">
+          <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
+            {{anounce.title}}
+          </a>
+        </h4>
+      <div class="content">
+        <div class="image">
+          <img src="../assets/plumber.png">
+        </div>
       </div>
-      <div class="extra">
-        {{anounce.city}} ({{anounce.state}}) <br/>
-        {{creationDate()}}
       </div>
-   </div>
+      <div class="five wide column">
+        <h4 class="ui header">{{anounce.city}} ({{anounce.state}})</h4>
+        <div class="content">
+          {{creationDate()}}
+        </div>
+      </div>
+      <div class="two wide right aligned column">
+        <h4 class="ui header">Cena</h4>
+        <div class="content">
+          {{anounce.price}} zł
+        </div>
+      </div>
+    </div>
+ 
  </div>
 </template>
 
