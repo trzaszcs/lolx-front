@@ -45,9 +45,9 @@
             <div class="content">
               <div class="ui fluid selection list" v-for="item in items">
                 <div class="ui item">
-                    
-                  <img class="ui avatar image" src="assets/plumber.png">
-                  
+                  <div class="left floated content">
+                    <img class="ui small image" src="http://semantic-ui.com/images/wireframe/image.png">
+                  </div>
                   <div class="content">
                     <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
                         {{item.title}} 
