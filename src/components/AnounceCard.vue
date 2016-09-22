@@ -32,8 +32,8 @@
           </div>
 
 <div class="content">
-          <div class="description">
-            <img class="ui left floated image" src="../assets/plumber.png">
+          <div class="description">                    
+            <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
           </div>
 
