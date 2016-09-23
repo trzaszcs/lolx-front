@@ -3,11 +3,10 @@
   <div class="searchResult" v-show="finished">
     <div class="result">
       <h4>Znaleziono {{total}} ogłoszeń</h4>
-      <div class="ui divided items">
-        <div class="ui middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
+        <div class="ui large middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
           <anounce-item :anounce=item></anounce-item>
         </div>
-      </div>
+     
     </div>
         
     <div class="pagingBox">
