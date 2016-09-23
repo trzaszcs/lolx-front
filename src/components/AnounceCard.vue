@@ -20,7 +20,7 @@
             {{anounce.title}}
           </div>
           <div class="meta">
-            Jan Kowalski - {{anounce.city}} - {{anounce.state}}
+            Jan Kowalski - {{anounce.location.title}}
           </div>
 </div>
 
