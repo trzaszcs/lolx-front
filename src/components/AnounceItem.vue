@@ -20,7 +20,7 @@
       
       <div class="ten wide column">
  
-        <h4 class="ui header">{{anounce.city}} ({{anounce.state}})</h4>
+        <h4 class="ui header">{{anounce.location.title}}</h4>
         <div class="content">
           {{creationDate()}}
         </div>
