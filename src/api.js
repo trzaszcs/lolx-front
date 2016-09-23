@@ -174,7 +174,7 @@ const API = (function () {
     },
     geocode: function (address, callback) {
       $.ajax({
-        url: `http://maps.google.com/maps/api/geocode/json?language=pl&address=Polska,${address}`,
+        url: `https://maps.google.com/maps/api/geocode/json?components=country:PL&language=pl&address=${address}`,
         method: 'GET'
       }).done(callback)
     }
