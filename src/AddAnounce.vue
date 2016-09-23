@@ -41,21 +41,9 @@
         </div>
       </div>
       
-      <div class="field required">
-        <label>Adres</label>
-         <div class="fields">
-          <div class="four wide field" v-bind:class="{'error': hasFieldError('state')}">
-           <select v-model="state">
-             <option value="">Województwo</option>
-             <option v-for="state in states" v-bind:value="state">
-               {{ state }}
-             </option>
-           </select>
-          </div>
-          <div class="four wide field" v-bind:class="{'error': hasFieldError('city')}">
-           <input v-model="city" type="text" name="city" placeholder="Miasto"/>
-          </div>
-        </div>
+      <div class="field" v-bind:class="{'error': hasFieldError('location')}">
+        <label>Lokalizacja</label>
+        <location-input :location="location"></location-input>
       </div>
         
       <input v-on:click="save($event)" type="submit" class="ui primary button" value="Zapisz"></input>
@@ -70,24 +58,23 @@
 <script>
 import api from './api'
 import session from './session'
-import {states} from './const'
 import LoadingBox from './components/LoadingBox.vue'
+import LocationInput from './components/LocationInput.vue'
 
 export default {
   components: {
-    LoadingBox
+    LoadingBox,
+    LocationInput
   },
   data () {
     return {
       title: '',
       description: '',
       price: null,
-      city: '',
-      state: '',
+      location: {title: ''},
       saving: false,
       saved: false,
-      validationErrors: null,
-      states: states
+      validationErrors: null
     }
   },
   methods: {
@@ -95,8 +82,7 @@ export default {
       this.title = ''
       this.description = ''
       this.price = null
-      this.city = ''
-      this.state = ''
+      this.location = {title: ''}
       this.validationErrors = null
       this.saved = true
       this.saving = false
@@ -113,8 +99,7 @@ export default {
         this.title,
         this.description,
         this.price,
-        this.city,
-        this.state,
+        this.location,
         session.getUserId(),
         session.getJwt(),
         (response) => {
@@ -138,11 +123,11 @@ export default {
           append('price', 'Cena jest niepoprawna')
         }
       }
-      if (!this.city) {
-        append('city', 'Miasto jest wymagane')
-      }
-      if (!this.state) {
-        append('state', 'Województwo jest wymagane')
+
+      if (!this.location || !this.location.title) {
+        append('location', 'Lokalizacja jest wymagana')
+      } else if (!this.location.latitude) {
+        append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
       }
 
       if (errors.length > 0) {
@@ -165,6 +150,11 @@ export default {
       session.setBackUrl(this.$route)
       this.$router.go({path: '/login'})
       return
+    }
+  },
+  events: {
+    'location': function (location) {
+      this.location = location
     }
   }
 }

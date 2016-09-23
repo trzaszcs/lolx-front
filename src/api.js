@@ -15,13 +15,13 @@ const API = (function () {
         data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       }).done(callback)
     },
-    add: function (title, description, price, state, city, userId, jwtToken, callback) {
+    add: function (title, description, price, location, userId, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
         headers: headers(jwtToken),
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({title, description, price, state, city, 'ownerId': userId})
+        data: JSON.stringify({title, description, price, location, 'ownerId': userId})
       }).done(callback)
     },
     order: function (order, jwtToken, callback) {
@@ -106,12 +106,12 @@ const API = (function () {
         callback({success: false})
       })
     },
-    register: function (firstName, lastName, email, password, state, city, callback) {
+    register: function (firstName, lastName, email, password, location, callback) {
       $.ajax({
         url: '/auth-api/users',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({firstName, lastName, email, password, state, city})
+        data: JSON.stringify({firstName, lastName, email, password, location})
       }).done(callback)
     },
     userDetails: function (userId, jwt, callback) {
@@ -122,13 +122,13 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8'
       }).done(callback)
     },
-    updateUserDetails: function (email, firstName, lastName, state, city, userId, jwt, callback) {
+    updateUserDetails: function (email, firstName, lastName, location, userId, jwt, callback) {
       $.ajax({
         url: `/auth-api/users/${userId}`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({email, firstName, lastName, state, city})
+        data: JSON.stringify({email, firstName, lastName, location})
       }).done(callback)
     },
     changePassword: function (oldPassword, newPassword, userId, jwt, callback) {
@@ -171,6 +171,12 @@ const API = (function () {
       }).fail(result => {
         callback({success: false})
       })
+    },
+    geocode: function (address, callback) {
+      $.ajax({
+        url: `http://maps.google.com/maps/api/geocode/json?language=pl&address=Polska,${address}`,
+        method: 'GET'
+      }).done(callback)
     }
   }
 })()

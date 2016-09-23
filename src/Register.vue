@@ -33,22 +33,11 @@
         <input v-model="lastName" placeholder="Nazwisko"/>
       </div>
       
-      <div class="field">
-        <label>Adres</label>
-         <div class="fields">
-          <div class="four wide field" v-bind:class="{'error': hasFieldError('state')}">
-           <select v-model="state">
-             <option value="">Województwo</option>
-             <option v-for="state in states">
-               {{ state }}
-             </option>
-           </select>
-          </div>
-          <div class="twelve wide field" v-bind:class="{'error': hasFieldError('city')}">
-           <input v-model="city" type="text" name="city" placeholder="Miasto">
-          </div>
+      <div class="field" v-bind:class="{'error': hasFieldError('location')}">
+        <label>Lokalizacja</label>
+        <location-input :location="location"></location-input>
       </div>
-
+      
       <div class="field" v-bind:class="{'error': hasFieldError('email')}">
         <label>E-mail</label>
         <input v-model="email" placeholder="Email"/>
@@ -75,12 +64,13 @@
 
 <script>
 import api from './api'
-import {states} from './const'
 import LoadingBox from './components/LoadingBox.vue'
+import LocationInput from './components/LocationInput.vue'
 
 export default {
   components: {
-    LoadingBox
+    LoadingBox,
+    LocationInput
   },
   data () {
     return {
@@ -89,12 +79,10 @@ export default {
       email: '',
       password1: null,
       password2: null,
-      city: '',
-      state: '',
+      location: {title: ''},
       saving: false,
       saved: false,
-      validationErrors: null,
-      states: states
+      validationErrors: null
     }
   },
   methods: {
@@ -104,8 +92,7 @@ export default {
       this.email = ''
       this.password1 = ''
       this.password2 = ''
-      this.city = ''
-      this.state = ''
+      this.location = {title: ''}
       this.saved = true
       this.saving = false
     },
@@ -117,7 +104,7 @@ export default {
       }
 
       this.saving = true
-      api.register(this.firstName, this.lastName, this.email, this.password1, this.state, this.city, (response) => {
+      api.register(this.firstName, this.lastName, this.email, this.password1, this.location, (response) => {
         this.afterSave()
       })
     },
@@ -152,12 +139,10 @@ export default {
         }
       }
 
-      if (!this.city) {
-        append('city', 'Miasto jest wymagane')
-      }
-
-      if (!this.state) {
-        append('state', 'Województwo jest wymagane')
+      if (!this.location || !this.location.title) {
+        append('location', 'Lokalizacja jest wymagana')
+      } else if (!this.location.latitude) {
+        append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
       }
 
       if (errors.length > 0) {
@@ -173,6 +158,11 @@ export default {
         })
       }
       return false
+    }
+  },
+  events: {
+    'location': function (location) {
+      this.location = location
     }
   }
 }

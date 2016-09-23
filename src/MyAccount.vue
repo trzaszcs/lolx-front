@@ -111,8 +111,7 @@
            <edit-account 
              :first-name="user.firstName"
              :last-name="user.lastName"
-             :state="user.state"
-             :city="user.city"
+             :location="user.location"
              :email="user.email"></edit-account>
         </div>
       </div>
@@ -154,7 +153,8 @@
           rating: 0,
           commentsCount: 0,
           likesCount: 0,
-          lastActive: ''
+          lastActive: '',
+          location: {title: ''}
         },
         items: [],
         customerOrders: [],

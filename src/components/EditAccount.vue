@@ -35,21 +35,10 @@
           <input v-model="email" placeholder="email@domena.pl"/>
         </div>
       </div>
-      
-      <div class="field">
-        <label>Adres</label>
-         <div class="fields">
-          <div class="field" v-bind:class="{'error': hasFieldError('state')}">
-           <select v-model="state">
-             <option value="">Województwo</option>
-             <option v-for="state in states">
-               {{ state }}
-             </option>
-           </select>
-          </div>
-          <div class="field" v-bind:class="{'error': hasFieldError('city')}">
-           <input v-model="city" type="text" name="city" placeholder="Miasto">
-          </div>
+
+      <div class="field" v-bind:class="{'error': hasFieldError('location')}">
+        <label>Lokalizacja</label>
+        <location-input :location="location"></location-input>
       </div>
 
       <input v-on:click="save" type="submit" class="ui primary button" value="Zmień"></input>
@@ -66,11 +55,13 @@ import api from '../api'
 import session from '../session'
 import {states} from '../const'
 import LoadingBox from './LoadingBox.vue'
+import LocationInput from './LocationInput.vue'
 
 export default {
-  props: ['firstName', 'lastName', 'state', 'city', 'email'],
+  props: ['firstName', 'lastName', 'location', 'email'],
   components: {
-    LoadingBox
+    LoadingBox,
+    LocationInput
   },
   data () {
     return {
@@ -93,7 +84,7 @@ export default {
       }
 
       this.saving = true
-      api.updateUserDetails(this.email, this.firstName, this.lastName, this.state, this.city, session.getUserId(), session.getJwt(), (response) => {
+      api.updateUserDetails(this.email, this.firstName, this.lastName, this.location, session.getUserId(), session.getJwt(), (response) => {
         this.afterSave()
       })
     },
@@ -111,12 +102,10 @@ export default {
         append('email', 'Email nie jest poprawny')
       }
 
-      if (!this.city) {
-        append('city', 'Miasto jest wymagane')
-      }
-
-      if (!this.state) {
-        append('state', 'Województwo jest wymagane')
+      if (!this.location || !this.location.title) {
+        append('location', 'Lokalizacja jest wymagana')
+      } else if (!this.location.latitude) {
+        append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
       }
 
       if (errors.length > 0) {
@@ -132,6 +121,11 @@ export default {
         })
       }
       return false
+    }
+  },
+  events: {
+    'location': function (location) {
+      this.location = location
     }
   }
 }
