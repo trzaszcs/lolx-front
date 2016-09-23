@@ -44,11 +44,20 @@ export default {
       return title
     }
 
+    const getComponent = (result, componentName) => {
+      const results = result.address_components.filter(component => {
+        return component.types[0] === componentName
+      })
+      return results.length > 0 ? results[0].short_name : null
+    }
+
     const mapResult = (result) => {
       return {
         title: buildTitle(result),
         latitude: result.geometry.location.lat,
-        longitude: result.geometry.location.lng
+        longitude: result.geometry.location.lng,
+        city: getComponent(result, 'locality'),
+        state: getComponent(result, 'administrative_area_level_1')
       }
     }
 
