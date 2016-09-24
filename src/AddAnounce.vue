@@ -1,15 +1,15 @@
 <template>
   <div class="ui container addAnounce">
     <div class="ui segment">
-    <loading-box :show="saving"></loading-box>
+    <loading-box :show="loading"></loading-box>
    
     <div v-if="saved" class="ui info message">
       <div class="header">
         Twój wpis został zapisany
       </div>
-      <ul class="list">
-        <li>Twój wpis został zapisany i zostanie opublikowany w ciągu 5 minut.</li>
-      </ul>
+      <p>
+        Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut.
+      <p>
     </div>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
@@ -72,7 +72,7 @@ export default {
       description: '',
       price: null,
       location: {title: ''},
-      saving: false,
+      loading: false,
       saved: false,
       validationErrors: null
     }
@@ -85,7 +85,7 @@ export default {
       this.location = {title: ''}
       this.validationErrors = null
       this.saved = true
-      this.saving = false
+      this.loading = false
     },
     save: function (event) {
       event.preventDefault()
@@ -94,7 +94,7 @@ export default {
         return
       }
 
-      this.saving = true
+      this.loading = true
       api.add(
         this.title,
         this.description,
@@ -151,6 +151,11 @@ export default {
       this.$router.go({path: '/login'})
       return
     }
+    this.loading = true
+    api.userDetails(session.getUserId(), session.getJwt(), (details) => {
+      this.location = details.location
+      this.loading = false
+    })
   },
   events: {
     'location': function (location) {
