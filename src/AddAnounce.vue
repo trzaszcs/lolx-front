@@ -34,14 +34,14 @@
       <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
         <label>Cena</label>
         <div class="ui right labeled input">
-          <input v-model="price" type="text" placeholder="Cena.."/>
+          <input v-model="price" type="text" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
           <div class="ui basic label">
             zł
           </div>
         </div>
       </div>
       
-      <div class="field" v-bind:class="{'error': hasFieldError('location')}">
+      <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
         <label>Lokalizacja</label>
         <location-input :location="location"></location-input>
       </div>
@@ -119,7 +119,10 @@ export default {
       if (!this.price) {
         append('price', 'Cena jest wymagana')
       } else {
-        if (this.price <= 0) {
+        const price = parseFloat(this.price)
+        if (!price) {
+          append('price', 'Niepoprawna cena')
+        } else if (price <= 0) {
           append('price', 'Cena jest niepoprawna')
         }
       }
@@ -143,6 +146,9 @@ export default {
         })
       }
       return false
+    },
+    onPriceChange: function () {
+      this.price = this.price.replace(',', '.')
     }
   },
   ready: function () {

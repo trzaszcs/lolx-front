@@ -5,13 +5,12 @@
     <loading-box :show="saving"></loading-box>
    
     <div v-if="saved" class="ui info message">
-      <i class="icon"></i>
       <div class="header">
-        Konto zostało utworzone
+        Rejestracja konta
       </div>
-      <ul class="list">
-        <li>Twoje konto zostało żałożone</li>
-      </ul>
+      <p>
+        Konto zostało żałożone
+      </p>
     </div>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
@@ -95,6 +94,7 @@ export default {
       this.location = {title: ''}
       this.saved = true
       this.saving = false
+      this.validationErrors = null
     },
     save: function (event) {
       event.preventDefault()
