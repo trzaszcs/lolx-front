@@ -44,7 +44,7 @@
               <div class="header">Moje ogłoszenia</div>
                <button class="ui right floated icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
                   <i class="add sign icon"></i> 
-                  Dodaj ogłoszenie
+                  Dodaj
               </button>
             </div>
                 
