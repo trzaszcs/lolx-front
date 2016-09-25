@@ -7,10 +7,13 @@
       <div class="ui fluid card">
         
         <div class="ui left aligned extra content">
-          <button v-on:click="emitCloseEvent()" class="ui stackable icon button " data-tooltip="wróć na poprzednią stronę">
+          <button v-on:click="emitCloseEvent()" class="ui icon button " data-tooltip="wróć na poprzednią stronę">
             <i class="arrow left icon"></i>
           </button> 
-          <b>Ogłoszenie</b>
+          <div class="right floated meta">
+            Ogłoszenie dodano: {{creationDate()}}
+          </div>
+          
         </div>
 
         <div class="content">
@@ -25,9 +28,7 @@
 </div>
 
    <div class="ui right floated section">
-            <div class="ui large label">
              Cena {{anounce.price}} PLN
-             </div>
           </div>
           </div>
 
@@ -169,7 +170,8 @@ export default {
         state: '',
         img: '',
         description: '',
-        price: ''
+        price: '',
+        creationDate: ''
       },
       user: {
         username: 'lala',
@@ -188,7 +190,27 @@ export default {
       },
       loading: false,
       validationErrors: null,
-      showLoginMessage: false
+      showLoginMessage: false,
+      creationDate: function () {
+        const anounceDate = new Date(this.anounce.creationDate)
+        const diff = new Date() - anounceDate
+        const oneHour = 60 * 60 * 1000
+        const hours = diff / oneHour
+        const days = hours / 24
+        const timeStr = () => {
+          const twoDigits = (value) => { return ('0' + value).slice(-2) }
+          const hours = twoDigits(anounceDate.getHours())
+          const minutes = twoDigits(anounceDate.getMinutes())
+          return `${hours}:${minutes}`
+        }
+        if (hours < 24) {
+          return `dziś ${timeStr()}`
+        } else if (hours < 48) {
+          return `wczoraj ${timeStr()}`
+        } else {
+          return `${days} dni temu`
+        }
+      }
     }
   },
   methods: {
