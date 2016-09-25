@@ -128,7 +128,12 @@
             Lista Twoich sprzedanych usług
            </div>
           <div class="content">
-               Tu możesz sprawdzić na które ogłoszenia spłynęły zamówienia oraz dane zamawiających Twoje usługi.
+            <p>
+               Tu możesz sprawdzić na które ogłoszenia spłynęły zamówienia oraz dane zamawiających Twoje usługi. 
+               </p>
+               <p>
+                 <b>Uwaga:</b> Aby zamówić usługę nie trzeba posiadać konta dorobie.pl - wtedy mamy tylko takie dane jak telefon czy email zamawiającego.
+               </p>
              </div>
          </div>
      
