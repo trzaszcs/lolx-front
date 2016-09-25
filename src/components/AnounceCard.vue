@@ -11,7 +11,7 @@
             wstecz
           </a> 
           <div class="right floated meta">
-            Ogłoszenie dodano: {{creationDate()}}
+            Dodano {{creationDate()}}
           </div>
 
         <div class="ui left floated description">
