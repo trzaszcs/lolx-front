@@ -59,11 +59,7 @@
                         {{item.title}} 
                       </a>
                       <div class="description" v-on:click="showAnounce(item)">
-                        {{item.city}} ({{item.state}}) <br/>
-                        {{item.creationDate}} <br/>
-                        {{item.price}} zł 
-               
-                        
+                        Cena {{item.price}} zł 
                      </div>
 
                   </div>  
@@ -113,7 +109,7 @@
                       </a>
                   </div> 
                   <div class="meta">
-                          Preferowana data: {{order.preferedDate}} {{order.preferedTime}} 
+                          Preferowana data {{order.preferedDate}} {{order.preferedTime}} 
                   </div> 
                 </div>
              </div>

@@ -5,51 +5,41 @@
     <div class="ui column">
 
       <div class="ui fluid card">
-        
-        <div class="ui left aligned extra content">
-          <button v-on:click="emitCloseEvent()" class="ui icon button " data-tooltip="wróć na poprzednią stronę">
-            <i class="arrow left icon"></i>
-          </button> 
+      
+        <div class="ui left aligned content">
+          <a v-on:click="emitCloseEvent()" class="ui button" data-tooltip="wróć na poprzednią stronę">
+            wstecz
+          </a> 
           <div class="right floated meta">
             Ogłoszenie dodano: {{creationDate()}}
           </div>
-          
-        </div>
 
-        <div class="content">
-          
-          <div class="ui left floated section">
+        <div class="ui left floated description">
+          <div class="ui divider"></div>
           <div class="ui header">
             {{anounce.title}}
           </div>
           <div class="meta">
-            Jan Kowalski - {{anounce.location.title}}
+            {{anounce.location.title}}
           </div>
-</div>
+        </div>
 
-   <div class="ui right floated section">
-             Cena {{anounce.price}} PLN
+          <div class="ui right floated teal inverted circular segment">
+            <h2 class="ui inverted header">
+              Cena
+              <div class="sub header">{{anounce.price}} zł</div>
+            </h2>
           </div>
-          </div>
-
-<div class="content">
-          <div class="description">                    
+          
+              <div class="description">                    
             <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
           </div>
-
+          
         </div>
-        
-     
-
- 
-       
+   
       </div>
-    
-    
-    
-    
-    
+
            <div class="ui secondary segment">
        <div class="ui header">Formularz zamówienia</div>
           
@@ -108,10 +98,7 @@
                 </div> 
                     
 
-              <div class="ui two buttons">
-                <input class="ui orange large button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
-                <div class="ui large button" v-on:click="emitCloseEvent()">Anuluj</div>
-              </div>
+                <input class="ui orange large fluid button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
 
               <div class="ui message">
               Zamówienie oznacza akceptację aktualnego <a v-link="{ path: '/terms' }">regulaminu</a> serwisu.
@@ -119,17 +106,7 @@
               
             </div>  
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     </div>
     <div class="ui column">
         <user-public-profile :user=user></user-public-profile>
