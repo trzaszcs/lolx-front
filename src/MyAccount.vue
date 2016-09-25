@@ -96,7 +96,9 @@
        
        <div class="ui fluid card">
          <div class="ui extra content">
-           <b>Moje zamówienia usług</b>
+          <div class="header">
+            Moje zamówienia usług
+          </div>
          </div>
          <div class="content">
           
@@ -144,7 +146,9 @@
      <div v-show="view == 'account'">
        <div class="ui fluid card">
          <div class="ui extra content">
-           <b>Moje dane</b>
+            <div class="header">
+              Moje dane
+            </div>
          </div>
          <div class="content">
            <edit-account 
@@ -160,7 +164,9 @@
      <div v-show="view == 'changePassword'">
        <div class="ui fluid card">
          <div class="ui extra content">
-           <b>Zmiana hasła</b>
+            <div class="header">
+              Zmiana hasła
+            </div>
          </div>
          <div class="content">
            <change-password></change-password>
