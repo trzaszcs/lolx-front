@@ -8,7 +8,10 @@
         Dane publiczne
       </a>
       <a class="item" v-bind:class="{'active': view == 'orders'}" @click="select('orders')">
-        Zamówienia
+        Kupione
+      </a>
+      <a class="item" v-bind:class="{'active': view == 'sold'}" @click="select('sold')">
+        Sprzedane
       </a>
       <a class="item" v-bind:class="{'active': view == 'account'}" @click="select('account')">
         Konto
@@ -22,24 +25,27 @@
         </a>
       </div>
     </div>
-    
-    <div class="ui message">
-       <div class="header">
-         Dane Publiczne
-       </div>
-       <div class="content">
-         Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać ogłoszeniami
-       </div>
-     </div>
-  
 
      <!-- PUBLIC ACCOUNT -->
      <div v-show="view == 'publicData'">
 
+          <div class="ui message">
+             <div class="header">
+               Dane Publiczne
+             </div>
+             <div class="content">
+               Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać ogłoszeniami
+             </div>
+           </div>
+
            <div class="ui fluid card">
         
             <div class="ui extra content">
-              <b>Moje ogłoszenia</b>
+              <div class="header">Moje ogłoszenia</div>
+               <button class="ui right floated icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
+                  <i class="add sign icon"></i> 
+                  Dodaj ogłoszenie
+              </button>
             </div>
                 
             <div class="content">
@@ -78,6 +84,16 @@
 
      <!-- MY-ORDERS -->
      <div v-show="view == 'orders'">
+       
+      <div class="ui message">
+       <div class="header">
+        Historia zamówień usług
+       </div>
+       <div class="content">
+         Tu możesz zobaczyć jakie usługi zamówiłeś oraz kto jest ich wykonawcą.
+       </div>
+     </div>
+       
        <div class="ui fluid card">
          <div class="ui extra content">
            <b>Moje zamówienia usług</b>
@@ -103,6 +119,21 @@
         
       </div>
      </div>
+
+
+    <div v-show="view == 'sold'">
+           
+          <div class="ui message">
+           <div class="header">
+            Lista Twoich sprzedanych usług
+           </div>
+          <div class="content">
+               Tu możesz sprawdzić na które ogłoszenia spłynęły zamówienia oraz dane zamawiających Twoje usługi.
+             </div>
+         </div>
+     
+     </div>
+
 
      <!-- ACCOUNT -->
      <div v-show="view == 'account'">
