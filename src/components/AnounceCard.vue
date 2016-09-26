@@ -7,35 +7,50 @@
       <div class="ui fluid card">
       
         <div class="ui left aligned content">
-          <a v-on:click="emitCloseEvent()" class="ui button" data-tooltip="wróć na poprzednią stronę">
+          <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
+            <i class="ui left arrow icon"></i>
             wstecz
           </a> 
           <div class="right floated meta">
-            Dodano {{creationDate()}}
+            Dodano {{creationDate()}}  
+            <a v-on:click="addToFavorites()" class="ui icon" data-tooltip="dodaj do ulubionych">
+                <i class="ui star icon"></i>
+            </a> 
           </div>
+      
+          
+          <div class="ui divider"></div>
+
+        <div class="ui description">
+            <div class="ui header">
+              {{anounce.title}}
+            </div>
+        </div>
 
         <div class="ui left floated description">
-          <div class="ui divider"></div>
-          <div class="ui header">
-            {{anounce.title}}
-          </div>
           <div class="meta">
             {{anounce.location.title}}
           </div>
+          <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
+            <i class="ui user icon"></i>
+            więcej ...
+          </a> 
+          
         </div>
-
-          <div class="ui right floated teal inverted circular segment">
+        
+         <div class="ui right floated teal tiny inverted circular segment">
             <h2 class="ui inverted header">
               Cena
               <div class="sub header">{{anounce.price}} zł</div>
             </h2>
           </div>
-          
-              <div class="description">                    
+   
+         <div class="description">  
             <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
           </div>
-          
+
+
         </div>
    
       </div>
@@ -96,9 +111,30 @@
                     Nie jesteś zalogowany! <a v-link="{ path: '/login'}">Logowanie</a> nie jest wymagane 
                     by zamówić, ale dzięki logowaniu automatycznie wypełnimy dane i zapamiętamy twoje zamówienia.
                 </div> 
-                    
-
-                <input class="ui orange large fluid button" type="submit" v-on:click="onOrder(anounce, $event)" value="Zamów"/>
+     
+                <div class="ui modal" id="confirm">
+                  <div class="ui segment">
+                  <div class="ui icon message">
+                    <i class="inbox icon"></i>
+                    <div class="content">
+                        <div class="ui header">
+                          Proszę potwierdzić zamówienie
+                        </div>
+                        <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" target="_blank">
+                           {{anounce.title}}
+                        </a>
+                      </div>
+                    </div>
+      
+                  <div class="ui two buttons">
+                   <input class="ui button" v-on:click="closeConfirm()" value="Anuluj"/>
+                   <input class="ui orange button" v-on:click="onOrder(anounce, $event)" value="Zamawiam"/>
+                  </div>
+                  
+                  </div>
+                </div>
+  
+                <input class="ui large orange fluid button" type="submit" v-on:click="orderConfirm()" value="Zamów"/>
 
               <div class="ui message">
               Zamówienie oznacza akceptację aktualnego <a v-link="{ path: '/terms' }">regulaminu</a> serwisu.
@@ -211,7 +247,17 @@ export default {
       }
       return false
     },
+    orderConfirm: function () {
+      if (!this.validate() && !session.logged()) {
+        return
+      }
+      $('.ui.modal').modal('show')
+    },
+    closeConfirm: function () {
+      $('.ui.modal').modal('hide')
+    },
     onOrder: function (anonuce, event) {
+      this.closeConfirm()
       event.preventDefault()
       if (!this.validate() && !session.logged()) {
         return
