@@ -151,6 +151,9 @@
     </div>
     <div class="ui column">
         <user-public-profile :user=user></user-public-profile>
+
+        <div id="map"></div>
+        
     </div>
   </div>
   
@@ -173,6 +176,7 @@ import LoadingBox from './LoadingBox.vue'
 const $ = require('jquery')
 require('moment')
 require('semantic-ui-daterangepicker')
+const gmAPI = require('google-maps')
 
 export default {
   components: {
@@ -293,6 +297,18 @@ export default {
         likesCount: 1,
         lastActive: '12h'
       }
+    },
+    initMap: function () {
+      console.log(this.anounce)
+      gmAPI.KEY = 'AIzaSyCHNx3_Bwnpapv_k2jjKqiGcti6GD1Jy6Q'
+      gmAPI.load(function (google) {
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 52.4064, lng: 16.9252},
+          scrollwheel: false,
+          zoom: 8
+        })
+        console.log(map)
+      })
     }
   },
   events: {
@@ -312,6 +328,7 @@ export default {
       }
     })
     this.showLoginMessage = !session.logged()
+    this.initMap()
   }
 }
 </script>
