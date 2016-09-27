@@ -25,11 +25,11 @@
               <button class="ui icon black button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
                   <i class="search icon"></i> 
               </button>
-              <button class="ui icon black button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
-                  <i class="user icon"></i> 
-              </button>
               <button class="ui icon black button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
                   <i class="add sign icon"></i> 
+              </button>
+              <button class="ui icon black button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
+                  <i class="user icon"></i> 
               </button>
             </div>
           </div>

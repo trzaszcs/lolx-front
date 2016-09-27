@@ -44,7 +44,12 @@
               <div class="sub header">{{anounce.price}} zł</div>
             </h2>
           </div>
-   
+
+       <div class="description">  
+            <i class="ui left floated sticky note outline icon"></i>Opis
+            <div class="ui divider"></div>
+        </div>
+          
          <div class="description">  
             <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
