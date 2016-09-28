@@ -15,13 +15,13 @@ const API = (function () {
         data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       }).done(callback)
     },
-    add: function (title, description, price, location, userId, jwtToken, callback) {
+    add: function (title, description, price, location, imgName, userId, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
         headers: headers(jwtToken),
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({title, description, price, location, 'ownerId': userId})
+        data: JSON.stringify({title, description, price, location, imgName, 'ownerId': userId})
       }).done(callback)
     },
     order: function (order, jwtToken, callback) {
