@@ -83,7 +83,6 @@
        
       <div class="ui message">
        <div class="header">
-        <i class="ui shop icon"></i>
         Historia zamówień usług
        </div>
        <div class="content">
@@ -94,6 +93,7 @@
        <div class="ui fluid card">
          <div class="ui extra content">
           <div class="header">
+            <i class="ui shop icon"></i>
             Moje zamówienia usług
           </div>
          </div>
@@ -124,7 +124,6 @@
            
           <div class="ui message">
            <div class="header">
-            <i class="ui money icon"></i>
             Lista Twoich sprzedanych usług
            </div>
           <div class="content">
@@ -137,6 +136,21 @@
              </div>
          </div>
      
+       <div class="ui fluid card">
+         <div class="ui extra content">
+          <div class="header">
+            <i class="ui money icon"></i>
+            Zamawiający Twoje usługi
+          </div>
+         </div>
+         <div class="content">
+          
+          
+        </div>
+        
+      </div>
+      
+     
      </div>
 
 
@@ -145,6 +159,7 @@
        <div class="ui fluid card">
          <div class="ui extra content">
             <div class="header">
+              <i class="ui edit icon"></i>
               Moje dane
             </div>
          </div>
@@ -163,6 +178,7 @@
        <div class="ui fluid card">
          <div class="ui extra content">
             <div class="header">
+              <i class="ui edit icon"></i>
               Zmiana hasła
             </div>
          </div>
