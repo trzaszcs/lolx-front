@@ -22,7 +22,7 @@
           <div class="ui divider"></div>
 
         <div class="ui description">
-            <div class="ui header">
+            <div class="ui large header">
               {{anounce.title}}
             </div>
         </div>
@@ -32,7 +32,7 @@
             {{anounce.location.title}}
           </div>
           <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
-            <i class="ui user icon"></i>
+            <i class="ui announcement icon"></i>
             więcej ...
           </a> 
           
@@ -46,22 +46,21 @@
           </div>
 
        <div class="description">  
-            <i class="ui left floated sticky note outline icon"></i>Opis
+            <div class="ui header">Opis</div>
             <div class="ui divider"></div>
         </div>
           
-         <div class="description">  
+         <div class="description"> 
             <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
           </div>
-
 
         </div>
    
       </div>
 
            <div class="ui secondary segment">
-       <div class="ui header">Formularz zamówienia</div>
+       <div class="ui header"><i class="content icon"></i>Formularz zamówienia</div>
           
             <div class="ui form" v-bind:class="{ 'error': validationErrors }">
               
@@ -154,7 +153,7 @@
       
       <div class="ui fluid card">
         <div class="ui extra content">
-          Lokalizacja
+          <div class="ui header"><i class="marker icon"></i>Lokalizacja ogłoszenia</div>
         </div>
         <div class="ui content">
           <div  id="map"> </div>
@@ -201,7 +200,11 @@ export default {
         img: '',
         description: '',
         price: '',
-        creationDate: ''
+        creationDate: '',
+        location: {
+          latitude: 52.4064,
+          longitude: 16.9252
+        }
       },
       user: {
         username: 'lala',
@@ -307,13 +310,12 @@ export default {
       }
     },
     initMap: function () {
-      const x = this.anounce.location
-      console.log(x)
-      console.log(this.anounce)
+      const latitude = this.anounce.location.latitude
+      const longitude = this.anounce.location.longitude
       gmAPI.KEY = 'AIzaSyCHNx3_Bwnpapv_k2jjKqiGcti6GD1Jy6Q'
       gmAPI.load(function (google) {
         const map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 52.4064, lng: 16.9252},
+          center: {lat: latitude, lng: longitude},
           scrollwheel: false,
           zoom: 12
         })
@@ -326,6 +328,7 @@ export default {
       console.log('event show anounce card-> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
+      this.initMap()
     }
   },
   ready: function () {
@@ -338,7 +341,6 @@ export default {
       }
     })
     this.showLoginMessage = !session.logged()
-    this.initMap()
   }
 }
 </script>

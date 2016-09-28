@@ -2,7 +2,7 @@
     <div class="ui fluid card">
 
       <div class="ui extra content">
-        <div class="ui icon"><i class="user icon"></i><b>O użytkowniku</b></div>
+        <div class="ui header"><i class="user icon"></i>O użytkowniku</div>
       </div>  
       
       <div class="content">
