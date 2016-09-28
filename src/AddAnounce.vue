@@ -45,7 +45,12 @@
         <label>Lokalizacja</label>
         <location-input :location="location"></location-input>
       </div>
-        
+      
+      <div class="ui field">
+        <label>Zdjęcie</label>
+        <upload></upload>
+      </div>
+
       <input v-on:click="save($event)" type="submit" class="ui primary button" value="Zapisz"></input>
       </form>
       <p></p>
@@ -60,11 +65,13 @@ import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
+import Upload from './components/Upload.vue'
 
 export default {
   components: {
     LoadingBox,
-    LocationInput
+    LocationInput,
+    Upload
   },
   data () {
     return {
@@ -72,6 +79,7 @@ export default {
       description: '',
       price: null,
       location: {title: ''},
+      imgName: null,
       loading: false,
       saved: false,
       validationErrors: null
@@ -82,10 +90,11 @@ export default {
       this.title = ''
       this.description = ''
       this.price = null
-      this.location = {title: ''}
+      this.imgName = null
       this.validationErrors = null
       this.saved = true
       this.loading = false
+      this.$broadcast('clear', {})
     },
     save: function (event) {
       event.preventDefault()
@@ -100,6 +109,7 @@ export default {
         this.description,
         this.price,
         this.location,
+        this.imgName,
         session.getUserId(),
         session.getJwt(),
         (response) => {
@@ -166,6 +176,9 @@ export default {
   events: {
     'location': function (location) {
       this.location = location
+    },
+    'img-uploaded': function (file) {
+      this.imgName = file ? file.imgName : null
     }
   }
 }
