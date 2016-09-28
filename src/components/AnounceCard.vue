@@ -23,6 +23,7 @@
 
         <div class="ui description">
             <div class="ui header">
+              <i class="ui announcement icon"></i>
               {{anounce.title}}
             </div>
         </div>
@@ -32,8 +33,8 @@
             {{anounce.location.title}}
           </div>
           <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
-            <i class="ui user icon"></i>
-            więcej ...
+            <i class="ui announcement icon"></i>
+            inne ogłoszenia użytkownika ...
           </a> 
           
         </div>
@@ -44,19 +45,23 @@
               <div class="sub header">{{anounce.price}} zł</div>
             </h2>
           </div>
-   
-         <div class="description">  
+
+       <div class="description">  
+            <div class="ui header">Opis</div>
+            <div class="ui divider"></div>
+        </div>
+          
+         <div class="description"> 
             <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
           </div>
-
 
         </div>
    
       </div>
 
            <div class="ui secondary segment">
-       <div class="ui header">Formularz zamówienia</div>
+       <div class="ui header"><i class="content icon"></i>Formularz zamówienia</div>
           
             <div class="ui form" v-bind:class="{ 'error': validationErrors }">
               
@@ -146,6 +151,17 @@
     </div>
     <div class="ui column">
         <user-public-profile :user=user></user-public-profile>
+      
+      <div class="ui fluid card">
+        <div class="ui extra content">
+          <div class="ui header"><i class="marker icon"></i>Lokalizacja ogłoszenia</div>
+        </div>
+        <div class="ui content">
+          <div  id="map"> </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
   
@@ -168,6 +184,7 @@ import LoadingBox from './LoadingBox.vue'
 const $ = require('jquery')
 require('moment')
 require('semantic-ui-daterangepicker')
+const gmAPI = require('google-maps')
 
 export default {
   components: {
@@ -184,7 +201,11 @@ export default {
         img: '',
         description: '',
         price: '',
-        creationDate: ''
+        creationDate: '',
+        location: {
+          latitude: 52.4064,
+          longitude: 16.9252
+        }
       },
       user: {
         username: 'lala',
@@ -288,6 +309,19 @@ export default {
         likesCount: 1,
         lastActive: '12h'
       }
+    },
+    initMap: function () {
+      const latitude = this.anounce.location.latitude
+      const longitude = this.anounce.location.longitude
+      gmAPI.KEY = 'AIzaSyCHNx3_Bwnpapv_k2jjKqiGcti6GD1Jy6Q'
+      gmAPI.load(function (google) {
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: latitude, lng: longitude},
+          scrollwheel: false,
+          zoom: 12
+        })
+        console.log(map)
+      })
     }
   },
   events: {
@@ -295,6 +329,7 @@ export default {
       console.log('event show anounce card-> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
+      this.initMap()
     }
   },
   ready: function () {
