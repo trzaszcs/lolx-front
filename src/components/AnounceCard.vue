@@ -151,9 +151,17 @@
     </div>
     <div class="ui column">
         <user-public-profile :user=user></user-public-profile>
+      
+      <div class="ui fluid card">
+        <div class="ui extra content">
+          Lokalizacja
+        </div>
+        <div class="ui content">
+          <div  id="map"> </div>
+        </div>
 
-        <div id="map"></div>
-        
+      </div>
+
     </div>
   </div>
   
@@ -299,13 +307,15 @@ export default {
       }
     },
     initMap: function () {
+      const x = this.anounce.location
+      console.log(x)
       console.log(this.anounce)
       gmAPI.KEY = 'AIzaSyCHNx3_Bwnpapv_k2jjKqiGcti6GD1Jy6Q'
       gmAPI.load(function (google) {
         const map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 52.4064, lng: 16.9252},
           scrollwheel: false,
-          zoom: 8
+          zoom: 12
         })
         console.log(map)
       })
