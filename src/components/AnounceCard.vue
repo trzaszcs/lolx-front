@@ -22,7 +22,7 @@
           <div class="ui divider"></div>
 
         <div class="ui description">
-            <div class="ui large header">
+            <div class="ui header">
               {{anounce.title}}
             </div>
         </div>
