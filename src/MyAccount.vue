@@ -41,7 +41,7 @@
            <div class="ui fluid card">
         
             <div class="ui extra content">
-              <div class="header">Moje ogłoszenia</div>
+              <div class="header"><i class="ui announcement icon"></i>Moje ogłoszenia</div>
                <button class="ui right floated icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
                   <i class="add sign icon"></i> 
                   Dodaj
@@ -83,6 +83,7 @@
        
       <div class="ui message">
        <div class="header">
+        <i class="ui shop icon"></i>
         Historia zamówień usług
        </div>
        <div class="content">
@@ -123,6 +124,7 @@
            
           <div class="ui message">
            <div class="header">
+            <i class="ui money icon"></i>
             Lista Twoich sprzedanych usług
            </div>
           <div class="content">

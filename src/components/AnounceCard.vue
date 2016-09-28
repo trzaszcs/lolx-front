@@ -23,6 +23,7 @@
 
         <div class="ui description">
             <div class="ui header">
+              <i class="ui announcement icon"></i>
               {{anounce.title}}
             </div>
         </div>
@@ -33,7 +34,7 @@
           </div>
           <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
             <i class="ui announcement icon"></i>
-            więcej ...
+            inne ogłoszenia użytkownika ...
           </a> 
           
         </div>
