@@ -27,11 +27,13 @@
               {{anounce.title}}
             </div>
         </div>
-
+         <p></p>
         <div class="ui left floated description">
           <div class="meta">
+
             {{anounce.location.title}}
           </div>
+           <p></p>
           <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
             <i class="ui shopping bag icon"></i>
             inne ogłoszenia użytkownika ...
