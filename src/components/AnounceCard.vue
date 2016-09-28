@@ -310,7 +310,7 @@ export default {
       }
     },
     initMap: function () {
-      const isDraggable = $(document).width() > 480
+      const isDraggable = $(document).width() > 640
       const latitude = this.anounce.location.latitude
       const longitude = this.anounce.location.longitude
       gmAPI.KEY = 'AIzaSyCHNx3_Bwnpapv_k2jjKqiGcti6GD1Jy6Q'
