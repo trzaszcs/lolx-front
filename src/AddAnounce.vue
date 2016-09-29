@@ -1,63 +1,60 @@
 <template>
   <div class="ui container addAnounce">
     <div class="ui segment">
-    <loading-box :show="loading"></loading-box>
+      <loading-box :show="loading"></loading-box>
    
-    <div v-if="saved" class="ui info message">
-      <div class="header">
-        Twój wpis został zapisany
-      </div>
-      <p>
-        Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut.
-      <p>
-    </div>
-
-    <form class="ui form" v-bind:class="{ 'error': validationErrors }">
-      <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
-
-      <div class="ui error message">
-        <ul class="list" v-for="error in validationErrors">
-          <li>{{error.txt}}</li>
-        </ul>
+      <div v-if="saved" class="ui info message">
+        <div class="header">
+          Twój wpis został zapisany
+        </div>
+        <p>
+          Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut.
+        <p>
       </div>
 
-      <div class="field required" v-bind:class="{'error': hasFieldError('title')}">
-        <label>Tytuł</label>
-        <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
-      </div>
+      <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+        <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
 
-      <div class="field required" v-bind:class="{'error': hasFieldError('description')}">
-        <label>Opis</label>
-        <textarea v-model="description" name="descripion"></textarea>
-      </div>
+        <div class="ui error message">
+          <ul class="list" v-for="error in validationErrors">
+            <li>{{error.txt}}</li>
+          </ul>
+        </div>
 
-      <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
-        <label>Cena</label>
-        <div class="ui right labeled input">
-          <input v-model="price" type="text" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
-          <div class="ui basic label">
-            zł
+        <div class="field required" v-bind:class="{'error': hasFieldError('title')}">
+          <label>Tytuł</label>
+          <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
+        </div>
+
+        <div class="field required" v-bind:class="{'error': hasFieldError('description')}">
+          <label>Opis</label>
+          <textarea v-model="description" name="descripion"></textarea>
+        </div>
+
+        <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
+          <label>Cena</label>
+          <div class="ui right labeled input">
+            <input v-model="price" type="text" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
+            <div class="ui basic label">
+              zł
+            </div>
           </div>
         </div>
-      </div>
       
-      <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
-        <label>Lokalizacja</label>
-        <location-input :location="location"></location-input>
-      </div>
+        <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
+          <label>Lokalizacja</label>
+          <location-input :location="location"></location-input>
+        </div>
       
-      <div class="ui field">
-        <label>Zdjęcie</label>
-        <upload></upload>
-      </div>
+        <div class="ui field">
+          <label>Zdjęcie</label>
+          <upload></upload>
+        </div>
 
-      <input v-on:click="save($event)" type="submit" class="ui teal button" value="Zapisz"></input>
+        <input v-on:click="save($event)" type="submit" class="ui teal button" value="Zapisz"></input>
 
       </form>
-      
-</div>
-</div>
-
+    </div>
   </div>
 </template>
 
