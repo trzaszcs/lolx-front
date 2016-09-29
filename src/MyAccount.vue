@@ -83,76 +83,13 @@
 
      <!-- MY-ORDERS -->
      <div v-show="view == 'orders'">
-       
-      <div class="ui message">
-       <div class="header">
-        Historia zamówień usług
-       </div>
-       <div class="content">
-         Tu możesz zobaczyć jakie usługi zamówiłeś oraz kto jest ich wykonawcą.
-       </div>
-     </div>
-       
-       <div class="ui fluid card">
-         
-          <div class="ui top attached label">
-            <i class="ui shop icon"></i>Moje zamówienia usług
-          </div>
-         
-         <div class="content">
-          
-             <div class="ui fluid selection list" v-for="order in customerOrders">
-                <div class="ui item" v-link="{ path: '/order', query: { orderId: order.requestId }}">
-                  <div class="left floated content">
-                    <img class="ui tiny image" src="http://semantic-ui.com/images/wireframe/image.png">
-                  </div>
-                  <div class="content">
-                      <a class="header">
-                          {{order.title}} {{order.requestId}} 
-                      </a>
-                  </div> 
-                  <div class="meta">
-                          Preferowana data {{order.preferedDate}} {{order.preferedTime}} 
-                  </div> 
-                </div>
-             </div>
-        </div>
-        
-      </div>
+       <my-orders :orders="customerOrders"></my-orders>
      </div>
 
-
+     <!-- MY-SOLD -->
     <div v-show="view == 'sold'">
-           
-          <div class="ui message">
-           <div class="header">
-            Lista Twoich sprzedanych usług
-           </div>
-          <div class="content">
-            <p>
-               Tu możesz sprawdzić na które ogłoszenia spłynęły zamówienia oraz dane zamawiających Twoje usługi. 
-               </p>
-               <p>
-                 <b>Uwaga:</b> Aby zamówić usługę nie trzeba posiadać konta dorobie.pl - wtedy mamy tylko takie dane jak telefon czy email zamawiającego.
-               </p>
-             </div>
-         </div>
-     
-       <div class="ui fluid card">
-         
-          <div class="ui top attached label">
-             <i class="ui money icon"></i>Zamawiający Twoje usługi
-          </div>
-
-         <div class="content">
-          
-          
-        </div>
-        
-      </div>
-      
-     
-     </div>
+      <my-sold></my-sold>
+    </div>
 
 
      <!-- ACCOUNT -->
@@ -197,6 +134,8 @@
 <script>
   import LoadingBox from './components/LoadingBox.vue'
   import AnounceCard from './components/AnounceCard.vue'
+  import MyOrders from './components/MyOrders.vue'
+  import MySold from './components/MySold.vue'
   import EditAccount from './components/EditAccount.vue'
   import UserPublicProfile from './components/UserPublicProfile.vue'
   import ChangePassword from './components/ChangePassword.vue'
@@ -223,6 +162,8 @@
     },
     components: {
       AnounceCard,
+      MyOrders,
+      MySold,
       UserPublicProfile,
       EditAccount,
       LoadingBox,

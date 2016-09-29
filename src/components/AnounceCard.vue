@@ -58,11 +58,11 @@
         </div>
 
 
-         <div class="ui segment"> 
+         <div class="ui segment" id="anounce-desc"> 
             <div class="ui top attached label">Opis</div>
               <div class="ui content">
-            <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
-            {{anounce.description}}
+                <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
+                 {{anounce.description}}
             </div>
           </div>
 
