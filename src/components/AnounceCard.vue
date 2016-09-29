@@ -40,7 +40,7 @@
            <p></p>
           <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
             <i class="ui shopping bag icon"></i>
-            inne ogłoszenia użytkownika ...
+            Ogłoszenia użytkownika ...
           </a> 
         </div>
 
