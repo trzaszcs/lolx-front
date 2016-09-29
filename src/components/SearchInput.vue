@@ -2,7 +2,7 @@
    <div class="ui action left icon fluid input">
      <input v-model="phrase" type="text" placeholder="Poszukuje kogoś kto..."/>
      <i class="search icon"></i>
-     <button v-on:click="search" class="ui button">Szukaj</button> 
+     <button v-on:click="search" class="ui teal button">Szukaj</button> 
    </div>
 </template>
 

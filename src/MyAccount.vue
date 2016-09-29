@@ -42,7 +42,7 @@
         
             <div class="ui extra content">
               <div class="header"><i class="ui announcement icon"></i>Moje ogłoszenia</div>
-               <button class="ui right floated icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
+               <button class="ui right floated icon teal button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
                   <i class="add sign icon"></i> 
                   Dodaj
               </button>
@@ -64,7 +64,7 @@
 
                   </div>  
                            
-                  <button class="ui right floated button" v-on:click="deleteAnounce(item)">
+                  <button class="ui right floated teal button" v-on:click="deleteAnounce(item)">
                     usuń
                   </button>
             

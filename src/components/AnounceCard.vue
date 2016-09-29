@@ -134,13 +134,13 @@
       
                   <div class="ui two buttons">
                    <input class="ui button" v-on:click="closeConfirm()" value="Anuluj"/>
-                   <input class="ui orange button" v-on:click="onOrder(anounce, $event)" value="Zamawiam"/>
+                   <input class="ui teal button" v-on:click="onOrder(anounce, $event)" value="Zamawiam"/>
                   </div>
                   
                   </div>
                 </div>
   
-                <input class="ui large orange fluid button" type="submit" v-on:click="orderConfirm()" value="Zamów"/>
+                <input class="ui large teal fluid button" type="submit" v-on:click="orderConfirm()" value="Zamów"/>
 
               <div class="ui message">
               Zamówienie oznacza akceptację aktualnego <a v-link="{ path: '/terms' }">regulaminu</a> serwisu.

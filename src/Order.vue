@@ -90,7 +90,7 @@
                     <input v-model="orderEmail.email" type="text" name="email" placeholder="email"/>
                 </div>
       
-                <button v-on:click="sendOrder($event)" type="submit" class="ui action right button" >Wyślij</button>
+                <button v-on:click="sendOrder($event)" type="submit" class="ui teal action right button" >Wyślij</button>
               </form>
             </div>
           </div>
