@@ -9,10 +9,7 @@
          <button v-on:click="upload" class="mini ui button" v-bind:class="{'loading': loading}">Zapisz</button>
          <button v-on:click="remove" class="mini ui button">Anuluj</button>
        </div>
-       <form id="upload" style="display:none" enctype="multipart/form-data">
-         <input type="file" name="file" id="fileInput"/>
-         <input type="submit" value="Dodaj" name="submit"/>
-       </form>
+       <input type="file" name="file" id="fileInput" style="display:none"/>
      </div>
 
      <div v-else>
@@ -30,7 +27,6 @@ export default {
   data () {
     return {
       $fileInput: null,
-      $form: null,
       file: null,
       fileSelected: false,
       fileUploaded: false,
@@ -39,17 +35,19 @@ export default {
     }
   },
   methods: {
-    add: function () {
+    add: function (e) {
+      e.preventDefault()
       this.$fileInput.click()
     },
-    upload: function () {
-      const formData = new window.FormData(this.$form[0])
+    upload: function (e) {
+      e.preventDefault()
+      let formData = new window.FormData()
+      formData.append('file', this.$fileInput[0].files[0])
       this.loading = true
       $.ajax({
         url: '/api/upload',
         type: 'POST',
         data: formData,
-        async: false,
         cache: false,
         contentType: false,
         processData: false,
@@ -61,7 +59,8 @@ export default {
         }
       })
     },
-    remove: function () {
+    remove: function (e) {
+      e.preventDefault()
       this.file = null
       this.fileSelected = false
       this.fileUploaded = false
@@ -69,12 +68,12 @@ export default {
     }
   },
   ready: function () {
-    this.$form = $('form#upload')
-    this.$fileInput = this.$form.find('input[type=\'file\']')
+    this.$fileInput = $('input#fileInput')
     const imgExtensions = ['.jpg', '.png', '.bmp', '.gif']
     const extractExtension = (fileName) => {
       return fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase()
     }
+
     this.$fileInput.change((e) => {
       this.file = e.target.value
       const ext = extractExtension(this.file)
