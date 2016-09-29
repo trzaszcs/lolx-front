@@ -15,7 +15,7 @@
   </div>
       
       <div class="four wide column">
-          <img class="ui small image" src="http://semantic-ui.com/images/wireframe/image.png">
+          <img class="ui small image" :src="getImg()">
       </div>
       
       <div class="ten wide column">
@@ -66,6 +66,9 @@ export default {
     }
   },
   methods: {
+    getImg: function () {
+      return this.anounce.img ? this.anounce.img : 'http://semantic-ui.com/images/wireframe/image.png'
+    }
   }
 }
 </script>
