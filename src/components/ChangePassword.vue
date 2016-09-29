@@ -1,6 +1,5 @@
 <template>
   <div class="ui container changePassword">
-    <div class="ui segment">
 
     <loading-box :show="saving"></loading-box>
    
@@ -39,9 +38,8 @@
         </div>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui primary button" value="Zmień"></input>
+      <input v-on:click="save" type="submit" class="ui teal button" value="Zmień"></input>
       </form>
-    </div> 
   </div>
 </div>
 

@@ -51,9 +51,10 @@
         <upload></upload>
       </div>
 
-      <input v-on:click="save($event)" type="submit" class="ui teal primary button" value="Zapisz"></input>
+      <input v-on:click="save($event)" type="submit" class="ui teal button" value="Zapisz"></input>
+
       </form>
-      <p></p>
+      
 </div>
 </div>
 

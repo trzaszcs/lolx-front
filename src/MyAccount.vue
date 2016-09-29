@@ -40,14 +40,17 @@
 
            <div class="ui fluid card">
         
-            <div class="ui extra content">
+            <div class="ui top attached label">
               <div class="header"><i class="ui announcement icon"></i>Moje ogłoszenia</div>
+            </div>
+        
+            <div class="ui extra content">
                <button class="ui right floated icon teal button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
                   <i class="add sign icon"></i> 
                   Dodaj
               </button>
             </div>
-                
+
             <div class="content">
               <div class="ui fluid selection list" v-for="item in items">
                 <div class="ui item">
@@ -91,12 +94,11 @@
      </div>
        
        <div class="ui fluid card">
-         <div class="ui extra content">
-          <div class="header">
-            <i class="ui shop icon"></i>
-            Moje zamówienia usług
+         
+          <div class="ui top attached label">
+            <i class="ui shop icon"></i>Moje zamówienia usług
           </div>
-         </div>
+         
          <div class="content">
           
              <div class="ui fluid selection list" v-for="order in customerOrders">
@@ -137,12 +139,11 @@
          </div>
      
        <div class="ui fluid card">
-         <div class="ui extra content">
-          <div class="header">
-            <i class="ui money icon"></i>
-            Zamawiający Twoje usługi
+         
+          <div class="ui top attached label">
+             <i class="ui money icon"></i>Zamawiający Twoje usługi
           </div>
-         </div>
+
          <div class="content">
           
           
@@ -157,12 +158,12 @@
      <!-- ACCOUNT -->
      <div v-show="view == 'account'">
        <div class="ui fluid card">
-         <div class="ui extra content">
-            <div class="header">
+
+          <div class="ui top attached label">
               <i class="ui edit icon"></i>
               Moje dane
-            </div>
-         </div>
+          </div>
+         
          <div class="content">
            <edit-account 
              :first-name="user.firstName"
@@ -176,12 +177,12 @@
      <!-- CHANGE PASSWORD -->
      <div v-show="view == 'changePassword'">
        <div class="ui fluid card">
-         <div class="ui extra content">
-            <div class="header">
+         
+          <div class="ui top attached label">
               <i class="ui edit icon"></i>
-              Zmiana hasła
-            </div>
-         </div>
+                Zmiana hasła
+          </div>
+         
          <div class="content">
            <change-password></change-password>
          </div>

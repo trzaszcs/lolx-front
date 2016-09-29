@@ -1,6 +1,5 @@
 <template>
   <div class="ui container register">
-    <div class="ui segment">
 
     <loading-box :show="saving"></loading-box>
    
@@ -41,10 +40,9 @@
         <location-input :location="location"></location-input>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui primary button" value="Zmień"></input>
+      <input v-on:click="save" type="submit" class="ui teal button" value="Zmień"></input>
       </form>
     </div> 
-  </div>
 </div>
 
   </div>

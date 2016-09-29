@@ -6,8 +6,9 @@
 
       <div class="ui fluid card">
       
-        <div class="ui left aligned content">
-          <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
+                  <div class="ui top attached label">
+                  
+                   <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
             <i class="ui left arrow icon"></i>
             wstecz
           </a> 
@@ -17,9 +18,12 @@
                 <i class="ui star icon"></i>
             </a> 
           </div>
+                  </div>
+
       
-          
-          <div class="ui divider"></div>
+      
+        <div class="ui left aligned content">
+
 
         <div class="ui description">
             <div class="ui header">
@@ -28,7 +32,7 @@
             </div>
         </div>
          <p></p>
-        <div class="ui left floated description">
+        <div class="ui left floated section">
           <div class="meta">
 
             {{anounce.location.title}}
@@ -39,27 +43,28 @@
             inne ogłoszenia użytkownika ...
           </a> 
         </div>
-        
-         <div class="ui right floated teal tiny inverted circular segment">
-            <h2 class="ui inverted header">
+
+        <div class="ui right floated section">
+            <h2 class="ui header">
               Cena
               <div class="sub header">{{anounce.price}} zł</div>
             </h2>
-          </div>
 
-       <div class="description">  
-            <div class="ui header">Opis</div>
-            <div class="ui divider"></div>
         </div>
-          
-         <div class="description"> 
+
+      </div>
+
+
+        </div>
+
+
+         <div class="ui segment"> 
+            <div class="ui top attached label">Opis</div>
+              <div class="ui content">
             <img class="ui left floated spaced small image" src="http://semantic-ui.com/images/wireframe/image.png">
             {{anounce.description}}
+            </div>
           </div>
-
-        </div>
-   
-      </div>
 
            <div class="ui secondary segment">
        <div class="ui header"><i class="content icon"></i>Formularz zamówienia</div>
@@ -154,13 +159,10 @@
         <user-public-profile :user=user></user-public-profile>
       
       <div class="ui fluid card">
-        <div class="ui extra content">
-          <div class="ui header"><i class="marker icon"></i>Lokalizacja ogłoszenia</div>
+        <div class="ui top attached label">
+          <i class="marker icon"></i>Lokalizacja ogłoszenia 
         </div>
-        <div class="ui content">
-          <div  id="map"> </div>
-        </div>
-
+        <div  id="map"> </div>
       </div>
 
     </div>

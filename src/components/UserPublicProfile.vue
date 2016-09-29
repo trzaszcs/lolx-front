@@ -1,9 +1,9 @@
 <template>
     <div class="ui fluid card">
 
-      <div class="ui extra content">
-        <div class="ui header"><i class="user icon"></i>O użytkowniku</div>
-      </div>  
+      <div class="ui top attached label">
+        <i class="user icon"></i>O użytkowniku
+      </div>
       
       <div class="content">
         <div class="right floated meta">{{user.lastActive}}</div>

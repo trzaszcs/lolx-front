@@ -4,7 +4,7 @@
         <div class="extra content">  
              <i class="close icon"></i>Chcesz zamówić - to proste!
         </div>
-          
+  
         <div class="extra content">
 
               <div class="ui ordered inverted fluid steps">
