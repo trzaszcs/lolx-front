@@ -9,13 +9,13 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input v-model="email" type="text" name="email" placeholder="E-mail"/>
+              <input v-model="email" type="text" name="email" placeholder="E-mail" v-on:keyup.13="login"/>
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input v-model="password" type="password" name="password" placeholder="Hasło"/>
+              <input v-model="password" type="password" name="password" placeholder="Hasło" v-on:keyup.13="login"/>
             </div>
           </div>
         <div v-on:click="login" class="ui fluid large teal submit button">Login</div>

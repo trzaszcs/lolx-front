@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "Staring lolx-front..."
+npm run dev
