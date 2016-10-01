@@ -1,6 +1,6 @@
 <template>
    <div class="ui action left icon fluid input">
-     <input v-model="phrase" type="text" placeholder="Poszukuje kogoś kto..."/>
+     <input v-model="phrase" type="text" placeholder="Poszukuje kogoś kto..." v-on:keyup.13="search"/>
      <i class="search icon"></i>
      <button v-on:click="search" class="ui teal button">Szukaj</button> 
    </div>
