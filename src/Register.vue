@@ -34,7 +34,7 @@
       
       <div class="field" v-bind:class="{'error': hasFieldError('location')}">
         <label>Lokalizacja</label>
-        <location-input :location="location"></location-input>
+        <location-input :location="location" :simple="false"></location-input>
       </div>
       
       <div class="field" v-bind:class="{'error': hasFieldError('email')}">

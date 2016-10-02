@@ -1,8 +1,8 @@
 <template>
   <div class="ui fluid search">
     <div class="ui icon input">
-      <input class="prompt"  placeholder="Lokalizacja..." v-model="location.title">
-      <i class="search icon"></i>
+      <input class="searchPrompt"  placeholder="Lokalizacja..." v-model="location.title">
+      <i class="search icon" v-show="!simple"></i>
     </div>
     <div class="results">
     </div>
@@ -14,7 +14,7 @@ import api from '../api'
 import $ from 'jquery'
 
 export default {
-  props: ['location'],
+  props: ['location', 'simple'],
   ready: function () {
     const buildTitle = (result) => {
       let locationParts = {}
@@ -70,6 +70,7 @@ export default {
               callback({results: suggestedLocations})
             })
           }},
+        selector: {prompt: '.searchPrompt'},
         minCharacters: 2,
         searchFullText: true,
         onSelect: (result, response) => {
