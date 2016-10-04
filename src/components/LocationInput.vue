@@ -1,5 +1,5 @@
 <template>
-  <div class="ui fluid search">
+  <div class="ui fluid search locationInput">
     <div class="ui icon input">
       <input class="searchPrompt"  placeholder="Lokalizacja..." v-model="location.title">
       <i class="search icon" v-show="!simple"></i>
@@ -24,7 +24,7 @@ export default {
       if ('locality' in locationParts) {
         title = locationParts['locality'] + ', '
       }
-
+      /*
       if ('route' in locationParts) {
         title += locationParts['route']
       }
@@ -36,7 +36,7 @@ export default {
       if ('political' in locationParts) {
         title += ' ' + locationParts['political']
       }
-
+      */
       if ('administrative_area_level_1' in locationParts) {
         title += ' ' + locationParts['administrative_area_level_1']
       }
