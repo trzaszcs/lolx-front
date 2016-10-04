@@ -47,7 +47,7 @@ export default {
       return this.searchQuery.phrase
     },
     doSearch: function () {
-      api.search(this.searchQuery.phrase, this.searchQuery.page, itemsPerPage, (searchResult) => {
+      api.search(this.searchQuery.phrase, this.searchQuery.page, this.searchQuery.location, itemsPerPage, (searchResult) => {
         this.searchFinished(searchResult)
       })
     },

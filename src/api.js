@@ -9,10 +9,16 @@ const API = (function () {
     return headers
   }
   return {
-    search: function (query, page, itemsPerPage, callback) {
+    search: function (query, page, itemsPerPage, location, callback) {
+      let queryData = {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
+      if (location) {
+        queryData.location = queryData.title
+        queryData.latitude = queryData.latitude
+        queryData.longitude = queryData.longitude
+      }
       $.ajax({
         url: '/api/anounces',
-        data: {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
+        data: queryData
       }).done(callback)
     },
     add: function (title, description, price, location, imgName, userId, jwtToken, callback) {
