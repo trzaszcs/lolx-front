@@ -21,13 +21,13 @@ const API = (function () {
         data: queryData
       }).done(callback)
     },
-    add: function (title, description, price, location, imgName, userId, jwtToken, callback) {
+    add: function (title, description, price, location, imgName, categoryId, userId, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
         headers: headers(jwtToken),
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({title, description, price, location, imgName, 'ownerId': userId})
+        data: JSON.stringify({title, description, price, location, imgName, categoryId, 'ownerId': userId})
       }).done(callback)
     },
     order: function (order, jwtToken, callback) {
@@ -181,6 +181,12 @@ const API = (function () {
     geocode: function (address, callback) {
       $.ajax({
         url: `https://maps.google.com/maps/api/geocode/json?components=country:PL&language=pl&address=${address}`,
+        method: 'GET'
+      }).done(callback)
+    },
+    categories: function (callback) {
+      $.ajax({
+        url: '/category-api/categories',
         method: 'GET'
       }).done(callback)
     }

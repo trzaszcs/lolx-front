@@ -40,7 +40,17 @@
             </div>
           </div>
         </div>
-      
+
+        <div class="three wide field required" v-bind:class="{'error': hasFieldError('category')}">
+          <label>Kategoria</label>
+          <select v-model="categoryId" class="ui dropdown">
+            <option value="">Kategoria...</option>
+            <option  v-for="category in categories" v-bind:value="category.id">
+              {{category.name}}
+            </option>
+          </select>
+        </div>
+
         <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
           <label>Lokalizacja</label>
           <location-input :location="location" :simple="false"></location-input>
@@ -59,6 +69,7 @@
 </template>
 
 <script>
+import $ from 'jquery'
 import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
@@ -78,6 +89,8 @@ export default {
       price: null,
       location: {title: ''},
       imgName: null,
+      categoryId: null,
+      categories: [],
       loading: false,
       saved: false,
       validationErrors: null
@@ -89,6 +102,7 @@ export default {
       this.description = ''
       this.price = null
       this.imgName = null
+      this.categoryId = null
       this.validationErrors = null
       this.saved = true
       this.loading = false
@@ -108,6 +122,7 @@ export default {
         this.price,
         this.location,
         this.imgName,
+        this.categoryId,
         session.getUserId(),
         session.getJwt(),
         (response) => {
@@ -141,6 +156,10 @@ export default {
         append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
       }
 
+      if (!this.categoryId) {
+        append('category', 'Kategoria jest wymagana')
+      }
+
       if (errors.length > 0) {
         this.validationErrors = errors
         return false
@@ -166,10 +185,26 @@ export default {
       return
     }
     this.loading = true
+
+    let toLoad = 2
+    let done = () => {
+      toLoad = toLoad - 1
+      if (toLoad === 0) {
+        this.loading = false
+      }
+    }
+
     api.userDetails(session.getUserId(), session.getJwt(), (details) => {
       this.location = details.location
-      this.loading = false
+      done()
     })
+
+    api.categories((categories) => {
+      this.categories = categories
+      done()
+    })
+
+    $('.ui.dropdown').dropdown()
   },
   events: {
     'location': function (location) {

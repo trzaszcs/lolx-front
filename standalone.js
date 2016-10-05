@@ -27,8 +27,16 @@ var proxyConfigForAuthApi = {
     changeOrigin: true
 };
 
+var proxyConfigForCategoryApi = {
+    target: 'http://lolx-category.herokuapp.com/',  
+    pathRewrite: {'^/category-api' : ''},
+    changeOrigin: true
+};
+
 app.use(httpProxy('/api', proxyConfigForApi));
 app.use(httpProxy('/auth-api', proxyConfigForAuthApi));
+app.use(httpProxy('/category-api', proxyConfigForCategoryApi));
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

@@ -3,11 +3,11 @@
      {{message}}
 
      <div v-if="!fileUploaded">
-       <button v-show="!fileSelected" class="mini ui button" v-on:click="add">Wybierz zdjęcie</button>
+       <button v-show="!fileSelected" class="mini ui button" v-on:click="add($event)">Wybierz zdjęcie</button>
        <div v-show="fileSelected">
          Wybrano plik {{file}}
-         <button v-on:click="upload" class="mini ui button" v-bind:class="{'loading': loading}">Zapisz</button>
-         <button v-on:click="remove" class="mini ui button">Anuluj</button>
+         <button v-on:click="upload($event)" class="mini ui button" v-bind:class="{'loading': loading}">Zapisz</button>
+         <button v-on:click="remove($event)" class="mini ui button">Anuluj</button>
        </div>
        <input type="file" name="file" id="fileInput" style="display:none"/>
      </div>
