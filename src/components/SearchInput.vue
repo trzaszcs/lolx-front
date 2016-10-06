@@ -10,7 +10,7 @@
       <location-input :location="location" :simple="true"></location-input>
     </div>
     <div class="three wide column">
-      <category-box></category-box>
+      <category-box :category-id="categoryId"></category-box>
     </div>
     <div class="one wide column">
       <button v-on:click="search" class="ui teal button">Szukaj</button>
@@ -27,21 +27,27 @@ export default {
   data () {
     return {
       phrase: '',
-      location: {title: ''}
+      location: {title: ''},
+      categoryId: null
     }
   },
   methods: {
     search: function () {
-      this.$dispatch('search', {'phrase': this.phrase, 'location': this.location})
+      this.$dispatch('search', {'phrase': this.phrase, 'location': this.location, 'categoryId': this.categoryId})
     }
   },
   events: {
     'search': function (event) {
       this.phrase = event.phrase
       this.location = event.location
+      this.categoryId = event.categoryId
     },
     'location': function (location) {
       this.location = location
+    },
+    'categorySelected': function (event) {
+      this.categoryId = event.categoryId
+      this.search()
     }
   }
 }

@@ -9,12 +9,15 @@ const API = (function () {
     return headers
   }
   return {
-    search: function (query, page, itemsPerPage, location, callback) {
+    search: function (query, page, itemsPerPage, location, categoryId, callback) {
       let queryData = {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       if (location) {
         queryData.location = queryData.title
         queryData.latitude = queryData.latitude
         queryData.longitude = queryData.longitude
+      }
+      if (categoryId) {
+        queryData.categoryId = categoryId
       }
       $.ajax({
         url: '/api/anounces',
