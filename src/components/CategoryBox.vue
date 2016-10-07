@@ -1,10 +1,12 @@
 <template>
-  <select v-model="categoryId" v-on:change="selected" class="ui dropdown">
-    <option selected value="-1">Wszystkie kategorie</option>
-    <option  v-for="category in categories" v-bind:value="category.id">
-      {{category.name}}
-    </option>
-  </select>
+ <div class="ui selection dropdown">
+  <i class="dropdown icon"></i>
+  <div class="default text"></div>
+  <div class="menu">
+    <div class="item" v-for="category in categories" v-bind:data-value="category.id">{{category.name}}</div>
+  </div>
+</div>
+
 </template>
 
 <script>
@@ -19,18 +21,31 @@ export default {
     }
   },
   methods: {
-    selected: function () {
-      this.$dispatch('categorySelected', {categoryId: this.categoryId === '-1' ? null : this.categoryId})
+    onSelect: function (categoryId) {
+      this.$dispatch('categorySelected', {categoryId: categoryId === '-1' ? null : categoryId})
     }
   },
   ready: function () {
-    if (!this.categoryId) {
-      this.categoryId = '-1'
+    const $dropdown = $('.ui.dropdown')
+    let initDropdownSelection = (val, $dropdown) => {
+      let selectedCategory = this.categories.filter((element) => element.id === parseInt(val))[0]
+
+      if (!selectedCategory) {
+        selectedCategory = this.categories[0]
+      }
+      $dropdown.children('div.text')
+        .text(selectedCategory.name).removeClass('default')
+      $dropdown.find('div.menu').find(`item[data-value='${selectedCategory.id}']`)
+        .addClass('active')
+        .addClass('selected')
     }
-    api.categories((categories) => {
+    api.categories((response) => {
+      let categories = response
+      categories.splice(0, 0, {name: 'Wszystkie Kategorie', id: -1})
       this.categories = categories
+      $dropdown.dropdown({onChange: this.onSelect})
+      initDropdownSelection(this.categoryId, $dropdown)
     })
-    $('.ui.dropdown').dropdown()
   }
 }
 </script>

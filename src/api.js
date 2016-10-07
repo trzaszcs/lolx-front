@@ -9,7 +9,7 @@ const API = (function () {
     return headers
   }
   return {
-    search: function (query, page, itemsPerPage, location, categoryId, callback) {
+    search: function (query, page, location, categoryId, itemsPerPage, callback) {
       let queryData = {'query': query, 'page': page, 'itemsPerPage': itemsPerPage}
       if (location) {
         queryData.location = queryData.title
