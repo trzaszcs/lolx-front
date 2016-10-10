@@ -14,7 +14,7 @@
 
      <div v-else>
        Dodano plik {{file}}
-       <button v-on:click="remove" class="mini ui button">Anuluj</button>
+       <button v-on:click="remove($event)" class="mini ui button">Anuluj</button>
      </div>
 
    </div>
