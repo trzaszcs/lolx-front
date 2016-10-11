@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="four wide column">
-      <location-input :location="location" :simple="true"></location-input>
+      <location-input :location="location"></location-input>
     </div>
     <div class="three wide column">
       <category-box :category-id="categoryId"></category-box>

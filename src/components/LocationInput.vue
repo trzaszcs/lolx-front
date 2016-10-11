@@ -1,8 +1,8 @@
 <template>
   <div class="ui fluid search locationInput">
-    <div class="ui icon input">
+    <div class="ui left icon input">
       <input class="searchPrompt"  placeholder="Lokalizacja..." v-model="location.title">
-      <i class="search icon" v-show="!simple"></i>
+      <i class="marker icon" v-show="!simple"></i>
     </div>
     <div class="results">
     </div>
