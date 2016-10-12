@@ -28,8 +28,7 @@ export default {
   ready: function () {
     const $dropdown = $('.ui.dropdown')
     let initDropdownSelection = (val, $dropdown) => {
-      let selectedCategory = this.categories.filter((element) => element.id === parseInt(val))[0]
-
+      let selectedCategory = this.categories.filter((element) => element.id === val)[0]
       if (!selectedCategory) {
         selectedCategory = this.categories[0]
       }
