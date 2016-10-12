@@ -59,11 +59,14 @@ export default {
         }
       })
     },
-    remove: function (e) {
-      e.preventDefault()
+    resetForm: function () {
       this.file = null
       this.fileSelected = false
       this.fileUploaded = false
+    },
+    remove: function (event) {
+      event.preventDefault()
+      this.resetForm()
       this.$dispatch('img-uploaded', null)
     }
   },
@@ -86,7 +89,7 @@ export default {
   },
   events: {
     'clear': function (event) {
-      this.remove()
+      this.resetForm()
     }
   }
 }

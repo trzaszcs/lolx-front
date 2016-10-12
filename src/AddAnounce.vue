@@ -3,23 +3,30 @@
     <div class="ui segment">
       <loading-box :show="loading"></loading-box>
    
-      <div v-if="saved" class="ui info message">
-        <div class="header">
-          Twój wpis został zapisany
-        </div>
-        <p>
-          Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut.
-        <p>
-      </div>
-
+     
       <form class="ui form" v-bind:class="{ 'error': validationErrors }">
         <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
 
-        <div class="ui error message">
-          <ul class="list" v-for="error in validationErrors">
-            <li>{{error.txt}}</li>
-          </ul>
+        <div id="messageBox">
+
+          <div  v-show="newAnounceId" class="ui info message">
+            <div class="header">
+              Twoje ogłoszenie został zapisane
+            </div>
+            <p>
+              Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut pod podany adresem <a v-bind:href="anounceAddress()">link</a>
+            <p>
+          </div>
+
+          <div class="ui error message">
+            <ul class="list" v-for="error in validationErrors">
+              <li>{{error.txt}}</li>
+            </ul>
+         </div>
+
         </div>
+
+        
 
         <div class="three wide field required" v-bind:class="{'error': hasFieldError('type')}">
           <label>Rodzaj ogłoszenia</label>
@@ -71,7 +78,6 @@
         </div>
 
         <input v-on:click="save($event)" type="submit" class="ui teal button" value="Zapisz"></input>
-
       </form>
     </div>
   </div>
@@ -102,12 +108,16 @@ export default {
       categories: [],
       type: null,
       loading: false,
-      saved: false,
+      newAnounceId: null,
       validationErrors: null
     }
   },
   methods: {
-    afterSave: function () {
+    scrollToMessageBox: function () {
+      const position = document.getElementById('messageBox').getBoundingClientRect()
+      window.scrollTo(position.left, position.top)
+    },
+    afterSave: function (anounceId) {
       this.title = ''
       this.description = ''
       this.price = null
@@ -115,14 +125,17 @@ export default {
       this.categoryId = null
       this.type = null
       this.validationErrors = null
-      this.saved = true
+      this.newAnounceId = anounceId
       this.loading = false
       this.$broadcast('clear', {})
+      this.scrollToMessageBox()
     },
     save: function (event) {
       event.preventDefault()
 
+      this.newAnouneId = null
       if (!this.validate()) {
+        this.scrollToMessageBox()
         return
       }
 
@@ -138,7 +151,7 @@ export default {
         session.getUserId(),
         session.getJwt(),
         (response) => {
-          this.afterSave()
+          this.afterSave(response.id)
         }
       )
     },
@@ -192,6 +205,14 @@ export default {
     },
     onPriceChange: function () {
       this.price = this.price.replace(',', '.')
+    },
+    anounceAddress: function () {
+      return '/#!/anounce?anounceId=' + this.newAnounceId
+    },
+    resetForm: function () {
+      this.file = null
+      this.fileSelected = false
+      this.fileUploaded = false
     }
   },
   ready: function () {
