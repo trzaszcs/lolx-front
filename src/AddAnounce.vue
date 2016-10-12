@@ -129,6 +129,7 @@ export default {
       this.loading = false
       this.$broadcast('clear', {})
       this.scrollToMessageBox()
+      $('.ui.dropdown').dropdown('clear')
     },
     save: function (event) {
       event.preventDefault()
