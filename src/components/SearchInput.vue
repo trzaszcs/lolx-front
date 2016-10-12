@@ -16,6 +16,8 @@
       <button v-on:click="search" class="ui teal button">Szukaj</button>
     </div>
   </div>
+  
+  <p></p>
 </template>
 
 <script>

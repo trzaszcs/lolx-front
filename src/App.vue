@@ -38,10 +38,7 @@
 
       </div>
 
-
-      <div class="ui bottom attached segment">
-        <div class="fb-like" v-bind:data-href="siteUrl" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div>
-      </div> 
+        <p></p>
 
         <router-view></router-view>
 
@@ -56,34 +53,38 @@
     
      <div class="ui stackable inverted grid">
       <div class="two wide column">
-        <a v-link="{ path: '/search', query: { category: 1, location: ''}}"><img src="assets/categories/v2/sprzatanie.png" class="ui centered small image"/></a>
+        <a v-link="{ path: '/search', query: { category: 1, phrase:'', location: ''}}"><img src="assets/categories/v2/sprzatanie.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 2, location: '' }}"><img src="assets/categories/v2/cialo.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 7, phrase:'', location: '' }}"><img src="assets/categories/v2/cialo.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 3, location: '' }}"><img src="assets/categories/v2/korepetycje.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 4, phrase:'', location: '' }}"><img src="assets/categories/v2/korepetycje.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 4, location: '' }}"><img src="assets/categories/v2/mycie-auta.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 6, phrase:'', location: '' }}"><img src="assets/categories/v2/mycie-auta.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 5, location: '' }}"><img src="assets/categories/v2/odebranie-z-imprezy.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 5, phrase:'', location: '' }}"><img src="assets/categories/v2/odebranie-z-imprezy.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 6, location: '' }}"><img src="assets/categories/v2/opieka-nad-zwierzetami.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 3, phrase:'', location: '' }}"><img src="assets/categories/v2/opieka-nad-zwierzetami.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 7, location: '' }}"><img src="assets/categories/v2/prace-w-ogrodzie.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 2, phrase:'', location: '' }}"><img src="assets/categories/v2/prace-w-ogrodzie.png" class="ui centered small image"/></a>
       </div>
       <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 8, location: '' }}"><img src="assets/categories/v2/zlota-raczka.png" class="ui centered small image"/></a>
+         <a v-link="{ path: '/search', query: { category: 9, phrase:'', location: '' }}"><img src="assets/categories/v2/zlota-raczka.png" class="ui centered small image"/></a>
       </div>
       <div class="sixteen wide column">
-         <a v-link="{ path: '/search', query: { category: 9, location: '' }}"><img src="assets/categories/v2/inne.png" class="ui centered tiny image"/></a>
+         <a v-link="{ path: '/search', query: { category: 8, phrase:'', location: '' }}"><img src="assets/categories/v2/inne.png" class="ui centered tiny image"/></a>
       </div>
     </div>
+
     
+
+    <div class="ui inverted section divider"></div>
+
       <div class="ui stackable inverted divided grid">
         <div class="three wide column">
           <h4 class="ui inverted header">Wyszukaj</h4>
@@ -111,12 +112,16 @@
         </div>
         <div class="seven wide column">
           <h4 class="ui inverted header">Dorobie.pl</h4>
+          
           <p>Pozwalamy na znalezienie odpowiedniego dla Ciebie ogłoszenia mikro usługi - czyli rzeczy na którą nie masz czasu (np. sprzątanie, codzienne zakupy)
           i w której wyręczyć Ciebie mogą Ogłoszeniodawcy. Ty także możesz dodawać swoje ogłoszenia!</p>
+          
+          <div class="fb-like" v-bind:data-href="siteUrl" data-layout="button_count" data-action="recommend" data-show-faces="true" data-share="true"></div>
+
         </div>
       </div>
       <div class="ui inverted section divider"></div>
-      <img src="assets/logo.png" class="ui centered mini image">
+      <img src="assets/small-logo.png" class="ui centered image">
       <div class="ui horizontal inverted small divided link list">
         <a class="item" v-link="{ path: '/sitemap' }">Mapa strony</a>
         <a class="item" v-link="{ path: '/contact' }">Kontakt</a>
