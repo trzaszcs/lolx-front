@@ -53,6 +53,37 @@
   <div class="fbar ui inverted vertical footer segment">
   
   <div class=" ui center aligned container">
+    
+     <div class="ui stackable inverted grid">
+      <div class="two wide column">
+        <a v-link="{ path: '/search', query: { category: 1, location: ''}}"><img src="assets/categories/v2/sprzatanie.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 2, location: '' }}"><img src="assets/categories/v2/cialo.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 3, location: '' }}"><img src="assets/categories/v2/korepetycje.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 4, location: '' }}"><img src="assets/categories/v2/mycie-auta.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 5, location: '' }}"><img src="assets/categories/v2/odebranie-z-imprezy.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 6, location: '' }}"><img src="assets/categories/v2/opieka-nad-zwierzetami.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 7, location: '' }}"><img src="assets/categories/v2/prace-w-ogrodzie.png" class="ui centered small image"/></a>
+      </div>
+      <div class="two wide column">
+         <a v-link="{ path: '/search', query: { category: 8, location: '' }}"><img src="assets/categories/v2/zlota-raczka.png" class="ui centered small image"/></a>
+      </div>
+      <div class="sixteen wide column">
+         <a v-link="{ path: '/search', query: { category: 9, location: '' }}"><img src="assets/categories/v2/inne.png" class="ui centered tiny image"/></a>
+      </div>
+    </div>
+    
       <div class="ui stackable inverted divided grid">
         <div class="three wide column">
           <h4 class="ui inverted header">Wyszukaj</h4>
