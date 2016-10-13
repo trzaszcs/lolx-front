@@ -11,7 +11,7 @@
                    <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
             <i class="ui left arrow icon"></i>
             wstecz
-          </a> 
+          </a>
           <div class="right floated meta">
             Dodano {{creationDate()}}  
             <a v-on:click="addToFavorites()" class="ui icon" data-tooltip="dodaj do ulubionych">
@@ -30,6 +30,7 @@
               <i class="ui announcement icon"></i>
               {{anounce.title}}
             </div>
+            <anounce-type :type="anounce.type"></anounce-type>
         </div>
          <p></p>
         <div class="ui left floated section">
@@ -181,8 +182,10 @@
 <script>
 import api from '../api'
 import guid from '../guid'
+import util from '../util'
 import session from '../session'
 import UserPublicProfile from './UserPublicProfile.vue'
+import AnounceType from './AnounceType.vue'
 import LoadingBox from './LoadingBox.vue'
 const $ = require('jquery')
 require('moment')
@@ -192,7 +195,8 @@ const gmAPI = require('google-maps')
 export default {
   components: {
     UserPublicProfile,
-    LoadingBox
+    LoadingBox,
+    AnounceType
   },
   data () {
     return {
@@ -229,24 +233,7 @@ export default {
       validationErrors: null,
       showLoginMessage: false,
       creationDate: function () {
-        const anounceDate = new Date(this.anounce.creationDate)
-        const diff = new Date() - anounceDate
-        const oneHour = 60 * 60 * 1000
-        const hours = diff / oneHour
-        const days = hours / 24
-        const timeStr = () => {
-          const twoDigits = (value) => { return ('0' + value).slice(-2) }
-          const hours = twoDigits(anounceDate.getHours())
-          const minutes = twoDigits(anounceDate.getMinutes())
-          return `${hours}:${minutes}`
-        }
-        if (hours < 24) {
-          return `dziś ${timeStr()}`
-        } else if (hours < 48) {
-          return `wczoraj ${timeStr()}`
-        } else {
-          return `${days} dni temu`
-        }
+        return util.prettyDate(new Date(this.anounce.creationDate))
       }
     }
   },
