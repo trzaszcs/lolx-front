@@ -1,3 +1,10 @@
+
+export const anounceDurations = [
+  {id: 'THREE_DAYS', name: 'Trzy dni'},
+  {id: 'SEVEN_DAYS', name: 'Siedem dni'},
+  {id: 'FIFTEEN_DAYS', name: 'Piętnaście dni'}
+]
+
 export const states = [
   'Dolnośląskie',
   'Kujawsko-Pomorskie',

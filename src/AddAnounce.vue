@@ -67,6 +67,16 @@
           </select>
         </div>
 
+        <div class="two wide field required" v-bind:class="{'error': hasFieldError('duration')}">
+          <label>Czas trwania</label>
+          <select v-model="duration" class="ui dropdown">
+            <option value="">Czas trwania...</option>
+            <option  v-for="duration in durations" v-bind:value="duration.id">
+              {{duration.name}}
+            </option>
+          </select>
+        </div>
+
         <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
           <label>Lokalizacja</label>
           <location-input :location="location" :simple="false"></location-input>
@@ -87,6 +97,7 @@
 import $ from 'jquery'
 import api from './api'
 import session from './session'
+import {anounceDurations} from './const'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
 import Upload from './components/Upload.vue'
@@ -105,7 +116,9 @@ export default {
       location: {title: ''},
       imgName: null,
       categoryId: null,
+      duration: null,
       categories: [],
+      durations: anounceDurations,
       type: null,
       loading: false,
       newAnounceId: null,
@@ -122,6 +135,7 @@ export default {
       this.description = ''
       this.price = null
       this.imgName = null
+      this.duration = null
       this.categoryId = null
       this.type = null
       this.validationErrors = null
@@ -149,6 +163,7 @@ export default {
         this.imgName,
         this.categoryId,
         this.type,
+        this.duration,
         session.getUserId(),
         session.getJwt(),
         (response) => {
@@ -184,6 +199,10 @@ export default {
 
       if (!this.categoryId) {
         append('category', 'Kategoria jest wymagana')
+      }
+
+      if (!this.duration) {
+        append('duration', 'Czas trwania jest wymagany')
       }
 
       if (!this.type) {
