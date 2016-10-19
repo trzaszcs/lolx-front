@@ -51,30 +51,8 @@
               </button>
             </div>
 
-            <div class="content">
-              <div class="ui fluid selection list" v-for="item in items">
-                <div class="ui item">
-                  <div class="left floated content">
-                    <img class="ui tiny image" src="http://semantic-ui.com/images/wireframe/image.png">
-                  </div>
-                  <div class="content">
-                    <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
-                        {{item.title}} 
-                      </a>
-                      <div class="description" v-on:click="showAnounce(item)">
-                        Cena {{item.price}} zł 
-                     </div>
-
-                  </div>  
-                           
-                  <button class="ui right floated teal button" v-on:click="deleteAnounce(item)">
-                    usuń
-                  </button>
-            
-                </div>
-
-              </div>
-            </div> 
+            <user-anounces :user-id="currentUserId"></user-anounces>
+ 
            </div>
 
            <user-public-profile :user=user></user-public-profile>
@@ -139,6 +117,7 @@
   import EditAccount from './components/EditAccount.vue'
   import UserPublicProfile from './components/UserPublicProfile.vue'
   import ChangePassword from './components/ChangePassword.vue'
+  import UserAnounces from './components/UserAnounces.vue'
   import session from './session'
   import api from './api'
   import $ from 'jquery'
@@ -155,9 +134,9 @@
           lastActive: '',
           location: {title: ''}
         },
-        items: [],
         customerOrders: [],
-        loading: false
+        loading: false,
+        currentUserId: session.getUserId()
       }
     },
     components: {
@@ -167,7 +146,8 @@
       UserPublicProfile,
       EditAccount,
       LoadingBox,
-      ChangePassword
+      ChangePassword,
+      UserAnounces
     },
     methods: {
       select: function (viewName) {
@@ -176,15 +156,6 @@
       logout: function () {
         session.logout()
         this.$router.go({path: '/'})
-      },
-      showAnounce: function (selectedItem) {
-        console.log('MyAccount - showAnounce' + selectedItem)
-        this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
-      },
-      deleteAnounce: function (selectedItem) {
-        api.deleteAnounce(selectedItem.id, session.getJwt(), (result) => {
-          this.$router.go({path: '/myAccount'})
-        })
       }
     },
     ready: function () {
@@ -193,9 +164,6 @@
         this.$router.go({path: '/login'})
         return
       }
-      api.getForUser(session.getUserId(), 0, 10, (anounces) => {
-        this.items = anounces.anounces
-      })
       this.loading = true
       api.userDetails(session.getUserId(), session.getJwt(), (response) => {
         this.user = response
