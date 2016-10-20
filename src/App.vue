@@ -20,16 +20,16 @@
       <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui container">
           <div class="ui secondary inverted pointing menu">
-            <a class="ui small image" v-link="{ path: '/' }"><img src="./assets/dorobie-1.png"></a>
+            <a class="ui tiny image" v-link="{ path: '/' }"><img src="./assets/logo-big.png"></a>
             <div class="right item">
               <button class="ui icon black button" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie" data-position="bottom center">
-                  <i class="search icon"></i> 
+                  <img  src="./assets/search.png"class="ui mini image"></img> 
               </button>
               <button class="ui icon black button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie" data-position="bottom center">
-                  <i class="add sign icon"></i> 
+                  <img  src="./assets/add.png"class="ui mini image"></img> 
               </button>
               <button class="ui icon black button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
-                  <i class="user icon"></i> 
+                  <img  src="./assets/profile.png"class="ui mini image"></img> 
               </button>
             </div>
           </div>

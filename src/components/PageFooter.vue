@@ -4,34 +4,17 @@
   
   <div class=" ui center aligned container">
     
-     <div class="ui stackable inverted grid">
-      <div class="two wide column">
-        <a v-link="{ path: '/search', query: { category: 1, phrase:'', location: ''}}"><img src="../assets/categories/v2/sprzatanie.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 7, phrase:'', location: '' }}"><img src="../assets/categories/v2/cialo.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 4, phrase:'', location: '' }}"><img src="../assets/categories/v2/korepetycje.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 6, phrase:'', location: '' }}"><img src="../assets/categories/v2/mycie-auta.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 5, phrase:'', location: '' }}"><img src="../assets/categories/v2/odebranie-z-imprezy.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 3, phrase:'', location: '' }}"><img src="../assets/categories/v2/opieka-nad-zwierzetami.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 2, phrase:'', location: '' }}"><img src="../assets/categories/v2/prace-w-ogrodzie.png" class="ui centered small image"/></a>
-      </div>
-      <div class="two wide column">
-         <a v-link="{ path: '/search', query: { category: 9, phrase:'', location: '' }}"><img src="../assets/categories/v2/zlota-raczka.png" class="ui centered small image"/></a>
-      </div>
-      <div class="sixteen wide column">
-         <a v-link="{ path: '/search', query: { category: 8, phrase:'', location: '' }}"><img src="../assets/categories/v2/inne.png" class="ui centered tiny image"/></a>
-      </div>
+<div class="categories ui centered tiny images">
+        <a v-link="{ path: '/search', query: { category: 1, phrase:'', location: ''}}"><img src="../assets/categories/v3/sprzatanie.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 7, phrase:'', location: '' }}"><img src="../assets/categories/v3/kosmetyka-cialo.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 4, phrase:'', location: '' }}"><img src="../assets/categories/v3/korepetycje.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 6, phrase:'', location: '' }}"><img src="../assets/categories/v3/mycie-auta.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 5, phrase:'', location: '' }}"><img src="../assets/categories/v3/transport-zakupy.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 3, phrase:'', location: '' }}"><img src="../assets/categories/v3/opieka-zwierzeta.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 2, phrase:'', location: '' }}"><img src="../assets/categories/v3/ogrod.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 9, phrase:'', location: '' }}"><img src="../assets/categories/v3/zlota-raczka.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 10, phrase:'', location: '' }}"><img src="../assets/categories/v3/przeprowadzka.png" class="ui image"/></a>
+         <a v-link="{ path: '/search', query: { category: 8, phrase:'', location: '' }}"><img src="../assets/categories/v3/inne.png" class="ui image"/></a>
     </div>
 
     
