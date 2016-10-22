@@ -13,8 +13,9 @@
           <a class="header" v-link="{ path: '/anounce', query: { anounceId: item.id }}">
             {{item.title}} 
           </a>
-          <div class="description" v-on:click="show(item)">
-            Cena {{item.price}} zł 
+          <div class="meta">
+            <div class="price">Cena {{item.price}} zł</div>
+            <anounce-type :type="item.type"></anounce-type>
           </div>
         </div>  
                            
@@ -39,13 +40,14 @@
   import session from '../session'
   import {anouncesDecorator} from '../decorator'
   import LoadingBox from './LoadingBox'
+  import AnounceType from './AnounceType'
   import api from '../api'
 
   const ITEMS_PER_PAGE = 5
 
   export default {
     props: ['userId'],
-    components: {LoadingBox},
+    components: {LoadingBox, AnounceType},
     data () {
       return {
         loading: false,
