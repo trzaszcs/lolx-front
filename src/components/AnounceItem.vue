@@ -13,7 +13,7 @@
       </div>
       
       <div class="four wide column">
-          <img class="ui small image" :src="getImg()">
+          <img class="ui small image" :src="anounce.img">
       </div>
 
       <div class="ten wide column">
@@ -38,6 +38,7 @@
 <script>
 import util from '../util'
 import AnounceType from './AnounceType'
+
 export default {
   props: ['anounce'],
   components: {AnounceType},
@@ -46,11 +47,6 @@ export default {
       creationDate: function () {
         return util.prettyDate(new Date(this.anounce.creationDate))
       }
-    }
-  },
-  methods: {
-    getImg: function () {
-      return this.anounce.img ? this.anounce.img : 'http://semantic-ui.com/images/wireframe/image.png'
     }
   }
 }

@@ -73,7 +73,7 @@ const API = (function () {
         callback({success: false})
       })
     },
-    deleteAnounce: function (anounceId, jwtToken, callback) {
+    closeAnounce: function (anounceId, jwtToken, callback) {
       $.ajax({
         url: `/api/anounces/${anounceId}`,
         method: 'DELETE',

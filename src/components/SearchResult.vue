@@ -1,17 +1,16 @@
 <template>
   <loading-box :show="loading"></loading-box>
-  <div class="searchResult" v-show="finished">
+  <div class="searchResult listing" v-show="finished">
     <div class="result">
       <h4>Znaleziono {{total}} ogłoszeń</h4>
-        <div class="ui large middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
-          <anounce-item :anounce=item></anounce-item>
-        </div>
-     
+      <div class="ui large middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
+        <anounce-item :anounce=item></anounce-item>
+      </div>
     </div>
         
     <div class="pagingBox">
       <div class="ui pagination menu">
-        <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item">{{page +1}}</a>
+        <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item" v-bind:class="{selected:(page == (searchQuery.page || 0))}">{{page +1}}</a>
       </div>
     </div>
 
@@ -19,6 +18,7 @@
 </template>
 
 <script>
+import {anouncesDecorator} from '../decorator'
 import api from '../api'
 import AnounceItem from './AnounceItem.vue'
 import AnounceCard from './AnounceCard.vue'
@@ -54,7 +54,7 @@ export default {
     searchFinished: function (searchResult) {
       this.loading = false
       this.finished = true
-      this.anounces = searchResult.anounces
+      this.anounces = anouncesDecorator(searchResult.anounces)
       this.noOfPages = searchResult.totalCount / itemsPerPage
       this.total = searchResult.totalCount
     },
