@@ -63,7 +63,7 @@
       close: function (selectedItem) {
         if (window.confirm('Czy napewno chcesz zamknąć ogłoszenie?')) {
           api.closeAnounce(selectedItem.id, session.getJwt(), (result) => {
-            this.$router.go({path: '/myAccount'})
+            this.loadPage()
           })
         }
       },
