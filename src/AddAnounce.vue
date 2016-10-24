@@ -9,14 +9,11 @@
 
         <div id="messageBox">
 
-          <div  v-show="newAnounceId" class="ui info message">
-            <div class="header">
-              Twoje ogłoszenie został zapisane
-            </div>
+          <info-box :visible="newAnounceId" :header="'Twoje ogłoszenie zostało zapisane'">
             <p>
               Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut pod podany adresem <a v-bind:href="anounceAddress()">link</a>
             <p>
-          </div>
+          </info-box>
 
           <div class="ui error message">
             <ul class="list" v-for="error in validationErrors">
@@ -101,12 +98,14 @@ import {anounceDurations} from './const'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
 import Upload from './components/Upload.vue'
+import InfoBox from './components/InfoBox.vue'
 
 export default {
   components: {
     LoadingBox,
     LocationInput,
-    Upload
+    Upload,
+    InfoBox
   },
   data () {
     return {

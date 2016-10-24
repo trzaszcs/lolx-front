@@ -1,5 +1,14 @@
 <template>
   <loading-box :show="loading"></loading-box>
+
+  <div v-if="removed" class="ui success message">
+    <i class="close icon"></i>
+    <div class="header">
+      Ogłoszenie zostało zamknięte.
+    </div>
+    <p>Ogłoszenie zostało pomyślnie zamknięte</p>
+  </div>
+
   <div class="content listing">
     Znaleziono {{totalCount}} ogłoszenia
     <div class="ui fluid selection list" v-for="item in anounces">
@@ -37,6 +46,7 @@
 </template>
 
 <script>
+  import $ from 'jquery'
   import session from '../session'
   import {anouncesDecorator} from '../decorator'
   import LoadingBox from './LoadingBox'
@@ -55,7 +65,8 @@
         anounces: [],
         currentPage: 0,
         totalCount: null,
-        pageCount: 0
+        pageCount: 0,
+        removed: false
       }
     },
     methods: {
@@ -66,6 +77,7 @@
         if (window.confirm('Czy napewno chcesz zamknąć ogłoszenie?')) {
           api.closeAnounce(selectedItem.id, session.getJwt(), (result) => {
             this.loadPage()
+            this.removed = true
           })
         }
       },
@@ -87,6 +99,9 @@
       this.forCurrentUser = session.getUserId() === this.userId
       this.currentPage = 0
       this.loadPage()
+      $('.message .close').on('click', function () {
+        $(this).closest('.message').transition('fade')
+      })
     }
   }
 </script>
