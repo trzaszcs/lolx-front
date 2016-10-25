@@ -1,13 +1,7 @@
 <template>
   <loading-box :show="loading"></loading-box>
 
-  <div v-if="removed" class="ui success message">
-    <i class="close icon"></i>
-    <div class="header">
-      Ogłoszenie zostało zamknięte.
-    </div>
-    <p>Ogłoszenie zostało pomyślnie zamknięte</p>
-  </div>
+  <info-box :visible="removed" :header="'Zamknięcie ogłoszenia'" :message="'Ogłoszenie zostało pomyślnie zamknięte'"></info-box>
 
   <div class="content listing">
     Znaleziono {{totalCount}} ogłoszenia
@@ -51,13 +45,14 @@
   import {anouncesDecorator} from '../decorator'
   import LoadingBox from './LoadingBox'
   import AnounceType from './AnounceType'
+  import InfoBox from './InfoBox'
   import api from '../api'
 
   const ITEMS_PER_PAGE = 5
 
   export default {
     props: ['userId'],
-    components: {LoadingBox, AnounceType},
+    components: {LoadingBox, AnounceType, InfoBox},
     data () {
       return {
         loading: false,

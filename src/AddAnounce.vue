@@ -7,23 +7,17 @@
       <form class="ui form" v-bind:class="{ 'error': validationErrors }">
         <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
 
-        <div id="messageBox">
+        <info-box :visible="newAnounceId" :header="'Twoje ogłoszenie zostało zapisane'">
+          <p>
+            Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut pod podany adresem <a v-bind:href="anounceAddress()">link</a>
+          </p>
+        </info-box>
 
-          <info-box :visible="newAnounceId" :header="'Twoje ogłoszenie zostało zapisane'">
-            <p>
-              Ogłoszenie zostało utworzone i zostanie opublikowane w ciągu 5 minut pod podany adresem <a v-bind:href="anounceAddress()">link</a>
-            <p>
-          </info-box>
-
-          <div class="ui error message">
+        <div id="errorBox" class="ui error message">
             <ul class="list" v-for="error in validationErrors">
               <li>{{error.txt}}</li>
             </ul>
-         </div>
-
         </div>
-
-        
 
         <div class="three wide field required" v-bind:class="{'error': hasFieldError('type')}">
           <label>Rodzaj ogłoszenia</label>
@@ -125,8 +119,8 @@ export default {
     }
   },
   methods: {
-    scrollToMessageBox: function () {
-      const position = document.getElementById('messageBox').getBoundingClientRect()
+    scrollToErrorBox: function () {
+      const position = document.getElementById('errorBox').getBoundingClientRect()
       window.scrollTo(position.left, position.top)
     },
     afterSave: function (anounceId) {
@@ -141,7 +135,6 @@ export default {
       this.newAnounceId = anounceId
       this.loading = false
       this.$broadcast('clear', {})
-      this.scrollToMessageBox()
       $('.ui.dropdown').dropdown('clear')
     },
     save: function (event) {
@@ -149,7 +142,7 @@ export default {
 
       this.newAnouneId = null
       if (!this.validate()) {
-        this.scrollToMessageBox()
+        this.scrollToErrorBox()
         return
       }
 

@@ -3,15 +3,8 @@
     <div class="ui segment">
 
     <loading-box :show="saving"></loading-box>
-   
-    <div v-if="saved" class="ui info message">
-      <div class="header">
-        Rejestracja konta
-      </div>
-      <p>
-        Konto zostało żałożone
-      </p>
-    </div>
+
+    <info-box :visible="saved" :header="'Rejestracja konta'" :message="'Konto zostało założone pomyślnie'"></info-box>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
       <h4 class="ui dividing header">Zarejestruj konto</h4>
@@ -65,11 +58,13 @@
 import api from './api'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
+import InfoBox from './components/InfoBox.vue'
 
 export default {
   components: {
     LoadingBox,
-    LocationInput
+    LocationInput,
+    InfoBox
   },
   data () {
     return {

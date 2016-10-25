@@ -3,12 +3,8 @@
     <div class="ui segment">
 
     <loading-box :show="saving"></loading-box>
-   
-    <div v-if="saved" class="ui info message">
-      <ul class="list">
-        <li>Hasło zostało zmienione</li>
-      </ul>
-    </div>
+
+    <info-box :visible="saved" :message="'Hasło zostało zmienione pomyślnie'"></info-box>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
       <h4 class="ui dividing header">Zmień hasło</h4>
@@ -41,10 +37,12 @@
 <script>
 import api from './api'
 import LoadingBox from './components/LoadingBox.vue'
+import InfoBox from './components/InfoBox.vue'
 
 export default {
   components: {
-    LoadingBox
+    LoadingBox,
+    InfoBox
   },
   data () {
     return {
