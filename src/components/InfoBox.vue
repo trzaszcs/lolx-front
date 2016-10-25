@@ -29,7 +29,7 @@ export default {
           .hide() })
   },
   watch: {
-    visible: function (oldV, newV) {
+    visible: function (newV) {
       if (newV) {
         const position = document.getElementById('info-box').getBoundingClientRect()
         window.scrollTo(position.left, position.top)
