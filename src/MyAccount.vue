@@ -66,7 +66,7 @@
 
      <!-- MY-SOLD -->
     <div v-show="view == 'sold'">
-      <my-sold></my-sold>
+      <my-sold :orders="ownerOrders"></my-sold>
     </div>
 
 
@@ -135,6 +135,7 @@
           location: {title: ''}
         },
         customerOrders: [],
+        ownerOrders: [],
         loading: false,
         currentUserId: session.getUserId()
       }
@@ -177,6 +178,9 @@
       })
       api.getCustomerOrders(session.getUserId(), session.getJwt(), (items) => {
         this.customerOrders = items
+      })
+      api.getOwnerOrders(session.getUserId(), session.getJwt(), (items) => {
+        this.ownerOrders = items
       })
     },
     events: {
