@@ -51,7 +51,7 @@
               </button>
             </div>
 
-            <user-anounces :user-id="currentUserId"></user-anounces>
+            <user-anounces :user-id="currentUserId" :items-per-page="5"></user-anounces>
  
            </div>
 

@@ -48,10 +48,8 @@
   import InfoBox from './InfoBox'
   import api from '../api'
 
-  const ITEMS_PER_PAGE = 5
-
   export default {
-    props: ['userId'],
+    props: ['userId', 'itemsPerPage'],
     components: {LoadingBox, AnounceType, InfoBox},
     data () {
       return {
@@ -82,10 +80,10 @@
       },
       loadPage: function () {
         this.loading = true
-        api.getForUser(this.userId, this.currentPage, ITEMS_PER_PAGE, (response) => {
+        api.getForUser(this.userId, this.currentPage, this.itemsPerPage, (response) => {
           this.anounces = anouncesDecorator(response.anounces)
           this.totalCount = response.totalCount
-          this.pageCount = this.totalCount / ITEMS_PER_PAGE
+          this.pageCount = this.totalCount / this.itemsPerPage
           this.loading = false
         })
       }

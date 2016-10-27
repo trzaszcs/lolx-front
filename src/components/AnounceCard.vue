@@ -39,7 +39,7 @@
             {{anounce.location.title}}
           </div>
            <p></p>
-          <a v-link="{ path: '/more' }" data-tooltip="Więcej ogłoszeń tego użytkownika">
+          <a v-link="{ path: '/userAnounces', query: {id: anounce.ownerId} }" data-tooltip="Więcej ogłoszeń tego użytkownika">
             <i class="ui shopping bag icon"></i>
             Ogłoszenia użytkownika ...
           </a> 
