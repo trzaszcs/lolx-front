@@ -115,12 +115,12 @@ const API = (function () {
         callback({success: false})
       })
     },
-    register: function (firstName, lastName, email, password, location, callback) {
+    register: function (firstName, lastName, email, phone, password, location, callback) {
       $.ajax({
         url: '/auth-api/users',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({firstName, lastName, email, password, location})
+        data: JSON.stringify({firstName, lastName, email, phone, password, location})
       }).done(callback)
     },
     userDetails: function (userId, jwt, callback) {
@@ -131,13 +131,13 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8'
       }).done(callback)
     },
-    updateUserDetails: function (email, firstName, lastName, location, userId, jwt, callback) {
+    updateUserDetails: function (email, phone, firstName, lastName, location, userId, jwt, callback) {
       $.ajax({
         url: `/auth-api/users/${userId}`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({email, firstName, lastName, location})
+        data: JSON.stringify({email, phone, firstName, lastName, location})
       }).done(callback)
     },
     changePassword: function (oldPassword, newPassword, userId, jwt, callback) {

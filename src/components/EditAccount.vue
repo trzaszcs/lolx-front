@@ -17,25 +17,38 @@
         </ul>
       </div>
       <div class="fields">
-        <div class="field" v-bind:class="{'error': hasFieldError('firstName')}">
+        <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
           <label>Imie</label>
           <input v-model="firstName" placeholder="Imie"/>
         </div>
 
-        <div class="field" v-bind:class="{'error': hasFieldError('lastName')}">
+        <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
           <label>Nazwisko</label>
           <input v-model="lastName" placeholder="Nazwisko"/>
         </div>
       </div>
       
       <div class="fields">
-        <div class="field" v-bind:class="{'error': hasFieldError('email')}">
+        <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
           <label>Email</label>
           <input v-model="email" placeholder="email@domena.pl"/>
         </div>
+
+        <div class="field required">
+          <label>Telefon</label>
+          <div class="ui labeled input">
+            <div class="ui label">
+              +48
+            </div>
+            <input v-model="phone" placeholder="Nr tel">
+          </div>
+        </div>
+
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('location')}">
+      
+
+      <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
         <label>Lokalizacja</label>
         <location-input :location="location"></location-input>
       </div>
@@ -50,13 +63,14 @@
 
 <script>
 import api from '../api'
+import util from '../util'
 import session from '../session'
 import {states} from '../const'
 import LoadingBox from './LoadingBox.vue'
 import LocationInput from './LocationInput.vue'
 
 export default {
-  props: ['firstName', 'lastName', 'location', 'email'],
+  props: ['firstName', 'lastName', 'location', 'email', 'phone'],
   components: {
     LoadingBox,
     LocationInput
@@ -82,7 +96,7 @@ export default {
       }
 
       this.saving = true
-      api.updateUserDetails(this.email, this.firstName, this.lastName, this.location, session.getUserId(), session.getJwt(), (response) => {
+      api.updateUserDetails(this.email, this.phone, this.firstName, this.lastName, this.location, session.getUserId(), session.getJwt(), (response) => {
         this.afterSave()
       })
     },
@@ -98,6 +112,14 @@ export default {
 
       if (!this.email) {
         append('email', 'Email nie jest poprawny')
+      } else {
+        if (!util.emailValid(this.email)) {
+          append('email', 'Email jest niepoprawny')
+        }
+      }
+
+      if (!this.phone) {
+        append('phone', 'Telefon jest wymagany')
       }
 
       if (!this.location || !this.location.title) {

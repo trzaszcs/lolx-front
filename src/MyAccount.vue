@@ -84,7 +84,8 @@
              :first-name="user.firstName"
              :last-name="user.lastName"
              :location="user.location"
-             :email="user.email"></edit-account>
+             :email="user.email"
+             :phone="user.phone"></edit-account>
         </div>
       </div>
      </div>

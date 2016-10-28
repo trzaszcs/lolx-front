@@ -15,32 +15,42 @@
         </ul>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('firstName')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
         <label>Imie</label>
         <input v-model="firstName" placeholder="Imie"/>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('lastName')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
         <label>Nazwisko</label>
         <input v-model="lastName" placeholder="Nazwisko"/>
       </div>
       
-      <div class="field" v-bind:class="{'error': hasFieldError('location')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
         <label>Lokalizacja</label>
         <location-input :location="location" :simple="false"></location-input>
       </div>
       
-      <div class="field" v-bind:class="{'error': hasFieldError('email')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
         <label>E-mail</label>
         <input v-model="email" placeholder="Email"/>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('password1')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('phone')}">
+        <label>Telefon</label>
+        <div class="ui labeled input">
+          <div class="ui label">
+            +48
+          </div>
+          <input v-model="phone" placeholder="Nr tel">
+        </div>
+      </div>
+
+      <div class="field required" v-bind:class="{'error': hasFieldError('password1')}">
         <label>Hasło</label>
         <input v-model="password1" type="password"/>
       </div>
 
-      <div class="field" v-bind:class="{'error': hasFieldError('password2')}">
+      <div class="field required" v-bind:class="{'error': hasFieldError('password2')}">
         <label>Powtórzone hasło</label>
         <input v-model="password2" type="password"/>
       </div>
@@ -56,6 +66,7 @@
 
 <script>
 import api from './api'
+import util from './util'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
 import InfoBox from './components/InfoBox.vue'
@@ -71,6 +82,7 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
+      phone: '',
       password1: null,
       password2: null,
       location: {title: ''},
@@ -84,6 +96,7 @@ export default {
       this.firstName = ''
       this.lastName = ''
       this.email = ''
+      this.phone = ''
       this.password1 = ''
       this.password2 = ''
       this.location = {title: ''}
@@ -99,7 +112,7 @@ export default {
       }
 
       this.saving = true
-      api.register(this.firstName, this.lastName, this.email, this.password1, this.location, (response) => {
+      api.register(this.firstName, this.lastName, this.email, this.phone, this.password1, this.location, (response) => {
         this.afterSave()
       })
     },
@@ -114,6 +127,14 @@ export default {
       }
       if (!this.email) {
         append('email', 'Email jest wymagany')
+      } else {
+        if (!util.emailValid(this.email)) {
+          append('email', 'Email jest niepoprawny')
+        }
+      }
+
+      if (!this.phone) {
+        append('phone', 'Telefon jest wymagany')
       }
 
       let passwordsFilled = true
