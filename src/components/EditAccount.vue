@@ -2,12 +2,8 @@
   <div class="ui container register">
 
     <loading-box :show="saving"></loading-box>
-   
-    <div v-if="saved" class="ui info message">
-      <p>
-        Dane zostały zmodyfikowane
-      </p>
-    </div>
+
+    <info-box :visible="saved" :header="'Modyfikacja konta'" :message="'Dane zostały zmodyfikowane pomyślnie'"></info-box>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
     
@@ -68,12 +64,14 @@ import session from '../session'
 import {states} from '../const'
 import LoadingBox from './LoadingBox.vue'
 import LocationInput from './LocationInput.vue'
+import InfoBox from './InfoBox.vue'
 
 export default {
   props: ['firstName', 'lastName', 'location', 'email', 'phone'],
   components: {
     LoadingBox,
-    LocationInput
+    LocationInput,
+    InfoBox
   },
   data () {
     return {
