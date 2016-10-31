@@ -9,7 +9,7 @@ const Util = (function () {
     const diff = new Date() - anounceDate
     const oneHour = 60 * 60 * 1000
     const hours = diff / oneHour
-    const days = hours / 24
+    const days = Math.floor(hours / 24)
 
     if (hours < 24) {
       return `dziś ${timeStr(anounceDate)}`
