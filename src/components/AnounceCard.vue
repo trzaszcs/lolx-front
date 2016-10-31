@@ -31,18 +31,22 @@
               {{anounce.title}}
             </div>
             <anounce-type :type="anounce.type"></anounce-type>
+            <a href="tel:{{anounce.phone}}" class="ui label">
+               <i class="icon text telephone"></i>
+               {{anounce.contactPhone}}
+            </a>
         </div>
          <p></p>
         <div class="ui left floated section">
           <div class="meta">
-
             {{anounce.location.title}}
           </div>
            <p></p>
           <a v-link="{ path: '/userAnounces', query: {id: anounce.ownerId} }" data-tooltip="Więcej ogłoszeń tego użytkownika">
             <i class="ui shopping bag icon"></i>
             Ogłoszenia użytkownika ...
-          </a> 
+          </a>
+          
         </div>
 
         <div class="ui right floated section">
@@ -208,6 +212,7 @@ export default {
         img: '',
         description: '',
         price: '',
+        contactPhone: '',
         creationDate: '',
         location: {
           latitude: 52.4064,

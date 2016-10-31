@@ -68,6 +68,16 @@
           </select>
         </div>
 
+        <div class="four wide field required">
+          <label>Telefon kontaktowy</label>
+          <div class="ui labeled input">
+            <div class="ui label">
+              +48
+            </div>
+            <input v-model="contactPhone" placeholder="Nr tel">
+          </div>
+        </div>
+
         <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
           <label>Lokalizacja</label>
           <location-input :location="location" :simple="false"></location-input>
@@ -107,6 +117,7 @@ export default {
       description: '',
       price: null,
       location: {title: ''},
+      contactPhone: '',
       imgName: null,
       categoryId: null,
       duration: null,
@@ -129,6 +140,7 @@ export default {
       this.price = null
       this.imgName = null
       this.duration = null
+      this.contactPhone = null
       this.categoryId = null
       this.type = null
       this.validationErrors = null
@@ -152,6 +164,7 @@ export default {
         this.description,
         this.price,
         this.location,
+        this.contactPhone,
         this.imgName,
         this.categoryId,
         this.type,
@@ -187,6 +200,10 @@ export default {
         append('location', 'Lokalizacja jest wymagana')
       } else if (!this.location.latitude) {
         append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
+      }
+
+      if (!this.contactPhone) {
+        append('phone', 'Telefon jest wymagany')
       }
 
       if (!this.categoryId) {
@@ -245,6 +262,7 @@ export default {
 
     api.userDetails(session.getUserId(), session.getJwt(), (details) => {
       this.location = details.location
+      this.contactPhone = details.phone
       done()
     })
 
