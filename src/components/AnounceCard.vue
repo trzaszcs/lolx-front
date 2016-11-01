@@ -31,7 +31,7 @@
               {{anounce.title}}
             </div>
             <anounce-type :type="anounce.type"></anounce-type>
-            <a href="tel:{{anounce.phone}}" class="ui label">
+            <a href="tel:{{anounce.contactPhone}}" class="ui label">
                <i class="icon text telephone"></i>
                {{anounce.contactPhone}}
             </a>
