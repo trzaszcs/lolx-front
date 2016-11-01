@@ -33,7 +33,7 @@
             <anounce-type :type="anounce.type"></anounce-type>
             <a href="tel:{{anounce.contactPhone}}" class="ui label">
                <i class="icon text telephone"></i>
-               {{anounce.contactPhone}}
+               {{contactPhone()}}
             </a>
         </div>
          <p></p>
@@ -322,6 +322,9 @@ export default {
     },
     getImg: function () {
       return this.anounce.img ? this.anounce.img : 'http://semantic-ui.com/images/wireframe/image.png'
+    },
+    contactPhone: function () {
+      return util.prettyPhone(this.anounce.contactPhone)
     }
   },
   events: {

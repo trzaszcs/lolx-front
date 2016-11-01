@@ -20,14 +20,32 @@ const Util = (function () {
     }
   }
 
+  const formatPhone = (phone) => {
+    if (phone.length === 9) {
+      const re = /([0-9]{3})([0-9]{3})([0-9]{3})/
+      return phone.replace(re, '$1 $2 $3')
+    }
+    return phone
+  }
+
   const emailValid = (email) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(email)
   }
 
+  const phoneValid = (phone) => {
+    if (phone) {
+      const formatted = phone.replace(/ /g, '').replace(/-/g, '')
+      return formatted.match(/^[0-9]+$/) && formatted.length > 5
+    }
+    return false
+  }
+
   return {
     prettyDate: formatDate,
-    emailValid: emailValid
+    prettyPhone: formatPhone,
+    emailValid: emailValid,
+    phoneValid: phoneValid
   }
 })()
 

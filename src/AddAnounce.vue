@@ -97,6 +97,7 @@
 <script>
 import $ from 'jquery'
 import api from './api'
+import util from './util'
 import session from './session'
 import {anounceDurations} from './const'
 import LoadingBox from './components/LoadingBox.vue'
@@ -204,6 +205,8 @@ export default {
 
       if (!this.contactPhone) {
         append('phone', 'Telefon jest wymagany')
+      } else if (!util.phoneValid(this.contactPhone)) {
+        append('phone', 'Telefon jest niepoprawny')
       }
 
       if (!this.categoryId) {
