@@ -195,6 +195,12 @@ const API = (function () {
         method: 'GET'
       }).done(callback)
     },
+    reverseGeocode: function (latitude, longitude, callback) {
+      $.ajax({
+        url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}`,
+        method: 'GET'
+      }).done(callback)
+    },
     categories: function (callback) {
       $.ajax({
         url: '/category-api/categories',

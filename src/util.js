@@ -1,4 +1,14 @@
 const Util = (function () {
+  const currentLocation = (callback) => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (res) => callback(res.coords),
+        () => callback(),
+        {timeout: 1000})
+    } else {
+      callback()
+    }
+  }
   const timeStr = (date) => {
     const twoDigits = (value) => { return ('0' + value).slice(-2) }
     const hours = twoDigits(date.getHours())
@@ -45,7 +55,8 @@ const Util = (function () {
     prettyDate: formatDate,
     prettyPhone: formatPhone,
     emailValid: emailValid,
-    phoneValid: phoneValid
+    phoneValid: phoneValid,
+    currentLocation: currentLocation
   }
 })()
 
