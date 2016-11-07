@@ -55,6 +55,10 @@ export default {
       this.page = event.page
       this.emitEvent()
       this.changeAddress()
+    },
+    'geolocation': function (event) {
+      this.location = event
+      this.emitEvent()
     }
   },
   ready: function () {

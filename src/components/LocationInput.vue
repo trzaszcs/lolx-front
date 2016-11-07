@@ -12,52 +12,18 @@
 <script>
 import api from '../api'
 import $ from 'jquery'
+import util from '../util'
 
 export default {
   props: ['location', 'simple'],
   ready: function () {
-    const buildTitle = (result) => {
-      let locationParts = {}
-      let title = ''
-      result.address_components.forEach((component) => { locationParts[component.types[0]] = component.short_name })
-
-      if ('locality' in locationParts) {
-        title = locationParts['locality'] + ', '
-      }
-      /*
-      if ('route' in locationParts) {
-        title += locationParts['route']
-      }
-
-      if ('street_number' in locationParts) {
-        title += ' ' + locationParts['street_number'] + ', '
-      }
-
-      if ('political' in locationParts) {
-        title += ' ' + locationParts['political']
-      }
-      */
-      if ('administrative_area_level_1' in locationParts) {
-        title += ' ' + locationParts['administrative_area_level_1']
-      }
-
-      return title
-    }
-
-    const getComponent = (result, componentName) => {
-      const results = result.address_components.filter(component => {
-        return component.types[0] === componentName
-      })
-      return results.length > 0 ? results[0].short_name : null
-    }
-
     const mapResult = (result) => {
       return {
-        title: buildTitle(result),
+        title: util.decorateGeolocation(result),
         latitude: result.geometry.location.lat,
         longitude: result.geometry.location.lng,
-        city: getComponent(result, 'locality'),
-        state: getComponent(result, 'administrative_area_level_1')
+        city: util.geolocationCity(result),
+        state: util.geolocationState(result)
       }
     }
 

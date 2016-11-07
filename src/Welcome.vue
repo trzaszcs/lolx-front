@@ -16,9 +16,15 @@ export default {
   ready: function () {
     util.currentLocation((coords) => {
       if (coords) {
-        console.log('coords:', coords)
         api.reverseGeocode(coords.latitude, coords.longitude, (result) => {
-          console.log('address: ', result)
+          const geo = result.results[0]
+          this.$broadcast(
+            'geolocation',
+            {latitude: coords.latitude,
+             longitude: coords.longitude,
+             title: util.decorateGeolocation(geo),
+             city: util.geolocationCity(geo),
+             state: util.geolocationState(geo)})
         })
       }
     })
