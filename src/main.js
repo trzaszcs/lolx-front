@@ -12,6 +12,7 @@ import Register from './Register'
 import ResetPasswordRequest from './ResetPasswordRequest'
 import ResetPassword from './ResetPassword'
 import UserAnounces from './UserAnounces'
+import Chat from './chat/Chat'
 
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
@@ -53,6 +54,9 @@ router.map({
   },
   '/userAnounces': {
     component: UserAnounces
+  },
+  '/chat': {
+    component: Chat
   }
 })
 

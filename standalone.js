@@ -33,10 +33,16 @@ var proxyConfigForCategoryApi = {
     changeOrigin: true
 };
 
+var proxyConfigForChatApi = {
+    target: 'http://lolx-chat.herokuapp.com/',  
+    pathRewrite: {'^/chat-api' : ''},
+    changeOrigin: true
+};
+
 app.use(httpProxy('/api', proxyConfigForApi));
 app.use(httpProxy('/auth-api', proxyConfigForAuthApi));
 app.use(httpProxy('/category-api', proxyConfigForCategoryApi));
-
+app.use(httpProxy('/chat-api', proxyConfigForChatApi));
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

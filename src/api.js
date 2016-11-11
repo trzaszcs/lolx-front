@@ -206,6 +206,32 @@ const API = (function () {
         url: '/category-api/categories',
         method: 'GET'
       }).done(callback)
+    },
+    createChat: function (anounceId, jwt, msg, callback) {
+      $.ajax({
+        url: '/chat-api',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({anounceId, msg})
+      }).done(callback)
+    },
+    appendMessage: function (chatId, jwt, msg, callback) {
+      $.ajax({
+        url: `/chat-api/${chatId}`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({msg})
+      }).done(callback)
+    },
+    getChat: function (chatId, jwt, callback) {
+      $.ajax({
+        url: `/chat-api/${chatId}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
     }
   }
 })()
