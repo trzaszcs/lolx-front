@@ -2,25 +2,22 @@
   <div class="ui container chat">
     <div class="ui segment">
       <loading-box :show="loading"></loading-box>
-   
-      <form class="ui form" v-bind:class="{ 'error': validationErrors }">
-        <h4 class="ui dividing header">Wyślij wiadomość</h4>
 
-        <info-box :visible="msgAdded">
+      <h4 class="ui dividing header">Wyślij wiadomość</h4>
+      <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.ownerId} }">{{anounce.title}}</a></h2>
+
+      <info-box :visible="msgAdded" :header="'Chat'">
           <p>
             Twoja wiadomość została wysłana
           </p>
-        </info-box>
+      </info-box>
 
-        <div class="three wide field required" v-bind:class="{'error': hasFieldError('msg')}">
-          <textarea v-model="msg">
-          </textarea>
-        </div>
-
-        <input v-on:click="save($event)" type="submit" class="ui teal button" value="Wyślij"></input>
+      <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+        <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
+        <input v-on:click="save($event)" type="submit" class="ui teal button" v-bind:class="{ 'disabled': !msg }" value="Wyślij"></input>
       </form>
 
-      <conversation :messages="messages"></conversation>
+      <conversation v-if="messages" :messages="messages"></conversation>
 
     </div>
   </div>
@@ -43,9 +40,10 @@ export default {
     return {
       chatId: null,
       anounceId: null,
+      anounce: {},
       msg: null,
       msgAdded: false,
-      messages: []
+      messages: null
     }
   },
   methods: {
@@ -63,10 +61,10 @@ export default {
 
       if (!this.chatId) {
         api.createChat(this.anounceId, session.getJwt(), this.msg, (response) => {
-          this.chatId = response.chatId
+          this.chatId = response.id
           this.msgAdded = true
           api.getChat(this.chatId, session.getJwt(), (response) => {
-            this.messages = response.chat.messages
+            this.messages = response.messages
             this.afterSave()
             this.loading = false
           })
@@ -118,12 +116,14 @@ export default {
       // load chat
       this.loading = true
       api.getChat(this.chatId, session.getJwt(), (response) => {
-        this.messages = response.chat.messages
+        this.messages = response.messages
         this.loading = false
       })
     } else {
       // new chat
     }
+
+    api.getById(this.anounceId, (response) => { this.anounce = response })
   }
 }
 </script>

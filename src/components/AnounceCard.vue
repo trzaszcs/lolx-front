@@ -46,7 +46,11 @@
             <i class="ui shopping bag icon"></i>
             Ogłoszenia użytkownika ...
           </a>
-          
+          <br/>
+          <a v-link="{ path: '/chat', query: {anounceId: anounce.id} }" data-tooltip="Zadaj pytanie autorowi">
+            <i class="ui talk outline icon"></i>
+            Zapytaj o ofertę
+          </a>
         </div>
 
         <div class="ui right floated section">

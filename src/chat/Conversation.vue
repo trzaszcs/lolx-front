@@ -1,8 +1,7 @@
 <template>
   <div class="ui container conversation">
     <div class="ui segment">
-      <loading-box :show="loading"></loading-box>
-   
+    
       <ul>
         <li v-for="msg in messages">
           <message :msg="msg"></message>

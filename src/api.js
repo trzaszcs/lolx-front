@@ -209,7 +209,7 @@ const API = (function () {
     },
     createChat: function (anounceId, jwt, msg, callback) {
       $.ajax({
-        url: '/chat-api',
+        url: '/chat-api/chat',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
@@ -218,7 +218,7 @@ const API = (function () {
     },
     appendMessage: function (chatId, jwt, msg, callback) {
       $.ajax({
-        url: `/chat-api/${chatId}`,
+        url: `/chat-api/chat/${chatId}`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
@@ -227,7 +227,7 @@ const API = (function () {
     },
     getChat: function (chatId, jwt, callback) {
       $.ajax({
-        url: `/chat-api/${chatId}`,
+        url: `/chat-api/chat/${chatId}`,
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
