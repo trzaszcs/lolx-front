@@ -1,14 +1,10 @@
 <template>
-  <div class="ui container conversation">
-    <div class="ui segment">
-    
+  <div class="conversation">
       <ul>
         <li v-for="msg in messages">
           <message :msg="msg"></message>
         </li>
       </ul>
-      
-    </div>
   </div>
 </template>
 

@@ -30,6 +30,17 @@ import LoadingBox from '../components/LoadingBox.vue'
 import InfoBox from '../components/InfoBox.vue'
 import Conversation from './Conversation.vue'
 
+const enrichMessages = (messages, leftSideUserId) => {
+  return messages.map(message => {
+    message.leftSide = message['author-id'] === leftSideUserId
+    return message
+  })
+}
+
+const leftSideUserId = (chat, currentUserId) => {
+  return chat['author-id'] === currentUserId ? currentUserId : chat['anounce-author-id']
+}
+
 export default {
   components: {
     LoadingBox,
@@ -43,7 +54,8 @@ export default {
       anounce: {},
       msg: null,
       msgAdded: false,
-      messages: null
+      messages: null,
+      leftSideUserId: null
     }
   },
   methods: {
@@ -64,7 +76,8 @@ export default {
           this.chatId = response.id
           this.msgAdded = true
           api.getChat(this.chatId, session.getJwt(), (response) => {
-            this.messages = response.messages
+            this.leftSideUserId = leftSideUserId(response, session.getUserId())
+            this.messages = enrichMessages(response.messages, this.leftSideUserId)
             this.afterSave()
             this.loading = false
           })
@@ -73,7 +86,7 @@ export default {
         api.appendMessage(this.chatId, session.getJwt(), this.msg, (response) => {
           this.msgAdded = true
           api.getChat(this.chatId, session.getJwt(), (response) => {
-            this.messages = response.chat.messages
+            this.messages = enrichMessages(response.chat.messages, this.leftSideUserId)
             this.afterSave()
             this.loading = false
           })
@@ -116,7 +129,8 @@ export default {
       // load chat
       this.loading = true
       api.getChat(this.chatId, session.getJwt(), (response) => {
-        this.messages = response.messages
+        this.leftSideUserId = leftSideUserId(response, session.getUserId())
+        this.messages = enrichMessages(response.messages, this.leftSideUserId)
         this.loading = false
       })
     } else {

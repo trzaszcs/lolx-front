@@ -1,6 +1,8 @@
 <template>
-  <div class="message">
-    {{msg.msg}}
+  <div class="message" v-bind:class="{'left': msg.leftSide}">
+    {{msg.msg}}</br>
+    autor: {{msg.author}} </br>
+    utworzono {{msg.created}}
   </div>
 </template>
 
