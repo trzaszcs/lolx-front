@@ -168,12 +168,26 @@ margin-top: 100px;
       list-style: none;
       margin-left: 0;
 
+      .author {
+        background-color: #D4E0F4;
+      }
+
+      .opponent {
+        background-color: #F1F2EB;
+      }
+      
       .message {
-          text-align: right;
+        display: inline-block;
+        margin-bottom: 5px;
           
-          .left {
-              text-align: left;
-          } 
+        span.author{
+          font-weight: 700;
+        }
+  
+        span.creationDate{
+          color:gray;
+          font-size: 0.8em;
+        }
       }
     }
   }

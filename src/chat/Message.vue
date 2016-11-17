@@ -1,13 +1,20 @@
 <template>
-  <div class="message" v-bind:class="{'left': msg.leftSide}">
-    {{msg.msg}}</br>
-    autor: {{msg.author}} </br>
-    utworzono {{msg.created}}
+  <div class="message" v-bind:class="{'author': message.isAuthor, 'opponent': message.isOpponent}">
+    <span class="author">{{msg.author}}</span>
+    <span class="creationDate">{{formatDate(msg.created)}}</span>
+    <p>{{msg.msg}}</p>
   </div>
 </template>
 
 <script>
+import util from '../util'
+
 export default {
-  props: ['msg']
+  props: ['msg'],
+  methods: {
+    formatDate: function (dateStr) {
+      return util.prettyDateDetailed(new Date(dateStr))
+    }
+  }
 }
 </script>

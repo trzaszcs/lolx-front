@@ -30,6 +30,18 @@ const Util = (function () {
     }
   }
 
+  const formatDateToDetailed = (date) => {
+    const diff = new Date() - date
+    const oneHour = 60 * 60 * 1000
+    const hours = diff / oneHour
+
+    if (hours < 24) {
+      return `dziś ${timeStr(date)}`
+    } else {
+      return `${date.getDate()}.${date.getMonth() + 1} ${timeStr(date)}`
+    }
+  }
+
   const formatPhone = (phone) => {
     if (phone.length === 9) {
       const re = /([0-9]{3})([0-9]{3})([0-9]{3})/
@@ -95,6 +107,7 @@ const Util = (function () {
 
   return {
     prettyDate: formatDate,
+    prettyDateDetailed: formatDateToDetailed,
     prettyPhone: formatPhone,
     emailValid: emailValid,
     phoneValid: phoneValid,
