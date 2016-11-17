@@ -75,6 +75,7 @@ export default {
       if (!this.chatId) {
         api.createChat(this.anounceId, session.getJwt(), this.msg, (response) => {
           this.chatId = response.id
+          this.$router.go({query: {...this.$route.query, chatId: this.chatId}})
           this.msgAdded = true
           api.getChat(this.chatId, session.getJwt(), (response) => {
             this.handleChatLoaded(response)
