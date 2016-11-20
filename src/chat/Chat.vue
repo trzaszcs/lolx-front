@@ -4,13 +4,15 @@
       <loading-box :show="loading"></loading-box>
 
       <h4 class="ui dividing header">Wyślij wiadomość</h4>
-      <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.ownerId} }">{{anounce.title}}</a></h2>
 
-      <info-box :visible="msgAdded" :header="'Chat'">
+      <info-box :visible="msgAdded">
           <p>
-            Twoja wiadomość została wysłana
+            Wiadomość została wysłana
           </p>
       </info-box>
+
+      <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.ownerId} }">{{anounce.title}}</a></h2>
+
 
       <form class="ui form">
         <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
@@ -93,27 +95,6 @@ export default {
           })
         })
       }
-    },
-    validate: function (event) {
-      let errors = []
-      const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
-      if (!this.msg) {
-        append('msg', 'Wiadomość jest wymagana')
-      }
-
-      if (errors.length > 0) {
-        this.validationErrors = errors
-        return false
-      }
-      return true
-    },
-    hasFieldError: function (fieldName) {
-      if (this.validationErrors) {
-        return this.validationErrors.some((errorMessage) => {
-          return errorMessage.name === fieldName
-        })
-      }
-      return false
     }
   },
   ready: function () {
