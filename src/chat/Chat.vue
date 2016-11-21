@@ -11,7 +11,7 @@
           </p>
       </info-box>
 
-      <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.ownerId} }">{{anounce.title}}</a></h2>
+      <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.id} }">{{anounce.title}}</a></h2>
 
 
       <form class="ui form">
@@ -68,10 +68,6 @@ export default {
     save: function (event) {
       event.preventDefault()
 
-      if (!this.validate()) {
-        return
-      }
-
       this.loading = true
 
       if (!this.chatId) {
@@ -115,7 +111,13 @@ export default {
         this.loading = false
       })
     } else {
-      // new chat
+      api.getUserChat(this.anounceId, session.getJwt(), (response) => {
+        if (response) {
+          this.chatId = response.id
+          this.$router.go({query: {chatId: this.chatId}})
+          this.handleChatLoaded(response)
+        }
+      })
     }
 
     api.getById(this.anounceId, (response) => { this.anounce = response })
