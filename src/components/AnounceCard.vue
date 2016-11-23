@@ -47,7 +47,11 @@
             Ogłoszenia użytkownika ...
           </a>
           <br/>
-          <a v-link="{ path: '/chat', query: {anounceId: anounce.id} }" data-tooltip="Zadaj pytanie autorowi">
+          <a v-if="chatStatus" v-link="{ path: '/chat', query: {anounceId: anounce.id, chatId: chatStatus.id} }" data-tooltip="Przejdź do konwersacji">
+            <i class="ui talk outline icon"></i>
+            Przejdź do konwersacji
+          </a>
+          <a v-else v-link="{ path: '/chat', query: {anounceId: anounce.id} }" data-tooltip="Zadaj pytanie autorowi">
             <i class="ui talk outline icon"></i>
             Zapytaj o ofertę
           </a>
@@ -243,7 +247,8 @@ export default {
       showLoginMessage: false,
       creationDate: function () {
         return util.prettyDate(new Date(this.anounce.creationDate))
-      }
+      },
+      chatStatus: null
     }
   },
   methods: {
@@ -337,6 +342,11 @@ export default {
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
       this.initMap()
+      api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
+        if (chat) {
+          this.chatStatus = chat
+        }
+      })
     }
   },
   ready: function () {

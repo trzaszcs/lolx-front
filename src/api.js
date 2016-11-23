@@ -235,7 +235,7 @@ const API = (function () {
     },
     getUserChat: function (anounceId, jwt, callback) {
       $.ajax({
-        url: `/chat-api/chat?anounceId=${anounceId}`,
+        url: `/chat-api/chat/status?anounceId=${anounceId}`,
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
