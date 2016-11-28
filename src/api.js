@@ -242,6 +242,14 @@ const API = (function () {
       }).done(callback).fail(result => {
         callback()
       })
+    },
+    getUserChats: function (jwt, callback) {
+      $.ajax({
+        url: '/chat-api/chat/user',
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
     }
   }
 })()

@@ -342,11 +342,13 @@ export default {
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
       this.initMap()
-      api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
-        if (chat) {
-          this.chatStatus = chat
-        }
-      })
+      if (session.logged() && session.getUserId() !== this.anounce.ownerId) {
+        api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
+          if (chat) {
+            this.chatStatus = chat
+          }
+        })
+      }
     }
   },
   ready: function () {

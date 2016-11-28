@@ -13,6 +13,9 @@
       <a class="item" v-bind:class="{'active': view == 'sold'}" @click="select('sold')">
         Sprzedane
       </a>
+      <a class="item" v-bind:class="{'active': view == 'chats'}" @click="select('chats')">
+        Rozmowy
+      </a>
       <a class="item" v-bind:class="{'active': view == 'account'}" @click="select('account')">
         Konto
       </a>
@@ -64,30 +67,35 @@
        <my-orders :orders="customerOrders"></my-orders>
      </div>
 
-     <!-- MY-SOLD -->
+    <!-- MY-SOLD -->
     <div v-show="view == 'sold'">
       <my-sold :orders="ownerOrders"></my-sold>
     </div>
 
+    <!-- CHATS -->
+    <div v-show="view == 'chats'">
+      <my-chats></my-chats>
+    </div>
 
-     <!-- ACCOUNT -->
-     <div v-show="view == 'account'">
-       <div class="ui fluid card">
 
-          <div class="ui top attached label">
-              <i class="ui edit icon"></i>
-              Moje dane
-          </div>
-         
-         <div class="content">
-           <edit-account 
-             :first-name="user.firstName"
-             :last-name="user.lastName"
-             :location="user.location"
-             :email="user.email"
-             :phone="user.phone"></edit-account>
+    <!-- ACCOUNT -->
+    <div v-show="view == 'account'">
+      <div class="ui fluid card">
+
+        <div class="ui top attached label">
+          <i class="ui edit icon"></i>
+          Moje dane
         </div>
-      </div>
+         
+        <div class="content">
+          <edit-account 
+            :first-name="user.firstName"
+            :last-name="user.lastName"
+            :location="user.location"
+            :email="user.email"
+            :phone="user.phone"></edit-account>
+         </div>
+       </div>
      </div>
 
      <!-- CHANGE PASSWORD -->
@@ -119,6 +127,7 @@
   import UserPublicProfile from './components/UserPublicProfile.vue'
   import ChangePassword from './components/ChangePassword.vue'
   import UserAnounces from './components/UserAnounces.vue'
+  import MyChats from './components/myChats/MyChats.vue'
   import session from './session'
   import api from './api'
   import $ from 'jquery'
@@ -149,7 +158,8 @@
       EditAccount,
       LoadingBox,
       ChangePassword,
-      UserAnounces
+      UserAnounces,
+      MyChats
     },
     methods: {
       select: function (viewName) {
