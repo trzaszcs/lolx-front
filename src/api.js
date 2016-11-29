@@ -243,6 +243,16 @@ const API = (function () {
         callback()
       })
     },
+    getChatForAnounce: function (anounceId, jwt, callback) {
+      $.ajax({
+        url: `/chat-api/chat?anounceId=${anounceId}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
     getUserChats: function (jwt, callback) {
       $.ajax({
         url: '/chat-api/chat/user',

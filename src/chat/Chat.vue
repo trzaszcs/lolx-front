@@ -119,7 +119,7 @@ export default {
         this.loading = false
       })
     } else {
-      api.getUserChat(this.anounceId, session.getJwt(), (response) => {
+      api.getChatForAnounce(this.anounceId, session.getJwt(), (response) => {
         if (response) {
           this.chatId = response.id
           this.$router.go({query: {chatId: this.chatId}})
