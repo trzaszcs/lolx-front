@@ -73,7 +73,7 @@
     </div>
 
     <!-- CHATS -->
-    <div v-show="view == 'chats'">
+    <div v-if="view == 'chats'">
       <my-chats></my-chats>
     </div>
 
