@@ -25,7 +25,7 @@
         <div class="ui item" v-link="{ path: '/chat', query: { chatId: chat.id }}">
           <div class="content">
             <a class="header">
-              {{chat.title}} 
+              {{chat.anounceTitle}} 
             </a>
           </div> 
           <div class="meta">
