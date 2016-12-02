@@ -20,25 +20,20 @@
     </div>
 
     <div class="content">
-               
-      <div class="ui fluid selection list" v-for="chat in chats">
-        <div class="ui item" v-link="{ path: '/chat', query: { chatId: chat.id }}">
-          <div class="content">
-            <a class="header">
-              {{chat.anounceTitle}} 
-            </a>
-          </div> 
-          <div class="meta">
-            Data utworzenia {{chat.created}} <br/>
-            Author {{chat.authorName}} <br/>
-          </div> 
-        </div>
+
+      <div class="anounceChat" v-for="anounceChat in chats">
+        <ul>
+          <li v-for="chat in anounceChat.chats" v-link="{ path: '/chat', query: { chatId: chat.id }}">
+            <span class="author">{{chat.authorName}}</span> napisał: <p>"{{chat.firstMessage}}.."</p> 
+          </li>
+        </ul>
+        w ogłoszeniu <a v-link="{path: '/anounce/', query: {id: anounceChat.anounceId}}" target="_blank">{{anounceChat.anounceTitle}}</a>
       </div>
-          
-    </div>
         
-  </div>
-     
+   </div>
+          
+ </div>
+            
 </template>
 <script>
 import api from '../../api.js'
