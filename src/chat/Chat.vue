@@ -5,11 +5,6 @@
 
       <h4 class="ui dividing header">Wyślij wiadomość</h4>
 
-      <a v-on:click="goToOffer()" class="ui icon" data-tooltip="wróć do oferty">
-        <i class="ui left arrow icon"></i>
-        wróć do oferty
-      </a>
-
       <info-box :visible="msgAdded">
           <p>
             Wiadomość została wysłana
@@ -96,9 +91,6 @@ export default {
           })
         })
       }
-    },
-    goToOffer: function () {
-      this.$router.go({path: '/anounce', query: {anounceId: this.anounceId}})
     }
   },
   ready: function () {
