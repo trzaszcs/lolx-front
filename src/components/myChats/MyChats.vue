@@ -24,7 +24,8 @@
       <div class="anounceChat" v-for="anounceChat in chats">
         <ul>
           <li v-for="chat in anounceChat.chats" v-link="{ path: '/chat', query: { chatId: chat.id }}">
-            <span class="author">{{chat.authorName}}</span> napisał: <p>"{{chat.firstMessage}}.."</p> 
+            <span class="author">{{chat.authorName}}</span> napisał <span class="creationDate">{{formatDate(chat.created)}}</span>
+            <p>"{{chat.firstMessage}}.."</p> 
           </li>
         </ul>
         w ogłoszeniu <a v-link="{path: '/anounce/', query: {id: anounceChat.anounceId}}" target="_blank">{{anounceChat.anounceTitle}}</a>
@@ -37,6 +38,7 @@
 </template>
 <script>
 import api from '../../api.js'
+import util from '../../util'
 import session from '../../session.js'
 import LoadingBox from '../LoadingBox.vue'
 
@@ -49,6 +51,9 @@ export default {
     }
   },
   methods: {
+    formatDate: function (dateStr) {
+      return util.prettyDateDetailed(new Date(dateStr))
+    }
   },
   events: {
   },
