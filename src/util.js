@@ -1,4 +1,8 @@
+import DateFormatter from './utils/date'
+
 const Util = (function () {
+  const dateFormatter = new DateFormatter()
+
   const currentLocation = (callback) => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -9,37 +13,13 @@ const Util = (function () {
       callback()
     }
   }
-  const timeStr = (date) => {
-    const twoDigits = (value) => { return ('0' + value).slice(-2) }
-    const hours = twoDigits(date.getHours())
-    const minutes = twoDigits(date.getMinutes())
-    return `${hours}:${minutes}`
-  }
-  const formatDate = (anounceDate) => {
-    const diff = new Date() - anounceDate
-    const oneHour = 60 * 60 * 1000
-    const hours = diff / oneHour
-    const days = Math.floor(hours / 24)
 
-    if (hours < 24) {
-      return `dziś ${timeStr(anounceDate)}`
-    } else if (hours < 48) {
-      return `wczoraj ${timeStr(anounceDate)}`
-    } else {
-      return `${days} dni temu`
-    }
+  const formatDate = (date) => {
+    return dateFormatter.format(date)
   }
 
   const formatDateToDetailed = (date) => {
-    const diff = new Date() - date
-    const oneHour = 60 * 60 * 1000
-    const hours = diff / oneHour
-
-    if (hours < 24) {
-      return `dziś ${timeStr(date)}`
-    } else {
-      return `${date.getDate()}.${date.getMonth() + 1} ${timeStr(date)}`
-    }
+    return dateFormatter.formatToDetailed(date)
   }
 
   const formatPhone = (phone) => {
