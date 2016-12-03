@@ -39,8 +39,8 @@ import Conversation from './Conversation.vue'
 
 const enrich = (chat) => {
   chat.messages = chat.messages.map(message => {
-    message.isAuthor = message.authorId === chat.authorId
-    message.isOpponent = message.isAuthor
+    message.authorsMessage = message.authorId === chat.authorId
+    message.opponentsMessage = !message.authorsMessage
     return message
   })
   return chat
@@ -108,6 +108,10 @@ export default {
       return
     }
 
+    const loadAnounce = (anounceId) => {
+      api.getById(anounceId, (response) => { this.anounce = response })
+    }
+
     this.chatId = this.$route.query.chatId
     this.anounceId = this.$route.query.anounceId
 
@@ -117,8 +121,10 @@ export default {
       api.getChat(this.chatId, session.getJwt(), (response) => {
         this.handleChatLoaded(response)
         this.loading = false
+        this.anounceId = response.anounceId
+        loadAnounce(this.anounceId)
       })
-    } else {
+    } else if (this.anounceId) {
       api.getChatForAnounce(this.anounceId, session.getJwt(), (response) => {
         if (response) {
           this.chatId = response.id
@@ -126,9 +132,8 @@ export default {
           this.handleChatLoaded(response)
         }
       })
+      loadAnounce(this.anounceId)
     }
-
-    api.getById(this.anounceId, (response) => { this.anounce = response })
   }
 }
 </script>

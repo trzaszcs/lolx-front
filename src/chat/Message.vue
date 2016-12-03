@@ -1,5 +1,5 @@
 <template>
-  <div class="message" v-bind:class="{'author': msg.isAuthor, 'opponent': msg.isOpponent}">
+  <div class="message" v-bind:class="{'author': msg.authorsMessage, 'opponent': msg.opponentsMessage}">
     <span class="author">{{msg.author}}</span>
     <span class="creationDate">{{formatDate(msg.created)}}</span>
     <p>{{msg.msg}}</p>
