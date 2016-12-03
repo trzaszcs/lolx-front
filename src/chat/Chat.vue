@@ -27,6 +27,7 @@
 
 <script>
 import api from '../api'
+import util from '../util'
 import session from '../session'
 import LoadingBox from '../components/LoadingBox.vue'
 import InfoBox from '../components/InfoBox.vue'
@@ -36,6 +37,8 @@ const enrich = (chat) => {
   chat.messages = chat.messages.map(message => {
     message.authorsMessage = message.authorId === chat.authorId
     message.opponentsMessage = !message.authorsMessage
+    message.creationDatePretty = util.prettyDateDetailed(new Date(message.created))
+    message.authorPretty = message.authorId === session.getUserId() ? `Ty (${message.author})` : message.author
     return message
   })
   return chat

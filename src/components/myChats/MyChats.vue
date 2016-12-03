@@ -21,11 +21,11 @@
 
     <div class="content">
 
-      <div class="anounceChat" v-for="anounceChat in chats">
+      <div class="anounceChat" v-for="anounceChat in anounceChats">
         <ul>
           <li v-for="chat in anounceChat.chats" v-link="{ path: '/chat', query: { chatId: chat.id }}">
-            <span class="author">{{chat.authorName}}</span> napisał <span class="creationDate">{{formatDate(chat.created)}}</span>
-            <p>"{{chat.firstMessage}}.."</p> 
+            <span class="author">{{chat.authorNamePretty}}</span> napisał <span class="creationDate">{{chat.creationDatePretty}}</span>
+            <p>"{{chat.firstMessage}}.."</p>
           </li>
         </ul>
         w ogłoszeniu <a v-link="{path: '/anounce/', query: {id: anounceChat.anounceId}}" target="_blank">{{anounceChat.anounceTitle}}</a>
@@ -42,25 +42,37 @@ import util from '../../util'
 import session from '../../session.js'
 import LoadingBox from '../LoadingBox.vue'
 
+const decorate = (anounceChats) => {
+  const enrichChat = chat => {
+    chat.creationDatePretty = util.prettyDateDetailed(new Date(chat.created))
+    chat.authorNamePretty = chat.authorId === session.getUserId() ? `Ty (${chat.authorName})` : chat.authorName
+    return chat
+  }
+
+  return anounceChats.map(anounceChat => {
+    return {
+      ...anounceChat,
+      chats: anounceChat.chats.map(chat => enrichChat(chat))
+    }
+  })
+}
+
 export default {
   components: {LoadingBox},
   data () {
     return {
       loading: false,
-      chats: null
+      anounceChats: []
     }
   },
   methods: {
-    formatDate: function (dateStr) {
-      return util.prettyDateDetailed(new Date(dateStr))
-    }
   },
   events: {
   },
   ready: function () {
     this.loading = true
     api.getUserChats(session.getJwt(), (response) => {
-      this.chats = response
+      this.anounceChats = decorate(response)
       this.loading = false
     })
   }
