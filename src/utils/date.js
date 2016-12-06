@@ -12,7 +12,7 @@ class DateFormatter {
 
   hoursDiff (date, now) {
     const diff = now - date
-    return diff / this.oneHour
+    return Math.round(diff / this.oneHour)
   }
 
   isToday (date, now) {
@@ -27,7 +27,6 @@ class DateFormatter {
 
   format (date) {
     const now = new Date()
-
     if (this.isToday(date, now)) {
       return `dziś ${this.time(date)}`
     } else if (this.isYesterday(date, now)) {
