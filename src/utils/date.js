@@ -17,7 +17,7 @@ class DateFormatter {
 
   isToday (date, now) {
     const hours = this.hoursDiff(date, now)
-    return hours < 24 && date.getHours() < now.getHours()
+    return hours < 24 && date.getHours() <= now.getHours()
   }
 
   isYesterday (date, now) {
@@ -27,13 +27,13 @@ class DateFormatter {
 
   format (date) {
     const now = new Date()
-    const days = this.hoursDiff(date, now) / 24
 
     if (this.isToday(date, now)) {
       return `dziś ${this.time(date)}`
     } else if (this.isYesterday(date, now)) {
       return `wczoraj ${this.time(date)}`
     } else {
+      const days = Math.ceil(this.hoursDiff(date, now) / 24)
       return `${days} dni temu`
     }
   }
