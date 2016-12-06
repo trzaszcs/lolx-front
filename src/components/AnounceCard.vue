@@ -55,6 +55,11 @@
             <i class="ui talk outline icon"></i>
             Zapytaj o ofertę
           </a>
+          <br/>
+          <a v-link="{ path: '/requestOrder', query: {anounceId: anounce.id} }"  data-tooltip="Zgłoś zainteresowanie">
+            <i class="ui alarm inline icon"></i>
+            Zgłoś zainteresowanie
+          </a>
         </div>
 
         <div class="ui right floated section">
@@ -192,6 +197,7 @@
 </template>
 
 <script>
+import cache from '../utils/cache'
 import api from '../api'
 import guid from '../guid'
 import util from '../util'
@@ -203,6 +209,10 @@ const $ = require('jquery')
 require('moment')
 require('semantic-ui-daterangepicker')
 const gmAPI = require('google-maps')
+
+const showRequestOrderConfirm = () => {
+  $('.ui.modal').modal('show')
+}
 
 export default {
   components: {
@@ -248,7 +258,8 @@ export default {
       creationDate: function () {
         return util.prettyDate(new Date(this.anounce.creationDate))
       },
-      chatStatus: null
+      chatStatus: null,
+      showRequestOrderCreatedMsg: false
     }
   },
   methods: {
@@ -334,6 +345,15 @@ export default {
     },
     contactPhone: function () {
       return util.prettyPhone(this.anounce.contactPhone)
+    },
+    requestOrder: function () {
+      if (session.logged()) {
+        showRequestOrderConfirm()
+      } else {
+        cache.put('orderRequest', true)
+        session.setBackUrl(this.$route)
+        this.$router.go({path: '/login'})
+      }
     }
   },
   events: {
@@ -342,12 +362,19 @@ export default {
       this.anounce = selectedItem.anounce
       this.user = this.getUser(selectedItem)
       this.initMap()
-      if (session.logged() && session.getUserId() !== this.anounce.ownerId) {
-        api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
-          if (chat) {
-            this.chatStatus = chat
-          }
-        })
+
+      if (session.logged()) {
+        if (cache.getAndRemove('orderRequest')) {
+          showRequestOrderConfirm()
+        }
+
+        if (session.getUserId() !== this.anounce.ownerId) {
+          api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
+            if (chat) {
+              this.chatStatus = chat
+            }
+          })
+        }
       }
     }
   },
