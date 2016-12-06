@@ -367,7 +367,6 @@ export default {
         if (cache.getAndRemove('orderRequest')) {
           showRequestOrderConfirm()
         }
-
         if (session.getUserId() !== this.anounce.ownerId) {
           api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
             if (chat) {
