@@ -56,7 +56,7 @@
             Zapytaj o ofertę
           </a>
           <br/>
-          <a v-link="{ path: '/requestOrder', query: {anounceId: anounce.id} }"  data-tooltip="Zgłoś zainteresowanie">
+          <a v-on:click="requestOrder()"  data-tooltip="Zgłoś zainteresowanie">
             <i class="ui alarm inline icon"></i>
             Zgłoś zainteresowanie
           </a>
@@ -83,95 +83,6 @@
                  {{anounce.description}}
             </div>
           </div>
-
-           <div class="ui secondary segment">
-       <div class="ui header"><i class="content icon"></i>Formularz zamówienia</div>
-          
-            <div class="ui form" v-bind:class="{ 'error': validationErrors }">
-              
-             <div class="ui error message">
-                <ul class="list" v-for="error in validationErrors">
-                  <li>{{error.txt}}</li>
-                </ul>
-              </div>
-              
-              <div class="field">
-                <label>Możesz wybrać preferowaną godzinę wykonania usługi</label>
-                <select v-model="order.preferedTime" class="ui search dropdown">
-                  <option value="">-</option>
-                  <option value="06:00">06:00</option>
-                  <option value="07:00">07:00</option>
-                  <option value="08:00">08:00</option>
-                  <option value="09:00">09:00</option>
-                  <option value="10:00">10:00</option>
-                  <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="13:00">13:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="15:00">15:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="19:00">19:00</option>
-                  <option value="20:00">20:00</option>
-                  <option value="21:00">21:00</option>
-                  <option value="22:00">22:00</option>
-                  <option value="23:00">23:00</option>
-                </select>
-              </div>
-              
-              <div class="field">
-                <label>oraz datę</label>
-                  <div class="ui icon input">
-                    <i class="calendar icon"></i>
-                    <input v-model="order.preferedDate" type="text" id="daterange"/>
-                  </div>
-              </div>     
-                 
-                <div v-if="showLoginMessage" class="field" v-bind:class="{'error': hasFieldError('customerContactInfo')}">
-                  <label>Podaj swój email lub telefon.</label>
-                    <div class="ui icon input">
-                      <i class="at icon"></i>
-                      <input v-model="order.customerContactInfo" type="text" name="customerContactInfo"/>
-                    </div>
-                </div>    
-                
-                <div  v-if="showLoginMessage" class="ui message">
-                    Nie jesteś zalogowany! <a v-link="{ path: '/login'}">Logowanie</a> nie jest wymagane 
-                    by zamówić, ale dzięki logowaniu automatycznie wypełnimy dane i zapamiętamy twoje zamówienia.
-                </div> 
-     
-                <div class="ui modal" id="confirm">
-                  <div class="ui segment">
-                  <div class="ui icon message">
-                    <i class="inbox icon"></i>
-                    <div class="content">
-                        <div class="ui header">
-                          Proszę potwierdzić zamówienie
-                        </div>
-                        <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" target="_blank">
-                           {{anounce.title}}
-                        </a>
-                      </div>
-                    </div>
-      
-                  <div class="ui two buttons">
-                   <input class="ui button" v-on:click="closeConfirm()" value="Anuluj"/>
-                   <input class="ui teal button" v-on:click="onOrder(anounce, $event)" value="Zamawiam"/>
-                  </div>
-                  
-                  </div>
-                </div>
-  
-                <input class="ui large teal fluid button" type="submit" v-on:click="orderConfirm()" value="Zamów"/>
-
-              <div class="ui message">
-              Zamówienie oznacza akceptację aktualnego <a v-link="{ path: '/terms' }">regulaminu</a> serwisu.
-              </div>
-              
-            </div>  
-        </div>
- 
     </div>
     <div class="ui column">
         <user-public-profile :user=user></user-public-profile>
@@ -194,6 +105,26 @@
     </div>
   </div>
 
+  <div class="ui modal" id="confirm">
+    <div class="ui segment">
+      <div class="ui icon message">
+        <i class="inbox icon"></i>
+        <div class="content">
+          <div class="ui header">
+            Proszę potwierdzić zamówienie
+          </div>
+          <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}" target="_blank">
+            {{anounce.title}}
+          </a>
+        </div>
+      </div>
+      <div class="ui two buttons">
+        <input class="ui button" v-on:click="closeConfirm()" value="Anuluj"/>
+        <input class="ui teal button" v-on:click="confirmRequestOrder()" value="Zamawiam"/>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -212,6 +143,10 @@ const gmAPI = require('google-maps')
 
 const showRequestOrderConfirm = () => {
   $('.ui.modal').modal('show')
+}
+
+const hideRequesOrderConfirm = () => {
+  $('.ui.modal').modal('hide')
 }
 
 export default {
@@ -283,32 +218,8 @@ export default {
       }
       return false
     },
-    orderConfirm: function () {
-      if (!this.validate() && !session.logged()) {
-        return
-      }
-      $('.ui.modal').modal('show')
-    },
     closeConfirm: function () {
-      $('.ui.modal').modal('hide')
-    },
-    onOrder: function (anonuce, event) {
-      this.closeConfirm()
-      event.preventDefault()
-      if (!this.validate() && !session.logged()) {
-        return
-      }
-      this.loading = true
-      this.order.anounceId = anonuce.id
-      if (session.logged()) {
-        this.order.customerId = session.getUserId()
-      }
-      api.order(this.order, session.getJwt(), (response) => {
-        console.log('onOrder response -> ', response)
-        this.loading = false
-        this.emitOrderEvent(this.order)
-        this.$router.go({'path': '/order', 'query': {'orderId': this.order.requestId}})
-      })
+      hideRequesOrderConfirm()
     },
     emitOrderEvent: function (order) {
       this.$dispatch('emitOrderEvent', order)
@@ -354,6 +265,13 @@ export default {
         session.setBackUrl(this.$route)
         this.$router.go({path: '/login'})
       }
+    },
+    confirmRequestOrder: function () {
+      this.loading = true
+      api.requestOrder(this.anounce.id, session.getJwt(), (response) => {
+        this.loadig = false
+        this.$router.go({'path': '/order', 'query': {'orderId': response.id}})
+      })
     }
   },
   events: {
@@ -364,7 +282,7 @@ export default {
       this.initMap()
 
       if (session.logged()) {
-        if (cache.getAndRemove('orderRequest')) {
+        if (cache.getAndClear('orderRequest')) {
           showRequestOrderConfirm()
         }
         if (session.getUserId() !== this.anounce.ownerId) {
@@ -378,14 +296,6 @@ export default {
     }
   },
   ready: function () {
-    $('#daterange').daterangepicker({
-      singleDatePicker: true,
-      showDropdowns: true,
-      autoApply: true,
-      locale: {
-        format: 'MM-DD-YYYY'
-      }
-    })
     this.showLoginMessage = !session.logged()
   }
 }

@@ -9,7 +9,7 @@ class Cache {
   }
 
   clear (key) {
-    this.cache.delete(key)
+    delete this.cache[key]
   }
 
   get (key) {
