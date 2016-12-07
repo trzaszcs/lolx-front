@@ -260,7 +260,29 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
       }).done(callback)
+    },
+    requestOrder: function (anounceId, jwt, callback) {
+      $.ajax({
+        url: '/api/request-orders/',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({anounceId})
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
+    getRequestOrder: function (id, jwt, callback) {
+      $.ajax({
+        url: `/api/request-orders/${id}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
     }
+
   }
 })()
 

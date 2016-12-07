@@ -263,6 +263,7 @@ export default {
       } else {
         cache.put('orderRequest', true)
         session.setBackUrl(this.$route)
+        hideRequesOrderConfirm()
         this.$router.go({path: '/login'})
       }
     },
