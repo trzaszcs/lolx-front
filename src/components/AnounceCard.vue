@@ -198,26 +198,6 @@ export default {
     }
   },
   methods: {
-    validate: function (event) {
-      let errors = []
-      const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
-      if (this.showLoginMessage && !this.order.customerContactInfo) {
-        append('customerContactInfo', 'Podaj kontaktowy email lub zaloguj się')
-      }
-      if (errors.length > 0) {
-        this.validationErrors = errors
-        return false
-      }
-      return true
-    },
-    hasFieldError: function (fieldName) {
-      if (this.validationErrors) {
-        return this.validationErrors.some((errorMessage) => {
-          return errorMessage.name === fieldName
-        })
-      }
-      return false
-    },
     closeConfirm: function () {
       hideRequesOrderConfirm()
     },
@@ -263,13 +243,13 @@ export default {
       } else {
         cache.put('orderRequest', true)
         session.setBackUrl(this.$route)
-        hideRequesOrderConfirm()
         this.$router.go({path: '/login'})
       }
     },
     confirmRequestOrder: function () {
       this.loading = true
       api.requestOrder(this.anounce.id, session.getJwt(), (response) => {
+        hideRequesOrderConfirm()
         this.loadig = false
         this.$router.go({'path': '/order', 'query': {'orderId': response.id}})
       })

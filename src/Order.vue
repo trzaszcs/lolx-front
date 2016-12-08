@@ -26,7 +26,7 @@
             <div class="header">Karta zamówienia usługi</div>
             
             <div class="description">
-                     <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">
+                     <a v-link="{ path: '/anounce', query: { anounceId: requestOrder.anounceId }}">
                     <b>{{anounce.title}}</b>
                 </a>
               </div>
@@ -38,22 +38,22 @@
                       <div class="ui ribbon label">Identyfikator Twojego zamówienia</div>
                     </td>
                     <td>
-                      <a v-link="{ path: '/order', query: { orderId: order.id }}">{{order.id}}</a>
+                      <a v-link="{ path: '/order', query: { orderId: requestOrder.id }}">{{requestOrder.id}}</a>
                     </td>
                   </tr>
                   <tr>
-                    <td>Dodatkowe informacje od ogłoszeniodawcy</td>
-                    <td>{{order.accepted}}</td>
+                    <td>Status</td>
+                    <td>{{requestOrder.statusText}}</td>
                   </tr>
                   <tr>
-                    <td>link bezpośrednio do ogłoszenia</td>
+                    <td>Data utworzenia</td>
+                    <td>{{requestOrder.creationDate}}</td>
+                  </tr>
+                  <tr>
+                    <td>Link bezpośrednio do ogłoszenia</td>
                     <td>
-                      <a v-link="{ path: '/anounce', query: { anounceId: order.anounceId }}">{{order.anounceId }}</a>
+                      <a v-link="{ path: '/anounce', query: { anounceId: requestOrder.anounceId }}">{{anounce.title}}</a>
                     </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -72,13 +72,27 @@ import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
 
+const translateStatus = (status) => {
+  if (status === 'WAITING') {
+    return 'Oczekiwanie na akceptację'
+  } else if (status === 'ACCEPTED') {
+    return 'Zaakceptowany'
+  } else {
+    return status
+  }
+}
+
+const enrichRequestOrder = (requestOrder) => {
+  return {...requestOrder, statusText: translateStatus(requestOrder.status)}
+}
+
 export default {
   components: {
     LoadingBox
   },
   data () {
     return {
-      order: {},
+      requestOrder: {},
       anounce: {},
       loading: false
     }
@@ -86,10 +100,16 @@ export default {
   methods: {
   },
   ready: function () {
+    if (!session.logged()) {
+      session.setBackUrl(this.$route)
+      this.$router.go({path: '/login'})
+      return
+    }
     this.loading = true
     const orderId = this.$route.query.orderId
-    api.getRequestOrder(orderId, session.getJwt(), (order) => {
-      api.getById(order.anounceId, (anounce) => {
+    api.getRequestOrder(orderId, session.getJwt(), (response) => {
+      this.requestOrder = enrichRequestOrder(response)
+      api.getById(this.requestOrder.anounceId, (anounce) => {
         this.anounce = anounce
         this.loading = false
       })
