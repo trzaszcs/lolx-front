@@ -1,7 +1,7 @@
 <template>
   <loading-box :show="loading"></loading-box>
   <div class="anounce ui container">
-    <order-steps></order-steps>
+    <order-steps v-if="showSteps()"></order-steps>
     <p></p>
     <anounce-card></anounce-card>
   </div>
@@ -21,12 +21,17 @@ export default {
   },
   data () {
     return {
-      loading: false
+      loading: false,
+      showOrderSteps: true
     }
   },
   methods: {
     back: function () {
       this.$router.go(window.history.back())
+    },
+    showSteps: function () {
+      const isShowStepsRemoved = window.localStorage.getItem('isShowStepsRemoved')
+      return (isShowStepsRemoved === null) || (isShowStepsRemoved === 'false')
     }
   },
   ready: function () {

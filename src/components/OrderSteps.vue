@@ -51,6 +51,7 @@ export default {
   ready: function () {
     $('.section .close').on('click', function () {
       $(this).closest('.section').transition('fade')
+      window.localStorage.setItem('isShowStepsRemoved', true)
     })
   },
   events: {
