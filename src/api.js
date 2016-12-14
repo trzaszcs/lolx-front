@@ -272,6 +272,16 @@ const API = (function () {
         callback()
       })
     },
+    removeRequestOrder: function (requestOrderId, jwt, callback) {
+      $.ajax({
+        url: `/api/request-orders/${requestOrderId}`,
+        method: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
     getRequestOrder: function (id, jwt, callback) {
       $.ajax({
         url: `/api/request-orders/${id}`,
@@ -281,8 +291,33 @@ const API = (function () {
       }).done(callback).fail(result => {
         callback()
       })
+    },
+    getRequestOrderForAnounce: function (anounceId, jwt, callback) {
+      $.ajax({
+        url: `/api/request-orders/anounce/${anounceId}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
+    getRequestOrdersForAuthor: function (anounceId, jwt, callback) {
+      $.ajax({
+        url: '/api/request-orders/author',
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
+    },
+    getRequestOrdersForAnounceAuthor: function (jwt, callback) {
+      $.ajax({
+        url: '/api/request-orders/anounce-author',
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
     }
-
   }
 })()
 

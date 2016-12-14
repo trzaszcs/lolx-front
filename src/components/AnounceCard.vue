@@ -56,9 +56,13 @@
             Zapytaj o ofertę
           </a>
           <br/>
-          <a v-on:click="requestOrder()"  data-tooltip="Zgłoś zainteresowanie">
+          <a v-if="requestOrderAllowed" v-on:click="requestOrder()"  data-tooltip="Zgłoś zainteresowanie">
             <i class="ui alarm inline icon"></i>
             Zgłoś zainteresowanie
+          </a>
+          <a v-if="requestOrderRemoveAllowed" v-on:click="removeRequestOrder()"  data-tooltip="Anuluj zainteresowanie">
+            <i class="ui alarm inline icon"></i>
+            Anuluj zainteresowanie
           </a>
         </div>
 
@@ -194,7 +198,10 @@ export default {
         return util.prettyDate(new Date(this.anounce.creationDate))
       },
       chatStatus: null,
-      showRequestOrderCreatedMsg: false
+      showRequestOrderCreatedMsg: false,
+      requestOrderId: null,
+      requestOrderAllowed: false,
+      requestOrderRemoveAllowed: false
     }
   },
   methods: {
@@ -246,6 +253,15 @@ export default {
         this.$router.go({path: '/login'})
       }
     },
+    requestOrderRemove: function () {
+      if (window.confirm('Czy na pewno chcesz usunąć?')) {
+        api.removeRequestOrder(this.requestOrder, () => {
+          this.requestOrderId = null
+          this.requestOrderAllowed = true
+          this.requestOrderRemoveAllowed = false
+        })
+      }
+    },
     confirmRequestOrder: function () {
       this.loading = true
       api.requestOrder(this.anounce.id, session.getJwt(), (response) => {
@@ -262,6 +278,8 @@ export default {
       this.user = this.getUser(selectedItem)
       this.initMap()
 
+      this.requestOrderAllowed = true
+      this.requestOrderRemoveAllowed = false
       if (session.logged()) {
         if (cache.getAndClear('orderRequest')) {
           showRequestOrderConfirm()
@@ -272,6 +290,19 @@ export default {
               this.chatStatus = chat
             }
           })
+          api.getRequestOrderForAnounce(this.anounce.id, session.getJwt(), (requestOrder) => {
+            if (requestOrder) {
+              this.requestOrderAllowed = false
+              this.requestOrderRemoveAllowed = true
+              this.requestOrderId = requestOrder.id
+            } else {
+              this.requestOrderAllowed = true
+              this.requestOrderRemoveAllowed = false
+            }
+          })
+        } else {
+          this.requestOrderAllowed = false
+          this.requestOrderRemoveAllowed = false
         }
       }
     }
