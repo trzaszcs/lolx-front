@@ -317,6 +317,14 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
       }).done(callback)
+    },
+    getRequestOrdersForUser: function (jwt, callback) {
+      $.ajax({
+        url: '/api/request-orders/user',
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
     }
   }
 })()

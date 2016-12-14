@@ -16,6 +16,9 @@
       <a class="item" v-bind:class="{'active': view == 'chats'}" @click="select('chats')">
         Rozmowy
       </a>
+      <a class="item" v-bind:class="{'active': view == 'requestOrders'}" @click="select('requestOrders')">
+        Zamówienia
+      </a>
       <a class="item" v-bind:class="{'active': view == 'account'}" @click="select('account')">
         Konto
       </a>
@@ -77,6 +80,10 @@
       <my-chats></my-chats>
     </div>
 
+    <!-- REQUEST ORDERS -->
+    <div v-if="view == 'requestOrders'">
+      <my-request-orders></my-request-orders>
+    </div>
 
     <!-- ACCOUNT -->
     <div v-show="view == 'account'">
@@ -128,6 +135,7 @@
   import ChangePassword from './components/ChangePassword.vue'
   import UserAnounces from './components/UserAnounces.vue'
   import MyChats from './components/myChats/MyChats.vue'
+  import MyRequestOrders from './components/myRequestOrders/MyRequestOrders.vue'
   import session from './session'
   import api from './api'
   import $ from 'jquery'
@@ -159,7 +167,8 @@
       LoadingBox,
       ChangePassword,
       UserAnounces,
-      MyChats
+      MyChats,
+      MyRequestOrders
     },
     methods: {
       select: function (viewName) {
