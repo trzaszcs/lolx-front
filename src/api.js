@@ -282,6 +282,26 @@ const API = (function () {
         callback()
       })
     },
+    acceptRequestOrder: function (requestOrderId, jwt, callback) {
+      $.ajax({
+        url: `/api/request-orders/${requestOrderId}/accept`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
+    rejectRequestOrder: function (requestOrderId, jwt, callback) {
+      $.ajax({
+        url: `/api/request-orders/${requestOrderId}/accept`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
     getRequestOrder: function (id, jwt, callback) {
       $.ajax({
         url: `/api/request-orders/${id}`,
