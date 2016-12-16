@@ -24,6 +24,11 @@
         <label>Nazwisko</label>
         <input v-model="lastName" placeholder="Nazwisko"/>
       </div>
+
+      <div class="field required" v-bind:class="{'error': hasFieldError('nick')}">
+        <label>Nazwa użytkownika</label>
+        <input v-model="nick" placeholder="Twoja nazwa"/>
+      </div>
       
       <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
         <label>Lokalizacja</label>
@@ -32,16 +37,16 @@
       
       <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
         <label>E-mail</label>
-        <input v-model="email" placeholder="Email"/>
+        <input v-model="email" placeholder="Email" type="email"/>
       </div>
 
-      <div class="field required" v-bind:class="{'error': hasFieldError('phone')}">
+      <div class="field">
         <label>Telefon</label>
         <div class="ui labeled input">
           <div class="ui label">
             +48
           </div>
-          <input v-model="phone" placeholder="Nr tel">
+          <input v-model="phone" placeholder="Nr tel" type="tel">
         </div>
       </div>
 
@@ -83,6 +88,7 @@ export default {
       lastName: '',
       email: '',
       phone: '',
+      nick: '',
       password1: null,
       password2: null,
       location: {title: ''},
@@ -96,6 +102,7 @@ export default {
       this.firstName = ''
       this.lastName = ''
       this.email = ''
+      this.nick = ''
       this.phone = ''
       this.password1 = ''
       this.password2 = ''
@@ -112,7 +119,7 @@ export default {
       }
 
       this.saving = true
-      api.register(this.firstName, this.lastName, this.email, this.phone, this.password1, this.location, (response) => {
+      api.register(this.firstName, this.lastName, this.nick, this.email, this.phone, this.password1, this.location, (response) => {
         this.afterSave()
       })
     },
@@ -125,16 +132,15 @@ export default {
       if (!this.lastName) {
         append('lastName', 'Nazwisko jest wymagane')
       }
+      if (!this.nick) {
+        append('nick', 'Nazwa użytkownika jest wymagana')
+      }
       if (!this.email) {
         append('email', 'Email jest wymagany')
       } else {
         if (!util.emailValid(this.email)) {
           append('email', 'Email jest niepoprawny')
         }
-      }
-
-      if (!this.phone) {
-        append('phone', 'Telefon jest wymagany')
       }
 
       let passwordsFilled = true

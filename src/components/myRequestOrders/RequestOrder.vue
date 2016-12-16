@@ -4,6 +4,7 @@
     <a target="_blank">{{requestOrder.anounceTitle}}</a> <br/>
     <span class="author">{{requestOrder.authorNamePretty}}</span> zamówił <span class="creationDate">{{requestOrder.creationDatePretty}}</span> <br/>
     Status: <span class="status">{{requestOrder.statusPretty}}</span>
+    <br/>
     <a v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder()">Usuń</a>
     <a v-if="requestOrder.rejectAllowed" v-on:click="reject()">Odrzuć</a>
     <a v-if="requestOrder.acceptAllowed" v-on:click="accept()">Zaakceptuj</a>

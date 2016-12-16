@@ -123,12 +123,12 @@ const API = (function () {
         callback({success: false})
       })
     },
-    register: function (firstName, lastName, email, phone, password, location, callback) {
+    register: function (firstName, lastName, nick, email, phone, password, location, callback) {
       $.ajax({
         url: '/auth-api/users',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({firstName, lastName, email, phone, password, location})
+        data: JSON.stringify({firstName, lastName, nick, email, phone, password, location})
       }).done(callback)
     },
     userDetails: function (userId, jwt, callback) {
