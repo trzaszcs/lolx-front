@@ -1,10 +1,10 @@
 <template>
 
   <div>
-    <a v-link="{path: '/anounce/', query: {id: requestOrder.anounceId}}" target="_blank">{{requestOrder.anounceTitle}}</a> <br/>
+    <a target="_blank">{{requestOrder.anounceTitle}}</a> <br/>
     <span class="author">{{requestOrder.authorNamePretty}}</span> zamówił <span class="creationDate">{{requestOrder.creationDatePretty}}</span> <br/>
     Status: <span class="status">{{requestOrder.statusPretty}}</span>
-    <a v-if="requestOrder.deleteAllowed" v-on:click="delete()">Usuń</a>
+    <a v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder()">Usuń</a>
     <a v-if="requestOrder.rejectAllowed" v-on:click="reject()">Odrzuć</a>
     <a v-if="requestOrder.acceptAllowed" v-on:click="accept()">Zaakceptuj</a>
   </div>
@@ -14,7 +14,7 @@
 export default {
   props: ['requestOrder'],
   methods: {
-    delete: function () {
+    deleteRequestOrder: function () {
       if (window.confirm('Czy na pewno chcesz usunąć zamówienie?')) {
         this.$dispatch('delete', {id: this.requestOrder.id})
       }

@@ -43,11 +43,11 @@
                   </tr>
                   <tr>
                     <td>Status</td>
-                    <td>{{requestOrder.statusText}}</td>
+                    <td>{{requestOrder.statusPretty}}</td>
                   </tr>
                   <tr>
                     <td>Data utworzenia</td>
-                    <td>{{requestOrder.creationDate}}</td>
+                    <td>{{requestOrder.creationDatePretty}}</td>
                   </tr>
                   <tr>
                     <td>Link bezpośrednio do ogłoszenia</td>
@@ -57,7 +57,7 @@
                   </tr>
                 </tbody>
               </table>
-    
+              <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui teal button">Usuń zamówienie</button>
           </div>
       </div>
   
@@ -71,20 +71,7 @@
 import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
-
-const translateStatus = (status) => {
-  if (status === 'WAITING') {
-    return 'Oczekiwanie na akceptację'
-  } else if (status === 'ACCEPTED') {
-    return 'Zaakceptowany'
-  } else {
-    return status
-  }
-}
-
-const enrichRequestOrder = (requestOrder) => {
-  return {...requestOrder, statusText: translateStatus(requestOrder.status)}
-}
+import {decorateRequestOrder} from './utils/requestOrderDecorator'
 
 export default {
   components: {
@@ -98,6 +85,13 @@ export default {
     }
   },
   methods: {
+    deleteRequestOrder: function () {
+      if (window.confirm('Czy na pewno chcesz usunąć zamówienie?')) {
+        api.removeRequestOrder(this.requestOrder.id, session.getJwt(), () => {
+          window.history.back()
+        })
+      }
+    }
   },
   ready: function () {
     if (!session.logged()) {
@@ -108,7 +102,7 @@ export default {
     this.loading = true
     const orderId = this.$route.query.orderId
     api.getRequestOrder(orderId, session.getJwt(), (response) => {
-      this.requestOrder = enrichRequestOrder(response)
+      this.requestOrder = decorateRequestOrder(response, session.getUserId())
       api.getById(this.requestOrder.anounceId, (anounce) => {
         this.anounce = anounce
         this.loading = false

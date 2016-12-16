@@ -58,11 +58,11 @@
           <br/>
           <a v-if="requestOrderAllowed" v-on:click="requestOrder()"  data-tooltip="Zgłoś zainteresowanie">
             <i class="ui alarm inline icon"></i>
-            Zgłoś zainteresowanie
+            Zgłoś zamówienie
           </a>
-          <a v-if="requestOrderRemoveAllowed" v-on:click="removeRequestOrder()"  data-tooltip="Anuluj zainteresowanie">
+          <a v-if="requestOrderId" v-link="{ path: '/order', query: {orderId: requestOrderId} }"  data-tooltip="Twoje zamówienie">
             <i class="ui alarm inline icon"></i>
-            Anuluj zainteresowanie
+            Twoje zamówienie
           </a>
         </div>
 
@@ -251,15 +251,6 @@ export default {
         cache.put('orderRequest', true)
         session.setBackUrl(this.$route)
         this.$router.go({path: '/login'})
-      }
-    },
-    requestOrderRemove: function () {
-      if (window.confirm('Czy na pewno chcesz usunąć?')) {
-        api.removeRequestOrder(this.requestOrder, () => {
-          this.requestOrderId = null
-          this.requestOrderAllowed = true
-          this.requestOrderRemoveAllowed = false
-        })
       }
     },
     confirmRequestOrder: function () {
