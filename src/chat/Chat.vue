@@ -37,6 +37,7 @@ const enrich = (chat) => {
   chat.messages = chat.messages.map(message => {
     message.authorsMessage = message.authorId === chat.authorId
     message.opponentsMessage = !message.authorsMessage
+    message.action = message.type === 'userAction'
     message.creationDatePretty = util.prettyDateDetailed(new Date(message.created))
     message.authorPretty = message.authorId === session.getUserId() ? `Ty (${message.author})` : message.author
     return message
