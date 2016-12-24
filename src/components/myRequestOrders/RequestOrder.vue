@@ -7,7 +7,7 @@
     <br/>
     <a v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder()">Usuń</a>
     <a v-if="requestOrder.rejectAllowed" v-on:click="reject()">Odrzuć</a>
-    <a v-if="requestOrder.acceptAllowed" v-on:click="accept()">Zaakceptuj</a>
+    <a v-if="requestOrder.acceptAllowed" v-on:click="accept()">Akceptuj</a>
   </div>
             
 </template>
@@ -25,7 +25,7 @@ export default {
         this.$dispatch('reject', {id: this.requestOrder.id})
       }
     },
-    confirm: function () {
+    accept: function () {
       if (window.confirm('Czy na pewno chcesz potwierdzić zamówienie?')) {
         this.$dispatch('accept', {id: this.requestOrder.id})
       }

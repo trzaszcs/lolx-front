@@ -4,25 +4,25 @@
    <div v-if="msg.message">
     <span class="author">{{msg.authorPretty}}</span>
     <span class="creationDate">{{msg.creationDatePretty}}</span>
-    <p>{{msg.msg}}</p>
+    <p><span class="type">Wiadomość:</span>{{msg.msg}}</p>
    </div>
 
    <div v-if="msg.requestOrderCreation">
-    <p>Akcja: Utworzenie zamówienia</p>
     <span class="author">{{msg.authorPretty}}</span>
     <span class="creationDate">{{msg.creationDatePretty}}</span>
+    <p><span class="type">Zamówienie:</span>Utworzenie zamówienia</p>
    </div>
 
    <div v-if="msg.requestOrderAcceptance">
-    <p>Akcja: Akceptacja zamówienia</p>
     <span class="author">{{msg.authorPretty}}</span>
     <span class="creationDate">{{msg.creationDatePretty}}</span>
+    <p><span class="type">Zamówienie:</span>Akceptacja zamówienia</p>
    </div>
 
    <div v-if="msg.requestOrderCancelation">
-    <p>Akcja: Anulowanie zamówienia</p>
     <span class="author">{{msg.authorPretty}}</span>
     <span class="creationDate">{{msg.creationDatePretty}}</span>
+    <p><span class="type">Zamówienie:</span>Anulowanie zamówienia</p>
    </div>
 
   </div>
