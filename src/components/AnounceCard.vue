@@ -258,6 +258,7 @@ export default {
       api.requestOrder(this.anounce.id, session.getJwt(), (response) => {
         hideRequesOrderConfirm()
         this.loadig = false
+        cache.put('requestOrderJustCreated', true)
         this.$router.go({'path': '/order', 'query': {'orderId': response.id}})
       })
     }

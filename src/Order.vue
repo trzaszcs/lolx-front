@@ -5,7 +5,7 @@
     <div class="ui stackable two column grid">
       <div class="column">
 
-        <div class="ui icon success message">
+        <div v-if="requestOrderJustCreated" class="ui icon success message">
           <i class="checkmark icon"></i>
           <p> </p>
            <div class="header">
@@ -13,7 +13,7 @@
           </div>
         </div>
         
-         <div class="ui icon message">
+         <div v-if="requestOrderJustCreated" class="ui icon message">
           <i class="info icon"></i>
           <div class="content">
             Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
@@ -55,6 +55,12 @@
                       <a v-link="{ path: '/anounce', query: { anounceId: requestOrder.anounceId }}">{{anounce.title}}</a>
                     </td>
                   </tr>
+                  <tr>
+                    <td>Link do rozmowy</td>
+                    <td>
+                      <a v-link="{ path: '/chat', query: { anounceId: requestOrder.anounceId }}">Chat</a>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
               <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui teal button">Usuń zamówienie</button>
@@ -68,6 +74,7 @@
 </template>
 
 <script>
+import cache from './utils/cache'
 import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
@@ -81,7 +88,8 @@ export default {
     return {
       requestOrder: {},
       anounce: {},
-      loading: false
+      loading: false,
+      requestOrderJustCreated: false
     }
   },
   methods: {
@@ -99,6 +107,7 @@ export default {
       this.$router.go({path: '/login'})
       return
     }
+    this.requestOrderJustCreated = cache.getAndClear('requestOrderJustCreated')
     this.loading = true
     const orderId = this.$route.query.orderId
     api.getRequestOrder(orderId, session.getJwt(), (response) => {
