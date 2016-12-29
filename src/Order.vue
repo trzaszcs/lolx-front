@@ -26,11 +26,17 @@
             <div class="header">Karta zamówienia usługi</div>
             
             <div class="description">
-                     <a v-link="{ path: '/anounce', query: { anounceId: requestOrder.anounceId }}">
-                    <b>{{anounce.title}}</b>
-                </a>
-              </div>
-            
+              <a v-link="{ path: '/anounce', query: { anounceId: requestOrder.anounceId }}">
+                <b>{{anounce.title}}</b>
+              </a>
+            </div>
+
+            <div class="action">
+              <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui teal tiny button">Usuń zamówienie</button>
+              <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui teal tiny button">Odrzuć</button>
+              <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui teal tiny button">Akceptuj</button>
+            </div>
+
               <table class="ui celled striped table">
                 <tbody>
                   <tr>
@@ -63,7 +69,6 @@
                   </tr>
                 </tbody>
               </table>
-              <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui teal button">Usuń zamówienie</button>
           </div>
       </div>
   
@@ -93,10 +98,32 @@ export default {
     }
   },
   methods: {
+    loadRequestOrder (onSuccess) {
+      this.loading = true
+      const orderId = this.$route.query.orderId
+      api.getRequestOrder(orderId, session.getJwt(), (response) => {
+        this.requestOrder = decorateRequestOrder(response, session.getUserId())
+        onSuccess()
+      })
+    },
     deleteRequestOrder: function () {
       if (window.confirm('Czy na pewno chcesz usunąć zamówienie?')) {
         api.removeRequestOrder(this.requestOrder.id, session.getJwt(), () => {
           window.history.back()
+        })
+      }
+    },
+    rejectRequestOrder: function () {
+      if (window.confirm('Czy na pewno chcesz odrzucić zamówienie?')) {
+        api.rejectRequestOrder(this.requestOrder.id, session.getJwt(), () => {
+          this.loadRequestOrder(() => { this.loading = false })
+        })
+      }
+    },
+    acceptRequestOrder: function () {
+      if (window.confirm('Czy na pewno chcesz zaakceptować zamówienie?')) {
+        api.acceptRequestOrder(this.requestOrder.id, session.getJwt(), () => {
+          this.loadRequestOrder(() => { this.loading = false })
         })
       }
     }
@@ -108,10 +135,7 @@ export default {
       return
     }
     this.requestOrderJustCreated = cache.getAndClear('requestOrderJustCreated')
-    this.loading = true
-    const orderId = this.$route.query.orderId
-    api.getRequestOrder(orderId, session.getJwt(), (response) => {
-      this.requestOrder = decorateRequestOrder(response, session.getUserId())
+    this.loadRequestOrder(() => {
       api.getById(this.requestOrder.anounceId, (anounce) => {
         this.anounce = anounce
         this.loading = false
