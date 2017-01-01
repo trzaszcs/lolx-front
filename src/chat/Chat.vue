@@ -10,9 +10,10 @@
             Wiadomość została wysłana
           </p>
       </info-box>
+      
+      <request-order v-if="anounceId" :anounce-id="anounceId"></request-order>
 
       <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.id} }">{{anounce.title}}</a></h2>
-
 
       <form class="ui form">
         <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
@@ -32,6 +33,7 @@ import session from '../session'
 import LoadingBox from '../components/LoadingBox.vue'
 import InfoBox from '../components/InfoBox.vue'
 import Conversation from './Conversation.vue'
+import RequestOrder from './RequestOrder.vue'
 
 const enrich = (chat) => {
   chat.messages = chat.messages.map(message => {
@@ -53,7 +55,8 @@ export default {
   components: {
     LoadingBox,
     InfoBox,
-    Conversation
+    Conversation,
+    RequestOrder
   },
   data () {
     return {

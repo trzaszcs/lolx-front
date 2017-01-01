@@ -34,7 +34,7 @@
             <div class="action">
               <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui teal tiny button">Usuń zamówienie</button>
               <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui teal tiny button">Odrzuć</button>
-              <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui teal tiny button">Akceptuj</button>
+              <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui teal tiny button">Akceptuj</button>w
             </div>
 
               <table class="ui celled striped table">
@@ -54,6 +54,10 @@
                   <tr>
                     <td>Data utworzenia</td>
                     <td>{{requestOrder.creationDatePretty}}</td>
+                  </tr>
+                  <tr>
+                    <td>Autor</td>
+                    <td>{{requestOrder.authorName}}</td>
                   </tr>
                   <tr>
                     <td>Link bezpośrednio do ogłoszenia</td>
