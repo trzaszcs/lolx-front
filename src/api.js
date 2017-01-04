@@ -207,13 +207,13 @@ const API = (function () {
         method: 'GET'
       }).done(callback)
     },
-    createChat: function (anounceId, jwt, msg, callback) {
+    createChat: function (anounceId, requestOrderId, jwt, msg, callback) {
       $.ajax({
         url: '/chat-api/chat',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({anounceId, msg})
+        data: JSON.stringify({anounceId, requestOrderId, msg})
       }).done(callback)
     },
     appendMessage: function (chatId, jwt, msg, callback) {

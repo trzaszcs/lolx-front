@@ -2,11 +2,16 @@
   <div v-if="requestOrder !== undefined" class="ui container requestOrder">
     <loading-box :show="loading"></loading-box>
     <div v-if="requestOrder === null">
-      Kliknij aby utworzyć zamówieie <a v-on:click="createRequestOrder" >Utwórz zamówienie</a>
+      <p>
+        Brak zamówienia dla oferty, kliknij aby utworzyć
+      </p>
+      <div class="action">
+        <button v-on:click="createRequestOrder" class="ui teal tiny button">Utwórz</button>
+      </div>
     </div>
     <div v-if="requestOrder">
       <p>
-        <a v-link="{ path: '/order', query: { orderId: requestOrder.id }}">Zamówienie</a> utworzono {{requestOrder.creationDatePretty}} posiada status {{requestOrder.statusPretty}}
+        <a v-link="{ path: '/order', query: { orderId: requestOrder.id }}">Zamówienie</a> użytkownika <span class="author">{{requestOrder.authorName}}</span> (status: {{requestOrder.statusPretty}})
       </p>
       
       <div class="action">
@@ -44,6 +49,7 @@ export default {
       api.getRequestOrderForAnounce(this.anounceId, session.getJwt(), (response) => {
         this.loading = false
         this.requestOrder = response ? decorateRequestOrder(response, session.getUserId()) : null
+        this.dispatch('requestOrderFetched', {id: this.requestOrder ? this.requestOrder.id : null})
       })
     },
     deleteRequestOrder: function () {

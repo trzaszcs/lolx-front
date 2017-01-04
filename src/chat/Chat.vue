@@ -66,7 +66,8 @@ export default {
       msg: null,
       msgAdded: false,
       messages: null,
-      leftSideUserId: null
+      leftSideUserId: null,
+      requestOrderId: null
     }
   },
   methods: {
@@ -82,7 +83,7 @@ export default {
       this.loading = true
 
       if (!this.chatId) {
-        api.createChat(this.anounceId, session.getJwt(), this.msg, (response) => {
+        api.createChat(this.anounceId, this.requestOrderId, session.getJwt(), this.msg, (response) => {
           this.chatId = response.id
           this.$router.go({query: {...this.$route.query, chatId: this.chatId}})
           this.msgAdded = true
@@ -136,6 +137,11 @@ export default {
         }
       })
       loadAnounce(this.anounceId)
+    }
+  },
+  events: {
+    'requestOrderFetched': (event) => {
+      this.requestOrderId = event.id
     }
   }
 }
