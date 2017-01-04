@@ -17,7 +17,10 @@
 
       <form class="ui form">
         <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
-        <input v-on:click="save($event)" type="submit" class="ui teal button" v-bind:class="{ 'disabled': !msg }" value="Wyślij"></input>
+        <button v-on:click="save($event)" class="ui teal button" v-bind:class="{ 'disabled': !msg }" value="Wyślij">
+           <i class="icon mail outline"></i>
+           Wyślij
+        </button>
       </form>
 
       <conversation v-if="messages" :messages="messages"></conversation>

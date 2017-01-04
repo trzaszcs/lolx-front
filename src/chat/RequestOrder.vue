@@ -6,7 +6,7 @@
         Brak zamówienia dla oferty, kliknij aby utworzyć
       </p>
       <div class="action">
-        <button v-on:click="createRequestOrder" class="ui teal tiny button">Utwórz</button>
+        <button v-on:click="createRequestOrder" class="ui basic tiny button">Utwórz</button>
       </div>
     </div>
     <div v-if="requestOrder">
@@ -15,9 +15,9 @@
       </p>
       
       <div class="action">
-        <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui teal tiny button">Usuń zamówienie</button>
-        <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui teal tiny button">Odrzuć</button>
-        <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui teal tiny button">Akceptuj</button>
+        <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui basic tiny button">Usuń zamówienie</button>
+        <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui basic tiny button">Odrzuć</button>
+        <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui basic tiny button">Akceptuj</button>
       </div>
 
     </div>
