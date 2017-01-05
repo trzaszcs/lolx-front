@@ -3,7 +3,7 @@
     <div class="ui segment">
       <loading-box :show="loading"></loading-box>
 
-      <h4 class="ui dividing header">Wyślij wiadomość</h4>
+      <h4 class="ui dividing header">Wiadomość w sprawie ogłoszenia: <a v-link="{ path: '/anounce', query: {anounceId: anounce.id} }">{{anounce.title}}</a></h4>
 
       <info-box :visible="msgAdded">
           <p>
@@ -12,8 +12,6 @@
       </info-box>
       
       <request-order v-if="anounceId" :anounce-id="anounceId"></request-order>
-
-      <h5>Pytanie w sprawie ogłoszenia: <a target="_blank" v-link="{ path: '/anounce', query: {anounceId: anounce.id} }">{{anounce.title}}</a></h2>
 
       <form class="ui form">
         <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
