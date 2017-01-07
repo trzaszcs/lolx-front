@@ -13,6 +13,8 @@
       
       <request-order v-if="anounceId" :anounce-id="anounceId"></request-order>
 
+      <conversation v-if="messages" :messages="messages" :focused-message-id="lastUnreadMessageId"></conversation>
+
       <form class="ui form">
         <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
         <button v-on:click="save($event)" class="ui teal button" v-bind:class="{ 'disabled': !msg }" value="Wyślij">
@@ -20,8 +22,6 @@
            Wyślij
         </button>
       </form>
-
-      <conversation v-if="messages" :messages="messages"></conversation>
 
     </div>
   </div>
@@ -41,10 +41,6 @@ const enrich = (chat) => {
     message.authorsMessage = message.authorId === chat.authorId
     message.opponentsMessage = !message.authorsMessage
     message.message = message.type === 'user'
-    message.action = !message.message
-    message.requestOrderCreation = message.type === 'requestOrderCreation'
-    message.requestOrderAcceptance = message.type === 'requestOrderAcceptance'
-    message.requestOrderCancelation = message.type === 'requestOrderCancelation'
     message.creationDatePretty = util.prettyDateDetailed(new Date(message.created))
     message.authorPretty = message.authorId === session.getUserId() ? `Ty (${message.author})` : message.author
     return message
@@ -67,13 +63,14 @@ export default {
       msg: null,
       msgAdded: false,
       messages: null,
-      leftSideUserId: null,
-      requestOrderId: null
+      requestOrderId: null,
+      lastUnreadMessageId: null
     }
   },
   methods: {
     handleChatLoaded: function (chat) {
       this.messages = enrich(chat).messages
+      this.lastUnreadMessageId = chat.firstUnreadMessageId ? chat.firstUnreadMessageId : this.messages[this.messages.length - 1].id
     },
     afterSave: function (anounceId) {
       this.msg = ''
@@ -141,7 +138,7 @@ export default {
     }
   },
   events: {
-    'requestOrderFetched': (event) => {
+    'requestOrderFetched': function (event) {
       this.requestOrderId = event.id
     }
   }

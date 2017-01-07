@@ -49,7 +49,7 @@ export default {
       api.getRequestOrderForAnounce(this.anounceId, session.getJwt(), (response) => {
         this.loading = false
         this.requestOrder = response ? decorateRequestOrder(response, session.getUserId()) : null
-        this.dispatch('requestOrderFetched', {id: this.requestOrder ? this.requestOrder.id : null})
+        this.$dispatch('requestOrderFetched', {id: this.requestOrder ? this.requestOrder.id : null})
       })
     },
     deleteRequestOrder: function () {
