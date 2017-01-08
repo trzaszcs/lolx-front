@@ -25,59 +25,43 @@
 </template>
 
 <script>
-import api from '../api'
-import {decorateRequestOrder} from '../utils/requestOrderDecorator'
 import session from '../session'
 import LoadingBox from '../components/LoadingBox.vue'
 import InfoBox from '../components/InfoBox.vue'
 
 export default {
-  props: ['anounceId'],
+  props: ['requestOrder'],
   components: {
     LoadingBox,
     InfoBox
   },
   data () {
     return {
-      loading: false,
-      requestOrder: undefined
+      loading: false
     }
   },
   methods: {
-    loadRequestOrder: function () {
-      this.loading = true
-      api.getRequestOrderForAnounce(this.anounceId, session.getJwt(), (response) => {
-        this.loading = false
-        this.requestOrder = response ? decorateRequestOrder(response, session.getUserId()) : null
-        this.$dispatch('requestOrderFetched', {id: this.requestOrder ? this.requestOrder.id : null})
-      })
+    loadRequestOrder: function (id) {
+      this.$dispatch('loadRequestOrder', {id: id})
     },
     deleteRequestOrder: function () {
       if (window.confirm('Czy na pewno chcesz usunąć zamówienie?')) {
-        api.removeRequestOrder(this.requestOrder.id, session.getJwt(), () => {
-          this.requestOrder = null
-        })
+        this.$dispatch('removeRequestOrder', {id: this.requestOrder.id})
       }
     },
     rejectRequestOrder: function () {
       if (window.confirm('Czy na pewno chcesz odrzucić zamówienie?')) {
-        api.rejectRequestOrder(this.requestOrder.id, session.getJwt(), () => {
-          this.loadRequestOrder()
-        })
+        this.$dispatch('rejectRequestOrder', {id: this.requestOrder.id})
       }
     },
     acceptRequestOrder: function () {
       if (window.confirm('Czy na pewno chcesz zaakceptować zamówienie?')) {
-        api.acceptRequestOrder(this.requestOrder.id, session.getJwt(), () => {
-          this.loadRequestOrder()
-        })
+        this.$dispatch('acceptRequestOrder', {id: this.requestOrder.id})
       }
     },
     createRequestOrder: function () {
       if (window.confirm('Czy na pewno chcesz utworzyć zamówienie?')) {
-        api.requestOrder(this.anounceId, session.getJwt(), () => {
-          this.loadRequestOrder()
-        })
+        this.$dispatch('createRequestOrder', {})
       }
     }
   },
@@ -85,7 +69,6 @@ export default {
     if (!session.logged()) {
       return
     }
-    this.loadRequestOrder()
   }
 }
 </script>

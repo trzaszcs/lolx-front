@@ -11,7 +11,7 @@
           </p>
       </info-box>
       
-      <request-order v-if="anounceId" :anounce-id="anounceId"></request-order>
+      <request-order v-if="requestOrder !== undefined" :request-order="requestOrder"></request-order>
 
       <conversation v-if="messages" :messages="messages" :focused-message-id="lastUnreadMessageId"></conversation>
 
@@ -35,6 +35,7 @@ import LoadingBox from '../components/LoadingBox.vue'
 import InfoBox from '../components/InfoBox.vue'
 import Conversation from './Conversation.vue'
 import RequestOrder from './RequestOrder.vue'
+import {decorateRequestOrder} from '../utils/requestOrderDecorator'
 
 const enrich = (chat) => {
   chat.messages = chat.messages.map(message => {
@@ -63,7 +64,7 @@ export default {
       msg: null,
       msgAdded: false,
       messages: null,
-      requestOrderId: null,
+      requestOrder: undefined,
       lastUnreadMessageId: null
     }
   },
@@ -81,7 +82,7 @@ export default {
       this.loading = true
 
       if (!this.chatId) {
-        api.createChat(this.anounceId, this.requestOrderId, session.getJwt(), this.msg, (response) => {
+        api.createChat(this.anounceId, this.anounce.ownerId, session.getJwt(), this.msg, (response) => {
           this.chatId = response.id
           this.$router.go({query: {...this.$route.query, chatId: this.chatId}})
           this.msgAdded = true
@@ -101,6 +102,11 @@ export default {
           })
         })
       }
+    },
+    loadRequestOrderById: function (id) {
+      api.getRequestOrder(id, session.getJwt(), (requestOrder) => {
+        this.requestOrder = decorateRequestOrder(requestOrder, session.getUserId())
+      })
     }
   },
   ready: function () {
@@ -110,36 +116,81 @@ export default {
       return
     }
 
-    const loadAnounce = (anounceId) => {
-      api.getById(anounceId, (response) => { this.anounce = response })
+    const loadAnounce = (anounceId, onSuccess) => {
+      api.getById(anounceId, (response) => {
+        this.anounce = response
+        onSuccess(this.anounce)
+      })
     }
 
     this.chatId = this.$route.query.chatId
     this.anounceId = this.$route.query.anounceId
+    const requestOrderId = this.$route.query.requestOrdeId
 
-    if (this.chatId) {
+    const loadAnounceWithChat = (anounceId, opponent) => {
+      loadAnounce(anounceId, (anounce) => {
+        api.getChatForAnounce(this.anounceId, opponent || anounce.ownerId, session.getJwt(), (response) => {
+          if (response) {
+            this.chatId = response.id
+            this.$router.go({query: {chatId: this.chatId}})
+            this.handleChatLoaded(response)
+          }
+        })
+      })
+    }
+
+    const loadRequestOrderByAnounceId = (anounceId) => {
+      api.getRequestOrderForAnounce(this.anounceId, session.getJwt(), (response) => {
+        this.requestOrder = response ? decorateRequestOrder(response, session.getUserId()) : null
+      })
+    }
+
+    if (requestOrderId) {
+      api.getRequestOrder(requestOrderId, session.getJwt(), (requestOrder) => {
+        this.requestOrder = requestOrder
+        this.anounceId = requestOrder.anounceId
+        loadAnounceWithChat(this.anounceId, requestOrder.authorId === session.getUserId() ? requestOrder.anounceAuthorId : requestOrder.authorId)
+      })
+    } else if (this.chatId) {
       // load chat
       this.loading = true
       api.getChat(this.chatId, session.getJwt(), (response) => {
         this.handleChatLoaded(response)
         this.loading = false
         this.anounceId = response.anounceId
-        loadAnounce(this.anounceId)
+        loadAnounce(this.anounceId, () => {})
+        loadRequestOrderByAnounceId(this.anounceId)
       })
     } else if (this.anounceId) {
-      api.getChatForAnounce(this.anounceId, session.getJwt(), (response) => {
-        if (response) {
-          this.chatId = response.id
-          this.$router.go({query: {chatId: this.chatId}})
-          this.handleChatLoaded(response)
-        }
-      })
-      loadAnounce(this.anounceId)
+      loadAnounceWithChat(this.anounceId, null)
+      loadRequestOrderByAnounceId(this.anounceId)
     }
   },
   events: {
-    'requestOrderFetched': function (event) {
-      this.requestOrderId = event.id
+    'loadRequestOrder': function (event) {
+      api.getRequestOrder(event.id, session.getJwt(), (requestOrder) => {
+        this.requestOrder = requestOrder
+      })
+    },
+    'removeRequestOrder': function (event) {
+      api.removeRequestOrder(event.id, session.getJwt(), () => {
+        this.requestOrder = null
+      })
+    },
+    'rejectRequestOrder': function (event) {
+      api.rejectRequestOrder(event.id, session.getJwt(), () => {
+        this.loadRequestOrderById(event.id)
+      })
+    },
+    'acceptRequestOrder': function (event) {
+      api.acceptRequestOrder(event.id, session.getJwt(), () => {
+        this.loadRequestOrderById(event.id)
+      })
+    },
+    'createRequestOrder': function (event) {
+      api.requestOrder(this.anounceId, session.getJwt(), (response) => {
+        this.loadRequestOrderById(response.id)
+      })
     }
   }
 }

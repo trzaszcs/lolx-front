@@ -207,13 +207,13 @@ const API = (function () {
         method: 'GET'
       }).done(callback)
     },
-    createChat: function (anounceId, requestOrderId, jwt, msg, callback) {
+    createChat: function (anounceId, opponent, jwt, msg, callback) {
       $.ajax({
         url: '/chat-api/chat',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({anounceId, requestOrderId, msg})
+        data: JSON.stringify({anounceId, msg, opponent})
       }).done(callback)
     },
     appendMessage: function (chatId, jwt, msg, callback) {
@@ -233,9 +233,9 @@ const API = (function () {
         headers: headers(jwt)
       }).done(callback)
     },
-    getUserChat: function (anounceId, jwt, callback) {
+    getChatStatus: function (anounceId, opponent, jwt, callback) {
       $.ajax({
-        url: `/chat-api/chat/status?anounceId=${anounceId}`,
+        url: `/chat-api/chat/status?anounceId=${anounceId}&opponent=${opponent}`,
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
@@ -243,9 +243,9 @@ const API = (function () {
         callback()
       })
     },
-    getChatForAnounce: function (anounceId, jwt, callback) {
+    getChatForAnounce: function (anounceId, opponent, jwt, callback) {
       $.ajax({
-        url: `/chat-api/chat?anounceId=${anounceId}`,
+        url: `/chat-api/chat?anounceId=${anounceId}&opponent=${opponent}`,
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)

@@ -65,10 +65,16 @@
                       <a v-link="{ path: '/anounce', query: { anounceId: requestOrder.anounceId }}">{{anounce.title}}</a>
                     </td>
                   </tr>
-                  <tr>
-                    <td>Link do rozmowy</td>
+                  <tr v-if="chatStatus == null">
+                    <td>Rozpocznij rozmowę</td>
                     <td>
-                      <a v-link="{ path: '/chat', query: { anounceId: requestOrder.anounceId }}">Chat</a>
+                      <a v-link="{ path: '/chat', query: { anounceId: requestOrder.anounceId , requestOrderId: requestOrder.id}}">Rozpocznij</a>
+                    </td>
+                  </tr>
+                  <tr v-if="chatStatus">
+                    <td>Kontynuuj rozmowę</td>
+                    <td>
+                      <a v-link="{ path: '/chat', query: { chatId: chatStatus.id}}">Kontynuuj</a>
                     </td>
                   </tr>
                 </tbody>
@@ -98,7 +104,8 @@ export default {
       requestOrder: {},
       anounce: {},
       loading: false,
-      requestOrderJustCreated: false
+      requestOrderJustCreated: false,
+      chatStatus: undefined
     }
   },
   methods: {
@@ -143,6 +150,10 @@ export default {
       api.getById(this.requestOrder.anounceId, (anounce) => {
         this.anounce = anounce
         this.loading = false
+      })
+      const opponent = session.getUserId() === this.requestOrder.authorId ? this.requestOrder.anounceAuthorId : this.requestOrder.anounceAuthorId
+      api.getChatStatus(this.requestOrder.anounceId, opponent, session.getJwt(), (status) => {
+        this.chatStatus = status
       })
     })
   }

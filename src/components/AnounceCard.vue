@@ -277,7 +277,7 @@ export default {
           showRequestOrderConfirm()
         }
         if (session.getUserId() !== this.anounce.ownerId) {
-          api.getUserChat(this.anounce.id, session.getJwt(), (chat) => {
+          api.getChatStatus(this.anounce.id, this.anounce.ownerId, session.getJwt(), (chat) => {
             if (chat) {
               this.chatStatus = chat
             }
