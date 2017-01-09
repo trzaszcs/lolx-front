@@ -58,6 +58,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       chatId: null,
       anounceId: null,
       anounce: {},
@@ -168,28 +169,38 @@ export default {
   },
   events: {
     'loadRequestOrder': function (event) {
+      this.loading = true
       api.getRequestOrder(event.id, session.getJwt(), (requestOrder) => {
         this.requestOrder = requestOrder
+        this.loading = false
       })
     },
     'removeRequestOrder': function (event) {
+      this.loading = true
       api.removeRequestOrder(event.id, session.getJwt(), () => {
         this.requestOrder = null
+        this.loading = false
       })
     },
     'rejectRequestOrder': function (event) {
+      this.loading = true
       api.rejectRequestOrder(event.id, session.getJwt(), () => {
         this.loadRequestOrderById(event.id)
+        this.loading = false
       })
     },
     'acceptRequestOrder': function (event) {
+      this.loading = true
       api.acceptRequestOrder(event.id, session.getJwt(), () => {
         this.loadRequestOrderById(event.id)
+        this.loading = false
       })
     },
     'createRequestOrder': function (event) {
+      this.loading = true
       api.requestOrder(this.anounceId, session.getJwt(), (response) => {
         this.loadRequestOrderById(response.id)
+        this.loading = false
       })
     }
   }

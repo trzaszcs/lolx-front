@@ -74,7 +74,16 @@
                   <tr v-if="chatStatus">
                     <td>Kontynuuj rozmowę</td>
                     <td>
-                      <a v-link="{ path: '/chat', query: { chatId: chatStatus.id}}">Kontynuuj</a>
+                      <div class="ui compact menu">
+                        <a class="item" v-if="chatStatus.unreadMessages > 0" v-link="{ path: '/chat', query: { chatId: chatStatus.id}}">
+                          <i class="icon mail"></i> Wiadomości
+                          <div class="floating ui red label">{{chatStatus.unreadMessages}}</div>
+                        </a>
+                        <a class="item" v-else v-link="{ path: '/chat', query: { chatId: chatStatus.id}}">
+                          <i class="icon mail"></i> Rozmowa
+                        </a>
+                      </div>
+                      
                     </td>
                   </tr>
                 </tbody>
@@ -151,7 +160,7 @@ export default {
         this.anounce = anounce
         this.loading = false
       })
-      const opponent = session.getUserId() === this.requestOrder.authorId ? this.requestOrder.anounceAuthorId : this.requestOrder.anounceAuthorId
+      const opponent = session.getUserId() === this.requestOrder.authorId ? this.requestOrder.anounceAuthorId : this.requestOrder.authorId
       api.getChatStatus(this.requestOrder.anounceId, opponent, session.getJwt(), (status) => {
         this.chatStatus = status
       })
