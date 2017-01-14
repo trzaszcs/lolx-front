@@ -21,7 +21,7 @@
 
     <div class="content">
  
-     <filter></filter>
+     <filter v-if="filterVisible"></filter>
 
       <ul class="requestOrders" v-if="requestOrders">
         <li v-for="requestOrder in requestOrders">
@@ -58,7 +58,8 @@ export default {
     return {
       loading: false,
       requestOrders: null,
-      filter: {}
+      filter: {},
+      filterVisible: true
     }
   },
   methods: {
@@ -66,6 +67,7 @@ export default {
       this.loading = true
       api.getRequestOrdersForUser(this.filter.status, session.getJwt(), (response) => {
         this.requestOrders = decorate(response.requestOrders)
+        this.filterVisible = !(this.filter.status === 'ALL' && this.requestOrders.length === 0)
         this.loading = false
       })
     }
