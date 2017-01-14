@@ -338,10 +338,12 @@ const API = (function () {
         headers: headers(jwt)
       }).done(callback)
     },
-    getRequestOrdersForUser: function (jwt, callback) {
+    getRequestOrdersForUser: function (status, jwt, callback) {
+      let query = {status}
       $.ajax({
         url: '/api/request-orders/user',
         method: 'GET',
+        data: query,
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
       }).done(callback)

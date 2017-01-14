@@ -20,11 +20,19 @@
     </div>
 
     <div class="content">
-        <ul class="requestOrders">
-          <li v-for="requestOrder in requestOrders">
-            <request-order :request-order="requestOrder"></request-order>
-          </li>
-        </ul>
+ 
+     <filter></filter>
+
+      <ul class="requestOrders" v-if="requestOrders">
+        <li v-for="requestOrder in requestOrders">
+          <request-order :request-order="requestOrder"></request-order>
+        </li>
+      </ul>
+
+      <p v-if="requestOrders && requestOrders.length === 0">
+        Brak zamówień
+      <p>
+
    </div>
           
  </div>
@@ -36,6 +44,7 @@ import api from '../../api.js'
 import session from '../../session.js'
 import LoadingBox from '../LoadingBox.vue'
 import RequestOrder from './RequestOrder.vue'
+import Filter from './Filter.vue'
 
 const decorate = (requestOrders) => {
   return requestOrders.map(requestOrder => {
@@ -44,43 +53,30 @@ const decorate = (requestOrders) => {
 }
 
 export default {
-  components: {LoadingBox, RequestOrder},
+  components: {LoadingBox, RequestOrder, Filter},
   data () {
     return {
       loading: false,
-      requestOrders: []
+      requestOrders: null,
+      filter: {}
     }
   },
   methods: {
     reloadRequestOrders: function () {
-      api.getRequestOrdersForUser(session.getJwt(), (response) => {
-        this.requestOrders = decorate(response)
+      this.loading = true
+      api.getRequestOrdersForUser(this.filter.status, session.getJwt(), (response) => {
+        this.requestOrders = decorate(response.requestOrders)
         this.loading = false
       })
     }
   },
   ready: function () {
-    this.loading = true
     this.reloadRequestOrders()
   },
   events: {
-    'delete': function (event) {
-      this.loading = true
-      api.removeRequestOrder(event.id, session.getJwt(), (response) => {
-        this.reloadRequestOrders()
-      })
-    },
-    'reject': function (event) {
-      this.loading = true
-      api.rejectRequestOrder(event.id, session.getJwt(), (response) => {
-        this.reloadRequestOrders()
-      })
-    },
-    'accept': function (event) {
-      this.loading = true
-      api.acceptRequestOrder(event.id, session.getJwt(), (response) => {
-        this.reloadRequestOrders()
-      })
+    'filterChanged': function (event) {
+      this.filter = event
+      this.reloadRequestOrders()
     }
   }
 }
