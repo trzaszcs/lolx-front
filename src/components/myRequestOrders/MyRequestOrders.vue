@@ -25,7 +25,7 @@
 
      <div class="searchResult listing">
        <div class="result" v-if="totalCount && totalCount > 0">
-         <h4>Znaleziono zamówień: {{totalCount}}</h4>
+         <h4>Zamówień: {{totalCount}}</h4>
          <ul class="requestOrders" v-if="requestOrders">
            <li v-for="requestOrder in requestOrders">
               <request-order :request-order="requestOrder"></request-order>

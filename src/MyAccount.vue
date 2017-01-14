@@ -173,6 +173,7 @@
     methods: {
       select: function (viewName) {
         this.view = viewName
+        this.$router.go({query: {section: viewName}})
       },
       logout: function () {
         session.logout()
@@ -186,6 +187,12 @@
         return
       }
       this.loading = true
+
+      const section = this.$route.query.section
+      if (section) {
+        this.view = section
+      }
+
       api.userDetails(session.getUserId(), session.getJwt(), (response) => {
         this.user = response
         this.user.username = response.firstName
