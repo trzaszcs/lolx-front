@@ -23,15 +23,27 @@
  
      <filter v-if="filterVisible"></filter>
 
-      <ul class="requestOrders" v-if="requestOrders">
-        <li v-for="requestOrder in requestOrders">
-          <request-order :request-order="requestOrder"></request-order>
-        </li>
-      </ul>
+     <div class="searchResult listing">
+       <div class="result" v-if="totalCount && totalCount > 0">
+         <h4>Znaleziono zamówień: {{totalCount}}</h4>
+         <ul class="requestOrders" v-if="requestOrders">
+           <li v-for="requestOrder in requestOrders">
+              <request-order :request-order="requestOrder"></request-order>
+           </li>
+         </ul>
 
-      <p v-if="requestOrders && requestOrders.length === 0">
-        Brak zamówień
-      <p>
+         <div class="pagingBox" v-if="noOfPages > 0">
+           <div class="ui pagination menu">
+             <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item" v-bind:class="{selected:(page == currentPage)}">{{page +1}}</a>
+           </div>
+         </div>
+
+       </div>
+
+       <p v-if="totalCount === 0">
+         Brak zamówień
+       <p>
+     </div>
 
    </div>
           
@@ -52,10 +64,15 @@ const decorate = (requestOrders) => {
   })
 }
 
+const itemsPerPage = 20
+
 export default {
   components: {LoadingBox, RequestOrder, Filter},
   data () {
     return {
+      currentPage: 0,
+      noOfPages: 0,
+      totalCount: null,
       loading: false,
       requestOrders: null,
       filter: {},
@@ -65,11 +82,22 @@ export default {
   methods: {
     reloadRequestOrders: function () {
       this.loading = true
-      api.getRequestOrdersForUser(this.filter.status, session.getJwt(), (response) => {
-        this.requestOrders = decorate(response.requestOrders)
-        this.filterVisible = !(this.filter.status === 'ALL' && this.requestOrders.length === 0)
-        this.loading = false
-      })
+      api.getRequestOrdersForUser(
+        this.currentPage,
+        itemsPerPage,
+        this.filter.status,
+        session.getJwt(),
+        (response) => {
+          this.requestOrders = decorate(response.requestOrders)
+          this.totalCount = response.totalCount
+          this.filterVisible = !(this.filter.status === 'ALL' && this.requestOrders.length === 0)
+          this.loading = false
+          this.noOfPages = Math.round(this.totalCount / itemsPerPage)
+        })
+    },
+    goToPage: function (page) {
+      this.currentPage = page
+      this.reloadRequestOrders()
     }
   },
   ready: function () {
