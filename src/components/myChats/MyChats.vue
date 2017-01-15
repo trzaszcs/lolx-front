@@ -21,16 +21,32 @@
 
     <div class="content">
 
-      <div class="anounceChat" v-for="anounceChat in anounceChats">
-        <ul>
-          <li v-for="chat in anounceChat.chats" v-link="{ path: '/chat', query: { chatId: chat.id }}">
-            <span class="author">{{chat.authorNamePretty}}</span> napisał <span class="creationDate">{{chat.creationDatePretty}}</span>
-            <p>"{{chat.firstMessage}}.."</p>
-          </li>
-        </ul>
-        w ogłoszeniu <a v-link="{path: '/anounce/', query: {id: anounceChat.anounceId}}" target="_blank">{{anounceChat.anounceTitle}}</a>
-      </div>
-        
+      <div class="searchResult listing">
+        <div class="result" v-if="totalCount && totalCount > 0">
+          <h4>Rozmów: {{totalCount}}</h4>
+
+          
+          <ul class="items">
+            <li v-for="chat in chats" v-link="{ path: '/chat', query: { chatId: chat.id }}">
+              <span class="author">{{chat.authorNamePretty}}</span> napisał <span class="creationDate">{{chat.creationDatePretty}}</span><br/>
+              w ogłoszeniu <a>{{chat.anounceTitle}}</a>
+              <p>"{{chat.firstMessage}}.."</p>
+            </li>
+          </ul>
+          
+
+          <div class="pagingBox" v-if="noOfPages > 0">
+            <div class="ui pagination menu">
+              <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item" v-bind:class="{selected:(page == currentPage)}">{{page +1}}</a>
+             </div>
+          </div>
+
+        </div>
+
+        <p v-if="totalCount === 0">
+          Brak rozmów
+        <p>
+
    </div>
           
  </div>
@@ -42,39 +58,50 @@ import util from '../../util'
 import session from '../../session.js'
 import LoadingBox from '../LoadingBox.vue'
 
-const decorate = (anounceChats) => {
+const decorate = (chats) => {
   const enrichChat = chat => {
     chat.creationDatePretty = util.prettyDateDetailed(new Date(chat.created))
     chat.authorNamePretty = chat.authorId === session.getUserId() ? `Ty (${chat.authorName})` : chat.authorName
     return chat
   }
 
-  return anounceChats.map(anounceChat => {
-    return {
-      ...anounceChat,
-      chats: anounceChat.chats.map(chat => enrichChat(chat))
-    }
+  return chats.map(chat => {
+    return enrichChat(chat)
   })
 }
+
+const itemsPerPage = 20
 
 export default {
   components: {LoadingBox},
   data () {
     return {
       loading: false,
-      anounceChats: []
+      chats: [],
+      noOfPages: 0,
+      totalCount: 0,
+      currentPage: 0
     }
   },
   methods: {
+    loadUserChats: function () {
+      this.loading = true
+      api.getUserChats(this.currentPage, itemsPerPage, session.getJwt(), (response) => {
+        this.chats = decorate(response.chats)
+        this.totalCount = response.totalCount
+        this.noOfPages = Math.round(this.totalCount / itemsPerPage)
+        this.loading = false
+      })
+    },
+    goToPage: function (page) {
+      this.currentPage = page
+      this.loadUserChats()
+    }
   },
   events: {
   },
   ready: function () {
-    this.loading = true
-    api.getUserChats(session.getJwt(), (response) => {
-      this.anounceChats = decorate(response)
-      this.loading = false
-    })
+    this.loadUserChats()
   }
 }
 </script>

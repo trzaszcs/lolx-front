@@ -253,12 +253,14 @@ const API = (function () {
         callback()
       })
     },
-    getUserChats: function (jwt, callback) {
+    getUserChats: function (page, itemsPerPage, jwt, callback) {
+      let query = {page, itemsPerPage}
       $.ajax({
         url: '/chat-api/chat/user',
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
-        headers: headers(jwt)
+        headers: headers(jwt),
+        data: query
       }).done(callback)
     },
     requestOrder: function (anounceId, jwt, callback) {
