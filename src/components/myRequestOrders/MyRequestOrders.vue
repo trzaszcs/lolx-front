@@ -90,7 +90,8 @@ export default {
         (response) => {
           this.requestOrders = decorate(response.requestOrders)
           this.totalCount = response.totalCount
-          this.filterVisible = !(this.filter.status === 'ALL' && this.requestOrders.length === 0)
+          this.filterVisible = !((!this.filter.status || this.filter.status === 'ALL') && this.totalCount === 0)
+          console.log(this.filter.status)
           this.loading = false
           this.noOfPages = Math.round(this.totalCount / itemsPerPage)
         })
