@@ -82,6 +82,7 @@ export default {
   methods: {
     reloadRequestOrders: function () {
       this.loading = true
+      const filteringStatus = this.filter.status
       api.getRequestOrdersForUser(
         this.currentPage,
         itemsPerPage,
@@ -90,8 +91,7 @@ export default {
         (response) => {
           this.requestOrders = decorate(response.requestOrders)
           this.totalCount = response.totalCount
-          this.filterVisible = !((!this.filter.status || this.filter.status === 'ALL') && this.totalCount === 0)
-          console.log(this.filter.status)
+          this.filterVisible = !((!filteringStatus || filteringStatus === 'ALL') && this.totalCount === 0)
           this.loading = false
           this.noOfPages = Math.round(this.totalCount / itemsPerPage)
         })
