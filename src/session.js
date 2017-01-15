@@ -1,23 +1,19 @@
 
 const SESSION = (function () {
-  let jwt, backUrl, userId
+  let backUrl
 
   function logout () {
-    jwt = null
-    userId = null
+    window.localStorage.removeItem('login.jwt')
+    window.localStorage.removeItem('login.userId')
   }
 
   function create (responseUserId, jwtToken) {
-    jwt = jwtToken
-    userId = responseUserId
+    window.localStorage.setItem('login.jwt', jwtToken)
+    window.localStorage.setItem('login.userId', responseUserId)
   }
 
   function logged () {
-    return jwt
-  }
-
-  function reset () {
-    jwt = null
+    return getJwt()
   }
 
   function setBackUrl (backurl) {
@@ -29,17 +25,16 @@ const SESSION = (function () {
   }
 
   function getJwt () {
-    return jwt
+    return window.localStorage.getItem('login.jwt')
   }
 
   function getUserId () {
-    return userId
+    return window.localStorage.getItem('login.userId')
   }
 
   return {
     create: create,
     logged: logged,
-    reset: reset,
     setBackUrl: setBackUrl,
     getBackUrl: getBackUrl,
     getJwt: getJwt,
