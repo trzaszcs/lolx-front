@@ -31,6 +31,9 @@
               <span class="author">{{chat.authorNamePretty}}</span> napisał <span class="creationDate">{{chat.creationDatePretty}}</span><br/>
               w ogłoszeniu <a>{{chat.anounceTitle}}</a>
               <p>"{{chat.firstMessage}}.."</p>
+              <div class="ui label" v-if="chat.unreadMessages > 0">
+                <i class="mail icon"></i> {{chat.unreadMessages}}
+              </div>
             </li>
           </ul>
           
