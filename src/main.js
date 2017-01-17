@@ -13,6 +13,9 @@ import ResetPasswordRequest from './ResetPasswordRequest'
 import ResetPassword from './ResetPassword'
 import UserAnounces from './UserAnounces'
 import Chat from './chat/Chat'
+import Error from './Error'
+import $ from 'jquery'
+import session from './session'
 
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
@@ -57,7 +60,30 @@ router.map({
   },
   '/chat': {
     component: Chat
+  },
+  '/error': {
+    component: Error
   }
 })
 
 router.start(App, '#app')
+
+$(document).ajaxError((event, response) => {
+  console.log('ajax error', response.status)
+
+  switch (response.status) {
+    case 500: {
+      console.log('http 500')
+      // router.go({path: '/error'})
+      return null
+    }
+    case 401: {
+      session.logout()
+      router.go({path: '/login'})
+      return null
+    }
+    default: {
+      console.log('unhandled error', response)
+    }
+  }
+})
