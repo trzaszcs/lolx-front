@@ -7,11 +7,11 @@
       <a class="item" v-bind:class="{'active': view == 'publicData'}" @click="select('publicData')">
         Dane publiczne
       </a>
-      <a class="item" v-bind:class="{'active': view == 'chats'}" @click="select('chats')">
-        Rozmowy
-      </a>
       <a class="item" v-bind:class="{'active': view == 'requestOrders'}" @click="select('requestOrders')">
         Zamówienia
+      </a>
+      <a class="item" v-bind:class="{'active': view == 'chats'}" @click="select('chats')">
+        Rozmowy
       </a>
       <a class="item" v-bind:class="{'active': view == 'account'}" @click="select('account')">
         Konto

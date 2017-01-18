@@ -1,5 +1,5 @@
 <template>
-  <div class="error">
+  <div class="errorPage">
     <div class="ui red message">
       Wystąpił błąd serdecznie przepraszamy !
     </div>
