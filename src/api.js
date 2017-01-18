@@ -296,7 +296,7 @@ const API = (function () {
     },
     rejectRequestOrder: function (requestOrderId, jwt, callback) {
       $.ajax({
-        url: `/api/request-orders/${requestOrderId}/accept`,
+        url: `/api/request-orders/${requestOrderId}/reject`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)

@@ -7,12 +7,6 @@
       <a class="item" v-bind:class="{'active': view == 'publicData'}" @click="select('publicData')">
         Dane publiczne
       </a>
-      <a class="item" v-bind:class="{'active': view == 'orders'}" @click="select('orders')">
-        Kupione
-      </a>
-      <a class="item" v-bind:class="{'active': view == 'sold'}" @click="select('sold')">
-        Sprzedane
-      </a>
       <a class="item" v-bind:class="{'active': view == 'chats'}" @click="select('chats')">
         Rozmowy
       </a>
@@ -64,16 +58,6 @@
            <user-public-profile :user=user></user-public-profile>
 
      </div>
-
-     <!-- MY-ORDERS -->
-     <div v-show="view == 'orders'">
-       <my-orders :orders="customerOrders"></my-orders>
-     </div>
-
-    <!-- MY-SOLD -->
-    <div v-show="view == 'sold'">
-      <my-sold :orders="ownerOrders"></my-sold>
-    </div>
 
     <!-- CHATS -->
     <div v-if="view == 'chats'">
@@ -128,8 +112,6 @@
 <script>
   import LoadingBox from './components/LoadingBox.vue'
   import AnounceCard from './components/AnounceCard.vue'
-  import MyOrders from './components/MyOrders.vue'
-  import MySold from './components/MySold.vue'
   import EditAccount from './components/EditAccount.vue'
   import UserPublicProfile from './components/UserPublicProfile.vue'
   import ChangePassword from './components/ChangePassword.vue'
@@ -160,8 +142,6 @@
     },
     components: {
       AnounceCard,
-      MyOrders,
-      MySold,
       UserPublicProfile,
       EditAccount,
       LoadingBox,
