@@ -14,12 +14,12 @@
   </div>
      
   <div class="ui fluid card">
-         
+
     <div class="ui top attached label">
       <i class="ui money icon"></i>Zamówienia
     </div>
 
-    <div class="content">
+    <div class="content myRequestOrders">
  
      <filter v-if="filterVisible"></filter>
 

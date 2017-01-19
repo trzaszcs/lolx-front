@@ -1,6 +1,6 @@
 <template>
   <div class="anounceType">
-    <div v-if="type === 'FIND'" class="ui green horizontal label">
+    <div v-if="type === 'ORDER'" class="ui green horizontal label">
       ZLECĘ
     </div>
     <div v-else class="ui teal horizontal label">
