@@ -30,11 +30,6 @@
               <i class="ui announcement icon"></i>
               {{anounce.title}}
             </div>
-            <anounce-type :type="anounce.type"></anounce-type>
-            <a href="tel:{{anounce.contactPhone}}" class="ui label">
-               <i class="icon text telephone"></i>
-               {{contactPhone()}}
-            </a>
         </div>
          <p></p>
         <div class="ui left floated section">
@@ -55,15 +50,7 @@
             <i class="ui talk outline icon"></i>
             Zapytaj o ofertę
           </a>
-          <br/>
-          <a v-if="requestOrderAllowed" v-on:click="requestOrder()"  data-tooltip="Zgłoś zainteresowanie">
-            <i class="ui alarm inline icon"></i>
-            Zgłoś zamówienie
-          </a>
-          <a v-if="requestOrderId" v-link="{ path: '/order', query: {orderId: requestOrderId} }"  data-tooltip="Twoje zamówienie">
-            <i class="ui alarm inline icon"></i>
-            Twoje zamówienie
-          </a>
+          
         </div>
 
         <div class="ui right floated section">
@@ -72,8 +59,19 @@
               <div class="sub header">{{anounce.price}} zł</div>
             </h2>
 
+            <button v-if="requestOrderId"  class="ui button tiny"  v-link="{ path: '/order', query: {orderId: requestOrderId} }"  data-tooltip="Twoje zamówienie">
+              <i class="ui add to cart icon"></i>
+              Twoje zamówienie
+            </button>
+
+            <button v-if="!requestOrderId"  class="ui teal button"  v-on:click="requestOrder()">
+              <i class="ui add to cart icon"></i>
+              Zamów
+            </button>
+
         </div>
 
+       
       </div>
 
 
@@ -138,7 +136,6 @@ import guid from '../guid'
 import util from '../util'
 import session from '../session'
 import UserPublicProfile from './UserPublicProfile.vue'
-import AnounceType from './AnounceType.vue'
 import LoadingBox from './LoadingBox.vue'
 const $ = require('jquery')
 require('moment')
@@ -156,8 +153,7 @@ const hideRequesOrderConfirm = () => {
 export default {
   components: {
     UserPublicProfile,
-    LoadingBox,
-    AnounceType
+    LoadingBox
   },
   data () {
     return {
@@ -169,7 +165,6 @@ export default {
         img: '',
         description: '',
         price: '',
-        contactPhone: '',
         creationDate: '',
         location: {
           latitude: 52.4064,
@@ -240,9 +235,6 @@ export default {
     },
     getImg: function () {
       return this.anounce.img ? this.anounce.img : 'http://semantic-ui.com/images/wireframe/image.png'
-    },
-    contactPhone: function () {
-      return util.prettyPhone(this.anounce.contactPhone)
     },
     requestOrder: function () {
       if (session.logged()) {

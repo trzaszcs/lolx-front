@@ -16,6 +16,7 @@ import Chat from './chat/Chat'
 import Error from './Error'
 import $ from 'jquery'
 import session from './session'
+import {startPolling} from './utils/backendEventsPoller'
 
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
@@ -87,3 +88,5 @@ $(document).ajaxError((event, response) => {
     }
   }
 })
+
+startPolling()

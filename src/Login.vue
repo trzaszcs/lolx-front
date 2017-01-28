@@ -55,6 +55,7 @@ import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
 import social from './socialplugin'
+import {startPolling} from './utils/backendEventsPoller'
 
 export default {
   data () {
@@ -76,6 +77,7 @@ export default {
         this.loading = false
         if (result.success) {
           session.create(result.userId, result.jwt)
+          startPolling()
           const backUrl = session.getBackUrl()
           this.$router.go(backUrl || {'path': '/myAccount'})
         } else {
@@ -94,6 +96,7 @@ export default {
         this.loading = false
         if (result.success) {
           session.create(result.userId, result.jwt)
+          startPolling()
           const backUrl = session.getBackUrl()
           this.$router.go(backUrl || {'path': '/myAccount'})
         } else {

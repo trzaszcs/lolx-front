@@ -1,20 +1,6 @@
 <template>
   <div class="globalctr template">
-    <!-- Following Menu -->
-    <div class="ui large top fixed menu transition hidden">
-      <div class="ui container">
-        <a class="active item"  v-link="{ path: '/search' }">Dorobie.pl</a>
-        <div class="right menu">
-          <div class="item">
-            <a v-link="{ path: '/login' }"  class="ui button">Log in</a>
-          </div>
-          <div class="item">
-            <a v-link="{ path: '/myAccount' }" class="ui primary button">Moje Konto</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
     <!-- Page Contents -->
     <div class="pusher">
       <div class="ui inverted vertical masthead center aligned segment">
@@ -31,16 +17,17 @@
               <button class="ui icon black button" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto" data-position="bottom center">
                   <img  src="./assets/profile.png"class="ui mini image"></img> 
               </button>
+
+              <toolbar-events v-if="logged"></toolbar-events>
+
             </div>
           </div>
-          
         </div>
+     </div>
 
-      </div>
+     <p></p>
 
-        <p></p>
-
-        <router-view></router-view>
+     <router-view></router-view>
 
     </div>
     
@@ -52,20 +39,25 @@
 
 <script>
 import PageFooter from './components/PageFooter.vue'
+import ToolbarEvents from './components/ToolbarEvents.vue'
+import session from './session'
 
 export default {
   components: {
-    PageFooter
+    PageFooter,
+    ToolbarEvents
   },
   data () {
     return {
-      siteUrl: ''
+      siteUrl: '',
+      logged: false
     }
   },
   methods: {
   },
   ready: function () {
     this.siteUrl = window.location.href
+    this.logged = session.logged()
   }
 }
 </script>

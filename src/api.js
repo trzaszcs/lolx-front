@@ -263,6 +263,14 @@ const API = (function () {
         data: query
       }).done(callback)
     },
+    getUnreadMessages: function (jwt, callback) {
+      $.ajax({
+        url: '/chat-api/chat/unread',
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
+    },
     requestOrder: function (anounceId, jwt, callback) {
       $.ajax({
         url: '/api/request-orders/',
@@ -307,6 +315,16 @@ const API = (function () {
     getRequestOrder: function (id, jwt, callback) {
       $.ajax({
         url: `/api/request-orders/${id}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback).fail(result => {
+        callback()
+      })
+    },
+    getUnseenRequestOrderEvents: function (jwt, callback) {
+      $.ajax({
+        url: '/api/request-orders/events/unseen',
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
