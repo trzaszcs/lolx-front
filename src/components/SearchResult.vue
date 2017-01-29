@@ -8,7 +8,7 @@
       </div>
     </div>
         
-    <div class="pagingBox">
+    <div class="pagingBox" v-if="noOfPages > 1">
       <div class="ui pagination menu">
         <a v-for="page in noOfPages" v-on:click="goToPage(page)" class="item" v-bind:class="{selected:(page == (searchQuery.page || 0))}">{{page +1}}</a>
       </div>

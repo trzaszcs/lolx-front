@@ -4,23 +4,29 @@
     <div class="floating ui red label">{{noOfEvents}}</div>
   </button>
   
-  <div class="ui fluid popup bottom center transition">
-    <div class="ui one column divided center aligned grid">
-      <div class="column">
-        <a v-if="eventsMap.unreadMessages && eventsMap.unreadMessages > 0" v-on:click="showUpdatedChats()">
+  <div class="ui fluid popup bottom center">
+    <ul>
+      <li v-if="eventsMap.unreadMessages && eventsMap.unreadMessages > 0">
+        <a v-on:click="showUpdatedChats()">
            Nowych wiadomości: {{eventsMap.unreadMessages}}
         </a>
-        <a v-if="eventsMap.newRequestOrders && eventsMap.newRequestOrders > 0" v-on:click="showRequestOrders()">
+      </li>
+      <li v-if="eventsMap.newRequestOrders && eventsMap.newRequestOrders > 0">
+        <a v-on:click="showRequestOrders()">
            Nowych zamówień: {{eventsMap.newRequestOrders}}
         </a>
-        <a v-if="eventsMap.acceptedRequestOrders && eventsMap.acceptedRequestOrders > 0" v-on:click="showRequestOrders()">
+      </li>
+      <li v-if="eventsMap.acceptedRequestOrders && eventsMap.acceptedRequestOrders > 0">
+        <a v-on:click="showRequestOrders()">
            Nowych zaakceptowanych zamówień: {{eventsMap.acceptedRequestOrders}}
         </a>
-        <a v-if="eventsMap.rejectedRequestOrders && eventsMap.rejectedRequestOrders > 0" v-on:click="showRequestOrders()">
+      </li>
+      <li v-if="eventsMap.rejectedRequestOrders && eventsMap.rejectedRequestOrders > 0">
+        <a v-on:click="showRequestOrders()">
            Nowych odrzuconych zamówień: {{eventsMap.rejectedRequestOrders}}
         </a>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
   
 </template>
@@ -46,8 +52,6 @@ export default {
   },
   ready: function () {
     registerListener((event) => {
-      console.log('backend event:', event)
-
       const unreadMessages = event.unreadMessages
 
       const newRequestOrders = event.requestOrderEvents.filter(event => {

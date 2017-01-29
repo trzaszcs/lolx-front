@@ -30,7 +30,7 @@
           <input v-model="email" placeholder="email@domena.pl"/>
         </div>
 
-        <div class="field required">
+        <div class="field">
           <label>Telefon</label>
           <div class="ui labeled input">
             <div class="ui label">
@@ -114,10 +114,6 @@ export default {
         if (!util.emailValid(this.email)) {
           append('email', 'Email jest niepoprawny')
         }
-      }
-
-      if (!this.phone) {
-        append('phone', 'Telefon jest wymagany')
       }
 
       if (!this.location || !this.location.title) {
