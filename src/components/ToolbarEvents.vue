@@ -4,13 +4,21 @@
     <div class="floating ui red label">{{noOfEvents}}</div>
   </button>
   
-  <div class="ui fluid popup bottom left transition">
+  <div class="ui fluid popup bottom center transition">
     <div class="ui one column divided center aligned grid">
       <div class="column">
-        <a v-if="eventsMap.unreadMessages && eventsMap.unreadMessages > 0">Nowych wiadomości: {{eventsMap.unreadMessages}}</a>
-        <a v-if="eventsMap.newRequestOrders && eventsMap.newRequestOrders > 0">Nowych zamówień: {{eventsMap.newRequestOrders}}</a>
-        <a v-if="eventsMap.acceptedRequestOrders && eventsMap.acceptedRequestOrders > 0">Nowych zaakceptowanych zamówień: {{eventsMap.acceptedRequestOrders}}</a>
-        <a v-if="eventsMap.rejectedRequestOrders && eventsMap.rejectedRequestOrders > 0">Nowych odrzuconych zamówień: {{eventsMap.rejectedRequestOrders}}</a>
+        <a v-if="eventsMap.unreadMessages && eventsMap.unreadMessages > 0" v-on:click="showUpdatedChats()">
+           Nowych wiadomości: {{eventsMap.unreadMessages}}
+        </a>
+        <a v-if="eventsMap.newRequestOrders && eventsMap.newRequestOrders > 0" v-on:click="showRequestOrders()">
+           Nowych zamówień: {{eventsMap.newRequestOrders}}
+        </a>
+        <a v-if="eventsMap.acceptedRequestOrders && eventsMap.acceptedRequestOrders > 0" v-on:click="showRequestOrders()">
+           Nowych zaakceptowanych zamówień: {{eventsMap.acceptedRequestOrders}}
+        </a>
+        <a v-if="eventsMap.rejectedRequestOrders && eventsMap.rejectedRequestOrders > 0" v-on:click="showRequestOrders()">
+           Nowych odrzuconych zamówień: {{eventsMap.rejectedRequestOrders}}
+        </a>
       </div>
     </div>
   </div>
@@ -29,6 +37,12 @@ export default {
     }
   },
   methods: {
+    showUpdatedChats: function () {
+      this.$router.go({path: '/myAccount', query: {section: 'chats'}})
+    },
+    showRequestOrders: function () {
+      this.$router.go({path: '/myAccount', query: {section: 'requestOrders'}})
+    }
   },
   ready: function () {
     registerListener((event) => {
