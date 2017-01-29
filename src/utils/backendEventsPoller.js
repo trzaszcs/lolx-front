@@ -11,8 +11,6 @@ export const startPolling = () => {
           onResult({unreadMessages: response.count, requestOrderEvents: roEventsResponse})
         })
       })
-      console.log('scheduler ...')
-      return 1
     })
   }
 }

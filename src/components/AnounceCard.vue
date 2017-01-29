@@ -59,7 +59,7 @@
               <div class="sub header">{{anounce.price}} zł</div>
             </h2>
 
-            <button v-if="requestOrderId"  class="ui button tiny"  v-link="{ path: '/order', query: {orderId: requestOrderId} }"  data-tooltip="Twoje zamówienie">
+            <button v-if="requestOrderId"  class="ui button tiny"  v-link="{ path: '/order', query: {orderId: requestOrderId} }">
               <i class="ui add to cart icon"></i>
               Twoje zamówienie
             </button>

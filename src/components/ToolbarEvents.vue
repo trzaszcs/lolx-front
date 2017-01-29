@@ -63,9 +63,8 @@ export default {
       }).length
 
       this.eventsMap = {unreadMessages, newRequestOrders, acceptedRequestOrders, rejectedRequestOrders}
-      this.noOfEvents += (unreadMessages + newRequestOrders + acceptedRequestOrders + rejectedRequestOrders)
+      this.noOfEvents = (unreadMessages + newRequestOrders + acceptedRequestOrders + rejectedRequestOrders)
     })
-
     setTimeout(() => {
       $('#events').popup({
         popup: $('.popup'),

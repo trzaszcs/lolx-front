@@ -7,6 +7,7 @@ class Scheduler {
     this.intervalId = window.setInterval(
       () => {
         repeatableFunc((result) => {
+          this.lastResult = result
           if (this.onEvent) {
             this.onEvent(result)
           }
@@ -21,6 +22,9 @@ class Scheduler {
 
   registerListener (onEvent) {
     this.onEvent = onEvent
+    if (this.lastResult) {
+      this.onEvent(this.lastResult)
+    }
   }
 
 }
