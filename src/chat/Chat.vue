@@ -42,7 +42,7 @@ const enrich = (chat) => {
     message.authorsMessage = message.authorId === chat.authorId
     message.opponentsMessage = !message.authorsMessage
     message.message = message.type === 'user'
-    message.creationDatePretty = util.prettyDateDetailed(new Date(message.created))
+    message.creationDatePretty = util.prettyDateDetailed(message.created)
     message.authorPretty = message.authorId === session.getUserId() ? 'Ja' : message.author
     return message
   })

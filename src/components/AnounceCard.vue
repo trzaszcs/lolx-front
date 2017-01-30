@@ -190,7 +190,7 @@ export default {
       validationErrors: null,
       showLoginMessage: false,
       creationDate: function () {
-        return util.prettyDate(new Date(this.anounce.creationDate))
+        return util.prettyDate(this.anounce.creationDate)
       },
       chatStatus: null,
       showRequestOrderCreatedMsg: false,
