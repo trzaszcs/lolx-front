@@ -16,6 +16,10 @@ class Cache {
     return this.cache[key]
   }
 
+  clearAll () {
+    this.cache = {}
+  }
+
   getAndClear (key) {
     const value = this.get(key)
     if (value) {

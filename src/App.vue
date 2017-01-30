@@ -58,6 +58,15 @@ export default {
   ready: function () {
     this.siteUrl = window.location.href
     this.logged = session.logged()
+  },
+  events: {
+    'logout': function () {
+      this.logged = false
+    },
+    'logged': function () {
+      this.logged = true
+      console.log('LOGGED')
+    }
   }
 }
 </script>

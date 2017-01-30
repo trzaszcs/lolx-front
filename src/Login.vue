@@ -78,6 +78,7 @@ export default {
         if (result.success) {
           session.create(result.userId, result.jwt)
           startPolling()
+          this.$dispatch('logged', {logged: true})
           const backUrl = session.getBackUrl()
           this.$router.go(backUrl || {'path': '/myAccount'})
         } else {
@@ -97,6 +98,7 @@ export default {
         if (result.success) {
           session.create(result.userId, result.jwt)
           startPolling()
+          this.$dispatch('logged', {logged: true})
           const backUrl = session.getBackUrl()
           this.$router.go(backUrl || {'path': '/myAccount'})
         } else {

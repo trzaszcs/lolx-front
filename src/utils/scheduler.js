@@ -1,3 +1,5 @@
+import cache from './cache'
+
 class Scheduler {
   constructor () {
     this.oneHour = 60 * 60 * 1000
@@ -7,7 +9,7 @@ class Scheduler {
     this.intervalId = window.setInterval(
       () => {
         repeatableFunc((result) => {
-          this.lastResult = result
+          cache.put('events', result)
           if (this.onEvent) {
             this.onEvent(result)
           }
@@ -22,8 +24,9 @@ class Scheduler {
 
   registerListener (onEvent) {
     this.onEvent = onEvent
-    if (this.lastResult) {
-      this.onEvent(this.lastResult)
+    const lastResult = cache.get('events')
+    if (lastResult) {
+      this.onEvent(lastResult)
     }
   }
 
