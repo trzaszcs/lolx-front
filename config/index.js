@@ -41,6 +41,11 @@ module.exports = {
           target: "http://localhost:8084/", 
           pathRewrite: {'^/chat-api' : ''},
           changeOrigin: true
+      },
+      "/rating-api": {
+          target: "http://localhost:8085/", 
+          pathRewrite: {'^/rating-api' : ''},
+          changeOrigin: true
       }
     },
     rewrites: [

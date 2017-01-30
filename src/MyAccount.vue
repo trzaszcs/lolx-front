@@ -127,11 +127,8 @@
       return {
         view: 'publicData',
         user: {
+          id: session.getUserId(),
           username: 'lala',
-          rating: 0,
-          commentsCount: 0,
-          likesCount: 0,
-          lastActive: '',
           location: {title: ''}
         },
         customerOrders: [],
@@ -172,16 +169,10 @@
       if (section) {
         this.view = section
       }
-
+      this.userId = session.getUserId()
       api.userDetails(session.getUserId(), session.getJwt(), (response) => {
         this.user = response
-        this.user.username = response.firstName
-        this.user.rating = 4
-        this.user.commentsCount = 2
-        this.user.likesCount = 1
-        this.user.lastActive = '12h'
         this.loading = false
-        $('.ui.star.rating').rating()
       })
       api.getCustomerOrders(session.getUserId(), session.getJwt(), (items) => {
         this.customerOrders = items

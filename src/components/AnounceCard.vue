@@ -211,11 +211,7 @@ export default {
     },
     getUser: function (selectedItem) {
       return {
-        username: 'Zbigniew ToDo',
-        rating: 4,
-        commentsCount: 2,
-        likesCount: 1,
-        lastActive: '12h'
+        username: 'Zbigniew ToDo'
       }
     },
     initMap: function () {

@@ -367,6 +367,14 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
       }).done(callback)
+    },
+    getUserRating: function (userId, jwt, callback) {
+      $.ajax({
+        url: `/rating-api/ratings/${userId}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
     }
   }
 })()
