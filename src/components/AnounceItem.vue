@@ -45,7 +45,7 @@ export default {
   data () {
     return {
       creationDate: function () {
-        return util.prettyDate(new Date(this.anounce.creationDate))
+        return util.prettyDate(this.anounce.creationDate)
       }
     }
   }

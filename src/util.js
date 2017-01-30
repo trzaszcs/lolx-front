@@ -14,12 +14,18 @@ const Util = (function () {
     }
   }
 
-  const formatDate = (date) => {
-    return dateFormatter.format(date)
+  const parseIso = (isoStr) => {
+    const parts = isoStr.match(/\d+/g)
+    const isoTime = Date.UTC(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5])
+    return new Date(isoTime)
   }
 
-  const formatDateToDetailed = (date) => {
-    return dateFormatter.formatToDetailed(date)
+  const formatDate = (dateStr) => {
+    return dateFormatter.format(parseIso(dateStr))
+  }
+
+  const formatDateToDetailed = (dateStr) => {
+    return dateFormatter.formatToDetailed(parseIso(dateStr))
   }
 
   const formatPhone = (phone) => {
