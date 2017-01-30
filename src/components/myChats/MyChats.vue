@@ -63,7 +63,7 @@ import LoadingBox from '../LoadingBox.vue'
 
 const decorate = (chats) => {
   const enrichChat = chat => {
-    chat.creationDatePretty = util.prettyDateDetailed(new Date(chat.created))
+    chat.creationDatePretty = util.prettyDateDetailed(chat.created)
     chat.authorNamePretty = chat.authorId === session.getUserId() ? `Ty (${chat.authorName})` : chat.authorName
     return chat
   }
