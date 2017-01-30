@@ -199,6 +199,14 @@
         console.log('close - MyAccount')
         $('.ui.modal').modal('hide')
       }
+    },
+    watch: {
+      '$route': function (newValue, oldValue) {
+        const section = this.$route.query.section
+        if (section) {
+          this.view = section
+        }
+      }
     }
   }
 </script>
