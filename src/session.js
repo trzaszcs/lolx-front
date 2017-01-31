@@ -1,7 +1,7 @@
 
 const SESSION = (function () {
   let backUrl
-  let userEvents = []
+  let userEvents = {requestOrderEvents: []}
 
   function logout () {
     window.localStorage.removeItem('login.jwt')
