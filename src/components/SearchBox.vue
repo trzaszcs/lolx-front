@@ -9,11 +9,12 @@
 import SearchInput from './SearchInput.vue'
 import SearchResult from './SearchResult.vue'
 
-const buildSearchEvent = (phrase, location, page, categoryId) => {
-  return {phrase, location, page, categoryId}
+const buildSearchEvent = (phrase, location, page, categoryId, offerType) => {
+  return {phrase, location, page, categoryId, offerType}
 }
 
 export default {
+  props: ['offerType'],
   components: {
     SearchInput,
     SearchResult
@@ -28,10 +29,10 @@ export default {
   },
   methods: {
     emitEvent: function () {
-      this.$broadcast('search', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId))
+      this.$broadcast('search', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId, this.offerType))
     },
     changeAddress: function () {
-      let query = {phrase: this.phrase, page: this.page}
+      let query = {phrase: this.phrase, page: this.page, 'offerType': this.offerType}
       if (this.location) {
         query.location = this.location.title
         query.lat = this.location.latitude
@@ -75,6 +76,9 @@ export default {
         this.categoryId = this.$route.query.category
       }
       this.phrase = this.$route.query.phrase
+      if ('offerType' in this.$route.query) {
+        this.offerType = this.$route.query.offerType
+      }
       this.emitEvent()
     }
   }

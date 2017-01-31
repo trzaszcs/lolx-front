@@ -1,4 +1,4 @@
-import cache from './cache'
+import session from '../session'
 
 class Scheduler {
   constructor () {
@@ -9,7 +9,7 @@ class Scheduler {
     this.intervalId = window.setInterval(
       () => {
         repeatableFunc((result) => {
-          cache.put('events', result)
+          session.events(result)
           if (this.onEvent) {
             this.onEvent(result)
           }
@@ -24,7 +24,7 @@ class Scheduler {
 
   registerListener (onEvent) {
     this.onEvent = onEvent
-    const lastResult = cache.get('events')
+    const lastResult = session.events()
     if (lastResult) {
       this.onEvent(lastResult)
     }

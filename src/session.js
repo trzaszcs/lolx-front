@@ -1,6 +1,7 @@
 
 const SESSION = (function () {
   let backUrl
+  let userEvents = []
 
   function logout () {
     window.localStorage.removeItem('login.jwt')
@@ -32,6 +33,13 @@ const SESSION = (function () {
     return window.localStorage.getItem('login.userId')
   }
 
+  function events (eventsList) {
+    if (eventsList !== undefined) {
+      userEvents = eventsList
+    }
+    return userEvents
+  }
+
   return {
     create: create,
     logged: logged,
@@ -39,7 +47,8 @@ const SESSION = (function () {
     getBackUrl: getBackUrl,
     getJwt: getJwt,
     getUserId: getUserId,
-    logout: logout
+    logout: logout,
+    events: events
   }
 })()
 

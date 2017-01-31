@@ -2,7 +2,7 @@
   <loading-box :show="loading"></loading-box>
   <div class="searchResult listing" v-show="finished">
     <div class="result">
-      <h4>Znaleziono {{total}} ogłoszeń</h4>
+      <h4>Znaleziono {{total}} ogłoszeń typu "{{offerTypeLabel()}}"</h4>
       <div class="ui large middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
         <anounce-item :anounce=item></anounce-item>
       </div>
@@ -70,6 +70,13 @@ export default {
     },
     showAnounce: function (selectedItem) {
       this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
+    },
+    offerTypeLabel: function () {
+      if (this.searchQuery.orderType === 'FIND') {
+        return 'Znajdę pracę'
+      } else {
+        return 'Zlecę pracę'
+      }
     }
   },
   events: {

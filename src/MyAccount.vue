@@ -119,7 +119,6 @@
   import MyChats from './components/myChats/MyChats.vue'
   import MyRequestOrders from './components/myRequestOrders/MyRequestOrders.vue'
   import session from './session'
-  import cache from './utils/cache'
   import api from './api'
   import $ from 'jquery'
 
@@ -155,7 +154,6 @@
       },
       logout: function () {
         session.logout()
-        cache.clearAll()
         this.$dispatch('logout', {logout: true})
         this.$router.go({path: '/'})
       }
