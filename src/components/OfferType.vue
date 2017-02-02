@@ -1,19 +1,19 @@
 <template>
   <div class="dashboard">
-    <h2>Wybierz rodzaj oferty której szukasz</h2>
+    <h2>Czego szukasz ?</h2>
     <div class="ui stackable two column grid">
 
       <div class="column" v-on:click="narrowOffers('ORDER')">
         <div class="cell order">
-          <h2>Zleć</h2>
-          Znajdź osoby szukające pracy
+          <h2>Zarabiaj</h2>
+          Szukaj drobnych zleceń w Twojej okolicy
         </div>
       </div>
 
       <div class="column"  v-on:click="narrowOffers('FIND')">
         <div class="cell find">
-          <h2>Wykonam</h2>
-          Znajdź osoby zlecające pracę
+          <h2>Zlecaj</h2>
+          Znajdź osoby, które wykonają Twoje zlecenie
         </div>
       </div>
 
@@ -30,7 +30,6 @@ export default {
   methods: {
     narrowOffers: function (type) {
       cache.put('offerType', type)
-      console.log('---->', type)
       this.$dispatch('offerTypeSelected', {})
     }
   }
