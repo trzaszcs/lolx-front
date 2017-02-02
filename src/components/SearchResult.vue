@@ -72,10 +72,10 @@ export default {
       this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
     },
     offerTypeLabel: function () {
-      if (this.searchQuery.orderType === 'FIND') {
-        return 'Znajdę pracę'
+      if (this.searchQuery.anounceType === 'ORDER') {
+        return 'Zlecę'
       } else {
-        return 'Zlecę pracę'
+        return 'Wykonam'
       }
     }
   },

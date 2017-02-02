@@ -1,7 +1,7 @@
 <template>
   <div class="ui container main">
-    <anounce-type v-if="!offerType"></anounce-type>
-    <search-box v-if="offerType" :offer-type="offerType"></search-box>   
+    <anounce-type v-if="!anounceType"></anounce-type>
+    <search-box v-if="anounceType" :anounce-type="anounceType"></search-box>   
   </div>
 </template>
 
@@ -19,11 +19,11 @@ export default {
   },
   data: function () {
     return {
-      offerType: null
+      anounceType: null
     }
   },
   ready: function () {
-    this.offerType = cache.get('offerType')
+    this.anounceType = cache.get('anounceType')
     util.currentLocation((coords) => {
       if (coords) {
         api.reverseGeocode(coords.latitude, coords.longitude, (result) => {
@@ -40,8 +40,8 @@ export default {
     })
   },
   events: {
-    'offerTypeSelected': function (event) {
-      this.offerType = cache.get('offerType')
+    'anounceTypeSelected': function (event) {
+      this.anounceType = cache.get('anounceType')
     }
   }
 }

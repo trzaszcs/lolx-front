@@ -10,8 +10,8 @@
         </div>
       </div>
 
-      <div class="column"  v-on:click="narrowOffers('FIND')">
-        <div class="cell find">
+      <div class="column"  v-on:click="narrowOffers('OFFER')">
+        <div class="cell offer">
           <h2>Zlecaj</h2>
           Znajdź osoby, które wykonają Twoje zlecenie
         </div>
@@ -29,8 +29,8 @@ export default {
   },
   methods: {
     narrowOffers: function (type) {
-      cache.put('offerType', type)
-      this.$dispatch('offerTypeSelected', {})
+      cache.put('anounceType', type)
+      this.$dispatch('anounceTypeSelected', {})
     }
   }
 }

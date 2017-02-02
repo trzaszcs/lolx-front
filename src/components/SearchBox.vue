@@ -1,5 +1,6 @@
 <template>
   <div class="searchBox ui container">
+    <h4 v-if="!searchStarted">Znajdź ogłoszenia typu "{{anounceTypeLabel()}}"</h4>
     <search-input></search-input>
     <search-result></search-result>
   </div>
@@ -9,12 +10,12 @@
 import SearchInput from './SearchInput.vue'
 import SearchResult from './SearchResult.vue'
 
-const buildSearchEvent = (phrase, location, page, categoryId, offerType) => {
-  return {phrase, location, page, categoryId, offerType}
+const buildSearchEvent = (phrase, location, page, categoryId, anounceType) => {
+  return {phrase, location, page, categoryId, anounceType}
 }
 
 export default {
-  props: ['offerType'],
+  props: ['anounceType'],
   components: {
     SearchInput,
     SearchResult
@@ -24,15 +25,17 @@ export default {
       phrase: '',
       location: '',
       categoryId: null,
-      page: 0
+      page: 0,
+      searchStarted: false
     }
   },
   methods: {
     emitEvent: function () {
-      this.$broadcast('search', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId, this.offerType))
+      this.searchStarted = true
+      this.$broadcast('search', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId, this.anounceType))
     },
     changeAddress: function () {
-      let query = {phrase: this.phrase, page: this.page, 'offerType': this.offerType}
+      let query = {phrase: this.phrase, page: this.page, 'anounceType': this.anounceType}
       if (this.location) {
         query.location = this.location.title
         query.lat = this.location.latitude
@@ -42,6 +45,13 @@ export default {
         query.category = this.categoryId
       }
       this.$router.go({'path': '/search', 'query': query})
+    },
+    anounceTypeLabel: function () {
+      if (this.anounceType === 'ORDER') {
+        return 'Zlecę'
+      } else {
+        return 'Wykonam'
+      }
     }
   },
   events: {
@@ -76,10 +86,12 @@ export default {
         this.categoryId = this.$route.query.category
       }
       this.phrase = this.$route.query.phrase
-      if ('offerType' in this.$route.query) {
-        this.offerType = this.$route.query.offerType
+      if ('anounceType' in this.$route.query) {
+        this.anounceType = this.$route.query.anounceType
       }
       this.emitEvent()
+    } else {
+      this.searchStarted = false
     }
   }
 }
