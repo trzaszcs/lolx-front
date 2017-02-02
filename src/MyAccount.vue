@@ -181,6 +181,7 @@
       api.getOwnerOrders(session.getUserId(), session.getJwt(), (items) => {
         this.ownerOrders = items
       })
+      this.$broadcast('loadUserRatingEvent', this.userId)
     },
     events: {
       'emitOrderEvent': function (order) {

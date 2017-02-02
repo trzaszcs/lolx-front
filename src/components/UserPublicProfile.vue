@@ -10,9 +10,14 @@
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">{{user.username}}
       </div>
 
+      <div class="content">
+        <i class="ui left floated big orange star icon"></i><span class="ui left floated"><h2>{{rating.starRate}}</h2> </span> 
+        <span class="ui right floated">{{rating.starRateCount}} głosów</span>
+      </div>
+    
       <div class="extra content">
-        Rating:
-        <div class="ui star rating" data-rating="{{rating.starRate}}" id="rating"></div>
+        Skorzystałem / moja ocena:
+        <div class="ui star rating" data-max-rating="5" id="rating"></div>
       </div>
     
       <div class="content">
@@ -45,22 +50,32 @@ export default {
       rating: {
         starRate: 0,
         likeCount: 0,
+        starRateCount: 0,
         commentsCount: 0,
         lastActive: '1h temu'
       }
     }
   },
   methods: {
+    loadUserRating: function (userId) {
+      console.log('user: %s', userId)
+      api.getUserRating(userId, session.getJwt(), (response) => {
+        console.log('user rating: %s', response.likeCount)
+        this.rating = response
+      })
+    },
+    saveRating: function (value) {
+      console.log(value)
+    }
   },
   ready: function () {
-    console.log('pp user: %s', this.user.id)
-    api.getUserRating(this.user.id, session.getJwt(), (response) => {
-      console.log('pp user rating: %s', response.likeCount)
-      this.rating = response
-      $('.ui.star.rating').rating()
-    })
+    $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
   },
   events: {
+    'loadUserRatingEvent': function (userId) {
+      console.log('loadUserRatingEvent')
+      this.loadUserRating(userId)
+    }
   }
 }
 </script>

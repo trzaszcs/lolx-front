@@ -173,10 +173,7 @@ export default {
       },
       user: {
         username: 'lala',
-        rating: 2,
-        commentsCount: 0,
-        likesCount: 0,
-        lastActive: ''
+        commentsCount: 0
       },
       order: {
         requestId: guid.getUuid(),
@@ -255,7 +252,7 @@ export default {
     'showAnounce': function (selectedItem) {
       console.log('event show anounce card-> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
-      this.user = this.getUser(selectedItem)
+      this.$broadcast('loadUserRatingEvent', selectedItem.customerId)
       this.initMap()
 
       this.requestOrderAllowed = true
