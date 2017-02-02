@@ -1,13 +1,13 @@
 <template>
   <div class="ui container main">
-    <offer-type v-if="!offerType"></offer-type>
+    <anounce-type v-if="!offerType"></anounce-type>
     <search-box v-if="offerType" :offer-type="offerType"></search-box>   
   </div>
 </template>
 
 <script>
 import SearchBox from './components/SearchBox'
-import OfferType from './components/OfferType'
+import AnounceType from './components/AnounceType'
 import util from './util'
 import api from './api'
 import cache from './utils/cache'
@@ -15,7 +15,7 @@ import cache from './utils/cache'
 export default {
   components: {
     SearchBox,
-    OfferType
+    AnounceType
   },
   data: function () {
     return {

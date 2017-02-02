@@ -18,7 +18,6 @@
           </a>
           <div class="meta">
             <div class="price">Cena {{item.price}} zł</div>
-            <anounce-type :type="item.type"></anounce-type>
           </div>
         </div>  
                            
@@ -44,13 +43,12 @@
   import session from '../session'
   import {anouncesDecorator} from '../decorator'
   import LoadingBox from './LoadingBox'
-  import AnounceType from './AnounceType'
   import InfoBox from './InfoBox'
   import api from '../api'
 
   export default {
     props: ['userId', 'itemsPerPage'],
-    components: {LoadingBox, AnounceType, InfoBox},
+    components: {LoadingBox, InfoBox},
     data () {
       return {
         loading: false,

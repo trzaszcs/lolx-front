@@ -18,7 +18,6 @@
 
       <div class="ten wide column">
         <h4 class="ui header">{{anounce.location.title}}</h4>
-        <anounce-type :type="anounce.type"></anounce-type>
         <div class="content">
           {{creationDate()}}
         </div>
@@ -37,11 +36,9 @@
 
 <script>
 import util from '../util'
-import AnounceType from './AnounceType'
 
 export default {
   props: ['anounce'],
-  components: {AnounceType},
   data () {
     return {
       creationDate: function () {
