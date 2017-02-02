@@ -12,7 +12,9 @@
 
       <div class="extra content">
         Rating:
-        <div class="ui star rating" data-rating="{{rating.starRate}}" id="rating"></div>
+        <div class="ui star rating" data-max-rating="5" id="rating"></div>
+        <span><b>{{rating.starRate}}</b> </span> 
+        <span class="ui right floated">{{rating.starRateCount}} głosów</span>
       </div>
     
       <div class="content">
@@ -45,22 +47,31 @@ export default {
       rating: {
         starRate: 0,
         likeCount: 0,
+        starRateCount: 0,
         commentsCount: 0,
         lastActive: '1h temu'
       }
     }
   },
   methods: {
+    loadUserRating: function (userId) {
+      console.log('user: %s', userId)
+      api.getUserRating(userId, session.getJwt(), (response) => {
+        console.log('user rating: %s', response.likeCount)
+        this.rating = response
+        $('.ui.star.rating').rating({
+          initialRating: this.rating.starRate
+        })
+      })
+    }
   },
   ready: function () {
-    console.log('pp user: %s', this.user.id)
-    api.getUserRating(this.user.id, session.getJwt(), (response) => {
-      console.log('pp user rating: %s', response.likeCount)
-      this.rating = response
-      $('.ui.star.rating').rating()
-    })
   },
   events: {
+    'loadUserRatingEvent': function (userId) {
+      console.log('loadUserRatingEvent')
+      this.loadUserRating(userId)
+    }
   }
 }
 </script>
