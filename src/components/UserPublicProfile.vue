@@ -6,35 +6,36 @@
       </div>
       
       <div class="content">
-        <div class="right floated meta">{{rating.lastActive}}</div>
-        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">{{user.username}}
+        <span class="right floated">
+          <i class="teal thumbs up icon"></i>
+          {{rating.likeCount}} lajków
+        </span>
+        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
+        {{user.username}}
       </div>
 
       <div class="content">
-        <i class="ui left floated big orange star icon"></i><span class="ui left floated"><h2>{{rating.starRate}}</h2> </span> 
-        <span class="ui right floated">{{rating.starRateCount}} głosów</span>
-      </div>
-    
-      <div class="extra content">
-        Skorzystałem / moja ocena:
-        <div class="ui star rating" data-max-rating="5" id="rating"></div>
-      </div>
-    
-      <div class="content">
-        <span class="right floated">
-          <i class="heart outline like icon"></i>
-          {{rating.likeCount}} lajków
-        </span>
-        <i class="comment icon"></i>
-        {{rating.commentsCount}} komentarzy
-      </div>
         
+            <i class="ui left floated big orange star icon"></i>
+            <span class="ui left floated">
+              <h2>{{rating.starRate}}/5</h2> 
+            </span> 
+            <span class="ui right floated">
+              ocena na podstawie {{rating.starRateCount}} głosów <br>
+              <a>komentarze ({{rating.commentsCount}}) ...</a>
+            </span>
+      </div>
+    
       <div class="extra content">
-        <div class="ui large transparent left icon focus input">
-          <i class="heart outline icon"></i>
+        Moja ocena:
+        <div class="ui star rating" data-max-rating="5" id="rating"></div>
+        <p></p>
+        <div class="ui fluid transparent left icon focus input">
+          <i class="comment outline icon"></i>
           <input type="text" placeholder="Dodaj komentarz...">
         </div>
       </div>
+    
     </div>
     
 </template>
