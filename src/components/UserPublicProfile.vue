@@ -10,11 +10,14 @@
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">{{user.username}}
       </div>
 
-      <div class="extra content">
-        Rating:
-        <div class="ui star rating" data-max-rating="5" id="rating"></div>
-        <span><b>{{rating.starRate}}</b> </span> 
+      <div class="content">
+        <i class="ui left floated big orange star icon"></i><span class="ui left floated"><h2>{{rating.starRate}}</h2> </span> 
         <span class="ui right floated">{{rating.starRateCount}} głosów</span>
+      </div>
+    
+      <div class="extra content">
+        Skorzystałem / moja ocena:
+        <div class="ui star rating" data-max-rating="5" id="rating"></div>
       </div>
     
       <div class="content">
@@ -59,13 +62,14 @@ export default {
       api.getUserRating(userId, session.getJwt(), (response) => {
         console.log('user rating: %s', response.likeCount)
         this.rating = response
-        $('.ui.star.rating').rating({
-          initialRating: this.rating.starRate
-        })
       })
+    },
+    saveRating: function (value) {
+      console.log(value)
     }
   },
   ready: function () {
+    $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
   },
   events: {
     'loadUserRatingEvent': function (userId) {
