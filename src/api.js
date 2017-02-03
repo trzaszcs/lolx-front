@@ -377,16 +377,16 @@ const API = (function () {
       }).done(callback)
     },
     updateUserStarRating: function (userId, announceId, starRating, comment, jwt, callback) {
-      const type = 'STAR'
-      const rate = starRating
-      const customerId = 0
-      const tags = []
       $.ajax({
         url: '/rating-api/ratings',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({type, rate, userId, customerId, announceId, tags, comment})
+        data: JSON.stringify({
+          'userId': userId,
+          'rate': starRating,
+          'type': 'STAR'
+        })
       }).done(callback)
     }
   }

@@ -18,7 +18,7 @@
         
             <i class="ui left floated big orange star icon"></i>
             <span class="ui left floated">
-              <h2>{{rating.starRate}}/5</h2> 
+              <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
             </span> 
             <span class="ui right floated">
               ocena na podstawie {{rating.starRateCount}} głosów <br>
@@ -67,11 +67,11 @@ export default {
       })
     },
     saveRating: function (value) {
-      const userId = this.user.userId
+      const userId = this.user.id
       const announceId = ''
       const starRating = value
       const comment = this.comment
-      console.log('saving starRate $s, userId $s', value, comment)
+      console.log('saving starRate %s, userId %s comment', value, userId, comment)
       api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
         console.log('user rating added: %s', response.starRate)
         this.loadUserRating(userId)
@@ -83,6 +83,7 @@ export default {
   },
   events: {
     'loadUserRatingEvent': function (userId) {
+      this.user.id = userId
       console.log('loadUserRatingEvent')
       this.loadUserRating(userId)
     }

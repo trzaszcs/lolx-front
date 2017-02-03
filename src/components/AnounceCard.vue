@@ -252,7 +252,7 @@ export default {
     'showAnounce': function (selectedItem) {
       console.log('event show anounce card-> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
-      this.$broadcast('loadUserRatingEvent', selectedItem.customerId)
+      this.$broadcast('loadUserRatingEvent', selectedItem.anounce.ownerId)
       this.initMap()
 
       this.requestOrderAllowed = true
