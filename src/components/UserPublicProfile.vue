@@ -21,7 +21,7 @@
         </span> 
         <span class="ui right floated">
           ocena na podstawie {{rating.starRateCount}} głosów <br>
-          <a>komentarze ({{rating.commentsCount}}) ...</a>
+          <a>komentarze ({{rating.lastComments.length}}) ...</a>
         </span>
       </div>
     
@@ -51,6 +51,7 @@ export default {
         likeCount: 0,
         starRateCount: 0,
         commentsCount: 0,
+        lastComments: [],
         lastActive: '1h temu'
       },
       comment: '',

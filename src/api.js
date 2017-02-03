@@ -385,7 +385,9 @@ const API = (function () {
         data: JSON.stringify({
           'userId': userId,
           'rate': starRating,
-          'type': 'STAR'
+          'type': 'STAR',
+          'announceId': announceId,
+          'comment': comment
         })
       }).done(callback)
     }
