@@ -32,7 +32,7 @@
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
-          <input type="text" placeholder="Dodaj komentarz...">
+          <input type="text" v-model="comment"  placeholder="Dodaj komentarz...">
         </div>
       </div>
     
@@ -54,7 +54,8 @@ export default {
         starRateCount: 0,
         commentsCount: 0,
         lastActive: '1h temu'
-      }
+      },
+      comment: ''
     }
   },
   methods: {
@@ -66,7 +67,15 @@ export default {
       })
     },
     saveRating: function (value) {
-      console.log(value)
+      const userId = this.user.userId
+      const announceId = ''
+      const starRating = value
+      const comment = this.comment
+      console.log('saving starRate $s, userId $s', value, comment)
+      api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
+        console.log('user rating added: %s', response.starRate)
+        this.loadUserRating(userId)
+      })
     }
   },
   ready: function () {
