@@ -55,7 +55,7 @@
  
            </div>
 
-           <user-public-profile :user=user></user-public-profile>
+           <user-public-profile></user-public-profile>
 
      </div>
 
