@@ -171,17 +171,15 @@
         this.view = section
       }
       this.userId = session.getUserId()
-      api.userDetails(session.getUserId(), session.getJwt(), (response) => {
-        this.user = response
-        this.loading = false
-      })
       api.getCustomerOrders(session.getUserId(), session.getJwt(), (items) => {
         this.customerOrders = items
+        this.loading = false
       })
       api.getOwnerOrders(session.getUserId(), session.getJwt(), (items) => {
         this.ownerOrders = items
+        this.loading = false
       })
-      this.$broadcast('loadUserRatingEvent', this.user.id)
+      this.$broadcast('loadUserRatingEvent', session.getUserId())
     },
     events: {
       'emitOrderEvent': function (order) {
