@@ -1,6 +1,9 @@
 <template>
   <div class="searchBox ui container">
-    <h4 v-if="!searchStarted">Znajdź ogłoszenia typu "{{anounceTypeLabel()}}"</h4>
+    <h4 v-if="!searchStarted">
+      Znajdź ogłoszenia typu
+      <anounce-type-select :type="anounceType"></anounce-type-select>
+    </h4>
     <search-input></search-input>
     <search-result></search-result>
   </div>
@@ -9,6 +12,7 @@
 <script>
 import SearchInput from './SearchInput.vue'
 import SearchResult from './SearchResult.vue'
+import AnounceTypeSelect from './AnounceTypeSelect.vue'
 
 const buildSearchEvent = (phrase, location, page, categoryId, anounceType) => {
   return {phrase, location, page, categoryId, anounceType}
@@ -18,7 +22,8 @@ export default {
   props: ['anounceType'],
   components: {
     SearchInput,
-    SearchResult
+    SearchResult,
+    AnounceTypeSelect
   },
   data () {
     return {
@@ -45,13 +50,6 @@ export default {
         query.category = this.categoryId
       }
       this.$router.go({'path': '/search', 'query': query})
-    },
-    anounceTypeLabel: function () {
-      if (this.anounceType === 'ORDER') {
-        return 'Zlecę'
-      } else {
-        return 'Wykonam'
-      }
     }
   },
   events: {

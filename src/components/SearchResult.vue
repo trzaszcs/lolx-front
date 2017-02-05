@@ -2,7 +2,10 @@
   <loading-box :show="loading"></loading-box>
   <div class="searchResult listing" v-show="finished">
     <div class="result">
-      <h4>Znaleziono {{total}} ogłoszeń typu "{{offerTypeLabel()}}"</h4>
+      <h4>
+          Znaleziono {{total}} ogłoszeń typu
+          <anounce-type-select :type="searchQuery.anounceType"></anounce-type-select>
+      </h4>
       <div class="ui large middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
         <anounce-item :anounce=item></anounce-item>
       </div>
@@ -23,6 +26,7 @@ import api from '../api'
 import AnounceItem from './AnounceItem.vue'
 import AnounceCard from './AnounceCard.vue'
 import LoadingBox from './LoadingBox.vue'
+import AnounceTypeSelect from './AnounceTypeSelect.vue'
 
 const itemsPerPage = 20
 
@@ -30,7 +34,8 @@ export default {
   components: {
     AnounceItem,
     AnounceCard,
-    LoadingBox
+    LoadingBox,
+    AnounceTypeSelect
   },
   data () {
     return {
@@ -70,13 +75,6 @@ export default {
     },
     showAnounce: function (selectedItem) {
       this.$router.go({'path': '/anounce', 'query': { anounceId: selectedItem.id }})
-    },
-    offerTypeLabel: function () {
-      if (this.searchQuery.anounceType === 'ORDER') {
-        return 'Zlecę'
-      } else {
-        return 'Wykonam'
-      }
     }
   },
   events: {
