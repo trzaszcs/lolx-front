@@ -11,6 +11,7 @@
 
 <script>
 import $ from 'jquery'
+import cache from '../utils/cache'
 
 const TYPES_MAP = {
   'ORDER': 'Zlecę',
@@ -28,7 +29,9 @@ export default {
   ready: function () {
     $('.ui.dropdown').dropdown({
       onChange: (value, text, selectedItem) => {
-        this.$dispatch('anounceTypeSelected', {type: selectedItem.attr('data-type')})
+        const anounceType = selectedItem.attr('data-type')
+        cache.put('anounceType', anounceType)
+        this.$dispatch('anounceTypeSelected', {type: anounceType})
       }
     })
   }

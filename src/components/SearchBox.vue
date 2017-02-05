@@ -68,6 +68,13 @@ export default {
     'geolocation': function (event) {
       this.location = event
       this.emitEvent()
+    },
+    'anounceTypeSelected': function (event) {
+      this.anounceType = event.type
+      if (this.searchStarted) {
+        this.changeAddress()
+        this.emitEvent()
+      }
     }
   },
   ready: function () {
