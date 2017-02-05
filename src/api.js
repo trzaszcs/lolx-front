@@ -375,6 +375,21 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
       }).done(callback)
+    },
+    updateUserStarRating: function (userId, announceId, starRating, comment, jwt, callback) {
+      $.ajax({
+        url: '/rating-api/ratings',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({
+          'userId': userId,
+          'rate': starRating,
+          'type': 'STAR',
+          'announceId': announceId,
+          'comment': comment
+        })
+      }).done(callback)
     }
   }
 })()

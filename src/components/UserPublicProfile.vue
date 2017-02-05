@@ -6,35 +6,35 @@
       </div>
       
       <div class="content">
-        <div class="right floated meta">{{rating.lastActive}}</div>
-        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">{{user.username}}
+        <span class="right floated">
+          <i class="teal thumbs up icon"></i>
+          {{rating.likeCount}} lajków
+        </span>
+        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
+        {{user.firstName}} {{user.lastName}}
       </div>
 
       <div class="content">
-        <i class="ui left floated big orange star icon"></i><span class="ui left floated"><h2>{{rating.starRate}}</h2> </span> 
-        <span class="ui right floated">{{rating.starRateCount}} głosów</span>
-      </div>
-    
-      <div class="extra content">
-        Skorzystałem / moja ocena:
-        <div class="ui star rating" data-max-rating="5" id="rating"></div>
-      </div>
-    
-      <div class="content">
-        <span class="right floated">
-          <i class="heart outline like icon"></i>
-          {{rating.likeCount}} lajków
+        <i class="ui left floated big orange star icon"></i>
+        <span class="ui left floated">
+          <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
+        </span> 
+        <span class="ui right floated">
+          ocena na podstawie {{rating.starRateCount}} głosów <br>
+          <a>komentarze ({{rating.lastComments.length}}) ...</a>
         </span>
-        <i class="comment icon"></i>
-        {{rating.commentsCount}} komentarzy
       </div>
-        
+    
       <div class="extra content">
-        <div class="ui large transparent left icon focus input">
-          <i class="heart outline icon"></i>
-          <input type="text" placeholder="Dodaj komentarz...">
+        Moja ocena:
+        <div class="ui star rating" data-max-rating="5" id="rating"></div>
+        <p></p>
+        <div class="ui fluid transparent left icon focus input">
+          <i class="comment outline icon"></i>
+          <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Dodaj komentarz...">
         </div>
       </div>
+    
     </div>
     
 </template>
@@ -44,7 +44,6 @@ import session from '../session'
 import api from '../api'
 import $ from 'jquery'
 export default {
-  props: ['user'],
   data () {
     return {
       rating: {
@@ -52,7 +51,15 @@ export default {
         likeCount: 0,
         starRateCount: 0,
         commentsCount: 0,
+        lastComments: [],
         lastActive: '1h temu'
+      },
+      comment: '',
+      user: {
+        id: session.getUserId(),
+        firstName: '',
+        lastName: '',
+        location: {title: ''}
       }
     }
   },
@@ -65,7 +72,18 @@ export default {
       })
     },
     saveRating: function (value) {
-      console.log(value)
+      const userId = this.user.id
+      const announceId = ''
+      const starRating = value
+      const comment = this.comment
+      console.log('saving starRate %s, userId %s comment %s', value, userId, comment)
+      api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
+        console.log('user rating added: %s', response.starRate)
+        this.loadUserRating(userId)
+      })
+    },
+    saveComment: function () {
+      console.log('saving scomment %s', this.comment)
     }
   },
   ready: function () {
@@ -73,8 +91,11 @@ export default {
   },
   events: {
     'loadUserRatingEvent': function (userId) {
-      console.log('loadUserRatingEvent')
+      this.user.id = userId
       this.loadUserRating(userId)
+      api.userDetails(userId, session.getJwt(), (response) => {
+        this.user = response
+      })
     }
   }
 }

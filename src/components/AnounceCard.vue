@@ -87,7 +87,7 @@
           </div>
     </div>
     <div class="ui column">
-        <user-public-profile :user=user></user-public-profile>
+        <user-public-profile></user-public-profile>
       
       <div class="ui fluid card">
         <div class="ui top attached label">
@@ -252,7 +252,7 @@ export default {
     'showAnounce': function (selectedItem) {
       console.log('event show anounce card-> ', selectedItem.anounce)
       this.anounce = selectedItem.anounce
-      this.$broadcast('loadUserRatingEvent', selectedItem.customerId)
+      this.$broadcast('loadUserRatingEvent', this.anounce.ownerId)
       this.initMap()
 
       this.requestOrderAllowed = true

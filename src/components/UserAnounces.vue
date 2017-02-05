@@ -21,7 +21,7 @@
           </div>
         </div>  
                            
-        <button class="ui right floated teal button" v-if="forCurrentUser" v-on:click="close(item)">
+        <button class="ui right floated small button" v-if="forCurrentUser" v-on:click="close(item)">
           zamknij
         </button>
 
