@@ -70,24 +70,9 @@
     </div>
 
     <!-- ACCOUNT -->
-    <div v-show="view == 'account'">
-      <div class="ui fluid card">
-
-        <div class="ui top attached label">
-          <i class="ui edit icon"></i>
-          Moje dane
-        </div>
-         
-        <div class="content">
-          <edit-account 
-            :first-name="user.firstName"
-            :last-name="user.lastName"
-            :location="user.location"
-            :email="user.email"
-            :phone="user.phone"></edit-account>
-         </div>
-       </div>
-     </div>
+    <div v-if="view == 'account'">
+      <edit-account></edit-account>
+    </div>
 
      <!-- CHANGE PASSWORD -->
      <div v-show="view == 'changePassword'">
