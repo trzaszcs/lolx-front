@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="column"  v-on:click="narrowOffers('OFFER')">
+      <div class="column"  v-on:click="narrowOffers('EXECUTE')">
         <div class="cell offer">
           <h2>Zlecaj</h2>
           Znajdź osoby, które wykonają Twoje zlecenie

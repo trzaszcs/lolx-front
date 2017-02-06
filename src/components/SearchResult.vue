@@ -52,7 +52,7 @@ export default {
       return this.searchQuery.phrase
     },
     doSearch: function () {
-      api.search(this.searchQuery.phrase, this.searchQuery.page, this.searchQuery.location, this.searchQuery.categoryId, itemsPerPage, (searchResult) => {
+      api.search(this.searchQuery.phrase, this.searchQuery.type, this.searchQuery.page, this.searchQuery.location, this.searchQuery.categoryId, itemsPerPage, (searchResult) => {
         this.searchFinished(searchResult)
       })
     },

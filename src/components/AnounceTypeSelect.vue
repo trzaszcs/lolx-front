@@ -15,7 +15,7 @@ import cache from '../utils/cache'
 
 const TYPES_MAP = {
   'ORDER': 'Zlecę',
-  'OFFER': 'Wykonam'
+  'EXECUTE': 'Wykonam'
 }
 
 export default {
