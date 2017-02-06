@@ -1,6 +1,7 @@
 <template>
 
   <div v-on:click="details()">
+    <a v-if="!requestOrder.seen" class="ui horizontal label">{{label()}}</a>
     <a>{{requestOrder.anounceTitle}}</a>
     <br/>
     Zamówienie od <span class="author">{{requestOrder.authorName}}</span> <span class="creationDate">{{requestOrder.creationDatePretty}}</span> <br/>
@@ -14,6 +15,16 @@ export default {
   methods: {
     details: function () {
       this.$router.go({path: '/order', query: {orderId: this.requestOrder.id}})
+    },
+    label: function () {
+      if (!this.requestOrder.seen) {
+        if (this.requestOrder.waiting) {
+          return 'Nowe'
+        } else {
+          return 'Nowy status'
+        }
+      }
+      return null
     }
   }
 }
