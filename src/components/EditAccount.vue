@@ -85,7 +85,7 @@ export default {
       saved: false,
       validationErrors: null,
       states: states,
-      user: null
+      user: {}
     }
   },
   methods: {

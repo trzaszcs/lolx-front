@@ -1,7 +1,6 @@
 <template>
   
   <div id='info-box' v-show="visible" class="ui positive message">
-    <i class="close icon"></i>
     <div v-if="header" class="header">
       {{header}}
     </div>
