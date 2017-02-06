@@ -1,5 +1,5 @@
 <template>
- <div class="ui selection dropdown">
+ <div class="ui selection dropdown categoryBoxDropdown">
   <i class="dropdown icon"></i>
   <div class="default text"></div>
   <div class="menu">
@@ -26,7 +26,7 @@ export default {
     }
   },
   ready: function () {
-    const $dropdown = $('.ui.dropdown')
+    const $dropdown = $('.ui.categoryBoxDropdown')
     let initDropdownSelection = (val, $dropdown) => {
       let selectedCategory = this.categories.filter((element) => element.id === val)[0]
       if (!selectedCategory) {
