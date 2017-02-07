@@ -81,7 +81,7 @@ export default {
       saved: false,
       validationErrors: null,
       states: states,
-      user: {}
+      user: {location: {title: ''}}
     }
   },
   methods: {
@@ -127,7 +127,6 @@ export default {
           append('email', 'Email jest niepoprawny')
         }
       }
-
       if (!this.user.location || !this.user.location.title) {
         append('location', 'Lokalizacja jest wymagana')
       } else if (!this.user.location.latitude) {
@@ -151,7 +150,7 @@ export default {
   },
   events: {
     'location': function (location) {
-      this.location = location
+      this.user.location = location
     }
   },
   ready: function () {
