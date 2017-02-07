@@ -23,8 +23,8 @@
           <label>Rodzaj ogłoszenia</label>
           <select v-model="type" class="ui dropdown">
             <option value="">Rodzaj...</option>
-            <option value="FIND">Zlecę</option>
-            <option value="OFFER">Wykonam</option>
+            <option value="ORDER">Zlecę</option>
+            <option value="EXECUTE">Wykonam</option>
           </select>
         </div>
 
@@ -68,7 +68,12 @@
           </select>
         </div>
 
-        <div class="four wide field required">
+        <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
+          <label>Lokalizacja</label>
+          <location-input :location="location" :simple="false"></location-input>
+        </div>
+
+        <div class="eleven wide field">
           <label>Telefon kontaktowy</label>
           <div class="ui labeled input">
             <div class="ui label">
@@ -78,11 +83,6 @@
           </div>
         </div>
 
-        <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
-          <label>Lokalizacja</label>
-          <location-input :location="location" :simple="false"></location-input>
-        </div>
-      
         <div class="ui field">
           <label>Zdjęcie</label>
           <upload></upload>
@@ -121,7 +121,7 @@ export default {
       contactPhone: '',
       imgName: null,
       categoryId: null,
-      duration: null,
+      duration: 'SEVEN_DAYS',
       categories: [],
       durations: anounceDurations,
       type: null,
@@ -203,9 +203,7 @@ export default {
         append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
       }
 
-      if (!this.contactPhone) {
-        append('phone', 'Telefon jest wymagany')
-      } else if (!util.phoneValid(this.contactPhone)) {
+      if (this.contactPhone && !util.phoneValid(this.contactPhone)) {
         append('phone', 'Telefon jest niepoprawny')
       }
 
