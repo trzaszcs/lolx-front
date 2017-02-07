@@ -2,12 +2,9 @@
   <div class="ui container changePassword">
 
     <loading-box :show="saving"></loading-box>
-   
-    <div v-if="saved && passwordChangedSuccessfully" class="ui info message">
-      <p>
-        Hasło zostało zmodyfikowane
-      </p>
-    </div>
+
+    <info-box :visible="saved && passwordChangedSuccessfully"
+      :message="'Hasło zostało zmienione'"></info-box>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
     
@@ -17,24 +14,24 @@
         </ul>
       </div>
       
-      <div class="fields">
-        <div class="field" v-bind:class="{'error': hasFieldError('oldPassword1')}">
+      <div class="fields required">
+        <div class="field" v-bind:class="{'error': hasFieldError('oldPassword')}">
           <label>Obecne hasło</label>
-          <input v-model="oldPassword1" type="password"/>
+          <input v-model="oldPassword" type="password"/>
         </div>
       </div>
       
-      <div class="fields">
-        <div class="field" v-bind:class="{'error': hasFieldError('oldPassword2')}">
-          <label>Obecne hasło ponownie</label>
-          <input v-model="oldPassword2" type="password"/>
+      <div class="fields required">
+        <div class="field" v-bind:class="{'error': hasFieldError('newPassword1')}">
+          <label>Nowe hasło</label>
+          <input v-model="newPassword1" type="password"/>
         </div>
       </div>
 
-      <div class="fields">
-        <div class="field" v-bind:class="{'error': hasFieldError('newPassword')}">
-          <label>Nowe hasło</label>
-          <input v-model="newPassword" type="password"/>
+      <div class="fields required">
+        <div class="field" v-bind:class="{'error': hasFieldError('newPassword2')}">
+          <label>Nowe hasło ponownie</label>
+          <input v-model="newPassword2" type="password"/>
         </div>
       </div>
 
@@ -50,16 +47,18 @@
 import api from '../api'
 import session from '../session'
 import LoadingBox from './LoadingBox.vue'
+import InfoBox from './InfoBox.vue'
 
 export default {
   components: {
-    LoadingBox
+    LoadingBox,
+    InfoBox
   },
   data () {
     return {
-      oldPassword1: '',
-      oldPassword2: '',
-      newPassword: '',
+      oldPassword: '',
+      newPassword1: '',
+      newPassword2: '',
       saving: false,
       saved: false,
       passwordChangedSuccessfully: false,
@@ -71,6 +70,9 @@ export default {
       this.saved = true
       this.saving = false
       this.passwordChangedSuccessfully = success
+      this.oldPassword = ''
+      this.newPassword1 = ''
+      this.newPassword2 = ''
     },
     save: function (event) {
       event.preventDefault()
@@ -80,7 +82,7 @@ export default {
       }
 
       this.saving = true
-      api.changePassword(this.oldPassword1, this.newPassword, session.getUserId(), session.getJwt(), (response) => {
+      api.changePassword(this.oldPassword, this.newPassword1, session.getUserId(), session.getJwt(), (response) => {
         if (response.success) {
         } else if (response.wrongOldPassword) {
           this.validationErrors.push({none: '', txt: 'Błędne stare hasło'})
@@ -93,15 +95,15 @@ export default {
     validate: function (event) {
       let errors = []
       const append = (fieldName, description) => errors.push({name: fieldName, txt: description})
-      if (!this.oldPassword1) {
-        append('oldPassword1', 'Stare hasło jest wymagane')
+      if (!this.oldPassword) {
+        append('oldPassword', 'Stare hasło jest wymagane')
       }
-      if (this.oldPassword1 !== this.oldPassword2) {
-        append('old-password', 'Hasła nie są takie same')
+      if (this.newPassword1 !== this.newPassword2) {
+        append('new-password', 'Hasła nie są takie same')
       }
 
-      if (!this.newPassword) {
-        append('newPassword', 'Nowe hasło jest wymagane')
+      if (!this.newPassword1) {
+        append('newPassword1', 'Nowe hasło jest wymagane')
       }
 
       if (errors.length > 0) {
