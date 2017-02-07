@@ -21,40 +21,36 @@
               <li>{{error.txt}}</li>
             </ul>
           </div>
-
-          <div class="fields">
-            <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
-              <label>Imie</label>
-              <input v-model="user.firstName" placeholder="Imie"/>
-            </div>
-
-            <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
-              <label>Nazwisko</label>
-              <input v-model="user.lastName" placeholder="Nazwisko"/>
+          <div class="field required">
+            <label class="required">Imie i nazwisko</label>
+            <div class="two fields">
+              <div class="field" v-bind:class="{'error': hasFieldError('firstName')}">
+                <input v-model="user.firstName" placeholder="Imie"/>
+              </div>
+              <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
+                <input v-model="user.lastName" placeholder="Nazwisko"/>
+              </div>
             </div>
           </div>
       
-          <div class="fields">
-            <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
+          <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
               <label>Email</label>
-              <input v-model="user.email" placeholder="email@domena.pl"/>
-            </div>
-
-            <div class="field">
-              <label>Telefon</label>
-              <div class="ui labeled input">
-                <div class="ui label">
-                  +48
-                </div>
-                <input v-model="user.phone" placeholder="Nr tel">
-              </div>
-            </div>
-
+              <input v-model="user.email" placeholder="email@domena.pl" type="email"/>
           </div>
 
           <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
             <label>Lokalizacja</label>
             <location-input :location="user.location"></location-input>
+          </div>
+
+          <div class="field">
+              <label>Telefon</label>
+              <div class="ui labeled input">
+                <div class="ui label">
+                  +48
+                </div>
+                <input v-model="user.phone" type="tel" placeholder="Nr tel"/>
+              </div>
           </div>
 
           <input v-on:click="save" type="submit" class="ui teal button" value="Zmień"></input>
