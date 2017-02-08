@@ -28,12 +28,10 @@
           
           <ul class="items">
             <li v-for="chat in chats" v-link="{ path: '/chat', query: { chatId: chat.id }}">
-              <span class="author">{{chat.authorNamePretty}}</span> napisał <span class="creationDate">{{chat.creationDatePretty}}</span><br/>
+              <a v-if="chat.unreadMessages > 0" class="ui horizontal label">Nieprzeczytane</a>
+              Rozmowa z <span class="author">{{chat.opponentName}}</span> z <span class="creationDate">{{chat.creationDatePretty}}</span><br/>
               w ogłoszeniu <a>{{chat.anounceTitle}}</a>
               <p>"{{chat.firstMessage}}.."</p>
-              <div class="ui label" v-if="chat.unreadMessages > 0">
-                <i class="mail icon"></i> {{chat.unreadMessages}}
-              </div>
             </li>
           </ul>
           
@@ -64,7 +62,7 @@ import LoadingBox from '../LoadingBox.vue'
 const decorate = (chats) => {
   const enrichChat = chat => {
     chat.creationDatePretty = util.prettyDateDetailed(chat.created)
-    chat.authorNamePretty = chat.authorId === session.getUserId() ? `Ty (${chat.authorName})` : chat.authorName
+    chat.opponentName = chat.authorId === session.getUserId() ? chat.recipientName : chat.authorName
     return chat
   }
 
