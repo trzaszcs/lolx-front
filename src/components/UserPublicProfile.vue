@@ -7,8 +7,10 @@
       
       <div class="content">
         <span class="right floated">
-          <i class="teal thumbs up icon" v-on:click="saveLike()"></i>
-          {{rating.likeCount}} lajków
+          <button class="ui icon pink button" v-on:click="saveLike()">
+            <i class="thumbs up icon"></i>
+            {{rating.likeCount}} lajków
+          </button>
         </span>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
         {{user.firstName}} {{user.lastName}}
