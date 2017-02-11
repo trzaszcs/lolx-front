@@ -390,6 +390,21 @@ const API = (function () {
           'comment': comment
         })
       }).done(callback)
+    },
+    updateUserLikesRating: function (userId, announceId, comment, jwt, callback) {
+      $.ajax({
+        url: '/rating-api/ratings',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({
+          'userId': userId,
+          'rate': 1,
+          'type': 'LIKE',
+          'announceId': announceId,
+          'comment': comment
+        })
+      }).done(callback)
     }
   }
 })()

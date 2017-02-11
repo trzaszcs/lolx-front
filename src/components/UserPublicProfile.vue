@@ -7,7 +7,7 @@
       
       <div class="content">
         <span class="right floated">
-          <i class="teal thumbs up icon"></i>
+          <i class="teal thumbs up icon" v-on:click="saveLike()"></i>
           {{rating.likeCount}} lajków
         </span>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
@@ -79,6 +79,16 @@ export default {
       console.log('saving starRate %s, userId %s comment %s', value, userId, comment)
       api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
         console.log('user rating added: %s', response.starRate)
+        this.loadUserRating(userId)
+      })
+    },
+    saveLike: function () {
+      const userId = this.user.id
+      const announceId = ''
+      const comment = this.comment
+      console.log('saving userId %s comment %s', userId, comment)
+      api.updateUserLikesRating(userId, announceId, comment, session.getJwt(), (response) => {
+        console.log('user likes added: %s %s', userId, announceId)
         this.loadUserRating(userId)
       })
     },
