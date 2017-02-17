@@ -62,7 +62,8 @@ export default {
         firstName: '',
         lastName: '',
         location: {title: ''}
-      }
+      },
+      announceId: ''
     }
   },
   methods: {
@@ -75,10 +76,10 @@ export default {
     },
     saveRating: function (value) {
       const userId = this.user.id
-      const announceId = ''
+      const announceId = this.announceId
       const starRating = value
       const comment = this.comment
-      console.log('saving starRate %s, userId %s comment %s', value, userId, comment)
+      console.log('saving starRate %s, userId %s announceId %s comment %s', value, userId, announceId, comment)
       api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
         console.log('user rating added: %s', response.starRate)
         this.loadUserRating(userId)
@@ -86,23 +87,24 @@ export default {
     },
     saveLike: function () {
       const userId = this.user.id
-      const announceId = ''
+      const announceId = this.announceId
       const comment = this.comment
-      console.log('saving userId %s comment %s', userId, comment)
+      console.log('saving userId %s announceId %s comment %s', userId, announceId, comment)
       api.updateUserLikesRating(userId, announceId, comment, session.getJwt(), (response) => {
         console.log('user likes added: %s %s', userId, announceId)
         this.loadUserRating(userId)
       })
     },
     saveComment: function () {
-      console.log('saving scomment %s', this.comment)
+      console.log('saving comment %s', this.comment)
     }
   },
   ready: function () {
     $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
   },
   events: {
-    'loadUserRatingEvent': function (userId) {
+    'loadUserRatingEvent': function (userId, announceId) {
+      this.announceId = announceId
       this.user.id = userId
       this.loadUserRating(userId)
       api.userDetails(userId, session.getJwt(), (response) => {
