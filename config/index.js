@@ -33,7 +33,7 @@ module.exports = {
           changeOrigin: true
       },
       "/category-api": {
-          target: "http://localhost:8083/", 
+          target: "http://lolx-category.herokuapp.com/", 
           pathRewrite: {'^/category-api' : ''},
           changeOrigin: true
       },

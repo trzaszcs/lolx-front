@@ -79,7 +79,7 @@ $(document).ajaxError((event, response) => {
   switch (response.status) {
     case 500: {
       console.log('http 500')
-      // router.go({path: '/error'})
+      router.go({path: '/error'})
       return null
     }
     case 401: {
