@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import LocationInput from './LocationInput'
-import CategoryBox from './CategoryBox'
+import LocationInput from '../LocationInput'
+import CategoryBox from '../CategoryBox'
 
 export default {
   components: {LocationInput, CategoryBox},
@@ -39,7 +39,7 @@ export default {
     }
   },
   events: {
-    'search': function (event) {
+    'initializeSearch': function (event) {
       this.phrase = event.phrase
       this.location = event.location
       this.categoryId = event.categoryId

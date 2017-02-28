@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import Welcome from './Welcome'
-import Listing from './Listing'
+import Listing from './components/listing/Listing'
 import AddAnounce from './AddAnounce'
 import MyAccount from './MyAccount'
 import Anounce from './Anounce'
@@ -14,6 +14,7 @@ import ResetPassword from './ResetPassword'
 import UserAnounces from './UserAnounces'
 import Chat from './chat/Chat'
 import Error from './Error'
+import AnounceTypeSelection from './AnounceTypeSelection'
 import $ from 'jquery'
 import session from './session'
 import {startPolling} from './utils/backendEventsPoller'
@@ -64,6 +65,9 @@ router.map({
   },
   '/error': {
     component: Error
+  },
+  '/anounceTypeSelection': {
+    component: AnounceTypeSelection
   }
 })
 

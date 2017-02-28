@@ -30,7 +30,7 @@ export default {
   methods: {
     narrowOffers: function (type) {
       cache.put('anounceType', type)
-      this.$dispatch('anounceTypeSelected', {})
+      this.$dispatch('anounceTypeSelected', {type})
     }
   }
 }

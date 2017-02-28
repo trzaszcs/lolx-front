@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import {anouncesDecorator} from '../decorator'
-import api from '../api'
+import {anouncesDecorator} from '../../decorator'
+import api from '../../api'
 import AnounceItem from './AnounceItem.vue'
-import AnounceCard from './AnounceCard.vue'
-import LoadingBox from './LoadingBox.vue'
+import AnounceCard from '../AnounceCard.vue'
+import LoadingBox from '../LoadingBox.vue'
 import AnounceTypeSelect from './AnounceTypeSelect.vue'
 
 const itemsPerPage = 20
@@ -78,7 +78,7 @@ export default {
     }
   },
   events: {
-    'search': function (queryMsg) {
+    'initializeSearch': function (queryMsg) {
       console.log('do query', queryMsg)
       this.searchQuery = queryMsg
       this.startSearch()

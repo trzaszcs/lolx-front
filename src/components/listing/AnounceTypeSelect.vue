@@ -11,7 +11,7 @@
 
 <script>
 import $ from 'jquery'
-import cache from '../utils/cache'
+import cache from '../../utils/cache'
 
 const TYPES_MAP = {
   'ORDER': 'Zlecę',
@@ -31,7 +31,7 @@ export default {
       onChange: (value, text, selectedItem) => {
         const anounceType = selectedItem.attr('data-type')
         cache.put('anounceType', anounceType)
-        this.$dispatch('anounceTypeSelected', {type: anounceType})
+        this.$dispatch('anounceTypeChanged', {type: anounceType})
       }
     })
   }

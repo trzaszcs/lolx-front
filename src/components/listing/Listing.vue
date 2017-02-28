@@ -10,26 +10,30 @@
 </template>
 
 <script>
+import AnounceType from '../AnounceType.vue'
 import SearchInput from './SearchInput.vue'
 import SearchResult from './SearchResult.vue'
 import AnounceTypeSelect from './AnounceTypeSelect.vue'
+import cache from '../../utils/cache'
+import searchQueryParser from './searchQueryParser'
 
 const buildSearchEvent = (phrase, location, page, categoryId, anounceType) => {
   return {phrase, location, page, categoryId, anounceType}
 }
 
 export default {
-  props: ['anounceType'],
   components: {
     SearchInput,
     SearchResult,
-    AnounceTypeSelect
+    AnounceTypeSelect,
+    AnounceType
   },
   data () {
     return {
       phrase: '',
       location: '',
       categoryId: null,
+      anounceType: null,
       page: 0,
       searchStarted: false
     }
@@ -37,7 +41,7 @@ export default {
   methods: {
     emitEvent: function () {
       this.searchStarted = true
-      this.$broadcast('search', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId, this.anounceType))
+      this.$broadcast('initializeSearch', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId, this.anounceType))
     },
     changeAddress: function () {
       let query = {phrase: this.phrase, page: this.page, 'anounceType': this.anounceType}
@@ -57,8 +61,8 @@ export default {
       this.phrase = event.phrase
       this.location = event.location
       this.categoryId = event.categoryId
-      this.emitEvent()
       this.changeAddress()
+      this.emitEvent()
     },
     'listing-page-changed': function (event) {
       this.page = event.page
@@ -69,34 +73,44 @@ export default {
       this.location = event
       this.emitEvent()
     },
-    'anounceTypeSelected': function (event) {
+    'anounceTypeChanged': function (event) {
       this.anounceType = event.type
       if (this.searchStarted) {
         this.changeAddress()
         this.emitEvent()
       }
+    },
+    'anounceTypeSelected': function (event) {
+      this.anounceType = event.type
     }
   },
   ready: function () {
-    if ('phrase' in this.$route.query) {
-      if ('page' in this.$route.query) {
-        this.page = this.$route.query.page
+    const searchQueryParams = searchQueryParser(this.$route.query)
+    this.anounceType = cache.get('anounceType')
+    const urlHasSearchParams = Object.keys(searchQueryParams).length > 0
+    if (!this.anounceType && !urlHasSearchParams) {
+      // go to anounceType selection
+      this.$router.go({path: '/anounceTypeSelection'})
+      return null
+    }
+
+    if (urlHasSearchParams) {
+      if ('page' in searchQueryParams) {
+        this.page = searchQueryParams.page
       }
-      if ('location' in this.$route.query &&
-          'lat' in this.$route.query &&
-          'lng' in this.$route.query) {
-        this.location = {title: this.$route.query.location, latitude: this.$route.query.lat, longitude: this.$route.query.lng}
+      if ('location' in searchQueryParams) {
+        this.location = searchQueryParams.location
       }
-      if ('category' in this.$route.query) {
-        this.categoryId = this.$route.query.category
+      if ('categoryId' in searchQueryParams) {
+        this.categoryId = searchQueryParams.categoryId
       }
-      this.phrase = this.$route.query.phrase
-      if ('anounceType' in this.$route.query) {
-        this.anounceType = this.$route.query.anounceType
+      if ('anounceType' in searchQueryParams) {
+        this.anounceType = searchQueryParams.anounceType
+      }
+      if ('phrase' in searchQueryParams) {
+        this.phrase = searchQueryParams.phrase
       }
       this.emitEvent()
-    } else {
-      this.searchStarted = false
     }
   }
 }
