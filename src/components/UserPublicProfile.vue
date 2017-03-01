@@ -7,10 +7,8 @@
       
       <div class="content">
         <span class="right floated">
-          <button class="ui icon pink button" v-on:click="saveLike()">
             <i class="thumbs up icon"></i>
-            {{rating.likeCount}} lajków
-          </button>
+            {{rating.likeCount}} polubień
         </span>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
         {{user.firstName}} {{user.lastName}}
@@ -26,15 +24,29 @@
           <a>komentarze ({{rating.lastComments.length}}) ...</a>
         </span>
       </div>
+    </div>
     
-      <div class="extra content">
-        Moja ocena:
+    <div class="ui fluid card">
+
+      <div class="ui top attached label">
+        <i class="star icon"></i>Moja ocena
+      </div>
+      
+      <div class="content">
+        Moja ogólna ocena: 
         <div class="ui star rating" data-max-rating="5" id="rating"></div>
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
           <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Dodaj komentarz...">
         </div>
+      </div>
+
+      <div class="extra content">
+        <button class="ui icon pink button" v-on:click="saveLike()">
+            <i class="thumbs up icon"></i>
+            {{rating.likeCount}} Fajne ogłoszenie
+        </button>
       </div>
     
     </div>
