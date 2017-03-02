@@ -29,24 +29,26 @@
     <div class="ui fluid card">
 
       <div class="ui top attached label">
-        <i class="star icon"></i>Moja ocena
+        <i class="star icon"></i>Moja ocena użytkownika
       </div>
       
       <div class="content">
-        Moja ogólna ocena: 
+        moje gwiazdki: 
         <div class="ui star rating" data-max-rating="5" id="rating"></div>
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
-          <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Dodaj komentarz...">
+          <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Podziel się opinią ...">
         </div>
       </div>
 
       <div class="extra content">
-        <button class="ui icon pink button" v-on:click="saveLike()">
+        <button class="ui small icon pink button" v-on:click="saveLike()">
             <i class="thumbs up icon"></i>
-            {{rating.likeCount}} Fajne ogłoszenie
+            Polecam
         </button>
+       Użytkownik został polecony {{rating.likeCount}} razy
+
       </div>
     
     </div>
