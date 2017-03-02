@@ -405,6 +405,14 @@ const API = (function () {
           'comment': comment
         })
       }).done(callback)
+    },
+    getVote: function (voterId, announceId, jwt, callback) {
+      $.ajax({
+        url: `/rating-api/votes/voter/${voterId}/announce/${announceId}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt)
+      }).done(callback)
     }
   }
 })()

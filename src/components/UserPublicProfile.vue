@@ -35,6 +35,7 @@
       <div class="content">
         moje gwiazdki: 
         <div class="ui star rating" data-max-rating="5" id="rating"></div>
+        ostatnia nota {{myVote.starRate.toPrecision(2)}}
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
@@ -47,8 +48,9 @@
             <i class="thumbs up icon"></i>
             Polecam
         </button>
-       Użytkownik został polecony {{rating.likeCount}} razy
-
+        <p>
+          Użytkownik został polecony {{rating.likeCount}} razy
+        </p>
       </div>
     
     </div>
@@ -77,7 +79,12 @@ export default {
         lastName: '',
         location: {title: ''}
       },
-      announceId: ''
+      announceId: '',
+      myVote: {
+        like: 0,
+        starRate: 0.0,
+        comment: ''
+      }
     }
   },
   methods: {
@@ -86,6 +93,16 @@ export default {
       api.getUserRating(userId, session.getJwt(), (response) => {
         console.log('user rating: %s', response.likeCount)
         this.rating = response
+      })
+    },
+    loadMyVote: function (announceId) {
+      console.log('loading vote voterId: %s, announceId: %s', session.getUserId(), announceId)
+      if (announceId == null) {
+        return
+      }
+      api.getVote(session.getUserId(), announceId, session.getJwt(), (response) => {
+        console.log('user vote: %s, %s', response.like, response.starRate)
+        this.myVote = response
       })
     },
     saveRating: function (value) {
@@ -123,6 +140,7 @@ export default {
       this.loadUserRating(userId)
       api.userDetails(userId, session.getJwt(), (response) => {
         this.user = response
+        this.loadMyVote(announceId)
       })
     }
   }
