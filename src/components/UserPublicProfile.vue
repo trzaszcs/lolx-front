@@ -97,10 +97,10 @@ export default {
     },
     loadMyVote: function (announceId) {
       console.log('loading vote voterId: %s, announceId: %s', session.getUserId(), announceId)
-      if (announceId == null) {
+      if (!session.logged() || announceId == null) {
         return
       }
-      api.getVote(session.getUserId(), announceId, session.getJwt(), (response) => {
+      api.getVote(announceId, session.getJwt(), (response) => {
         console.log('user vote: %s, %s', response.like, response.starRate)
         this.myVote = response
       })
@@ -140,8 +140,8 @@ export default {
       this.loadUserRating(userId)
       api.userDetails(userId, session.getJwt(), (response) => {
         this.user = response
-        this.loadMyVote(announceId)
       })
+      this.loadMyVote(announceId)
     }
   }
 }
