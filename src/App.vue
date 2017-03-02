@@ -24,11 +24,10 @@
           </div>
         </div>
      </div>
-
-     <p></p>
-
-     <router-view></router-view>
-
+     
+     <div class="core">
+       <router-view></router-view>
+     </div>
     </div>
     
   </div>

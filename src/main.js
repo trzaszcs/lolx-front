@@ -74,8 +74,6 @@ router.map({
 router.start(App, '#app')
 
 $(document).ajaxError((event, response) => {
-  console.log('ajax error', response.status)
-
   switch (response.status) {
     case 500: {
       console.log('http 500')
@@ -85,6 +83,9 @@ $(document).ajaxError((event, response) => {
     case 401: {
       session.logout()
       router.go({path: '/login'})
+      return null
+    }
+    case 404: {
       return null
     }
     default: {

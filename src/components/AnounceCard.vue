@@ -165,7 +165,7 @@ export default {
         img: '',
         description: '',
         price: '',
-        creationDate: '',
+        creationDate: null,
         location: {
           latitude: 52.4064,
           longitude: 16.9252
@@ -187,7 +187,9 @@ export default {
       validationErrors: null,
       showLoginMessage: false,
       creationDate: function () {
-        return util.prettyDate(this.anounce.creationDate)
+        return this.anounce.creationDate
+          ? util.prettyDate(this.anounce.creationDate)
+          : null
       },
       chatStatus: null,
       showRequestOrderCreatedMsg: false,
