@@ -29,30 +29,34 @@
     <div class="ui fluid card">
 
       <div class="ui top attached label">
-        <i class="star icon"></i>Moja ocena użytkownika
+        <i class="star icon"></i>Moja ocena
       </div>
       
       <div class="content">
-        moje gwiazdki: 
+        
+        
+        <div class="ui stackable two column grid">
+  <div class="ten wide column">
+    
+            moje gwiazdki: 
         <div class="ui star rating" data-max-rating="5" id="rating"></div>
-        ostatnia nota {{myVote.starRate.toPrecision(2)}}
+        {{myVote.starRate.toPrecision(2)}}/5
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
           <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Podziel się opinią ...">
         </div>
       </div>
-
-      <div class="extra content">
-        <button class="ui small icon pink button" v-on:click="saveLike()">
-            <i class="thumbs up icon"></i>
+    
+  <div class="four wide right floated column">
+    
+            <button class="ui toggle button" v-on:click="saveLike()">
             Polecam
         </button>
-        <p>
-          Użytkownik został polecony {{rating.likeCount}} razy
-        </p>
-      </div>
     
+  </div>
+</div>
+        
     </div>
     
 </template>
@@ -103,6 +107,7 @@ export default {
       api.getVote(announceId, session.getJwt(), (response) => {
         console.log('user vote: %s, %s', response.like, response.starRate)
         this.myVote = response
+        $('.ui.star.rating').rating('set rating', this.myVote.starRate)
       })
     },
     saveRating: function (value) {
@@ -132,6 +137,12 @@ export default {
   },
   ready: function () {
     $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
+    $('.ui.button.toggle').state({
+      text: {
+        inactive: 'Polub',
+        active: 'Lubię'
+      }
+    })
   },
   events: {
     'loadUserRatingEvent': function (userId, announceId) {
