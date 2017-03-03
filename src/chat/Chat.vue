@@ -11,7 +11,8 @@
           </p>
       </info-box>
       
-      <request-order v-if="requestOrder !== undefined" :request-order="requestOrder"></request-order>
+      <request-order v-if="requestOrder !== undefined" :request-order="requestOrder" :anounce-author="anounceAuthor">
+      </request-order>
 
       <conversation v-if="messages" :messages="messages" :focused-message-id="lastUnreadMessageId"></conversation>
 
@@ -66,12 +67,14 @@ export default {
       msgAdded: false,
       messages: null,
       requestOrder: undefined,
-      lastUnreadMessageId: null
+      lastUnreadMessageId: null,
+      anounceAuthor: false
     }
   },
   methods: {
     handleChatLoaded: function (chat) {
       this.messages = enrich(chat).messages
+      this.anounceAuthor = session.getUserId() === chat.anounceAuthorId
       this.lastUnreadMessageId = chat.firstUnreadMessageId ? chat.firstUnreadMessageId : this.messages[this.messages.length - 1].id
     },
     afterSave: function (anounceId) {

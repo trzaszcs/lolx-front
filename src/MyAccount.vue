@@ -106,6 +106,7 @@
   import session from './session'
   import api from './api'
   import $ from 'jquery'
+  import scheduler from './utils/scheduler'
 
   export default {
     data () {
@@ -139,6 +140,7 @@
       },
       logout: function () {
         session.logout()
+        scheduler.stop()
         this.$dispatch('logout', {logout: true})
         this.$router.go({path: '/'})
       }

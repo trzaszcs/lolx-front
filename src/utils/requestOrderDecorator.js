@@ -18,7 +18,7 @@ const decorateRequestOrder = (requestOrder, userId) => {
   requestOrder.waiting = requestOrder.status === 'WAITING'
   requestOrder.rejected = requestOrder.status === 'REJECTED'
   requestOrder.accepted = requestOrder.status === 'ACCEPTED'
-  requestOrder.creationDatePretty = util.prettyDateDetailed(requestOrder.creationDate)
+  requestOrder.creationDatePrqetty = util.prettyDateDetailed(requestOrder.creationDate)
   requestOrder.authorNamePretty = isRequestOrderAuthor ? `Ty (${requestOrder.authorName})` : requestOrder.authorName
   requestOrder.statusPretty = mapStatus(requestOrder)
   requestOrder.deleteAllowed = isRequestOrderAuthor && requestOrder.waiting

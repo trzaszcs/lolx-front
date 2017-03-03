@@ -64,7 +64,6 @@ export default {
     },
     'logged': function () {
       this.logged = true
-      console.log('LOGGED')
     }
   }
 }

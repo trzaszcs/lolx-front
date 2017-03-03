@@ -52,7 +52,6 @@ export default {
   },
   ready: function () {
     registerListener((event) => {
-      console.log('event ', event)
       const unreadMessages = event.unreadMessages
 
       const newRequestOrders = event.requestOrderEvents.filter(event => {

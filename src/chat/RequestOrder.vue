@@ -2,10 +2,10 @@
   <div v-if="requestOrder !== undefined" class="ui container requestOrder">
     <loading-box :show="loading"></loading-box>
     <div v-if="requestOrder === null">
-      <p>
+      <p v-if="!anounceAuthor">
         Brak zamówienia dla oferty, kliknij aby utworzyć
       </p>
-      <div class="action">
+      <div v-if="!anounceAuthor" class="action">
         <button v-on:click="createRequestOrder" class="ui basic tiny button">Utwórz</button>
       </div>
     </div>
@@ -30,7 +30,7 @@ import LoadingBox from '../components/LoadingBox.vue'
 import InfoBox from '../components/InfoBox.vue'
 
 export default {
-  props: ['requestOrder'],
+  props: ['requestOrder', 'anounceAuthor'],
   components: {
     LoadingBox,
     InfoBox
