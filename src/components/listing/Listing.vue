@@ -16,6 +16,8 @@ import SearchResult from './SearchResult.vue'
 import AnounceTypeSelect from './AnounceTypeSelect.vue'
 import cache from '../../utils/cache'
 import searchQueryParser from './searchQueryParser'
+import util from '../../util'
+import api from '../../api'
 
 const buildSearchEvent = (phrase, location, page, categoryId, anounceType) => {
   return {phrase, location, page, categoryId, anounceType}
@@ -112,6 +114,22 @@ export default {
       }
       this.emitEvent()
     }
+
+    util.currentLocation((coords) => {
+      if (coords) {
+        api.reverseGeocode(coords.latitude, coords.longitude, (result) => {
+          const geo = result.results[0]
+          this.location = {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            title: util.decorateGeolocation(geo),
+            city: util.geolocationCity(geo),
+            state: util.geolocationState(geo)
+          }
+          this.emitEvent()
+        })
+      }
+    })
   }
 }
 </script>
