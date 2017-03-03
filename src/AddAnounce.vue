@@ -2,8 +2,7 @@
   <div class="ui container addAnounce">
     <div class="ui segment">
       <loading-box :show="loading"></loading-box>
-   
-     
+        
       <form class="ui form" v-bind:class="{ 'error': validationErrors }">
         <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
 
@@ -73,16 +72,6 @@
           <location-input :location="location" :simple="false"></location-input>
         </div>
 
-        <div class="eleven wide field">
-          <label>Telefon kontaktowy</label>
-          <div class="ui labeled input">
-            <div class="ui label">
-              +48
-            </div>
-            <input v-model="contactPhone" placeholder="Nr tel">
-          </div>
-        </div>
-
         <div class="ui field">
           <label>Zdjęcie</label>
           <upload></upload>
@@ -97,7 +86,6 @@
 <script>
 import $ from 'jquery'
 import api from './api'
-import util from './util'
 import session from './session'
 import {anounceDurations} from './const'
 import LoadingBox from './components/LoadingBox.vue'
@@ -118,7 +106,6 @@ export default {
       description: '',
       price: null,
       location: {title: ''},
-      contactPhone: '',
       imgName: null,
       categoryId: null,
       duration: 'SEVEN_DAYS',
@@ -165,7 +152,6 @@ export default {
         this.description,
         this.price,
         this.location,
-        this.contactPhone,
         this.imgName,
         this.categoryId,
         this.type,
@@ -201,10 +187,6 @@ export default {
         append('location', 'Lokalizacja jest wymagana')
       } else if (!this.location.latitude) {
         append('location', 'Podana lokalizacja nie została znaleziona, spróbuj jeszcze raz')
-      }
-
-      if (this.contactPhone && !util.phoneValid(this.contactPhone)) {
-        append('phone', 'Telefon jest niepoprawny')
       }
 
       if (!this.categoryId) {

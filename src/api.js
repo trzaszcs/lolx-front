@@ -24,13 +24,13 @@ const API = (function () {
         data: queryData
       }).done(callback)
     },
-    add: function (title, description, price, location, contactPhone, imgName, categoryId, type, duration, userId, jwtToken, callback) {
+    add: function (title, description, price, location, imgName, categoryId, type, duration, userId, jwtToken, callback) {
       $.ajax({
         url: '/api/anounces',
         method: 'POST',
         headers: headers(jwtToken),
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({title, description, price, location, contactPhone, imgName, categoryId, type, duration, 'ownerId': userId})
+        data: JSON.stringify({title, description, price, location, imgName, categoryId, type, duration, 'ownerId': userId})
       }).done(callback)
     },
     order: function (order, jwtToken, callback) {
