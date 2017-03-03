@@ -8,7 +8,7 @@
       <div class="content">
         <span class="right floated">
             <i class="thumbs up icon"></i>
-            {{rating.likeCount}} polubień
+            Polecony przez {{rating.likeCount}} osób
         </span>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
         {{user.firstName}} {{user.lastName}}
@@ -37,10 +37,8 @@
         
         <div class="ui stackable two column grid">
   <div class="ten wide column">
-    
-            moje gwiazdki: 
-        <div class="ui star rating" data-max-rating="5" id="rating"></div>
-        {{myVote.starRate.toPrecision(2)}}/5
+        <div class="ui large star rating" data-max-rating="5" id="rating"></div>
+        <span class="large text">{{myVote.starRate.toPrecision(2)}}/5</span>
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
@@ -48,12 +46,10 @@
         </div>
       </div>
     
-  <div class="four wide right floated column">
-    
-            <button class="ui toggle button" v-on:click="saveLike()">
-            Polecam
-        </button>
-    
+  <div class="six wide right floated column">
+    <button class="ui fluid toggle button" v-bind:class="{ active: isActive }" v-on:click="saveLike()">
+      Polecam
+    </button>
   </div>
 </div>
         
@@ -88,7 +84,8 @@ export default {
         like: 0,
         starRate: 0.0,
         comment: ''
-      }
+      },
+      isActive: false
     }
   },
   methods: {
@@ -108,6 +105,9 @@ export default {
         console.log('user vote: %s, %s', response.like, response.starRate)
         this.myVote = response
         $('.ui.star.rating').rating('set rating', this.myVote.starRate)
+        if (this.myVote.like > 0) {
+          this.isActive = true
+        }
       })
     },
     saveRating: function (value) {
@@ -137,12 +137,6 @@ export default {
   },
   ready: function () {
     $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
-    $('.ui.button.toggle').state({
-      text: {
-        inactive: 'Polub',
-        active: 'Lubię'
-      }
-    })
   },
   events: {
     'loadUserRatingEvent': function (userId, announceId) {
