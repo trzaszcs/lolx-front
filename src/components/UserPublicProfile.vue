@@ -137,6 +137,7 @@ export default {
   },
   ready: function () {
     $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
+    $('.ui.toggle.button').state()
   },
   events: {
     'loadUserRatingEvent': function (userId, announceId) {
