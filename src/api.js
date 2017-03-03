@@ -406,9 +406,9 @@ const API = (function () {
         })
       }).done(callback)
     },
-    getVote: function (voterId, announceId, jwt, callback) {
+    getVote: function (announceId, jwt, callback) {
       $.ajax({
-        url: `/rating-api/votes/voter/${voterId}/announce/${announceId}`,
+        url: `/rating-api/votes/announce/${announceId}`,
         method: 'GET',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)

@@ -8,7 +8,7 @@
       <div class="content">
         <span class="right floated">
             <i class="thumbs up icon"></i>
-            {{rating.likeCount}} polubień
+            Polecony przez {{rating.likeCount}} osób
         </span>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
         {{user.firstName}} {{user.lastName}}
@@ -29,30 +29,30 @@
     <div class="ui fluid card">
 
       <div class="ui top attached label">
-        <i class="star icon"></i>Moja ocena użytkownika
+        <i class="star icon"></i>Moja ocena
       </div>
       
       <div class="content">
-        moje gwiazdki: 
-        <div class="ui star rating" data-max-rating="5" id="rating"></div>
-        ostatnia nota {{myVote.starRate.toPrecision(2)}}
+        
+        
+        <div class="ui stackable two column grid">
+  <div class="ten wide column">
+        <div class="ui large star rating" data-max-rating="5" id="rating"></div>
+        <span class="large text">{{myVote.starRate.toPrecision(2)}}/5</span>
         <p></p>
         <div class="ui fluid transparent left icon focus input">
           <i class="comment outline icon"></i>
           <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Podziel się opinią ...">
         </div>
       </div>
-
-      <div class="extra content">
-        <button class="ui small icon pink button" v-on:click="saveLike()">
-            <i class="thumbs up icon"></i>
-            Polecam
-        </button>
-        <p>
-          Użytkownik został polecony {{rating.likeCount}} razy
-        </p>
-      </div>
     
+  <div class="six wide right floated column">
+    <button class="ui fluid toggle button" v-bind:class="{ active: isActive }" v-on:click="saveLike()">
+      Polecam
+    </button>
+  </div>
+</div>
+        
     </div>
     
 </template>
@@ -84,7 +84,8 @@ export default {
         like: 0,
         starRate: 0.0,
         comment: ''
-      }
+      },
+      isActive: false
     }
   },
   methods: {
@@ -97,12 +98,16 @@ export default {
     },
     loadMyVote: function (announceId) {
       console.log('loading vote voterId: %s, announceId: %s', session.getUserId(), announceId)
-      if (announceId == null) {
+      if (!session.logged() || announceId == null) {
         return
       }
-      api.getVote(session.getUserId(), announceId, session.getJwt(), (response) => {
+      api.getVote(announceId, session.getJwt(), (response) => {
         console.log('user vote: %s, %s', response.like, response.starRate)
         this.myVote = response
+        $('.ui.star.rating').rating('set rating', this.myVote.starRate)
+        if (this.myVote.like > 0) {
+          this.isActive = true
+        }
       })
     },
     saveRating: function (value) {
@@ -132,6 +137,7 @@ export default {
   },
   ready: function () {
     $('.ui.star.rating').rating('setting', 'onRate', this.saveRating)
+    $('.ui.toggle.button').state()
   },
   events: {
     'loadUserRatingEvent': function (userId, announceId) {
@@ -140,8 +146,8 @@ export default {
       this.loadUserRating(userId)
       api.userDetails(userId, session.getJwt(), (response) => {
         this.user = response
-        this.loadMyVote(announceId)
       })
+      this.loadMyVote(announceId)
     }
   }
 }
