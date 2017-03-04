@@ -1,5 +1,5 @@
 <template>
- <div class="ui selection dropdown categoryBoxDropdown">
+ <div class="ui fluid selection dropdown categoryBoxDropdown">
   <i class="dropdown icon"></i>
   <div class="default text"></div>
   <div class="menu">
