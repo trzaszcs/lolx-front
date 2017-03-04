@@ -99,12 +99,12 @@ const API = (function () {
         url: `/api/anounces/${anounceId}`
       }).done(callback)
     },
-    login: function (email, password, callback) {
+    login: function (login, password, callback) {
       $.ajax({
         url: '/auth-api/auth',
         method: 'POST',
         contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify({email, password})
+        data: JSON.stringify({login, password})
       }).done((result) => {
         callback({success: true, jwt: result.jwt, userId: result.userId})
       }).fail((result) => {

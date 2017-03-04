@@ -2,6 +2,9 @@
   <loading-box :show="loading"></loading-box>
   <div class="ui middle aligned center aligned grid login">
     <div class="column">
+      <div v-if="message" class="ui error message">
+          {{message}}
+      </div>
 
       <!-- login form -->
       <form class="ui large form" v-bind:class="{ 'error': message }">
@@ -9,16 +12,16 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input v-model="email" type="text" name="email" placeholder="E-mail" v-on:keyup.13="login"/>
+              <input v-model="login" type="text" name="login" placeholder="E-mail lub nick" v-on:keyup.13="loginUser"/>
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
-              <input v-model="password" type="password" name="password" placeholder="Hasło" v-on:keyup.13="login"/>
+              <input v-model="password" type="password" name="password" placeholder="Hasło" v-on:keyup.13="loginUser"/>
             </div>
           </div>
-        <div v-on:click="login" class="ui fluid large teal submit button">Login</div>
+        <div v-on:click="loginUser" class="ui fluid large teal submit button">Login</div>
         
         <div class="ui horizontal divider">
           lub zaloguj sie przez
@@ -28,9 +31,6 @@
           Nie publikujemy bez twojej zgody
         </p>
    
-        </div>
-        <div class="ui error message">
-          {{message}}
         </div>
       </form>
       
@@ -60,7 +60,7 @@ import {startPolling} from './utils/backendEventsPoller'
 export default {
   data () {
     return {
-      email: 'john@wp.pl',
+      login: 'rambo',
       password: 'pass',
       message: '',
       loading: false,
@@ -71,9 +71,9 @@ export default {
     LoadingBox
   },
   methods: {
-    login: function () {
+    loginUser: function () {
       this.loading = true
-      api.login(this.email, this.password, (result) => {
+      api.login(this.login, this.password, (result) => {
         this.loading = false
         if (result.success) {
           session.create(result.userId, result.jwt)
@@ -82,8 +82,7 @@ export default {
           const backUrl = session.getBackUrl()
           this.$router.go(backUrl || {'path': '/myAccount'})
         } else {
-          session.reset()
-          this.message = 'Podałeś złe hasło lub email'
+          this.message = 'Podałeś niepoprawny login lub email'
         }
       })
     }
