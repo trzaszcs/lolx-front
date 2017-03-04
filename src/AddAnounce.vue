@@ -18,7 +18,7 @@
             </ul>
         </div>
 
-        <div class="three wide field required" v-bind:class="{'error': hasFieldError('type')}">
+        <div class="seven wide field required" v-bind:class="{'error': hasFieldError('type')}">
           <label>Rodzaj ogłoszenia</label>
           <select v-model="type" class="ui dropdown">
             <option value="">Rodzaj...</option>
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="three wide field required" v-bind:class="{'error': hasFieldError('category')}">
+        <div class="seven wide field required" v-bind:class="{'error': hasFieldError('category')}">
           <label>Kategoria</label>
           <select v-model="categoryId" class="ui dropdown">
             <option value="">Kategoria...</option>
@@ -57,7 +57,7 @@
           </select>
         </div>
 
-        <div class="two wide field required" v-bind:class="{'error': hasFieldError('duration')}">
+        <div class="seven wide field required" v-bind:class="{'error': hasFieldError('duration')}">
           <label>Czas trwania</label>
           <select v-model="duration" class="ui dropdown">
             <option value="">Czas trwania...</option>
