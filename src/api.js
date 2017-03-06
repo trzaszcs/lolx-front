@@ -391,7 +391,8 @@ const API = (function () {
         })
       }).done(callback)
     },
-    updateUserLikesRating: function (userId, announceId, comment, jwt, callback) {
+    updateUserLikesRating: function (userId, announceId, isLikeActive, comment, jwt, callback) {
+      const rate = isLikeActive ? -1 : 1
       $.ajax({
         url: '/rating-api/ratings',
         method: 'POST',
@@ -399,7 +400,7 @@ const API = (function () {
         headers: headers(jwt),
         data: JSON.stringify({
           'userId': userId,
-          'rate': 1,
+          'rate': rate,
           'type': 'LIKE',
           'announceId': announceId,
           'comment': comment

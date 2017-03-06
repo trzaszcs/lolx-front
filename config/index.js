@@ -23,27 +23,27 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/api": {
-          target: "http://localhost:8081/", 
+          target: "http://lolx-backend.herokuapp.com/", 
           pathRewrite: {'^/api' : ''},
           changeOrigin: true
       },
       "/auth-api": {
-          target: "http://localhost:8082/", 
+          target: "http://lolx-auth.herokuapp.com/", 
           pathRewrite: {'^/auth-api' : ''},
           changeOrigin: true
       },
       "/category-api": {
-          target: "http://localhost:8085/", 
+          target: "http://lolx-category.herokuapp.com/", 
           pathRewrite: {'^/category-api' : ''},
           changeOrigin: true
       },
       "/chat-api": {
-          target: "http://localhost:8084/", 
+          target: "http://lolx-chat.herokuapp.com/", 
           pathRewrite: {'^/chat-api' : ''},
           changeOrigin: true
       },
       "/rating-api": {
-          target: "http://localhost:8086/", 
+          target: "http://lolx-rating.herokuapp.com/", 
           pathRewrite: {'^/rating-api' : ''},
           changeOrigin: true
       }
