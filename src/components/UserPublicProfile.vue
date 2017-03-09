@@ -8,7 +8,7 @@
       <div class="content">
         <span class="right floated">
             <i class="thumbs up icon"></i>
-            Polecony przez {{rating.likeCount}} osób
+            Polecony {{rating.likeCount}} razy
         </span>
         <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
         {{user.firstName}} {{user.lastName}}
@@ -16,9 +16,12 @@
 
       <div class="content">
         <i class="ui left floated big orange star icon"></i>
-        <span class="ui left floated">
+        <span v-if="rating.starRate > 0" class="ui left floated">
           <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
         </span> 
+        <span v-if="rating.starRate == 0" class="ui left floated">
+          <h2>Brak oceny</h2> 
+        </span>
         <span class="ui right floated">
           ocena na podstawie {{rating.starRateCount}} głosów <br>
           <a>komentarze ({{rating.lastComments.length}}) ...</a>
