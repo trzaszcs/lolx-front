@@ -130,6 +130,11 @@ export default {
       })
     },
     saveLike: function () {
+      if (!session.logged()) {
+        session.setBackUrl(this.$route)
+        this.$router.go({path: '/login'})
+        return
+      }
       const userId = this.user.id
       const announceId = this.announceId
       const comment = this.comment
