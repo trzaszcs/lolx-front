@@ -16,15 +16,17 @@
 
       <div class="content">
         <i class="ui left floated big orange star icon"></i>
-        <span v-if="rating.starRate > 0" class="ui left floated">
-          <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
-        </span> 
+        <div v-if="rating.starRate > 0">
+          <span  class="ui left floated">
+            <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
+          </span> 
+          <span class="ui right floated">
+            ocena na podstawie {{rating.starRateCount}} głosów <br>
+            <a>komentarze ({{rating.lastComments.length}}) ...</a>
+          </span>
+        </div>
         <span v-if="rating.starRate == 0" class="ui left floated">
-          jeszcze brak oceny
-        </span>
-        <span class="ui right floated">
-          ocena na podstawie {{rating.starRateCount}} głosów <br>
-          <a>komentarze ({{rating.lastComments.length}}) ...</a>
+          ten użytkownik nie został jeszcze oceniony
         </span>
       </div>
     </div>
