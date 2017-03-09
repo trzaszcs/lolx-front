@@ -20,7 +20,7 @@
           <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
         </span> 
         <span v-if="rating.starRate == 0" class="ui left floated">
-          <h2>Brak oceny</h2> 
+          jeszcze brak oceny
         </span>
         <span class="ui right floated">
           ocena na podstawie {{rating.starRateCount}} głosów <br>
