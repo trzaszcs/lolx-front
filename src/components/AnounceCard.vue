@@ -87,7 +87,7 @@
           </div>
     </div>
     <div class="ui column">
-        <user-public-profile></user-public-profile>
+        <user-public-profile :title="O użytkowniku"></user-public-profile>
       
       <div class="ui fluid card">
         <div class="ui top attached label">

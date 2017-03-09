@@ -93,7 +93,7 @@
   
     </div>
     <div class="column">
-      <user-public-profile></user-public-profile>
+      <user-public-profile :title="Moja ocena kontrahenta"></user-public-profile>
     </div>
   </div>
 
