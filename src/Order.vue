@@ -93,7 +93,7 @@
   
     </div>
     <div class="column">
-      <user-public-profile :title="O użytkowniku"></user-public-profile>
+      <user-public-profile></user-public-profile>
     </div>
   </div>
 

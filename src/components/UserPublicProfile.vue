@@ -2,7 +2,7 @@
     <div class="ui fluid card">
 
       <div class="ui top attached label">
-        <i class="user icon"></i>{{title}}
+        <i class="user icon"></i>O użytkowniku
       </div>
       
       <div class="content">
@@ -67,7 +67,6 @@ import session from '../session'
 import api from '../api'
 import $ from 'jquery'
 export default {
-  props: ['title'],
   data () {
     return {
       rating: {
