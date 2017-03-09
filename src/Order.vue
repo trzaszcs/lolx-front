@@ -92,11 +92,11 @@
       </div>
   
     </div>
-      
+    <div class="column">
+      <user-public-profile></user-public-profile>
+    </div>
   </div>
-  
-  
-  
+
 
 </template>
 
@@ -105,11 +105,13 @@ import cache from './utils/cache'
 import api from './api'
 import session from './session'
 import LoadingBox from './components/LoadingBox.vue'
+import UserPublicProfile from './components/UserPublicProfile.vue'
 import {decorateRequestOrder} from './utils/requestOrderDecorator'
 
 export default {
   components: {
-    LoadingBox
+    LoadingBox,
+    UserPublicProfile
   },
   data () {
     return {
@@ -164,6 +166,7 @@ export default {
         this.loading = false
       })
       const opponent = session.getUserId() === this.requestOrder.authorId ? this.requestOrder.anounceAuthorId : this.requestOrder.authorId
+      this.$broadcast('loadUserRatingEvent', opponent, this.anounce.id)
       api.getChatStatus(this.requestOrder.anounceId, opponent, session.getJwt(), (status) => {
         this.chatStatus = status
       })
