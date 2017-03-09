@@ -34,12 +34,10 @@
     <div class="ui fluid card">
 
       <div class="ui top attached label">
-        <i class="star icon"></i>Moja ocena
+        <i class="star icon"></i>Twoja ocena
       </div>
       
       <div class="content">
-        
-        
         <div class="ui stackable two column grid">
   <div class="ten wide column">
         <div class="ui large star rating" data-max-rating="5" id="rating"></div>
@@ -116,6 +114,11 @@ export default {
       })
     },
     saveRating: function (value) {
+      if (!session.logged()) {
+        session.setBackUrl(this.$route)
+        this.$router.go({path: '/login'})
+        return
+      }
       const userId = this.user.id
       const announceId = this.announceId
       const starRating = value
