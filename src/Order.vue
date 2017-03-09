@@ -166,7 +166,7 @@ export default {
         this.loading = false
       })
       const opponent = session.getUserId() === this.requestOrder.authorId ? this.requestOrder.anounceAuthorId : this.requestOrder.authorId
-      this.$broadcast('loadUserRatingEvent', opponent, this.anounce.id)
+      this.$broadcast('loadUserRatingEvent', opponent, this.requestOrder.anounceId)
       api.getChatStatus(this.requestOrder.anounceId, opponent, session.getJwt(), (status) => {
         this.chatStatus = status
       })
