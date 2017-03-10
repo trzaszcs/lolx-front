@@ -22,12 +22,13 @@
           </span> 
           <span class="ui right floated">
             ocena na podstawie {{rating.starRateCount}} głosów <br>
-            <a>komentarze ({{rating.lastComments.length}}) ...</a>
+            <a v-on:click="loadComments()">komentarze ({{rating.lastComments.length}}) ...</a>
           </span>
         </div>
         <span v-if="rating.starRate == 0" class="ui left floated">
           ten użytkownik nie został jeszcze oceniony
         </span>
+        <user-commants></user-commants>
       </div>
     </div>
     
@@ -64,7 +65,12 @@
 import session from '../session'
 import api from '../api'
 import $ from 'jquery'
+import UserComments from './UserComments.vue'
+
 export default {
+  components: {
+    UserComments
+  },
   data () {
     return {
       rating: {
@@ -147,6 +153,9 @@ export default {
     },
     saveComment: function () {
       console.log('saving comment %s', this.comment)
+    },
+    loadComments: function () {
+      this.$broadcast('loadComments', this.rating.lastComments)
     }
   },
   ready: function () {
