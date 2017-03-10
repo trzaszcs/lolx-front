@@ -28,7 +28,7 @@
         <span v-if="rating.starRate == 0" class="ui left floated">
           ten użytkownik nie został jeszcze oceniony
         </span>
-        <user-commants></user-commants>
+        <user-comments></user-comments>
       </div>
     </div>
     
