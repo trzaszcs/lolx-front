@@ -10,7 +10,7 @@
             <i class="thumbs up icon"></i>
             Polecony {{rating.likeCount}} razy
         </span>
-        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
+        <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
         {{user.firstName}} {{user.lastName}}
       </div>
 

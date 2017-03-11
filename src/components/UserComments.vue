@@ -2,18 +2,16 @@
           
  <div class="ui fluid selection list" v-for="comment in comments">
     <div class="ui item">
-      <div class="left floated content">
-        <div class="ui mini star rating" data-max-rating="5" data-rating="comment.stars" id="comment.nick"></div>
-        ({{comment.stars}}/5)
+      <div class="right floated content">
+        <b>{{comment.nick}}</b>
+        <i class="ui yellow star icon"></i>
+        {{comment.stars}}/5 
       </div>
-      <div class="content">
-          <a class="header">
-            {{comment.nick}} 
-          </a>
-      </div> 
       <div class="meta">
-           {{comment.msg}}
-      </div> 
+        <p>
+          {{comment.msg}}
+        </p>
+      </div>
     </div>
  </div>
 
