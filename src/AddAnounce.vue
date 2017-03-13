@@ -87,7 +87,7 @@
 import $ from 'jquery'
 import api from './api'
 import session from './session'
-import {anounceDurations} from './const'
+import {anounceDurations, categories} from './const'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
 import Upload from './components/Upload.vue'
@@ -109,7 +109,7 @@ export default {
       imgName: null,
       categoryId: null,
       duration: 'SEVEN_DAYS',
-      categories: [],
+      categories: categories,
       durations: anounceDurations,
       type: null,
       loading: false,
@@ -235,23 +235,10 @@ export default {
     }
     this.loading = true
 
-    let toLoad = 2
-    let done = () => {
-      toLoad = toLoad - 1
-      if (toLoad === 0) {
-        this.loading = false
-      }
-    }
-
     api.userDetails(session.getUserId(), session.getJwt(), (details) => {
       this.location = details.location
       this.contactPhone = details.phone
-      done()
-    })
-
-    api.categories((categories) => {
-      this.categories = categories
-      done()
+      this.loading = false
     })
 
     $('.ui.dropdown').dropdown()

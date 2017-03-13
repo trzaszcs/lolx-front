@@ -37,7 +37,8 @@ export default {
       categoryId: null,
       anounceType: null,
       page: 0,
-      searchStarted: false
+      searchStarted: false,
+      ignoreAddressChangedEvent: false
     }
   },
   methods: {
@@ -55,7 +56,37 @@ export default {
       if (this.categoryId) {
         query.category = this.categoryId
       }
+      this.ignoreAddressChangeEvent = true
       this.$router.go({'path': '/search', 'query': query})
+    },
+    bindQueryParams: function () {
+      const searchQueryParams = searchQueryParser(this.$route.query)
+      this.anounceType = cache.get('anounceType')
+      const urlHasSearchParams = Object.keys(searchQueryParams).length > 0
+      if (!this.anounceType && !urlHasSearchParams) {
+        // go to anounceType selection
+        this.$router.go({path: '/anounceTypeSelection'})
+        return null
+      }
+
+      if (urlHasSearchParams) {
+        if ('page' in searchQueryParams) {
+          this.page = searchQueryParams.page
+        }
+        if ('location' in searchQueryParams) {
+          this.location = searchQueryParams.location
+        }
+
+        this.categoryId = 'categoryId' in searchQueryParams ? searchQueryParams.categoryId : null
+
+        if ('anounceType' in searchQueryParams) {
+          this.anounceType = searchQueryParams.anounceType
+        }
+        if ('phrase' in searchQueryParams) {
+          this.phrase = searchQueryParams.phrase
+        }
+        this.emitEvent()
+      }
     }
   },
   events: {
@@ -84,37 +115,16 @@ export default {
     },
     'anounceTypeSelected': function (event) {
       this.anounceType = event.type
+    },
+    'address-changed': function (event) {
+      if (!this.ignoreAddressChangeEvent) {
+        this.bindQueryParams()
+      }
+      this.ignoreAddressChangeEvent = false
     }
   },
   ready: function () {
-    const searchQueryParams = searchQueryParser(this.$route.query)
-    this.anounceType = cache.get('anounceType')
-    const urlHasSearchParams = Object.keys(searchQueryParams).length > 0
-    if (!this.anounceType && !urlHasSearchParams) {
-      // go to anounceType selection
-      this.$router.go({path: '/anounceTypeSelection'})
-      return null
-    }
-
-    if (urlHasSearchParams) {
-      if ('page' in searchQueryParams) {
-        this.page = searchQueryParams.page
-      }
-      if ('location' in searchQueryParams) {
-        this.location = searchQueryParams.location
-      }
-      if ('categoryId' in searchQueryParams) {
-        this.categoryId = searchQueryParams.categoryId
-      }
-      if ('anounceType' in searchQueryParams) {
-        this.anounceType = searchQueryParams.anounceType
-      }
-      if ('phrase' in searchQueryParams) {
-        this.phrase = searchQueryParams.phrase
-      }
-      this.emitEvent()
-    }
-
+    this.bindQueryParams()
     util.currentLocation((coords) => {
       if (coords) {
         api.reverseGeocode(coords.latitude, coords.longitude, (result) => {

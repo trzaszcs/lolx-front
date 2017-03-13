@@ -57,6 +57,10 @@ export default {
   ready: function () {
     this.siteUrl = window.location.href
     this.logged = session.logged()
+    this.$router.afterEach((transition) => {
+      const {from, to} = transition
+      this.$broadcast('address-changed', {from: {path: from.path, query: from.query}, to: {path: to.path, query: to.query}})
+    })
   },
   events: {
     'logout': function () {

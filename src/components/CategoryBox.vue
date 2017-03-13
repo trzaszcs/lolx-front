@@ -11,7 +11,21 @@
 
 <script>
 import $ from 'jquery'
-import api from '../api'
+import {categories} from '../const'
+
+const selectCategory = (categoryId, categories, $dropdown) => {
+  const intCategoryId = parseInt(categoryId)
+  let selectedCategory = categories.filter((element) => element.id === intCategoryId)[0]
+  if (!selectedCategory) {
+    selectedCategory = categories[0]
+  }
+  $dropdown.children('div.text')
+    .text(selectedCategory.name).removeClass('default')
+  $dropdown.find('div.menu')
+    .find(`item[data-value='${selectedCategory.id}']`)
+    .addClass('active')
+    .addClass('selected')
+}
 
 export default {
   props: ['categoryId'],
@@ -26,25 +40,25 @@ export default {
     }
   },
   ready: function () {
-    const $dropdown = $('.ui.categoryBoxDropdown')
-    let initDropdownSelection = (val, $dropdown) => {
-      let selectedCategory = this.categories.filter((element) => element.id === val)[0]
-      if (!selectedCategory) {
-        selectedCategory = this.categories[0]
+    let importedCategories = categories.slice()
+    importedCategories.splice(0, 0, {name: 'Wszystkie Kategorie', id: -1})
+    this.categories = importedCategories
+    setTimeout(
+      () => {
+        const $dropdown = $('.ui.categoryBoxDropdown')
+        $dropdown.dropdown({onChange: this.onSelect})
+        if (!this.categoryId) {
+          selectCategory(null, this.categories, $('.ui.categoryBoxDropdown'))
+        }
+      },
+    0)
+  },
+  watch: {
+    'categoryId': function (categoryId) {
+      if (this.categories.length > 0) {
+        selectCategory(categoryId, this.categories, $('.ui.categoryBoxDropdown'))
       }
-      $dropdown.children('div.text')
-        .text(selectedCategory.name).removeClass('default')
-      $dropdown.find('div.menu').find(`item[data-value='${selectedCategory.id}']`)
-        .addClass('active')
-        .addClass('selected')
     }
-    api.categories((response) => {
-      let categories = response
-      categories.splice(0, 0, {name: 'Wszystkie Kategorie', id: -1})
-      this.categories = categories
-      $dropdown.dropdown({onChange: this.onSelect})
-      initDropdownSelection(this.categoryId, $dropdown)
-    })
   }
 }
 </script>

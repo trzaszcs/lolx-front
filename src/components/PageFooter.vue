@@ -2,22 +2,15 @@
     
   <div class="fbar ui inverted vertical footer segment">
   
-  <div class=" ui center aligned container">
+  <div class="ui center aligned container">
     
-<div class="categories ui centered tiny images">
-        <a v-link="{ path: '/search', query: { category: 1, phrase:'', location: ''}}"><img src="../assets/categories/v3/sprzatanie.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 7, phrase:'', location: '' }}"><img src="../assets/categories/v3/kosmetyka-cialo.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 4, phrase:'', location: '' }}"><img src="../assets/categories/v3/korepetycje.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 6, phrase:'', location: '' }}"><img src="../assets/categories/v3/mycie-auta.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 5, phrase:'', location: '' }}"><img src="../assets/categories/v3/transport-zakupy.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 3, phrase:'', location: '' }}"><img src="../assets/categories/v3/opieka-zwierzeta.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 2, phrase:'', location: '' }}"><img src="../assets/categories/v3/ogrod.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 9, phrase:'', location: '' }}"><img src="../assets/categories/v3/zlota-raczka.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 10, phrase:'', location: '' }}"><img src="../assets/categories/v3/przeprowadzka.png" class="ui image"/></a>
-         <a v-link="{ path: '/search', query: { category: 8, phrase:'', location: '' }}"><img src="../assets/categories/v3/inne.png" class="ui image"/></a>
-    </div>
-
-    
+  <div class="categories ui centered tiny images">
+    <a
+      v-for="cat in categories"
+      v-link="categoryPath(cat.id)">
+        <img :src="categoryImg(cat)" class="ui image"/>
+    </a>
+  </div>
 
     <div class="ui inverted section divider"></div>
 
@@ -72,16 +65,27 @@
 
 <script>
 import sp from '../socialplugin'
+import {categories} from '../const'
 
 export default {
-  components: {
-  },
   data () {
     return {
-      siteUrl: ''
+      siteUrl: '',
+      categories: categories
     }
   },
   methods: {
+    categoryImg: function (cat) {
+      return require(`../assets/categories/v3/${cat.img}`)
+    },
+    categoryPath: function (categoryId) {
+      const query = { category: categoryId }
+      if (this.$route.path.startsWith('/search')) {
+        return { query: {...this.$route.query, category: categoryId}, replace: true }
+      } else {
+        return { path: '/search', query }
+      }
+    }
   },
   ready: function () {
     this.siteUrl = window.location.href
