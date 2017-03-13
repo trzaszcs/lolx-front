@@ -1,6 +1,6 @@
 <template>
   <loading-box :show="loading"></loading-box>
-  <div class="searchResult listing" v-show="finished">
+  <div id="searchResult" class="searchResult listing" v-show="finished">
     <div class="result">
       <h4>
           Znaleziono {{total}} ogłoszeń typu
@@ -29,6 +29,10 @@ import LoadingBox from '../LoadingBox.vue'
 import AnounceTypeSelect from './AnounceTypeSelect.vue'
 
 const itemsPerPage = 20
+
+const scrollToTop = () => {
+  document.getElementsByTagName('body')[0].scrollIntoView()
+}
 
 export default {
   components: {
@@ -62,6 +66,7 @@ export default {
       this.anounces = anouncesDecorator(searchResult.anounces)
       this.noOfPages = searchResult.totalCount / itemsPerPage
       this.total = searchResult.totalCount
+      scrollToTop()
     },
     startSearch: function () {
       this.finished = false
