@@ -10,7 +10,7 @@
             <i class="thumbs up icon"></i>
             Polecony {{rating.likeCount}} razy
         </span>
-        <img class="ui avatar image" src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
+        <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
         {{user.firstName}} {{user.lastName}}
       </div>
 
@@ -29,7 +29,7 @@
           ten użytkownik nie został jeszcze oceniony
         </span>
       </div>
-      <div class="content">
+      <div v-show="showComments" class="content">
         <user-comments></user-comments>
       </div>
     </div>
@@ -96,7 +96,8 @@ export default {
         starRate: 0.0,
         comment: ''
       },
-      isActive: false
+      isActive: false,
+      showComments: false
     }
   },
   methods: {
@@ -157,6 +158,7 @@ export default {
       console.log('saving comment %s', this.comment)
     },
     loadComments: function () {
+      this.showComments = this.rating.lastComments.length > 0
       this.$broadcast('loadComments', this.rating.lastComments)
     }
   },

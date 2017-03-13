@@ -387,7 +387,8 @@ const API = (function () {
           'rate': starRating,
           'type': 'STAR',
           'announceId': announceId,
-          'comment': comment
+          'comment': comment,
+          'voterNick': 'voter-nick'
         })
       }).done(callback)
     },

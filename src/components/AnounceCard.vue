@@ -81,7 +81,7 @@
          <div class="ui segment" id="anounce-desc"> 
             <div class="ui top attached label">Opis</div>
               <div class="ui content">
-                <img class="ui left floated spaced small image" :src="getImg()">
+                <img class="ui left floated small spaced image" :src="getImg()">
                  {{anounce.description}}
             </div>
           </div>
@@ -229,7 +229,7 @@ export default {
       })
     },
     getImg: function () {
-      return this.anounce.img ? this.anounce.img : 'http://semantic-ui.com/images/wireframe/image.png'
+      return this.anounce.img ? this.anounce.img : 'https://semantic-ui.com/images/wireframe/image.png'
     },
     requestOrder: function () {
       if (session.logged()) {
