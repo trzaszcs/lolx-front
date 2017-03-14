@@ -19,6 +19,7 @@
       <div class="ten wide column">
         <h4 class="ui header">{{anounce.location.title}}</h4>
         <div class="content">
+          <span class="category">{{anounce.categoryName}}</span>
           {{creationDate()}}
         </div>
       </div>
