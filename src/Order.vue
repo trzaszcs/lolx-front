@@ -39,7 +39,7 @@
   <div class="four wide column">
     <b>Dane zamówienia</b>
   </div>
-  <div class="twelve wide column">
+  <div class="eight wide column">
     
           <table class="ui striped table">
               <tbody>
@@ -92,7 +92,7 @@
   <div class="four wide column">
     <b>{{userLabel}}</b>
   </div>
-  <div class="twelve wide column">
+  <div class="eight wide column">
         <user-public-profile></user-public-profile>
     </div>
     </div>
