@@ -30,15 +30,18 @@
       </div>
     </div>
 
-    <div class="ui two column stackable grid">
 
-        <div class="column">
-          <user-public-profile></user-public-profile>
-        </div>
 
-         <div class="column">
-
-            <table class="ui striped table">
+<div class="ui secondary segment">
+  
+  
+  <div class="ui stackable grid">
+  <div class="four wide column">
+    <b>Dane zamówienia</b>
+  </div>
+  <div class="twelve wide column">
+    
+          <table class="ui striped table">
               <tbody>
                 <tr>
                   <td>Status</td>
@@ -78,9 +81,23 @@
               <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui right floated teal button">Odrzuć</button>
               <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui right floated teal button">Akceptuj</button>
             </div>
-        </div>
-              
+    
+  </div>
+</div>
+    
+  </div>
+  <div class="ui secondary segment">
+    
+      <div class="ui stackable grid">
+  <div class="four wide column">
+    <b>{{userLabel}}</b>
+  </div>
+  <div class="twelve wide column">
+        <user-public-profile></user-public-profile>
     </div>
+    </div>
+
+  </div>
 
 </div>
 
@@ -105,7 +122,8 @@ export default {
       anounce: {},
       loading: false,
       requestOrderJustCreated: false,
-      chatStatus: undefined
+      chatStatus: undefined,
+      userLabel: ''
     }
   },
   methods: {
@@ -152,6 +170,7 @@ export default {
         this.loading = false
       })
       const opponent = session.getUserId() === this.requestOrder.authorId ? this.requestOrder.anounceAuthorId : this.requestOrder.authorId
+      this.userLabel = session.getUserId() === this.requestOrder.anounceAuthorId ? 'Pracę wykona' : 'Pracę zlecił'
       this.$broadcast('loadUserRatingEvent', opponent, this.requestOrder.anounceId)
       api.getChatStatus(this.requestOrder.anounceId, opponent, session.getJwt(), (status) => {
         this.chatStatus = status
