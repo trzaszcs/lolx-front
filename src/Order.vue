@@ -32,9 +32,6 @@
 
 
 
-<div class="ui secondary segment">
-  
-  
   <div class="ui stackable grid">
   <div class="four wide column">
     <b>Dane zamówienia</b>
@@ -85,19 +82,14 @@
   </div>
 </div>
     
-  </div>
-  <div class="ui secondary segment">
-    
-      <div class="ui stackable grid">
+<div class="ui stackable grid">
   <div class="four wide column">
     <b>{{userLabel}}</b>
   </div>
   <div class="eight wide column">
-        <user-public-profile></user-public-profile>
-    </div>
-    </div>
-
+    <user-public-profile></user-public-profile>
   </div>
+</div>
 
 </div>
 
