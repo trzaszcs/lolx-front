@@ -114,7 +114,7 @@ export default {
         return
       }
       api.getVote(announceId, session.getJwt(), (response) => {
-        console.log('user vote: %s, %s', response.like, response.starRate)
+        console.log('user vote: %s, %s, %s', response.like, response.starRate, response.comment)
         this.myVote = response
         $('.ui.star.rating').rating('set rating', this.myVote.starRate)
         if (this.myVote.like > 0) {
@@ -155,10 +155,24 @@ export default {
       })
     },
     saveComment: function () {
-      console.log('saving comment %s', this.comment)
+      if (!session.logged()) {
+        session.setBackUrl(this.$route)
+        this.$router.go({path: '/login'})
+        return
+      }
+      const userId = this.user.id
+      const announceId = this.announceId
+      const comment = this.comment
+      if (this.myVote !== null && (comment !== this.myVote.comment)) {
+        const starRating = this.myVote.starRate
+        console.log('saving comment %s', this.comment)
+        api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
+          console.log('user rating comment update: %s', response.starRate)
+        })
+      }
     },
     loadComments: function () {
-      this.showComments = this.rating.lastComments.length > 0
+      this.showComments = !this.showComments && this.rating.lastComments.length > 0
       this.$broadcast('loadComments', this.rating.lastComments)
     }
   },
