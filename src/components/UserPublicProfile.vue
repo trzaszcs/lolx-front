@@ -116,6 +116,7 @@ export default {
       api.getVote(announceId, session.getJwt(), (response) => {
         console.log('user vote: %s, %s, %s', response.like, response.starRate, response.comment)
         this.myVote = response
+        this.comment = this.myVote.comment
         $('.ui.star.rating').rating('set rating', this.myVote.starRate)
         if (this.myVote.like > 0) {
           this.isActive = true
