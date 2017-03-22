@@ -104,7 +104,6 @@
   import MyChats from './components/myChats/MyChats.vue'
   import MyRequestOrders from './components/myRequestOrders/MyRequestOrders.vue'
   import session from './session'
-  import api from './api'
   import $ from 'jquery'
   import scheduler from './utils/scheduler'
 
@@ -151,21 +150,11 @@
         this.$router.go({path: '/login'})
         return
       }
-      this.loading = true
-
       const section = this.$route.query.section
       if (section) {
         this.view = section
       }
       this.userId = session.getUserId()
-      api.getCustomerOrders(session.getUserId(), session.getJwt(), (items) => {
-        this.customerOrders = items
-        this.loading = false
-      })
-      api.getOwnerOrders(session.getUserId(), session.getJwt(), (items) => {
-        this.ownerOrders = items
-        this.loading = false
-      })
       this.$broadcast('loadUserRatingEvent', session.getUserId())
     },
     events: {

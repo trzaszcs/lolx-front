@@ -51,22 +51,6 @@ const API = (function () {
         headers: headers(jwtToken)
       }).done(callback)
     },
-    getCustomerOrders: function (userId, jwtToken, callback) {
-      console.log('api get customer orders -> ', userId)
-      $.ajax({
-        url: `/api/orders/customer/${userId}`,
-        method: 'GET',
-        headers: headers(jwtToken)
-      }).done(callback)
-    },
-    getOwnerOrders: function (userId, jwtToken, callback) {
-      console.log('api get owner orders -> ', userId)
-      $.ajax({
-        url: `/api/orders/owner/${userId}`,
-        method: 'GET',
-        headers: headers(jwtToken)
-      }).done(callback)
-    },
     sendOrderEmail: function (orderEmail, jwtToken, callback) {
       console.log('api email order -> ', orderEmail)
       $.ajax({
