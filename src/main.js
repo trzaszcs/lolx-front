@@ -14,7 +14,6 @@ import ResetPassword from './ResetPassword'
 import UserAnounces from './UserAnounces'
 import Chat from './chat/Chat'
 import Error from './Error'
-import AnounceTypeSelection from './AnounceTypeSelection'
 import $ from 'jquery'
 import session from './session'
 import {startPolling} from './utils/backendEventsPoller'
@@ -65,9 +64,6 @@ router.map({
   },
   '/error': {
     component: Error
-  },
-  '/anounceTypeSelection': {
-    component: AnounceTypeSelection
   }
 })
 

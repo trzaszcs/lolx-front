@@ -18,15 +18,6 @@
             </ul>
         </div>
 
-        <div class="seven wide field required" v-bind:class="{'error': hasFieldError('type')}">
-          <label>Rodzaj ogłoszenia</label>
-          <select v-model="type" class="ui dropdown">
-            <option value="">Rodzaj...</option>
-            <option value="ORDER">Zlecę</option>
-            <option value="EXECUTE">Wykonam</option>
-          </select>
-        </div>
-
         <div class="field required" v-bind:class="{'error': hasFieldError('title')}">
           <label>Tytuł</label>
           <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
@@ -111,7 +102,6 @@ export default {
       duration: 'SEVEN_DAYS',
       categories: categories,
       durations: anounceDurations,
-      type: null,
       loading: false,
       newAnounceId: null,
       validationErrors: null
@@ -130,7 +120,6 @@ export default {
       this.duration = null
       this.contactPhone = null
       this.categoryId = null
-      this.type = null
       this.validationErrors = null
       this.newAnounceId = anounceId
       this.loading = false
@@ -154,7 +143,6 @@ export default {
         this.location,
         this.imgName,
         this.categoryId,
-        this.type,
         this.duration,
         session.getUserId(),
         session.getJwt(),
@@ -195,10 +183,6 @@ export default {
 
       if (!this.duration) {
         append('duration', 'Czas trwania jest wymagany')
-      }
-
-      if (!this.type) {
-        append('type', 'Typ ogłoszenia jest wymagany')
       }
 
       if (errors.length > 0) {

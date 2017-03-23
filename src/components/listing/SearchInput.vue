@@ -2,7 +2,7 @@
   <div class="ui three column stackable grid">
     <div class="six wide column">
       <div class="ui left icon fluid input">
-        <input v-model="phrase" type="text" placeholder="Poszukuje kogoś kto..." v-on:keyup.13="search"/>
+        <input v-model="phrase" type="text" placeholder="Szukaj drobnych zleceń" v-on:keyup.13="search"/>
         <i class="search icon"></i>
       </div>
     </div>

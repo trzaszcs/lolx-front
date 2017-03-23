@@ -1,41 +1,32 @@
 <template>
   <div class="searchBox ui container">
-    <h4 v-if="!searchStarted">
-      Znajdź ogłoszenia typu
-      <anounce-type-select :type="anounceType"></anounce-type-select>
-    </h4>
     <search-input></search-input>
     <search-result></search-result>
   </div>
 </template>
 
 <script>
-import AnounceType from '../AnounceType.vue'
 import SearchInput from './SearchInput.vue'
 import SearchResult from './SearchResult.vue'
-import AnounceTypeSelect from './AnounceTypeSelect.vue'
 import cache from '../../utils/cache'
 import searchQueryParser from './searchQueryParser'
 import util from '../../util'
 import api from '../../api'
 
-const buildSearchEvent = (phrase, location, page, categoryId, anounceType) => {
-  return {phrase, location, page, categoryId, anounceType}
+const buildSearchEvent = (phrase, location, page, categoryId) => {
+  return {phrase, location, page, categoryId}
 }
 
 export default {
   components: {
     SearchInput,
-    SearchResult,
-    AnounceTypeSelect,
-    AnounceType
+    SearchResult
   },
   data () {
     return {
       phrase: '',
       location: '',
       categoryId: null,
-      anounceType: null,
       page: 0,
       searchStarted: false,
       ignoreAddressChangedEvent: false
@@ -44,10 +35,10 @@ export default {
   methods: {
     emitEvent: function () {
       this.searchStarted = true
-      this.$broadcast('initializeSearch', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId, this.anounceType))
+      this.$broadcast('initializeSearch', buildSearchEvent(this.phrase, this.location, this.page, this.categoryId))
     },
     changeAddress: function () {
-      let query = {phrase: this.phrase, page: this.page, 'anounceType': this.anounceType}
+      let query = {phrase: this.phrase, page: this.page}
       if (this.location) {
         query.location = this.location.title
         query.lat = this.location.latitude
@@ -63,11 +54,6 @@ export default {
       const searchQueryParams = searchQueryParser(this.$route.query)
       this.anounceType = cache.get('anounceType')
       const urlHasSearchParams = Object.keys(searchQueryParams).length > 0
-      if (!this.anounceType && !urlHasSearchParams) {
-        // go to anounceType selection
-        this.$router.go({path: '/anounceTypeSelection'})
-        return null
-      }
 
       if (urlHasSearchParams) {
         if ('page' in searchQueryParams) {
@@ -79,9 +65,6 @@ export default {
 
         this.categoryId = 'categoryId' in searchQueryParams ? searchQueryParams.categoryId : null
 
-        if ('anounceType' in searchQueryParams) {
-          this.anounceType = searchQueryParams.anounceType
-        }
         if ('phrase' in searchQueryParams) {
           this.phrase = searchQueryParams.phrase
         }
@@ -105,16 +88,6 @@ export default {
     'geolocation': function (event) {
       this.location = event
       this.emitEvent()
-    },
-    'anounceTypeChanged': function (event) {
-      this.anounceType = event.type
-      if (this.searchStarted) {
-        this.changeAddress()
-        this.emitEvent()
-      }
-    },
-    'anounceTypeSelected': function (event) {
-      this.anounceType = event.type
     },
     'address-changed': function (event) {
       if (!this.ignoreAddressChangeEvent) {

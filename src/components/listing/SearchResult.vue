@@ -3,8 +3,7 @@
   <div id="searchResult" class="searchResult listing" v-show="finished">
     <div class="result">
       <h4>
-          Znaleziono {{total}} ogłoszeń typu
-          <anounce-type-select :type="searchQuery.anounceType"></anounce-type-select>
+          Znaleziono {{total}} ogłoszeń
       </h4>
       <div class="ui large middle aligned selection list" v-for="item in anounces" v-on:click="showAnounce(item)">
         <anounce-item :anounce=item></anounce-item>
@@ -26,7 +25,6 @@ import api from '../../api'
 import AnounceItem from './AnounceItem.vue'
 import AnounceCard from '../AnounceCard.vue'
 import LoadingBox from '../LoadingBox.vue'
-import AnounceTypeSelect from './AnounceTypeSelect.vue'
 
 const itemsPerPage = 20
 
@@ -38,8 +36,7 @@ export default {
   components: {
     AnounceItem,
     AnounceCard,
-    LoadingBox,
-    AnounceTypeSelect
+    LoadingBox
   },
   data () {
     return {
