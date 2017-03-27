@@ -3,15 +3,15 @@
  <div class="ui fluid selection list" v-for="comment in comments">
     <div class="ui item">
       <div class="right floated content">
-        <a v-link="{ path: '/userAnounces', query: {id: comment.userId} }" data-tooltip="Więcej ogłoszeń tego użytkownika">
-          <b>{{comment.nick}}</b>
-        </a>
-        <i class="ui yellow star icon"></i>
-        {{comment.stars}}/5 
+        {{comment.date}}
       </div>
       <div class="meta">
         <p>
-          {{comment.date}}
+          <a v-link="{ path: '/userAnounces', query: {id: comment.userId} }" data-tooltip="Więcej ogłoszeń tego użytkownika">
+            <b>{{comment.nick}}</b>
+          </a>
+          <i class="ui yellow star icon"></i>
+          {{comment.stars}}/5
         </p>
         <p>
           {{comment.msg}}
