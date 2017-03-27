@@ -3,7 +3,9 @@
  <div class="ui fluid selection list" v-for="comment in comments">
     <div class="ui item">
       <div class="right floated content">
-        <b>{{comment.nick}}</b>
+        <a v-link="{ path: '/userAnounces', query: {id: comment.userId} }" data-tooltip="Więcej ogłoszeń tego użytkownika">
+          <b>{{comment.nick}}</b>
+        </a>
         <i class="ui yellow star icon"></i>
         {{comment.stars}}/5 
       </div>
