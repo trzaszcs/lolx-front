@@ -7,7 +7,7 @@
       </div>
       <div class="meta">
         <p>
-          <a v-link="{ path: '/userAnounces', query: {id: comment.userId} }" data-tooltip="Więcej ogłoszeń tego użytkownika">
+          <a v-link="{ path: '/userAnounces', query: {id: comment.userId} }" data-tooltip="Oghłoszenia tego użytkownika">
             <b>{{comment.nick}}</b>
           </a>
           <i class="ui yellow star icon"></i>
