@@ -8,9 +8,9 @@
         {{comment.stars}}/5 
       </div>
       <div class="meta">
-        <div class="left floated content">
+        <p>
           {{comment.date}}
-        </div>
+        </p>
         <p>
           {{comment.msg}}
         </p>
