@@ -399,6 +399,47 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt)
       }).done(callback)
+    },
+    createWorker: function (userId, description, categoryIds, jwt, callback) {
+      $.ajax({
+        url: '/api/workers',
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({
+          userId,
+          description,
+          categoryIds})
+      }).done(callback)
+    },
+    updateWorker: function (workerId, userId, description, categoryIds, jwt, callback) {
+      $.ajax({
+        url: `/api/workers/${workerId}`,
+        method: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({
+          workerId,
+          userId,
+          description,
+          categoryIds})
+      }).done(callback)
+    },
+    getWorkerForUser: function (userId, jwt, callback) {
+      $.ajax({
+        url: `/api/workers/user/${userId}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        statusCode: {
+          404: function () {
+            callback({found: false})
+          }
+        }
+      }).done((resp) => {
+        resp.found = true
+        callback(resp)
+      })
     }
   }
 })()
