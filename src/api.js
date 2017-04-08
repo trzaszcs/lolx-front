@@ -440,6 +440,15 @@ const API = (function () {
         resp.found = true
         callback(resp)
       })
+    },
+    deleteWorker: function (workerId, userId, jwt, callback) {
+      $.ajax({
+        url: `/api/workers/${workerId}`,
+        method: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        headers: headers(jwt),
+        data: JSON.stringify({userId})
+      }).done(callback)
     }
   }
 })()

@@ -1,13 +1,32 @@
 <template>
-  <div class="ui segment">
+  <div class="ui fluid card">
 
-    <loading-box :show="saving"></loading-box>
+    <div class="ui top attached label">
+      <i class="ui edit icon"></i>
+      Dane Pracownika
+    </div>
+         
+    <div class="content">
 
-    <info-box :visible="saved" :message="'Dane pracownika zostały zapisane'"></info-box>
+      <div class="ui container register">
+        
+          <loading-box :show="loading"></loading-box>
 
-    <plain-form :worker="worker"></plain-form>
+          <div v-if="!worker.id && !wantToCreateWorker">
+            <a v-on:click="createAccount">Załóż konto pracownika</a>
+          </div>
 
+          <div v-if="worker.id || wantToCreateWorker">
+            <info-box :visible="saved" :message="'Dane pracownika zostały zapisane'"></info-box>
+            <a v-if="worker.id" v-on:click="deleteAccount">Usuń konto pracownika</a>
+            <plain-form :worker="worker"></plain-form>
+          </div>
+
+     </div>
+
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -35,17 +54,18 @@ export default {
   data () {
     return {
       worker: emptyWorker(),
-      saving: false,
-      saved: false
+      loading: false,
+      saved: false,
+      wantToCreateWorker: null
     }
   },
   methods: {
     afterSave: function () {
       this.saved = true
-      this.saving = false
+      this.loading = false
     },
     saveWorker: function () {
-      this.saving = true
+      this.loading = true
       const userId = session.getUserId()
       const jwt = session.getJwt()
       if (this.worker.id) {
@@ -54,8 +74,21 @@ export default {
         })
       } else {
         api.createWorker(userId, this.worker.description, this.worker.categories, jwt, (response) => {
-          this.woker.id = response.id
+          this.worker.id = response.id
           this.afterSave()
+        })
+      }
+    },
+    createAccount () {
+      this.wantToCreateWorker = true
+    },
+    deleteAccount () {
+      if (window.confirm('Czy na pewno chcesz usunąć konto pracownika?')) {
+        this.loading = true
+        api.deleteWorker(this.worker.id, session.getUserId(), session.getJwt(), () => {
+          this.worker = emptyWorker()
+          this.wantToCreateWorker = false
+          this.loading = false
         })
       }
     }
@@ -65,12 +98,14 @@ export default {
       this.$router.go({ path: '/login' })
       return
     }
+    this.loading = true
     api.getWorkerForUser(session.getUserId(), session.getJwt(), (response) => {
       if (response.found) {
         this.worker = buildWorker(response.id, response.description, response.categoryIds)
       } else {
         this.worker = emptyWorker()
       }
+      this.loading = false
     })
   },
   events: {

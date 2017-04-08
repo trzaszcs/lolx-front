@@ -58,6 +58,9 @@
       </div> 
     </div>
   </div>
+
+  <worker-account></worker-account>
+
 </template>
 
 <script>
@@ -68,12 +71,14 @@ import {states} from '../const'
 import LoadingBox from './LoadingBox.vue'
 import LocationInput from './LocationInput.vue'
 import InfoBox from './InfoBox.vue'
+import WorkerAccount from './worker/WorkerAccount.vue'
 
 export default {
   components: {
     LoadingBox,
     LocationInput,
-    InfoBox
+    InfoBox,
+    WorkerAccount
   },
   data () {
     return {

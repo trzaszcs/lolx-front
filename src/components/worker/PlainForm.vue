@@ -9,7 +9,7 @@
 
       <div class="field required" v-bind:class="{'error': hasFieldError('description')}">
         <label>Twój opis</label>
-        <textarea v-model="worker.description" placeholder="textarea"></textarea>
+        <textarea v-model="worker.description" placeholder="Opis" rows="3"></textarea>
       </div>
 
       <div class="field required" v-bind:class="{'error': hasFieldError('categories')}">
@@ -17,7 +17,7 @@
         <multi-categories :selected-categories="worker.categories"></multi-categories>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui primary button" value="Zarejestruj"></input>
+      <input v-on:click="save" type="submit" class="ui primary button" v-bind:value="submitLabel()"></input>
     </form>
 </template>
 
@@ -48,7 +48,7 @@ export default {
         return
       }
       this.saving = true
-      $.emit('workerSaveEvent', this.worker)
+      this.$dispatch('workerSavedEvent', {worker: this.worker})
     },
     validate: function (event) {
       let errors = []
@@ -56,7 +56,7 @@ export default {
       if (!this.worker.description) {
         append('description', 'Opis jest wymagany')
       }
-      if (!this.worker.categories && this.worker.categories.length === 0) {
+      if (!this.worker.categories || this.worker.categories.length === 0) {
         append('categories', 'Kategorie są wymagane')
       }
       if (errors.length > 0) {
@@ -72,6 +72,9 @@ export default {
         })
       }
       return false
+    },
+    submitLabel: function () {
+      return this.worker.id ? 'Zapisz' : 'Utwórz'
     }
   },
   events: {
