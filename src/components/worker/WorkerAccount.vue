@@ -1,5 +1,5 @@
 <template>
-  <div class="ui fluid card">
+  <div class="ui fluid card" id="workerAccount">
 
     <div class="ui top attached label">
       <i class="ui edit icon"></i>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import util from '../../util'
 import api from '../../api'
 import session from '../../session'
 import LoadingBox from '../LoadingBox.vue'
@@ -104,6 +105,10 @@ export default {
         this.worker = buildWorker(response.id, response.description, response.categoryIds)
       } else {
         this.worker = emptyWorker()
+        if (this.$route.query.createWorker) {
+          this.wantToCreateWorker = true
+          setTimeout(() => util.focusOnElement('workerAccount'), 0)
+        }
       }
       this.loading = false
     })

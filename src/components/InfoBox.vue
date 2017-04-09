@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import util from '../util'
 import $ from 'jquery'
 
 export default {
@@ -30,8 +31,7 @@ export default {
   watch: {
     visible: function (newV) {
       if (newV) {
-        const position = document.getElementById('info-box').getBoundingClientRect()
-        window.scrollTo(position.left, position.top)
+        util.focusOnElement('info-box')
       }
     }
   }

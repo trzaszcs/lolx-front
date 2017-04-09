@@ -4,8 +4,6 @@
 
     <loading-box :show="saving"></loading-box>
 
-    <info-box :visible="saved" :header="'Rejestracja konta'" :message="'Konto zostało założone pomyślnie'"></info-box>
-
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
       <h4 class="ui dividing header">Zarejestruj konto</h4>
 
@@ -74,13 +72,11 @@ import api from './api'
 import util from './util'
 import LoadingBox from './components/LoadingBox.vue'
 import LocationInput from './components/LocationInput.vue'
-import InfoBox from './components/InfoBox.vue'
 
 export default {
   components: {
     LoadingBox,
-    LocationInput,
-    InfoBox
+    LocationInput
   },
   data () {
     return {
@@ -98,19 +94,6 @@ export default {
     }
   },
   methods: {
-    afterSave: function () {
-      this.firstName = ''
-      this.lastName = ''
-      this.email = ''
-      this.nick = ''
-      this.phone = ''
-      this.password1 = ''
-      this.password2 = ''
-      this.location = {title: ''}
-      this.saved = true
-      this.saving = false
-      this.validationErrors = null
-    },
     save: function (event) {
       event.preventDefault()
 
@@ -120,7 +103,7 @@ export default {
 
       this.saving = true
       api.register(this.firstName, this.lastName, this.nick, this.email, this.phone, this.password1, this.location, (response) => {
-        this.afterSave()
+        this.router.go({path: 'registerSuccess'})
       })
     },
     validate: function (event) {

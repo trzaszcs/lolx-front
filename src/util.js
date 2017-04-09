@@ -91,6 +91,11 @@ const Util = (function () {
     return geolocationComponent(geo, 'locality')
   }
 
+  const focusOnElement = (elementId) => {
+    const position = document.getElementById(elementId).getBoundingClientRect()
+    window.scrollTo(position.left, position.top)
+  }
+
   return {
     prettyDate: formatDate,
     prettyDateDetailed: formatDateToDetailed,
@@ -100,7 +105,8 @@ const Util = (function () {
     currentLocation: currentLocation,
     decorateGeolocation: decorateGeolocation,
     geolocationState: geolocationState,
-    geolocationCity: geolocationCity
+    geolocationCity: geolocationCity,
+    focusOnElement: focusOnElement
   }
 })()
 

@@ -9,6 +9,7 @@ import Anounce from './Anounce'
 import Order from './Order'
 import Login from './Login'
 import Register from './Register'
+import RegisterSuccess from './RegisterSuccess'
 import ResetPasswordRequest from './ResetPasswordRequest'
 import ResetPassword from './ResetPassword'
 import UserAnounces from './UserAnounces'
@@ -50,6 +51,9 @@ router.map({
   },
   '/register': {
     component: Register
+  },
+  '/registerSuccess': {
+    component: RegisterSuccess
   },
   '/resetPasswordRequest': {
     component: ResetPasswordRequest
