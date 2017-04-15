@@ -1,7 +1,7 @@
 <template>
   <div class="ui container main">
     <div class="anounceType">
-      <h2>Czego szukasz ?</h2>
+      <h3>Czego szukasz ?</h3>
       <div class="ui stackable two column grid">
         <div class="column" v-on:click="findAnounces()">
           <div class="cell order">
@@ -22,14 +22,14 @@
 
       <div class="ui stackable two column grid">
         <div class="column" v-on:click="addWorker()">
-          <div class="cell order">
+          <div class="cell addWorker">
             <h2>Dodaj pracownika</h2>
             Oferuj swoją pracę innym
           </div>
         </div>
 
         <div class="column"  v-on:click="findWorkers()">
-          <div class="cell offer">
+          <div class="cell findWorker">
             <h2>Znajdź pracowników</h2>
             Wyszukaj pracowników z swojej okolicy
           </div>
