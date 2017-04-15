@@ -3,7 +3,6 @@
     <div class="anounceType">
       <h2>Czego szukasz ?</h2>
       <div class="ui stackable two column grid">
-
         <div class="column" v-on:click="findAnounces()">
           <div class="cell order">
             <h2>Chcę dorobić</h2>
@@ -18,7 +17,27 @@
           </div>
         </div>
       </div>
-    </div>   
+
+      <h3>Pracownicy</h3>
+
+      <div class="ui stackable two column grid">
+        <div class="column" v-on:click="addWorker()">
+          <div class="cell order">
+            <h2>Dodaj pracownika</h2>
+            Oferuj swoją pracę innym
+          </div>
+        </div>
+
+        <div class="column"  v-on:click="findWorkers()">
+          <div class="cell offer">
+            <h2>Znajdź pracowników</h2>
+            Wyszukaj pracowników z swojej okolicy
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </template>
 
@@ -30,6 +49,12 @@ export default {
     },
     findAnounces: function () {
       this.$router.go({path: '/search'})
+    },
+    addWorker: function () {
+      this.$router.go({path: '/myAccount', query: {section: 'account', createWorker: true}})
+    },
+    findWorkers: function () {
+      this.$router.go({path: '/searchWorkers'})
     }
   },
   events: {

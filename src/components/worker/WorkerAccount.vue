@@ -105,10 +105,10 @@ export default {
         this.worker = buildWorker(response.id, response.description, response.categoryIds)
       } else {
         this.worker = emptyWorker()
-        if (this.$route.query.createWorker) {
-          this.wantToCreateWorker = true
-          setTimeout(() => util.focusOnElement('workerAccount'), 0)
-        }
+      }
+      if (this.$route.query.createWorker) {
+        this.wantToCreateWorker = true
+        setTimeout(() => util.focusOnElement('workerAccount'), 0)
       }
       this.loading = false
     })

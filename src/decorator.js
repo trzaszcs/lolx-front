@@ -1,4 +1,3 @@
-
 export const anouncesDecorator = (anounces) => {
   return anounces.map(anounce => {
     if (!anounce.img) {
@@ -7,4 +6,3 @@ export const anouncesDecorator = (anounces) => {
     return anounce
   })
 }
-

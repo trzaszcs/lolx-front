@@ -441,6 +441,13 @@ const API = (function () {
         callback(resp)
       })
     },
+    getWorker: function (id, callback) {
+      $.ajax({
+        url: `/api/workers/${id}`,
+        method: 'GET',
+        contentType: 'application/json; charset=utf-8'
+      }).done(callback)
+    },
     deleteWorker: function (workerId, userId, jwt, callback) {
       $.ajax({
         url: `/api/workers/${workerId}`,
@@ -448,6 +455,21 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
         data: JSON.stringify({userId})
+      }).done(callback)
+    },
+    findWorkers: function (query, type, page, location, categoryId, itemsPerPage, callback) {
+      let queryData = {'query': query, 'page': page, 'itemsPerPage': itemsPerPage, type}
+      if (location) {
+        queryData.location = queryData.title
+        queryData.latitude = queryData.latitude
+        queryData.longitude = queryData.longitude
+      }
+      if (categoryId) {
+        queryData.categoryId = categoryId
+      }
+      $.ajax({
+        url: '/api/workers',
+        data: queryData
       }).done(callback)
     }
   }

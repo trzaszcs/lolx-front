@@ -19,6 +19,8 @@ import AddWorker from './components/worker/Add'
 import $ from 'jquery'
 import session from './session'
 import {startPolling} from './utils/backendEventsPoller'
+import WorkerListing from './components/worker/listing/Listing'
+import WorkerDetails from './components/worker/listing/Details'
 
 // eslint-disable-next-line no-unused-vars
 import semantic from 'semantic'
@@ -72,6 +74,12 @@ router.map({
   },
   '/addWorker': {
     component: AddWorker
+  },
+  '/searchWorkers': {
+    component: WorkerListing
+  },
+  '/worker': {
+    component: WorkerDetails
   }
 })
 
