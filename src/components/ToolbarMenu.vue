@@ -1,27 +1,19 @@
 <template>
-  <div class="toolbarMenu">
+  <div class="toolbarMenu ui dropdown">
     <button class="ui icon black button">
       <img src="../assets/menu.png" class="ui mini image"></img>
     </button>
   
-    <div class="ui popup left" style="width: 180px">
-      <ul>
-        <li>
-          <a v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie">
-             Znajdź ogłoszenie
-          </a>
-        </li>
-        <li>
-          <a v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
-            Dodaj ogłoszenie
-          </a>
-        </li>
-        <li>
-          <a v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto">
-            Moje konto
-          </a>
-        </li>
-      </ul>
+    <div class="menu" style="width: 180px">
+      <a class="item" v-link="{ path: '/search' }" data-tooltip="Nowe wyszukanie">
+        Znajdź ogłoszenie
+      </a>
+      <a class="item" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
+        Dodaj ogłoszenie
+      </a>
+      <a class="item" v-link="{ path: '/myAccount' }" data-tooltip="Moje Konto">
+        Moje konto
+      </a>
     </div>
 
   </div>
@@ -49,10 +41,10 @@ export default {
   ready: function () {
     setTimeout(() => {
       let $toolbarMenu = $('.toolbarMenu')
-      let $popup = $toolbarMenu.find('.popup')
+      let $popup = $toolbarMenu.find('.menu')
       let $button = $toolbarMenu.find('button')
       const topPosition = $button.position().top
-      const leftPosition = $button.position().left - $popup.width() - 40
+      const leftPosition = $button.position().left - $popup.width() - 10
       $popup.css('left', leftPosition)
       $popup.css('top', topPosition)
       $button.click(() => {
