@@ -9,7 +9,6 @@
             <a class="ui tiny image" v-link="{ path: '/' }"><img src="./assets/logo-big.png"></a>
             <div class="right item">
               <toolbar-menu></toolbar-menu>
-              <toolbar-events v-if="logged"></toolbar-events>
             </div>
           </div>
         </div>
@@ -28,14 +27,12 @@
 
 <script>
 import PageFooter from './components/PageFooter.vue'
-import ToolbarEvents from './components/ToolbarEvents.vue'
 import ToolbarMenu from './components/ToolbarMenu.vue'
 import session from './session'
 
 export default {
   components: {
     PageFooter,
-    ToolbarEvents,
     ToolbarMenu
   },
   data () {
