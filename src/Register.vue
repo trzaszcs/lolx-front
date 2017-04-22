@@ -103,7 +103,7 @@ export default {
 
       this.saving = true
       api.register(this.firstName, this.lastName, this.nick, this.email, this.phone, this.password1, this.location, (response) => {
-        this.router.go({path: 'registerSuccess'})
+        this.$router.go({path: 'registerSuccess'})
       })
     },
     validate: function (event) {
