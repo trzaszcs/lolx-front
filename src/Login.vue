@@ -81,6 +81,7 @@ export default {
           this.$dispatch('logged', {logged: true})
           const backUrl = session.getBackUrl()
           this.$router.go(backUrl || {'path': '/myAccount'})
+          this.$dispatch('logged', {logged: true})
         } else {
           this.message = 'Podałeś niepoprawny login lub email'
         }

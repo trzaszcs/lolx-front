@@ -8,7 +8,7 @@
           <div class="ui secondary inverted pointing menu">
             <a class="ui tiny image" v-link="{ path: '/' }"><img src="./assets/logo-big.png"></a>
             <div class="right item">
-              <toolbar-menu></toolbar-menu>
+              <toolbar-menu :logged="logged"></toolbar-menu>
             </div>
           </div>
         </div>
@@ -54,9 +54,11 @@ export default {
   events: {
     'logout': function () {
       this.logged = false
+      this.$broadcast('logout', {})
     },
     'logged': function () {
       this.logged = true
+      this.$broadcast('logged', {})
     }
   }
 }

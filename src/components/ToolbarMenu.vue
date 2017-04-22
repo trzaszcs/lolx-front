@@ -27,7 +27,15 @@
       <a class="item" v-if="eventsMap.rejectedRequestOrders && eventsMap.rejectedRequestOrders > 0" v-on:click="showRequestOrders()">
         Nowych odrzuconych zamówień: {{eventsMap.rejectedRequestOrders}}
       </a>
-      
+      <a v-if="logged" class="item" v-on:click="logout()">
+        Wyloguj
+      </a>
+      <a v-if="!logged" class="item"  v-link="{ path: '/login' }">
+        Zaloguj
+      </a>
+      <a v-if="!logged" class="item"  v-link="{ path: '/register' }">
+        Zarejestruj
+      </a>
     </div>
 
   </div>
@@ -37,6 +45,7 @@
 <script>
 import $ from 'jquery'
 import {registerListener} from '../utils/backendEventsPoller'
+import session from '../session'
 
 const initPopup = () => {
   const setPopupLocation = ($button, $popup) => {
@@ -63,7 +72,8 @@ export default {
   data () {
     return {
       eventsMap: {},
-      noOfEvents: 0
+      noOfEvents: 0,
+      logged: session.logged()
     }
   },
   methods: {
@@ -72,6 +82,10 @@ export default {
     },
     showRequestOrders: function () {
       this.$router.go({path: '/myAccount', query: {section: 'requestOrders'}})
+    },
+    logout: function () {
+      session.logout()
+      window.location.reload()
     }
   },
   ready: function () {
@@ -97,6 +111,16 @@ export default {
     setTimeout(() => {
       initPopup()
     }, 0)
+  },
+  events: {
+    'logout': function () {
+      console.log('--->logout')
+      this.logged = false
+    },
+    'logged': function () {
+      console.log('--->logged')
+      this.logged = true
+    }
   }
 }
 </script>
