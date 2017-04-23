@@ -31,7 +31,7 @@
         <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
           <label>Cena</label>
           <div class="ui right labeled input">
-            <input v-model="price" type="text" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
+            <input v-model="price" type="number" min="1" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
             <div class="ui basic label">
               zł
             </div>
