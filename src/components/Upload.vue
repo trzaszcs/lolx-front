@@ -80,7 +80,7 @@ export default {
     this.$fileInput.change((e) => {
       this.file = e.target.value
       const ext = extractExtension(this.file)
-      if (imgExtensions.indexOf(ext) <= 0) {
+      if (imgExtensions.indexOf(ext) < 0) {
         this.message = 'Plik nie jest obrazkiem'
       } else {
         this.fileSelected = true
