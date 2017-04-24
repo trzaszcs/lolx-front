@@ -48,17 +48,17 @@ import {registerListener} from '../utils/backendEventsPoller'
 import session from '../session'
 
 const initPopup = () => {
-  const setPopupLocation = ($button, $popup) => {
-    const topPosition = $button.position().top + 10
-    const leftPosition = $button.position().left - $popup.width() - 10
+  const setPopupLocation = ($popup) => {
+    const topPosition = 10
+    const leftPosition = -$popup.width() - 10
     $popup.css('left', leftPosition)
     $popup.css('top', topPosition)
   }
   let $toolbarMenu = $('.toolbarMenu')
   let $popup = $toolbarMenu.find('.menu')
   let $button = $toolbarMenu.find('button')
-  setPopupLocation($button, $popup)
   $button.click(() => {
+    setPopupLocation($popup)
     $popup.toggle()
   })
   $(document).mouseup((e) => {
@@ -109,6 +109,7 @@ export default {
     })
 
     setTimeout(() => {
+      console.log('init')
       initPopup()
     }, 0)
   },
