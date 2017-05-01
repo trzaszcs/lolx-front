@@ -17,23 +17,6 @@
           </div>
         </div>
       </div>
-
-      <div class="ui stackable two column grid">
-        <div class="column" v-on:click="addWorker()">
-          <div class="cell addWorker">
-            <h2>Zostań pracownikiem</h2>
-            Oferuj swoją pracę innym
-          </div>
-        </div>
-
-        <div class="column"  v-on:click="findWorkers()">
-          <div class="cell findWorker">
-            <h2>Znajdź pracownika</h2>
-            Wyszukaj pracowników z swojej okolicy
-          </div>
-        </div>
-      </div>
-
     </div>
 
   </div>
