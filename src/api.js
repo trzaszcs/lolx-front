@@ -471,6 +471,17 @@ const API = (function () {
         url: '/api/workers',
         data: queryData
       }).done(callback)
+    },
+    uploadFile: function (formData, callback) {
+      $.ajax({
+        url: '/api/upload',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: callback
+      })
     }
   }
 })()

@@ -5,7 +5,7 @@
      <div v-if="!fileUploaded">
        <button v-show="!fileSelected" class="mini ui button" v-on:click="add($event)">Wybierz zdjęcie</button>
        <div v-show="fileSelected">
-         Wybrano plik {{file}}
+         Wybrano plik {{fileName}}
          <button v-on:click="upload($event)" class="mini ui button" v-bind:class="{'loading': loading}">Zapisz</button>
          <button v-on:click="remove($event)" class="mini ui button">Anuluj</button>
        </div>
@@ -13,8 +13,8 @@
      </div>
 
      <div v-else>
-       Dodano plik {{file}}
-       <button v-on:click="remove($event)" class="mini ui button">Anuluj</button>
+       Dodano plik {{fileName}}
+       <button v-on:click="cancel($event)" class="mini ui button">Anuluj</button>
      </div>
 
    </div>
@@ -22,11 +22,13 @@
 
 <script>
 import $ from 'jquery'
+import api from '../api'
 
 export default {
   data () {
     return {
       $fileInput: null,
+      fileName: null,
       file: null,
       fileSelected: false,
       fileUploaded: false,
@@ -44,27 +46,19 @@ export default {
       let formData = new window.FormData()
       formData.append('file', this.$fileInput[0].files[0])
       this.loading = true
-      $.ajax({
-        url: '/api/upload',
-        type: 'POST',
-        data: formData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: (returndata) => {
-          console.log('file uploaded', returndata)
-          this.$dispatch('img-uploaded', {'imgName': returndata.fileName})
-          this.fileUploaded = true
-          this.loading = false
-        }
+      api.uploadFile(formData, (returndata) => {
+        this.$dispatch('img-uploaded', {'imgName': returndata.fileName})
+        this.fileUploaded = true
+        this.loading = false
       })
     },
     resetForm: function () {
       this.file = null
+      this.fileName = null
       this.fileSelected = false
       this.fileUploaded = false
     },
-    remove: function (event) {
+    cancel: function (event) {
       event.preventDefault()
       this.resetForm()
       this.$dispatch('img-uploaded', null)
@@ -76,12 +70,22 @@ export default {
     const extractExtension = (fileName) => {
       return fileName.substring(fileName.lastIndexOf('.'), fileName.length).toLowerCase()
     }
+    const extractFileName = (filePath) => {
+      const lastIndexOfBackslash = filePath.lastIndexOf('\\')
+      if (lastIndexOfBackslash > 0) {
+        return filePath.substring(lastIndexOfBackslash + 1, filePath.length)
+      } else {
+        return filePath
+      }
+    }
 
     this.$fileInput.change((e) => {
       this.file = e.target.value
-      const ext = extractExtension(this.file)
+      this.fileName = extractFileName(this.file)
+      console.log(this.fileName)
+      const ext = extractExtension(this.fileName)
       if (imgExtensions.indexOf(ext) < 0) {
-        this.message = 'Plik nie jest obrazkiem'
+        this.message = `Plik ${this.fileName} nie jest obrazkiem`
       } else {
         this.fileSelected = true
       }
