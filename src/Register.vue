@@ -12,52 +12,61 @@
           <li>{{error.txt}}</li>
         </ul>
       </div>
+      <div class="ui two column stackable grid">
 
-      <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
-        <label>Imie</label>
-        <input v-model="firstName" placeholder="Imie"/>
-      </div>
-
-      <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
-        <label>Nazwisko</label>
-        <input v-model="lastName" placeholder="Nazwisko"/>
-      </div>
-
-      <div class="field required" v-bind:class="{'error': hasFieldError('nick')}">
-        <label>Nazwa użytkownika</label>
-        <input v-model="nick" placeholder="Twoja nazwa"/>
-      </div>
-      
-      <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
-        <label>Lokalizacja</label>
-        <location-input :location="location" :simple="false"></location-input>
-      </div>
-      
-      <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
-        <label>E-mail</label>
-        <input v-model="email" placeholder="Email" type="email"/>
-      </div>
-
-      <div class="field">
-        <label>Telefon</label>
-        <div class="ui labeled input">
-          <div class="ui label">
-            +48
+        <div class="seven wide column">
+          <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
+            <label>Imie</label>
+            <input v-model="firstName" placeholder="Imie"/>
           </div>
-          <input v-model="phone" placeholder="Nr tel" type="tel">
         </div>
-      </div>
 
-      <div class="field required" v-bind:class="{'error': hasFieldError('password1')}">
-        <label>Hasło</label>
-        <input v-model="password1" type="password"/>
-      </div>
+        <div class="eight wide column">
+          <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
+            <label>Nazwisko</label>
+            <input v-model="lastName" placeholder="Nazwisko"/>
+          </div>
+        </div>
 
-      <div class="field required" v-bind:class="{'error': hasFieldError('password2')}">
-        <label>Powtórzone hasło</label>
-        <input v-model="password2" type="password"/>
-      </div>
+        <div class="seven wide column">
+          <div class="field required" v-bind:class="{'error': hasFieldError('nick')}">
+            <label>Nazwa użytkownika</label>
+            <input v-model="nick" placeholder="Twoja nazwa"/>
+          </div>
+        </div>
 
+        <div class="eight wide column">
+          <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
+            <label>Lokalizacja</label>
+            <location-input :location="location" :simple="false"></location-input>
+          </div>
+        </div>
+
+        <div class="one column row">
+          <div class="five wide column">
+            <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
+              <label>E-mail</label>
+              <input v-model="email" placeholder="Email" type="email"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="five wide column">
+          <div class="field required" v-bind:class="{'error': hasFieldError('password1')}">
+            <label>Hasło</label>
+            <input v-model="password1" type="password"/>
+          </div>
+        </div>
+
+        <div class="five wide column">
+          <div class="field required" v-bind:class="{'error': hasFieldError('password2')}">
+            <label>Powtórzone hasło</label>
+            <input v-model="password2" type="password"/>
+          </div>
+        </div>
+
+      </div>
+      <br/>
       <input v-on:click="save" type="submit" class="ui primary button" value="Zarejestruj"></input>
       </form>
     </div> 
@@ -83,7 +92,6 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
-      phone: '',
       nick: '',
       password1: null,
       password2: null,
@@ -102,7 +110,7 @@ export default {
       }
 
       this.saving = true
-      api.register(this.firstName, this.lastName, this.nick, this.email, this.phone, this.password1, this.location, (response) => {
+      api.register(this.firstName, this.lastName, this.nick, this.email, this.password1, this.location, (response) => {
         this.$router.go({path: 'registerSuccess'})
       })
     },
