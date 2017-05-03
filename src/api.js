@@ -123,13 +123,13 @@ const API = (function () {
         contentType: 'application/json; charset=utf-8'
       }).done(callback)
     },
-    updateUserDetails: function (email, phone, firstName, lastName, location, userId, jwt, callback) {
+    updateUserDetails: function (email, firstName, lastName, location, userId, jwt, callback) {
       $.ajax({
         url: `/auth-api/users/${userId}`,
         method: 'PUT',
         contentType: 'application/json; charset=utf-8',
         headers: headers(jwt),
-        data: JSON.stringify({email, phone, firstName, lastName, location})
+        data: JSON.stringify({email, firstName, lastName, location})
       }).done(callback)
     },
     changePassword: function (oldPassword, newPassword, userId, jwt, callback) {

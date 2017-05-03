@@ -32,25 +32,16 @@
               </div>
             </div>
           </div>
-      
-          <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
+
+          <div class="two fields">
+            <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
               <label>Email</label>
               <input v-model="user.email" placeholder="email@domena.pl" type="email"/>
-          </div>
-
-          <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
-            <label>Lokalizacja</label>
-            <location-input :location="user.location"></location-input>
-          </div>
-
-          <div class="field">
-              <label>Telefon</label>
-              <div class="ui labeled input">
-                <div class="ui label">
-                  +48
-                </div>
-                <input v-model="user.phone" type="tel" placeholder="Nr tel"/>
-              </div>
+            </div>
+            <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
+              <label>Lokalizacja</label>
+              <location-input :location="user.location"></location-input>
+            </div>
           </div>
 
           <input v-on:click="save" type="submit" class="ui teal button" value="Zmień"></input>
@@ -104,7 +95,6 @@ export default {
       this.loading = true
       api.updateUserDetails(
         this.user.email,
-        this.user.phone,
         this.user.firstName,
         this.user.lastName,
         this.user.location,
