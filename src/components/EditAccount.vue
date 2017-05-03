@@ -44,7 +44,7 @@
             </div>
           </div>
 
-          <input v-on:click="save" type="submit" class="ui teal button" value="Zmień"></input>
+          <input v-on:click="save" type="submit" class="ui teal button" value="Zapisz"></input>
         </form>
       </div> 
     </div>

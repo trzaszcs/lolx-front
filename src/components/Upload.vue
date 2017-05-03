@@ -7,7 +7,7 @@
        <div v-show="fileSelected">
          Wybrano plik {{fileName}}
          <button v-on:click="upload($event)" class="mini ui button" v-bind:class="{'loading': loading}">Zapisz</button>
-         <button v-on:click="remove($event)" class="mini ui button">Anuluj</button>
+         <button v-on:click="cancel($event)" class="mini ui button">Anuluj</button>
        </div>
        <input type="file" name="file" id="fileInput" style="display:none"/>
      </div>
