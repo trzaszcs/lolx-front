@@ -137,6 +137,7 @@ export default {
       api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
         console.log('user rating added: %s', response.starRate)
         this.loadUserRating(userId)
+        this.loadMyVote(announceId)
       })
     },
     saveLike: function () {
@@ -153,6 +154,7 @@ export default {
       api.updateUserLikesRating(userId, announceId, isLikeActive, comment, session.getJwt(), (response) => {
         console.log('user likes added: %s %s', userId, announceId)
         this.loadUserRating(userId)
+        this.loadMyVote(announceId)
       })
     },
     saveComment: function () {
