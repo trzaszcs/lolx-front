@@ -133,11 +133,11 @@ export default {
       const announceId = this.announceId
       const starRating = value
       const comment = this.comment
+      this.myVote.comment = comment
       console.log('saving starRate %s, userId %s announceId %s comment %s', value, userId, announceId, comment)
       api.updateUserStarRating(userId, announceId, starRating, comment, session.getJwt(), (response) => {
         console.log('user rating added: %s', response.starRate)
         this.loadUserRating(userId)
-        this.loadMyVote(announceId)
       })
     },
     saveLike: function () {
@@ -149,12 +149,12 @@ export default {
       const userId = this.user.id
       const announceId = this.announceId
       const comment = this.comment
+      this.myVote.comment = comment
       const isLikeActive = this.isActive
       console.log('saving userId %s announceId %s comment %s', userId, announceId, comment)
       api.updateUserLikesRating(userId, announceId, isLikeActive, comment, session.getJwt(), (response) => {
         console.log('user likes added: %s %s', userId, announceId)
         this.loadUserRating(userId)
-        this.loadMyVote(announceId)
       })
     },
     saveComment: function () {
