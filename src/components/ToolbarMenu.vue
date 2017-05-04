@@ -1,11 +1,11 @@
 <template>
-  <div class="toolbarMenu ui inverted dropdown">
+  <div class="toolbarMenu ui dropdown">
     <button class="ui icon black button">
       <img src="../assets/menu.png" class="ui mini image"></img>
       <div v-if="noOfEvents" class="floating ui red label">{{noOfEvents}}</div>
     </button>
   
-    <div class="menu" style="width: 180px">
+    <div class="inverted menu" style="width: 180px">
       <a class="item" v-link="{ path: '/search' }">
         Znajdź ogłoszenie
       </a>
