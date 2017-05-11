@@ -2,19 +2,19 @@
    <div class="attachments">
      {{message}}
 
-     <div v-if="!fileUploaded">
-       <button v-show="!fileSelected" class="mini ui button" v-on:click="add($event)">Wybierz zdjęcie</button>
-       <div v-show="fileSelected">
-         Wybrano plik {{fileName}}
-         <button v-on:click="upload($event)" class="mini ui button" v-bind:class="{'loading': loading}">Zapisz</button>
-         <button v-on:click="cancel($event)" class="mini ui button">Anuluj</button>
-       </div>
+     <div v-if="uploading">
+       <div class="ui active inline loader"></div> Dodawanie pliku {{fileName}} 
+     </div>
+
+     <div v-if="!uploading && !file">
+       <button class="mini ui button" v-on:click="add($event)">Wybierz zdjęcie</button>
        <input type="file" name="file" id="fileInput" style="display:none"/>
      </div>
 
-     <div v-else>
-       Dodano plik {{fileName}}
-       <button v-on:click="cancel($event)" class="mini ui button">Anuluj</button>
+     <div v-if="!uploading && file">
+       <img class="ui middle aligned tiny image" v-bind:src="imageThumbnail()"/>
+       {{fileName}}
+       <a v-on:click="cancel($event)">Usuń</a>
      </div>
 
    </div>
@@ -30,10 +30,9 @@ export default {
       $fileInput: null,
       fileName: null,
       file: null,
-      fileSelected: false,
-      fileUploaded: false,
-      loading: false,
-      message: null
+      uploadedFileId: null,
+      message: null,
+      uploading: false
     }
   },
   methods: {
@@ -41,27 +40,30 @@ export default {
       e.preventDefault()
       this.$fileInput.click()
     },
-    upload: function (e) {
-      e.preventDefault()
+    uploadSelectedFile: function () {
       let formData = new window.FormData()
       formData.append('file', this.$fileInput[0].files[0])
-      this.loading = true
+      this.uploading = true
       api.uploadFile(formData, (returndata) => {
-        this.$dispatch('img-uploaded', {'imgName': returndata.fileName})
-        this.fileUploaded = true
-        this.loading = false
+        this.uploadedFileId = returndata.fileName
+        this.$dispatch('img-uploaded', {'imgName': this.uploadedFileId})
+        this.uploading = false
       })
     },
     resetForm: function () {
       this.file = null
       this.fileName = null
-      this.fileSelected = false
-      this.fileUploaded = false
+      this.uploadedFileId = null
+      this.uploading = false
     },
     cancel: function (event) {
       event.preventDefault()
       this.resetForm()
       this.$dispatch('img-uploaded', null)
+    },
+    imageThumbnail: function () {
+      const fileNameParts = this.uploadedFileId.split('.')
+      return `/api/upload/${fileNameParts[0]}-SMALL.${fileNameParts[1]}`
     }
   },
   ready: function () {
@@ -82,12 +84,11 @@ export default {
     this.$fileInput.change((e) => {
       this.file = e.target.value
       this.fileName = extractFileName(this.file)
-      console.log(this.fileName)
       const ext = extractExtension(this.fileName)
       if (imgExtensions.indexOf(ext) < 0) {
         this.message = `Plik ${this.fileName} nie jest obrazkiem`
       } else {
-        this.fileSelected = true
+        this.uploadSelectedFile()
       }
     })
   },
