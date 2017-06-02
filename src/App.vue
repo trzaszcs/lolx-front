@@ -3,16 +3,21 @@
     
     <!-- Page Contents -->
     <div class="pusher">
-      <div class="ui inverted vertical masthead center aligned segment">
-        <div class="ui container">
-          <div class="ui secondary inverted pointing menu">
-            <a class="ui tiny image" v-link="{ path: '/' }"><img src="./assets/logo-big.png"></a>
-            <div class="right item">
+
+        <div class="ui secondary  menu">
+            <div class="item">
+
+              <a class="ui tiny image" v-link="{ path: '/' }"><img src="./assets/logo-big.png"></a>
+              </div>
+                <div class="right menu">
+    <div class="item">
               <toolbar-menu :logged="logged"></toolbar-menu>
-            </div>
-          </div>
+
+</div>
         </div>
+
      </div>
+
      
      <div class="core">
        <router-view></router-view>

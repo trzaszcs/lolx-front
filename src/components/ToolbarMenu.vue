@@ -1,6 +1,6 @@
 <template>
   <div class="toolbarMenu ui dropdown">
-    <button class="ui icon black button">
+    <button class="ui icon button">
       <img src="../assets/menu.png" class="ui mini image"></img>
       <div v-if="noOfEvents" class="floating ui red label">{{noOfEvents}}</div>
     </button>

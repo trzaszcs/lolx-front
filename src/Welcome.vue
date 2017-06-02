@@ -1,22 +1,28 @@
 <template>
   <div class="ui container main">
+    <div style="width:80%; margin:0 auto;">
+    <img class="ui fluid image" src="./assets/pumper.jpg">
+    </div>
     <div class="anounceType">
-      <h3>Czego szukasz ?</h3>
+      <h1>Czego szukasz ?</h1>
       <div class="ui stackable two column grid">
+        
         <div class="column" v-on:click="findAnounces()">
           <div class="cell order">
-            <h2>Chcę dorobić</h2>
-            Szukaj drobnych zleceń w Twojej okolicy
+            <h1>Chcę dorobić</h1>
+            <h2>Szukaj drobnych zleceń w Twojej okolicy</h2>
           </div>
         </div>
 
+
         <div class="column"  v-on:click="addAnounce()">
           <div class="cell offer">
-            <h2>Dam dorobić</h2>
-            Znajdź osoby, które wykonają Twoje zlecenie
+            <h1>Dam dorobić</h1>
+            <h2>Znajdź osoby, które wykonają Twoje zlecenie</h2>
           </div>
         </div>
       </div>
+      
     </div>
 
   </div>
