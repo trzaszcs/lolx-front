@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="ui section divider"></div>
-      <img src="../assets/small-logo.png" class="ui centered image">
+      <img src="../assets/small-logo.png" class="ui small centered image">
       <div class="ui horizontal  small divided link list">
         <a class="item" v-link="{ path: '/sitemap' }">Mapa strony</a>
         <a class="item" v-link="{ path: '/contact' }">Kontakt</a>

@@ -1,8 +1,6 @@
 <template>
   <div class="ui container main">
-    <div style="width:80%; margin:0 auto;">
-    <img class="ui fluid image" src="./assets/pumper.jpg">
-    </div>
+    <img class="ui big centered image" src="./assets/pumper.jpg">
     <div class="anounceType">
       <h1>Czego szukasz ?</h1>
       <div class="ui stackable two column grid">
