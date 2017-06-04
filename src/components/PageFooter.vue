@@ -7,11 +7,11 @@
   <div class="ui section divider"></div>
   
     
-  <div class="categories ui centered tiny images">
+  <div class="categories ui images">
     <a
       v-for="cat in categories"
       v-link="categoryPath(cat.id)">
-        <img :src="categoryImg(cat)" class="ui image"/>
+        <img :src="categoryImg(cat)" class="ui image" style="height: 64px;"/>
     </a>
   </div>
 
@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     categoryImg: function (cat) {
-      return require(`../assets/categories/v3/${cat.img}`)
+      return require(`../assets/categories/v4/${cat.img}`)
     },
     categoryPath: function (categoryId) {
       const query = { category: categoryId }
