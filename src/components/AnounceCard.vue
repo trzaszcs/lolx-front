@@ -1,38 +1,28 @@
 <template>
   <loading-box :show="loading"></loading-box>
   
-  <div class="ui stackable two column grid">
+  <div class="ui stackable two column grid" style="padding-left:5px;padding-right:5px;background-color:#F5F5F5;">
     <div class="ui column">
-
-      <div class="ui fluid card">
-      
-                  <div class="ui top attached label">
-                  
-                   <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
-            <i class="ui left arrow icon"></i>
-            wstecz
-          </a>
-          <div class="right floated meta">
-            Dodano {{creationDate()}}  
-            <a v-on:click="addToFavorites()" class="ui icon" data-tooltip="dodaj do ulubionych">
-                <i class="ui star icon"></i>
-            </a> 
-          </div>
-                  </div>
-
-      
-      
-        <div class="ui left aligned content">
-
-
-        <div class="ui description">
-            <div class="ui header">
+<div class="anounceCard">
+  
+        <div class="date">
+          Dodano {{creationDate()}}  
+          <a v-on:click="addToFavorites()" class="ui icon" data-tooltip="dodaj do ulubionych">
+              <i class="ui star icon" style="color:#95b32d"></i>
+          </a> 
+        </div>
+          
+        <div class="title">
               <i class="ui announcement icon"></i>
               {{anounce.title}}
-            </div>
         </div>
-         <p></p>
-        <div class="ui left floated section">
+
+        <div class="ui divider" style="color:gray;"></div>
+
+         
+           <div class="ui fluid two column grid">
+    <div class="ui ten wide left floated left aligned column">
+              <div class="ui section">
           <div class="meta">
             {{anounce.location.title}}
           </div>
@@ -52,8 +42,11 @@
           </a>
           
         </div>
+         </div>
 
-        <div class="ui right floated section">
+             <div class="ui six wide right floated left aligned column ">
+               
+        <div class="ui section">
             <h2 class="ui header">
               Cena
               <div class="sub header">{{anounce.price}} zł</div>
@@ -64,33 +57,40 @@
               Twoje zamówienie
             </button>
 
-            <button v-if="!requestOrderId"  class="ui teal button"  v-on:click="requestOrder()">
+            <button v-if="!requestOrderId"  class="ui button"  v-on:click="requestOrder()">
               <i class="ui add to cart icon"></i>
               Zamów
             </button>
 
         </div>
+         </div>
 
-       
-      </div>
+         </div>
 
+<h4 class="ui horizontal divider header" style="color:gray;">
+  Opis
+</h4>
 
+       <div class="ui section" id="anounce-desc"> 
+            <img class="ui left floated small spaced image" :src="getImg()">
+            {{anounce.description}}
         </div>
 
 
-         <div class="ui segment" id="anounce-desc"> 
-            <div class="ui top attached label">Opis</div>
-              <div class="ui content">
-                <img class="ui left floated small spaced image" :src="getImg()">
-                 {{anounce.description}}
-            </div>
-          </div>
+          <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
+            <i class="ui left arrow icon"></i>
+            wstecz
+          </a>
+
+
+</div>
+  
     </div>
     <div class="ui column">
         <user-public-profile></user-public-profile>
       
-      <div class="ui fluid card">
-        <div class="ui top attached label">
+      <div class="anounceCard">
+        <div class="ui header localization">
           <i class="marker icon"></i>Lokalizacja ogłoszenia 
         </div>
         <div  id="map"> </div>
@@ -99,13 +99,11 @@
     </div>
   </div>
   
-  <div class="ui segments">
-    <div class="ui center aligned segment">
+    <div class="ui fluid section " style="text-align:center;color:white;padding:20px;margin-top:20px;">
       <a v-link="{ path: '/anounce', query: { anounceId: anounce.id }}">
         link bezpośrednio do oferty: {{anounce.id}}
       </a>
     </div>
-  </div>
 
   <div class="ui modal" id="confirm">
     <div class="ui segment">

@@ -1,55 +1,69 @@
 <template>
-    <div class="ui fluid card">
+    <div class="anounceCard">
 
-      <div class="ui top attached label">
+      <div class="label">
         <i class="user icon"></i>O użytkowniku
       </div>
+      <div class="ui divider" style="color:gray;"></div>
       
-      <div class="content">
-        <span class="right floated">
-            <i class="thumbs up icon"></i>
-            Polecony {{rating.likeCount}} razy
-        </span>
-        <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
-        {{user.firstName}} {{user.lastName}}
-      </div>
+      <div class="ui section">
 
-      <div class="content">
-        <i class="ui left floated big orange star icon"></i>
+      
+      <div class="ui fluid two column grid">
+        
+      <div class="ui left aligned  column">
+        <div class="ui gray header">
+        <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
+          {{user.firstName}} {{user.lastName}}
+        </div>
+      </div>
+        
+        <div class="ui right aligned  column" style="color:gray;">
+
+            <i class="thumbs up icon"></i>
+            <span style="color:gray;">Polecony {{rating.likeCount}} razy</span>
+        </div>
+
+      </div>
+      
+            </div>
+
+
+      <div class="ui section">
         <div v-if="rating.starRate > 0">
-          <span  class="ui left floated">
-            <h2>{{rating.starRate.toPrecision(2)}}/5</h2> 
-          </span> 
-          <span class="ui right floated">
+          <div align="center" style="padding-bottom:20px;">
+            <h1 style="color:gray"> <i class="ui left floated orange star icon"></i>
+              {{rating.starRate.toPrecision(2)}}/5
+              </h1> 
+          </div> 
+          <div align="right">
             ocena na podstawie {{rating.starRateCount}} głosów <br>
             <a v-on:click="loadComments()">komentarze ({{rating.lastComments.length}}) ...</a>
-          </span>
+          </div>
         </div>
-        <span v-if="rating.starRate == 0" class="ui left floated">
-          ten użytkownik nie został jeszcze oceniony
-        </span>
+        <div v-if="rating.starRate == 0" align="center">
+          <i class="ui left floated orange star icon"></i>ten użytkownik nie został jeszcze oceniony
+        </div>
       </div>
       <div v-show="showComments" class="content">
+        <div class="ui divider" style="color:gray;"></div>
         <user-comments></user-comments>
       </div>
     </div>
     
-    <div class="ui fluid card">
+    <div class="anounceCard">
 
-      <div class="ui top attached label">
+      <div class="label">
         <i class="star icon"></i>Twoja ocena
       </div>
       
-      <div class="content">
+      <div class="ui divider" style="color:gray;"></div>
+
+      
         <div class="ui stackable two column grid">
   <div class="ten wide column">
-        <div class="ui large star rating" data-max-rating="5" id="rating"></div>
-        <span class="large text">{{myVote.starRate.toPrecision(2)}}/5</span>
-        <p></p>
-        <div class="ui fluid transparent left icon focus input">
-          <i class="comment outline icon"></i>
-          <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Podziel się opinią ...">
-        </div>
+        <div class="ui huge star rating" data-max-rating="5" id="rating"></div>
+        <span class="large text" style="color: gray">{{myVote.starRate.toPrecision(2)}}/5</span>
       </div>
     
   <div class="six wide right floated column">
@@ -58,7 +72,12 @@
     </button>
   </div>
 </div>
-        
+
+        <div class="ui big fluid transparent right icon focus input"  style="background-color:#F5F5F5;height:60px;padding:10px;margin-top:20px;">
+          <i class="comment outline icon" style="margin-right:10px;"></i>
+          <input type="text" v-model="comment" v-on:change="saveComment()" placeholder="Podziel się opinią ...">
+        </div>
+
     </div>
     
 </template>
