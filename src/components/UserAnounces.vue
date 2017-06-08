@@ -4,7 +4,7 @@
   <info-box :visible="removed" :header="'Zamknięcie ogłoszenia'" :message="'Ogłoszenie zostało pomyślnie zamknięte'"></info-box>
 
   <div class="content listing">
-    Znalezionych  ogłoszeń: {{totalCount}}
+    <h4 style="color:gray;padding-left:5px;">Znalezionych  ogłoszeń: {{totalCount}}</h4>
     <div class="ui fluid selection list" v-for="item in anounces">
       <div class="ui item">
 

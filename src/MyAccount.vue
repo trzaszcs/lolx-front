@@ -1,5 +1,5 @@
 <template>
-  <div class="ui container myAccount">
+  <div class="ui container myAccount" style="padding-left:5px;padding-right:5px;padding-bottom:5px;background-color:#F5F5F5;">
     
     <loading-box :show="loading"></loading-box>
 
@@ -38,24 +38,30 @@
              </div>
            </div>
 
-           <div class="ui fluid card">
+           <div class="accountCard">
         
-            <div class="ui top attached label">
-              <div class="header"><i class="ui announcement icon"></i>Moje ogłoszenia</div>
+            <div class="ui header" style="color:gray">
+              <i class="ui announcement icon"></i>Moje ogłoszenia
             </div>
         
-            <div class="ui extra content">
-               <button class="ui right floated icon teal button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
+
+               <button class="ui right floated icon button" v-link="{ path: '/addAnounce' }" data-tooltip="Dodaj ogłoszenie">
                   <i class="add sign icon"></i> 
                   Dodaj
               </button>
-            </div>
+
+             <div class="ui divider" style="color:gray;margin-top:60px;"></div>
+
+            
+            <div class="ui section">
 
             <user-anounces :user-id="currentUserId" :items-per-page="5"></user-anounces>
  
+             </div>
+ 
            </div>
 
-           <user-public-profile></user-public-profile>
+           <user-public-profile :showVotePanel=false></user-public-profile>
 
      </div>
 
