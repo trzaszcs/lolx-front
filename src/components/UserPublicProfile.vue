@@ -51,7 +51,7 @@
       </div>
     </div>
     
-    <div v-if="votePanel" class="anounceCard">
+    <div v-if="showVotePanel" class="anounceCard">
 
       <div class="label">
         <i class="star icon"></i>Twoja ocena

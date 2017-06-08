@@ -87,7 +87,7 @@
   
     </div>
     <div class="ui column">
-        <user-public-profile></user-public-profile>
+        <user-public-profile :showVotePanel=true></user-public-profile>
       
       <div class="anounceCard">
         <div class="ui header localization">
