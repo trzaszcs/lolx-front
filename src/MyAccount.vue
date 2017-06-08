@@ -29,11 +29,8 @@
      <!-- PUBLIC ACCOUNT -->
      <div v-show="view == 'publicData'">
 
-          <div class="ui message">
-             <div class="header">
-               Dane Publiczne
-             </div>
-             <div class="content">
+          <div style="background-color:#95b32d;color:white;padding:20px;">
+             <div class="ui header" style="color:white;">
                Tu możesz zobaczyć jak widzą Ciebie inni użytkownicy oraz zarządzać ogłoszeniami
              </div>
            </div>
