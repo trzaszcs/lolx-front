@@ -51,7 +51,7 @@
       </div>
     </div>
     
-    <div v-if="showVotePanel" class="anounceCard">
+    <div class="anounceCard">
 
       <div class="label">
         <i class="star icon"></i>Twoja ocena
@@ -92,7 +92,6 @@ export default {
   components: {
     UserComments
   },
-  props: ['showVotePanel'],
   data () {
     return {
       rating: {

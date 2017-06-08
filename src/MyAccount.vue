@@ -58,7 +58,7 @@
  
            </div>
 
-           <user-public-profile :showVotePanel=false></user-public-profile>
+           <user-public-profile></user-public-profile>
 
      </div>
 
