@@ -21,7 +21,7 @@
               <input v-model="password" type="password" name="password" placeholder="Hasło" v-on:keyup.13="loginUser"/>
             </div>
           </div>
-        <div v-on:click="loginUser" class="ui fluid large teal submit button">Login</div>
+        <div v-on:click="loginUser" class="ui fluid large submit cashgreen button">Login</div>
         
         <div class="ui horizontal divider">
           lub zaloguj sie przez

@@ -1,5 +1,5 @@
 <template>
-  <div class="ui three column stackable grid">
+  <div class="ui four column stackable grid searchInput">
     <div class="six wide column">
       <div class="ui left icon fluid input">
         <input v-model="phrase" type="text" placeholder="Szukaj drobnych zleceń" v-on:keyup.13="search"/>
@@ -7,13 +7,13 @@
       </div>
     </div>
     <div class="four wide column">
-      <location-input :location="location"></location-input>
+      <location-input :location="location" style="width:95%;"></location-input>
     </div>
     <div class="three wide column">
-      <category-box :category-id="categoryId"></category-box>
+      <category-box :category-id="categoryId" style="width:95%;margin: 0% 2%;"></category-box>
     </div>
-    <div class="one wide column">
-      <button v-on:click="search" class="ui teal button">Szukaj</button>
+    <div class="two wide column">
+      <button v-on:click="search" class="ui fluid button">Szukaj</button>
     </div>
   </div>
   

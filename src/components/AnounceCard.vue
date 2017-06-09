@@ -20,8 +20,11 @@
         <div class="ui divider" style="color:gray;"></div>
 
          
-           <div class="ui fluid two column grid">
-    <div class="ui ten wide left floated left aligned column">
+       <div class="ui fluid two column grid">
+        <div class="ui ten wide left floated left aligned column">
+          
+          <img v-if="anounce.img" class="ui medium bordered spaced image" :src="getImg()">
+
               <div class="ui section">
           <div class="meta">
             {{anounce.location.title}}
@@ -67,23 +70,20 @@
 
          </div>
 
-<h4 class="ui horizontal divider header" style="color:gray;">
-  Opis
-</h4>
+      <h4 class="ui horizontal divider header" style="color:gray;">
+        Opis
+      </h4>
 
-       <div class="ui section" id="anounce-desc"> 
-            <img class="ui left floated small spaced image" :src="getImg()">
-            {{anounce.description}}
-        </div>
+     <div class="ui section" id="anounce-desc"> 
+          {{anounce.description}}
+      </div>
 
+      <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
+        <i class="ui left arrow icon"></i>
+        wstecz
+      </a>
 
-          <a v-on:click="emitCloseEvent()" class="ui icon" data-tooltip="wróć na poprzednią stronę">
-            <i class="ui left arrow icon"></i>
-            wstecz
-          </a>
-
-
-</div>
+    </div>
   
     </div>
     <div class="ui column">

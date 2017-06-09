@@ -1,6 +1,5 @@
 <template>
   <div class="ui container addAnounce">
-    <div class="ui segment">
       <loading-box :show="loading"></loading-box>
         
       <form class="ui form" v-bind:class="{ 'error': validationErrors }">
@@ -19,17 +18,17 @@
         </div>
 
         <div class="field required" v-bind:class="{'error': hasFieldError('title')}">
-          <label>Tytuł</label>
+          <label style="color:gray">Tytuł</label>
           <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
         </div>
 
         <div class="field required" v-bind:class="{'error': hasFieldError('description')}">
-          <label>Opis</label>
+          <label style="color:gray">Opis</label>
           <textarea v-model="description" name="descripion"></textarea>
         </div>
 
         <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
-          <label>Cena</label>
+          <label style="color:gray">Cena</label>
           <div class="ui right labeled input">
             <input v-model="price" type="number" min="1" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
             <div class="ui basic label">
@@ -39,7 +38,7 @@
         </div>
 
         <div class="seven wide field required" v-bind:class="{'error': hasFieldError('category')}">
-          <label>Kategoria</label>
+          <label style="color:gray">Kategoria</label>
           <select v-model="categoryId" class="ui dropdown">
             <option value="">Kategoria...</option>
             <option  v-for="category in categories" v-bind:value="category.id">
@@ -49,7 +48,7 @@
         </div>
 
         <div class="seven wide field required" v-bind:class="{'error': hasFieldError('duration')}">
-          <label>Czas trwania</label>
+          <label style="color:gray">Czas trwania</label>
           <select v-model="duration" class="ui dropdown">
             <option value="">Czas trwania...</option>
             <option  v-for="duration in durations" v-bind:value="duration.id">
@@ -59,18 +58,17 @@
         </div>
 
         <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
-          <label>Lokalizacja</label>
+          <label style="color:gray">Lokalizacja</label>
           <location-input :location="location" :simple="false"></location-input>
         </div>
 
         <div class="ui field">
-          <label>Zdjęcie</label>
+          <label style="color:gray">Zdjęcie</label>
           <upload></upload>
         </div>
 
-        <input v-on:click="save($event)" type="submit" class="ui teal button" value="Zapisz"></input>
+        <input v-on:click="save($event)" type="submit" class="ui right floated button" value="Zapisz" style="width:50%;"></input>
       </form>
-    </div>
   </div>
 </template>
 
