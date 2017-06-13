@@ -6,41 +6,42 @@
       </div>
       <div class="ui divider" style="color:gray;"></div>
       
-      <div class="ui section">
 
+      
+      <div class="ui section">
       
       <div class="ui fluid two column grid">
         
-      <div class="ui left aligned  column">
-        <div class="ui gray header">
-        <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
-          {{user.firstName}} {{user.lastName}}
-        </div>
-      </div>
-        
-        <div class="ui right aligned  column" style="color:gray;">
-
-            <i class="thumbs up icon"></i>
-            <span style="color:gray;">Polecony {{rating.likeCount}} razy</span>
+        <div class="ui left aligned column">
+          <div class="ui gray header">
+          <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
+                {{user.firstName}} {{user.lastName}}
+              <div v-if="rating.likeCount > 0" data-tooltip="Przyznanych medali" style="float:left;background-color:#95b32d;margin:7px;color:white;"> <i class="ui left floated white certificate icon"></i>
+                  {{rating.likeCount}}
+              </div> 
+          </div>
         </div>
 
+        <div v-if="rating.starRate > 0" class="ui right aligned column" style="padding-top:20px;">
+              <div class="ui header"> <i class="ui big left floated orange star icon"></i>
+                {{rating.starRate.toPrecision(2)}}/5
+                </div> 
+        </div>
+  
       </div>
       
-            </div>
-
-
-      <div class="ui section">
-        <div v-if="rating.starRate > 0">
-          <div align="center" style="padding-bottom:20px;">
-            <h1 style="color:gray"> <i class="ui left floated orange star icon"></i>
-              {{rating.starRate.toPrecision(2)}}/5
-              </h1> 
-          </div> 
+        <div aligned="right"  v-if="rating.starRate > 0">
           <div align="right">
             ocena na podstawie {{rating.starRateCount}} głosów <br>
             <a v-on:click="loadComments()">komentarze ({{rating.lastComments.length}}) ...</a>
           </div>
         </div>
+      
+      </div>
+
+
+      <div class="ui section">
+
         <div v-if="rating.starRate == 0" align="center">
           <i class="ui left floated orange star icon"></i>ten użytkownik nie został jeszcze oceniony
         </div>
@@ -53,7 +54,7 @@
     
     <div class="anounceCard">
 
-      <div class="label">
+      <div class="ui header">
         <i class="star icon"></i>Twoja ocena
       </div>
       
@@ -61,17 +62,18 @@
 
       
         <div class="ui stackable two column grid">
-  <div class="ten wide column">
-        <div class="ui huge star rating" data-max-rating="5" id="rating"></div>
-        <span class="large text" style="color: gray">{{myVote.starRate.toPrecision(2)}}/5</span>
-      </div>
-    
-  <div class="six wide right floated column">
-    <button class="ui fluid toggle button" v-bind:class="{ active: isActive }" v-on:click="saveLike()">
-      Polecam
-    </button>
-  </div>
-</div>
+          
+          <div class="ten wide column">
+            <div class="ui huge star rating" data-max-rating="5" id="rating"></div>
+            <span class="large text" style="color: gray">{{myVote.starRate.toPrecision(2)}}/5</span>
+          </div>
+      
+          <div class="six wide right floated column">
+            <button class="ui right floated toggle circular compact icon button" v-bind:class="{ active: isActive }" v-on:click="saveLike()" data-tooltip="Przyznaj medal">
+              <i class="big certificate icon"></i>
+            </button>
+          </div>
+        </div>
 
         <div class="ui big fluid transparent right icon focus input"  style="background-color:#F5F5F5;height:60px;padding:10px;margin-top:20px;">
           <i class="comment outline icon" style="margin-right:10px;"></i>

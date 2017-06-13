@@ -3,7 +3,7 @@
       <loading-box :show="loading"></loading-box>
         
       <form class="ui form" v-bind:class="{ 'error': validationErrors }">
-        <h4 class="ui dividing header">Dodaj ogłoszenie</h4>
+        <h2 class="ui dividing header">Dodaj ogłoszenie</h2>
 
         <info-box :visible="newAnounceId" :header="'Twoje ogłoszenie zostało zapisane'">
           <p>
@@ -18,18 +18,18 @@
         </div>
 
         <div class="field required" v-bind:class="{'error': hasFieldError('title')}">
-          <label style="color:gray">Tytuł</label>
-          <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia"/>
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Tytuł</label>
+          <input v-model="title" type="text" name="title" placeholder="Tytuł ogłoszenia" style="ui big transparent input"/>
         </div>
 
         <div class="field required" v-bind:class="{'error': hasFieldError('description')}">
-          <label style="color:gray">Opis</label>
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Opis</label>
           <textarea v-model="description" name="descripion"></textarea>
         </div>
 
-        <div class="five wide field required" v-bind:class="{'error': hasFieldError('price')}">
-          <label style="color:gray">Cena</label>
-          <div class="ui right labeled input">
+        <div class="five six field required" v-bind:class="{'error': hasFieldError('price')}">
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Cena</label>
+          <div class="ui right labeled fluid input" style="width:40%;">
             <input v-model="price" type="number" min="1" placeholder="Cena.." v-on:change="onPriceChange" maxlength="6"/>
             <div class="ui basic label">
               zł
@@ -38,7 +38,7 @@
         </div>
 
         <div class="seven wide field required" v-bind:class="{'error': hasFieldError('category')}">
-          <label style="color:gray">Kategoria</label>
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Kategoria</label>
           <select v-model="categoryId" class="ui dropdown">
             <option value="">Kategoria...</option>
             <option  v-for="category in categories" v-bind:value="category.id">
@@ -48,7 +48,7 @@
         </div>
 
         <div class="seven wide field required" v-bind:class="{'error': hasFieldError('duration')}">
-          <label style="color:gray">Czas trwania</label>
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Czas trwania</label>
           <select v-model="duration" class="ui dropdown">
             <option value="">Czas trwania...</option>
             <option  v-for="duration in durations" v-bind:value="duration.id">
@@ -58,12 +58,12 @@
         </div>
 
         <div class="eleven wide field required" v-bind:class="{'error': hasFieldError('location')}">
-          <label style="color:gray">Lokalizacja</label>
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Lokalizacja</label>
           <location-input :location="location" :simple="false"></location-input>
         </div>
 
         <div class="ui field">
-          <label style="color:gray">Zdjęcie</label>
+          <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Zdjęcie</label>
           <upload></upload>
         </div>
 
