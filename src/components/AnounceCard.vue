@@ -12,7 +12,7 @@
           </a> 
         </div>
           
-        <div class="title">
+        <div class="title" style="margin-top:20px;">
               <i class="ui announcement icon"></i>
               {{anounce.title}}
         </div>

@@ -6,39 +6,33 @@
       </div>
       <div class="ui divider" style="color:gray;"></div>
       
-
-      
-      <div class="ui section">
-      
-      <div class="ui fluid two column grid">
-        
-        <div class="ui left aligned column">
-          <div class="ui gray header">
+        <div class="ui gray header">
           <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
                 {{user.firstName}} {{user.lastName}}
-              <div v-if="rating.likeCount > 0" data-tooltip="Przyznanych medali" style="float:left;background-color:#95b32d;margin:7px;color:white;"> <i class="ui left floated white certificate icon"></i>
+                
+                
+           <div  style="float:right;margin-top:5px;">
+
+            <div v-if="rating.starRate > 0" style="float:left;font-size:1.5em;">
+              <i class="ui left floated orange star icon"></i>
+                {{rating.starRate.toPrecision(2)}}/5
+
+            </div>
+        
+            <div v-if="rating.likeCount > 0" data-tooltip="Przyznanych medali" style="float:right;background-color:#95b32d;color:white;padding:0px;margin-left:5px;"> <i class="ui left floated white certificate icon"></i>
                   {{rating.likeCount}}
-              </div> 
-          </div>
+            </div> 
+          </div> 
+
+        
         </div>
 
-        <div v-if="rating.starRate > 0" class="ui right aligned column" style="padding-top:20px;">
-              <div class="ui header"> <i class="ui big left floated orange star icon"></i>
-                {{rating.starRate.toPrecision(2)}}/5
-                </div> 
-        </div>
-  
-      </div>
-      
         <div aligned="right"  v-if="rating.starRate > 0">
           <div align="right">
             ocena na podstawie {{rating.starRateCount}} głosów <br>
             <a v-on:click="loadComments()">komentarze ({{rating.lastComments.length}}) ...</a>
           </div>
         </div>
-      
-      </div>
-
 
       <div class="ui section">
 
@@ -46,10 +40,12 @@
           <i class="ui left floated orange star icon"></i>ten użytkownik nie został jeszcze oceniony
         </div>
       </div>
+      
       <div v-show="showComments" class="content">
         <div class="ui divider" style="color:gray;"></div>
         <user-comments></user-comments>
       </div>
+      
     </div>
     
     <div class="anounceCard">
@@ -69,9 +65,12 @@
           </div>
       
           <div class="six wide right floated column">
-            <button class="ui right floated toggle circular compact icon button" v-bind:class="{ active: isActive }" v-on:click="saveLike()" data-tooltip="Przyznaj medal">
-              <i class="big certificate icon"></i>
+            <button class="ui right floated toggle circular compact icon button" v-bind:class="{ active: isActive }" v-on:click="saveLike()" data-tooltip="Medal mozesz przyznac do każdego ogłoszenia oraz zrealizowanego zamówienia uzytkownika.">
+              <i class=" certificate icon"></i>
+                <span v-if="isActive">1</span>
+                <span v-if="!isActive">0</span>
             </button>
+
           </div>
         </div>
 
@@ -176,6 +175,7 @@ export default {
       api.updateUserLikesRating(userId, announceId, isLikeActive, comment, session.getJwt(), (response) => {
         console.log('user likes added: %s %s', userId, announceId)
         this.loadUserRating(userId)
+        this.isActive = !this.isActive
       })
     },
     saveComment: function () {
