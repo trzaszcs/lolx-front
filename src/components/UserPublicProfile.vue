@@ -6,7 +6,7 @@
       </div>
       <div class="ui divider" style="color:gray;"></div>
       
-        <div class="ui gray header">
+        <div class="ui gray header" style="margin-bottom:40px;">
           <img class="ui avatar image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMr0df7Bxkkgk76H60KgAaRcxz3uUF4Jxa_uHtqEpW4Ltl8Ic3zw">
                 {{user.firstName}} {{user.lastName}}
                 
@@ -27,11 +27,11 @@
         
         </div>
 
-        <div aligned="right"  v-if="rating.starRate > 0">
-          <div align="right">
+        <div v-if="rating.starRate > 0">
             ocena na podstawie {{rating.starRateCount}} głosów <br>
-            <a v-on:click="loadComments()">komentarze ({{rating.lastComments.length}}) ...</a>
-          </div>
+            <a v-on:click="loadComments()">
+                <i class="ui left floated comment icon"></i>
+              komentarze ({{rating.lastComments.length}}) ...</a>
         </div>
 
       <div class="ui section">
@@ -41,7 +41,7 @@
         </div>
       </div>
       
-      <div v-show="showComments" class="content">
+      <div v-show="showComments">
         <div class="ui divider" style="color:gray;"></div>
         <user-comments></user-comments>
       </div>
@@ -57,22 +57,20 @@
       <div class="ui divider" style="color:gray;"></div>
 
       
-        <div class="ui stackable two column grid">
-          
-          <div class="ten wide column">
+
+          <div class="ui center aligned segment" style="border:0px;">
+
             <div class="ui huge star rating" data-max-rating="5" id="rating"></div>
-            <span class="large text" style="color: gray">{{myVote.starRate.toPrecision(2)}}/5</span>
-          </div>
-      
-          <div class="six wide right floated column">
-            <button class="ui right floated toggle circular compact icon button" v-bind:class="{ active: isActive }" v-on:click="saveLike()" data-tooltip="Medal mozesz przyznac do każdego ogłoszenia oraz zrealizowanego zamówienia uzytkownika.">
+            <span class="large text" style="color: gray;font-size: 1.5em;">{{myVote.starRate.toPrecision(2)}}/5</span>
+
+<p></p>
+            <button class="ui toggle icon button" v-bind:class="{ active: isActive }" v-on:click="saveLike()" style="padding:3px;margin:0px;">
               <i class=" certificate icon"></i>
-                <span v-if="isActive">1</span>
-                <span v-if="!isActive">0</span>
+                <span v-if="isActive" data-tooltip="Usuń medal">1 medal</span>
+                <span v-if="!isActive" data-tooltip="Przyznaj medal">0 medali</span> 
             </button>
 
           </div>
-        </div>
 
         <div class="ui big fluid transparent right icon focus input"  style="background-color:#F5F5F5;height:60px;padding:10px;margin-top:20px;">
           <i class="comment outline icon" style="margin-right:10px;"></i>
