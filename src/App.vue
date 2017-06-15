@@ -4,20 +4,20 @@
     <!-- Page Contents -->
     <div class="pusher">
 
-        <div class="ui secondary  menu">
-            <div class="item">
+        <div class="ui secondary  menu" style="padding:1px;margin:1px;">
+            <div class="item" style="padding:0px;margin:0px;">
 
               <a class="ui tiny image" v-link="{ path: '/' }"><img src="./assets/logo-big.png"></a>
               </div>
-                <div class="right menu">
-    <div class="item">
-              <toolbar-menu :logged="logged"></toolbar-menu>
+                <div class="right menu" style="padding:0px;margin:0px;">
+                <div class="item">
+                    <toolbar-menu :logged="logged" style="padding:0px;margin:0px;"></toolbar-menu>
+                </div>
+              </div>
 
-</div>
-        </div>
-
-     </div>
-
+         </div>
+         
+      <div class="ui divider" style="color:gray;margin:0px;padding:0px;margin-bottom:25px;"></div>
      
      <div class="core">
        <router-view></router-view>
