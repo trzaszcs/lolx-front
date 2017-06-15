@@ -1,9 +1,11 @@
 <template>
   <div class="ui container chat">
-    <div class="ui segment">
       <loading-box :show="loading"></loading-box>
 
-      <h4 class="ui dividing header">Wiadomość w sprawie ogłoszenia: <a v-link="{ path: '/anounce', query: {anounceId: anounce.id} }">{{anounce.title}}</a></h4>
+      <div style="color:gray;font-size:1.5em;font-weight:bold;padding-bottom:10px;">Wiadomość w sprawie ogłoszenia</div>
+      <a v-link="{ path: '/anounce', query: {anounceId: anounce.id} }" style="font-size:1.4em;">{{anounce.title}}</a>
+      <div class="ui divider" style="color:gray;margin-bottom:20px;"></div>
+
 
       <info-box :visible="msgAdded">
           <p>
@@ -18,13 +20,12 @@
 
       <form class="ui form">
         <textarea v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
-        <button v-on:click="save($event)" class="ui teal button" v-bind:class="{ 'disabled': !msg }" value="Wyślij">
+        <button v-on:click="save($event)" class="ui right floated button" v-bind:class="{ 'disabled': !msg }" value="Wyślij">
            <i class="icon mail outline"></i>
            Wyślij
         </button>
       </form>
 
-    </div>
   </div>
 </template>
 

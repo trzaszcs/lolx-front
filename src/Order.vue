@@ -1,24 +1,19 @@
 <template>
-  <div class="order ui container">
+  <div class="order ui container order">
     <loading-box :show="loading"></loading-box>
-
-      <div v-if="requestOrderJustCreated" class="ui icon success message">
-        <i class="checkmark icon"></i>
-        <p> </p>
-         <div class="header">
-          Twoje zamówienie zostało przyjęte
-        </div>
-      </div>
       
-       <div v-if="requestOrderJustCreated" class="ui icon message">
-        <i class="info icon"></i>
-        <div class="content">
-          Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
-          W razie wątpliwości możesz skontaktować się z nim bezpośrednio.</p>
-        </div>
-      </div>
+      <div v-if="requestOrderJustCreated" style="background-color:#95b32d;color:white;padding:20px;">
+         <div class="ui header" style="color:white;">
+          Twoje zamówienie zostało przyjęte
+         </div>
+         <p>
+            Ogłoszeniodawca zostanie przez nas poinformowany o twoim zgłoszeniu i się z tobą skontaktuje. 
+            W razie wątpliwości możesz skontaktować się z nim bezpośrednio.
+          </p>
+       </div>
+      
 
-    <div class="ui dividing header">
+    <div class="ui dividing header" style="padding-bottom:40px;padding-top:40px;color:gray;font-size:1.5em;">
       <i class="settings icon"></i>
       <div class="content">
           Karta zamówienia usługi
@@ -33,7 +28,7 @@
 
 
   <div class="ui stackable grid">
-  <div class="four wide column">
+  <div class="four wide column" style="margin:10px;color:gray;font-size:1.2em;">
     <b>Dane zamówienia</b>
   </div>
   <div class="eight wide column">
@@ -74,16 +69,16 @@
             </table>
             
             <div class="right floated action">
-              <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui right floated teal button">Usuń zamówienie</button>
-              <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui right floated teal button">Odrzuć</button>
-              <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui right floated teal button">Akceptuj</button>
+              <button v-if="requestOrder.deleteAllowed" v-on:click="deleteRequestOrder" class="ui right floated button">Usuń zamówienie</button>
+              <button v-if="requestOrder.rejectAllowed" v-on:click="rejectRequestOrder" class="ui right floated button">Odrzuć</button>
+              <button v-if="requestOrder.acceptAllowed" v-on:click="acceptRequestOrder" class="ui right floated button">Akceptuj</button>
             </div>
     
   </div>
 </div>
     
 <div class="ui stackable grid">
-  <div class="four wide column">
+  <div class="four wide column" style="margin:10px;color:gray;font-size:1.2em;">
     <b>{{userLabel}}</b>
   </div>
   <div class="eight wide column">
