@@ -1,7 +1,7 @@
 <template>
   
-  <div id='info-box' v-show="visible" class="ui positive message">
-    <div v-if="header" class="header">
+  <div id='info-box' v-show="visible" class="ui fluid positive message">
+    <div v-if="header" class="ui header">
       {{header}}
     </div>
     <slot>
