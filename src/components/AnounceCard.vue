@@ -120,7 +120,7 @@
       </div>
       <div class="ui two buttons">
         <input class="ui button" v-on:click="closeConfirm()" value="Anuluj"/>
-        <input class="ui teal button" v-on:click="confirmRequestOrder()" value="Zamawiam"/>
+        <input class="ui button" v-on:click="confirmRequestOrder()" value="Zamawiam" style="background-color:#95b32d;color:white;"/>
       </div>
     </div>
   </div>
