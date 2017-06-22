@@ -3,7 +3,7 @@
     
     <loading-box :show="loading"></loading-box>
 
-    <div class="ui secondary stackable pointing menu">
+    <div class="ui grey secondary stackable pointing menu">
       <a class="item" v-bind:class="{'active': view == 'publicData'}" @click="select('publicData')">
         Dane publiczne
       </a>

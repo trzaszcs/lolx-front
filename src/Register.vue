@@ -1,79 +1,76 @@
 <template>
   <div class="ui container register">
-    <div class="ui segment">
 
     <loading-box :show="saving"></loading-box>
 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
-      <h4 class="ui dividing header">Zarejestruj konto</h4>
+      <h2 class="ui dividing header">Zarejestruj konto</h2>
 
       <div class="ui error message">
         <ul class="list" v-for="error in validationErrors">
           <li>{{error.txt}}</li>
         </ul>
       </div>
-      <div class="ui two column stackable grid">
+      <div class="ui two column stackable grid" >
 
-        <div class="seven wide column">
+        <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
-            <label>Imie</label>
+            <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Imie</label>
             <input v-model="firstName" placeholder="Imie"/>
           </div>
         </div>
 
-        <div class="eight wide column">
+        <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('lastName')}">
-            <label>Nazwisko</label>
+            <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Nazwisko</label>
             <input v-model="lastName" placeholder="Nazwisko"/>
           </div>
         </div>
 
-        <div class="seven wide column">
+        <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('nick')}">
-            <label>Nazwa użytkownika</label>
+            <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Nazwa użytkownika</label>
             <input v-model="nick" placeholder="Twoja nazwa"/>
           </div>
         </div>
 
-        <div class="eight wide column">
+        <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('location')}">
-            <label>Lokalizacja</label>
+            <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Lokalizacja</label>
             <location-input :location="location" :simple="false"></location-input>
           </div>
         </div>
 
         <div class="one column row">
-          <div class="five wide column">
+          <div class="eight wide column">
             <div class="field required" v-bind:class="{'error': hasFieldError('email')}">
-              <label>E-mail</label>
+              <label style="color:gray;font-size:1.2em;margin-bottom:10px;">E-mail</label>
               <input v-model="email" placeholder="Email" type="email"/>
             </div>
           </div>
         </div>
 
-        <div class="five wide column">
+        <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('password1')}">
-            <label>Hasło</label>
+            <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Hasło</label>
             <input v-model="password1" type="password"/>
           </div>
         </div>
 
-        <div class="five wide column">
+        <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('password2')}">
-            <label>Powtórzone hasło</label>
+            <label style="color:gray;font-size:1.2em;margin-bottom:10px;">Powtórzone hasło</label>
             <input v-model="password2" type="password"/>
           </div>
         </div>
 
       </div>
       <br/>
-      <input v-on:click="save" type="submit" class="ui primary button" value="Zarejestruj"></input>
+      <input v-on:click="save" type="submit" class="ui right floated button" value="Zarejestruj" style="width:50%;"></input>
       </form>
-    </div> 
+  
   </div>
-</div>
 
-  </div>
 </template>
 
 <script>
