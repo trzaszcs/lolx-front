@@ -3,7 +3,7 @@
 
     <loading-box :show="saving"></loading-box>
 
-    <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+    <form class="ui container form" v-bind:class="{ 'error': validationErrors }">
       <h2 class="ui dividing header">Zarejestruj konto</h2>
 
       <div class="ui error message">
@@ -11,7 +11,7 @@
           <li>{{error.txt}}</li>
         </ul>
       </div>
-      <div class="ui two column stackable grid" >
+      <div class="ui two column fluid stackable grid" >
 
         <div class="six wide column">
           <div class="field required" v-bind:class="{'error': hasFieldError('firstName')}">
@@ -65,7 +65,7 @@
         </div>
 
       </div>
-      <br/>
+  
       <input v-on:click="save" type="submit" class="ui right floated button" value="Zarejestruj" style="width:50%;"></input>
       </form>
   
