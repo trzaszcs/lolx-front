@@ -212,6 +212,9 @@ margin-top: 100px;
   }
   
    form {
+     #inputmsg{
+      font-size:1.2em;
+     }
      button {
        margin-top: 5px !important;
      }
@@ -227,10 +230,18 @@ margin-top: 100px;
 
       div.author {
         background-color: #D4E0F4;
+        float: right;
+        width:66%;
+            border-radius: 15px;
+
       }
 
       div.opponent {
         background-color: #F1F2EB;
+        float: left;
+        width: 66%;
+            border-radius: 15px;
+
       }
 
       div.action {
@@ -239,16 +250,22 @@ margin-top: 100px;
 
       .message {
         display: inline-block;
-        margin-bottom: 5px;
+        margin-bottom: 20px;
         padding: 8px;
+          font-size: 1.2em;
 
         span.author{
           font-weight: 700;
+                color: gray;
+
         }
 
         span.creationDate{
           color:gray;
           font-size: 0.8em;
+          float: right;
+      color: gray;
+
         }
 
         span.type {
@@ -262,6 +279,8 @@ margin-top: 100px;
   .requestOrder {
     margin-bottom: 10px;
     padding: 10px;
+    font-size: 1.1em;
+    color: gray;
     background-color:#F5F5F5;
     .author {
       font-size: 1em;
@@ -271,6 +290,12 @@ margin-top: 100px;
 
     .action {
       margin-bottom: 15px;
+    }
+    
+    .button{
+      background-color: #95b32d;
+      color: white;
+      font-size:1.1em;
     }
   }
 }
