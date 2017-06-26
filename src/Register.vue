@@ -66,7 +66,7 @@
 
       </div>
   
-      <input v-on:click="save" type="submit" class="ui right floated button" value="Zarejestruj" style="width:50%;"></input>
+      <input v-on:click="save" type="submit" class="ui right floated button" value="Zarejestruj"></input>
       </form>
   
   </div>

@@ -17,7 +17,7 @@
       </request-order>
 
       <conversation v-if="messages" :messages="messages" :focused-message-id="lastUnreadMessageId"></conversation>
-
+      
       <form class="ui form">
         <textarea id="inputmsg" v-model="msg" rows=2 placeholder="Wpisz wiadomość"></textarea>
         <button v-on:click="save($event)" class="ui right floated button" v-bind:class="{ 'disabled': !msg }" value="Wyślij">

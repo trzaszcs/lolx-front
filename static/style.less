@@ -27,7 +27,30 @@
     background-color: #95b32d;
     color: white;
     font-size:1.3em;
+    width: 100%;
   }
+  
+  .photobutton{
+    background-color: gray;
+    color: white;
+    font-size:1.3em;
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 480px) {
+     .button{
+      background-color: #95b32d;
+      color: white;
+      font-size:1.3em;
+      width: 350px;
+    }
+    .photobutton{
+      background-color: gray;
+      color: white;
+      font-size:1.3em;
+      width: 350px;
+    }
+  } 
   
   .header{
     color: gray;
@@ -201,10 +224,9 @@ margin-top: 100px;
 
 .chat {
 
-
   background-color:white;
   padding:5px;
-  
+
   .button{
       background-color: #95b32d;
       color: white;
@@ -212,18 +234,29 @@ margin-top: 100px;
   }
   
    form {
+
      #inputmsg{
       font-size:1.2em;
      }
      button {
        margin-top: 5px !important;
+             width: 100%;
+
      }
+     
+    @media screen and (min-width: 480px) {
+     .button{
+
+      width: 350px;
+    }
+  }
+     
+     
    }
 
    .conversation {
      max-height: 800px;
      overflow: auto;
-
     ul {
       list-style: none;
       padding: 5px;
@@ -232,7 +265,7 @@ margin-top: 100px;
         background-color: #D4E0F4;
         float: right;
         width:66%;
-            border-radius: 15px;
+        border-radius: 15px;
 
       }
 
@@ -240,8 +273,7 @@ margin-top: 100px;
         background-color: #F1F2EB;
         float: left;
         width: 66%;
-            border-radius: 15px;
-
+        border-radius: 15px;
       }
 
       div.action {
@@ -252,11 +284,11 @@ margin-top: 100px;
         display: inline-block;
         margin-bottom: 20px;
         padding: 8px;
-          font-size: 1.2em;
+        font-size: 1.2em;
 
         span.author{
           font-weight: 700;
-                color: gray;
+          color: gray;
 
         }
 
@@ -264,8 +296,7 @@ margin-top: 100px;
           color:gray;
           font-size: 0.8em;
           float: right;
-      color: gray;
-
+          color: gray;
         }
 
         span.type {
@@ -277,8 +308,8 @@ margin-top: 100px;
   }
 
   .requestOrder {
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 20px;
+    padding: 30px;
     font-size: 1.1em;
     color: gray;
     background-color:#F5F5F5;
@@ -292,11 +323,24 @@ margin-top: 100px;
       margin-bottom: 15px;
     }
     
+
     .button{
       background-color: #95b32d;
       color: white;
       font-size:1.1em;
+      width: 100%;
     }
+    
+    @media screen and (min-width: 480px) {
+     .button{
+      background-color: #95b32d;
+      color: white;
+      font-size:1.1em;
+      width: 350px;
+    }
+  }
+
+    
   }
 }
 
@@ -599,7 +643,19 @@ ul.items {
     background-color: #95b32d;
     color: white;
     font-size:1.3em;
+    width: 100%;
   }
+  
+  @media screen and (min-width: 480px) {
+    .button{
+      margin-top: 20px;
+      background-color: #95b32d;
+      color: white;
+      font-size:1.3em;
+      width: 350px;
+    }
+  } 
+  
   
   .header{
     color: gray;

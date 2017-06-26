@@ -7,7 +7,7 @@
      </div>
 
      <div v-if="!uploading && !file">
-       <button class="mini ui button" v-on:click="add($event)">Wybierz zdjęcie</button>
+       <button class="small ui button photobutton" v-on:click="add($event)">Wybierz zdjęcie</button>
        <input type="file" name="file" id="fileInput" style="display:none"/>
      </div>
 
