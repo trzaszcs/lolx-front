@@ -20,10 +20,10 @@
         <div class="ui divider" style="color:gray;"></div>
 
          
-       <div class="ui fluid two column grid">
+       <div class="ui fluid stackable two column grid">
         <div class="ui ten wide left floated left aligned column">
           
-          <img v-if="anounce.img" class="ui medium bordered spaced image" :src="getImg()">
+          <img v-if="anounce.img" class="ui image" :src="getImg()" style="padding-bottom: 20px;">
 
               <div class="ui section">
           <div class="meta">
