@@ -17,7 +17,7 @@
         <multi-categories :selected-categories="worker.categories"></multi-categories>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui primary button" v-bind:value="submitLabel()"></input>
+      <input v-on:click="save" type="submit" class="ui button" v-bind:value="submitLabel()"></input>
     </form>
 </template>
 

@@ -240,6 +240,7 @@ export default {
     },
     confirmRequestOrder: function () {
       this.loading = true
+      console.log(this.anounce)
       api.requestOrder(this.anounce.id, session.getJwt(), (response) => {
         hideRequesOrderConfirm()
         this.loadig = false

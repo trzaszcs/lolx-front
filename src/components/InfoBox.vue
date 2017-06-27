@@ -1,6 +1,8 @@
 <template>
   
-  <div id='info-box' v-show="visible" class="ui fluid positive message">
+  <div id='info-box' v-show="visible" class="ui fluid positive compact info message">
+      <i class="close icon"></i>
+
     <div v-if="header" class="ui header">
       {{header}}
     </div>

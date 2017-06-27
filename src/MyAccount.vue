@@ -79,17 +79,7 @@
 
      <!-- CHANGE PASSWORD -->
      <div v-show="view == 'changePassword'">
-       <div class="ui fluid card">
-         
-          <div class="ui top attached label">
-              <i class="ui edit icon"></i>
-                Zmiana hasła
-          </div>
-         
-         <div class="content">
            <change-password></change-password>
-         </div>
-       </div>
      </div>
 
     </div>

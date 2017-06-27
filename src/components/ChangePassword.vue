@@ -1,12 +1,22 @@
 <template>
-  <div class="ui container changePassword">
+  <div class="ui changePassword">
 
     <loading-box :show="saving"></loading-box>
 
+
+
+
     <info-box :visible="saved && passwordChangedSuccessfully"
       :message="'Hasło zostało zmienione'"></info-box>
-
+ 
     <form class="ui form" v-bind:class="{ 'error': validationErrors }">
+    
+               <div class="ui header">
+              <i class="ui edit icon"></i>
+                Zmiana hasła
+          </div>
+          
+          <div class="ui divider"></div>
     
       <div class="ui error message">
         <ul class="list" v-for="error in validationErrors">
@@ -35,11 +45,10 @@
         </div>
       </div>
 
-      <input v-on:click="save" type="submit" class="ui teal button" value="Zmień"></input>
+      <input v-on:click="save" type="submit" class="ui button" value="Zmień"></input>
       </form>
-  </div>
 </div>
-
+</div>
   </div>
 </template>
 
